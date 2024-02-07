@@ -1,0 +1,5 @@
+{
+  "resource": true,
+  "name": "configcat",
+  "server": "api://github.com/pulumiverse"
+}
