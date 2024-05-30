@@ -7,8 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumiverse/pulumi-configcat/sdk/go/configcat/internal"
 )
 
 // The provider type for the configcat package. By default, resources use package-wide configuration
@@ -21,25 +21,41 @@ type Provider struct {
 	// ConfigCat Public Management API Base Path (defaults to production).
 	BasePath pulumi.StringPtrOutput `pulumi:"basePath"`
 	// ConfigCat Public API credential - Basic Auth Password
-	BasicAuthPassword pulumi.StringOutput `pulumi:"basicAuthPassword"`
+	BasicAuthPassword pulumi.StringPtrOutput `pulumi:"basicAuthPassword"`
 	// ConfigCat Public API credential - Basic Auth Username.
-	BasicAuthUsername pulumi.StringOutput `pulumi:"basicAuthUsername"`
+	BasicAuthUsername pulumi.StringPtrOutput `pulumi:"basicAuthUsername"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
 func NewProvider(ctx *pulumi.Context,
 	name string, args *ProviderArgs, opts ...pulumi.ResourceOption) (*Provider, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ProviderArgs{}
 	}
 
+	if args.BasePath == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "CONFIGCAT_BASE_PATH"); d != nil {
+			args.BasePath = pulumi.StringPtr(d.(string))
+		}
+	}
 	if args.BasicAuthPassword == nil {
-		return nil, errors.New("invalid value for required argument 'BasicAuthPassword'")
+		if d := internal.GetEnvOrDefault(nil, nil, "CONFIGCAT_BASIC_AUTH_PASSWORD"); d != nil {
+			args.BasicAuthPassword = pulumi.StringPtr(d.(string))
+		}
 	}
 	if args.BasicAuthUsername == nil {
-		return nil, errors.New("invalid value for required argument 'BasicAuthUsername'")
+		if d := internal.GetEnvOrDefault(nil, nil, "CONFIGCAT_BASIC_AUTH_USERNAME"); d != nil {
+			args.BasicAuthUsername = pulumi.StringPtr(d.(string))
+		}
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.BasicAuthPassword != nil {
+		args.BasicAuthPassword = pulumi.ToSecret(args.BasicAuthPassword).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"basicAuthPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:configcat", name, args, &resource, opts...)
 	if err != nil {
@@ -52,9 +68,9 @@ type providerArgs struct {
 	// ConfigCat Public Management API Base Path (defaults to production).
 	BasePath *string `pulumi:"basePath"`
 	// ConfigCat Public API credential - Basic Auth Password
-	BasicAuthPassword string `pulumi:"basicAuthPassword"`
+	BasicAuthPassword *string `pulumi:"basicAuthPassword"`
 	// ConfigCat Public API credential - Basic Auth Username.
-	BasicAuthUsername string `pulumi:"basicAuthUsername"`
+	BasicAuthUsername *string `pulumi:"basicAuthUsername"`
 }
 
 // The set of arguments for constructing a Provider resource.
@@ -62,9 +78,9 @@ type ProviderArgs struct {
 	// ConfigCat Public Management API Base Path (defaults to production).
 	BasePath pulumi.StringPtrInput
 	// ConfigCat Public API credential - Basic Auth Password
-	BasicAuthPassword pulumi.StringInput
+	BasicAuthPassword pulumi.StringPtrInput
 	// ConfigCat Public API credential - Basic Auth Username.
-	BasicAuthUsername pulumi.StringInput
+	BasicAuthUsername pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -110,13 +126,13 @@ func (o ProviderOutput) BasePath() pulumi.StringPtrOutput {
 }
 
 // ConfigCat Public API credential - Basic Auth Password
-func (o ProviderOutput) BasicAuthPassword() pulumi.StringOutput {
-	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.BasicAuthPassword }).(pulumi.StringOutput)
+func (o ProviderOutput) BasicAuthPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BasicAuthPassword }).(pulumi.StringPtrOutput)
 }
 
 // ConfigCat Public API credential - Basic Auth Username.
-func (o ProviderOutput) BasicAuthUsername() pulumi.StringOutput {
-	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.BasicAuthUsername }).(pulumi.StringOutput)
+func (o ProviderOutput) BasicAuthUsername() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BasicAuthUsername }).(pulumi.StringPtrOutput)
 }
 
 func init() {

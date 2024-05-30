@@ -80,37 +80,72 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/pulumiverse/pulumi-configcat",
 		// The GitHub Org for the provider - defaults to `terraform-providers`
 		GitHubOrg: "configcat",
-		Config:    map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
-			// "region": {
-			// 	Type: tfbridge.MakeType("region", "Region"),
-			// 	Default: &tfbridge.DefaultInfo{
-			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
-			// 	},
-			// },
+		Config: map[string]*tfbridge.SchemaInfo{
+			"basic_auth_username": {
+				Type: "string",
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"CONFIGCAT_BASIC_AUTH_USERNAME"},
+				},
+			},
+			"basic_auth_password": {
+				Type:   "string",
+				Secret: tfbridge.True(),
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"CONFIGCAT_BASIC_AUTH_PASSWORD"},
+				},
+			},
+			"base_path": {
+				Type:           "string",
+				MarkAsOptional: tfbridge.True(),
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"CONFIGCAT_BASE_PATH"},
+				},
+			},
 		},
 		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "IamRole")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: tfbridge.MakeResource(mainPkg, mainMod, "Certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
-			// 	},
-			// },
+		Resources: map[string]*tfbridge.ResourceInfo{
+			"configcat_config": {
+				// Changed from Config to Configuration to not conflict with Pulumi's generated provider `Config` type.
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Configuration"),
+			},
+			"configcat_environment": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Environment"),
+			},
+			"configcat_permission_group": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "PermissionGroup"),
+			},
+			"configcat_product": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Product"),
+			},
+			"configcat_segment": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Segment"),
+			},
+			"configcat_setting": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Setting"),
+			},
+			"configcat_setting_tag": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SettingTag"),
+			},
+			"configcat_setting_value": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SettingValue"),
+			},
+			"configcat_tag": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Tag"),
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
+			"configcat_configs":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getConfigs")},
+			"configcat_environments":      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getEnvironments")},
+			"configcat_organizations":     {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrganizations")},
+			"configcat_permission_groups": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getPermissionGroups")},
+			"configcat_products":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getProducts")},
+			"configcat_sdkkeys":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSdkKeys")},
+			"configcat_segments":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSegments")},
+			"configcat_settings":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSettings")},
+			"configcat_tags":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTags")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "@pulumiverse/configcat",
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -125,6 +160,7 @@ func Provider() tfbridge.ProviderInfo {
 			//Overlay: &tfbridge.OverlayInfo{},
 		},
 		Python: &tfbridge.PythonInfo{
+			PackageName: "pulumiverse_configcat",
 			// List any Python dependencies and their version ranges
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
@@ -132,7 +168,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/pulumiverse/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
@@ -140,6 +176,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			RootNamespace: "Pulumiverse",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},

@@ -6,19 +6,46 @@ package config
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/pulumiverse/pulumi-configcat/sdk/go/configcat/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // ConfigCat Public Management API Base Path (defaults to production).
 func GetBasePath(ctx *pulumi.Context) string {
-	return config.Get(ctx, "configcat:basePath")
+	v, err := config.Try(ctx, "configcat:basePath")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "CONFIGCAT_BASE_PATH"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // ConfigCat Public API credential - Basic Auth Password
 func GetBasicAuthPassword(ctx *pulumi.Context) string {
-	return config.Get(ctx, "configcat:basicAuthPassword")
+	v, err := config.Try(ctx, "configcat:basicAuthPassword")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "CONFIGCAT_BASIC_AUTH_PASSWORD"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // ConfigCat Public API credential - Basic Auth Username.
 func GetBasicAuthUsername(ctx *pulumi.Context) string {
-	return config.Get(ctx, "configcat:basicAuthUsername")
+	v, err := config.Try(ctx, "configcat:basicAuthUsername")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "CONFIGCAT_BASIC_AUTH_USERNAME"); d != nil {
+		value = d.(string)
+	}
+	return value
 }

@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Configcat
+namespace Pulumiverse.Configcat
 {
     public static class Config
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "IDE1006", Justification = 
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "IDE1006", Justification = 
         "Double underscore prefix used to avoid conflicts with variable names.")]
         private sealed class __Value<T>
         {
@@ -30,9 +30,9 @@ namespace Pulumi.Configcat
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("configcat");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("configcat");
 
-        private static readonly __Value<string?> _basePath = new __Value<string?>(() => __config.Get("basePath"));
+        private static readonly __Value<string?> _basePath = new __Value<string?>(() => __config.Get("basePath") ?? Utilities.GetEnv("CONFIGCAT_BASE_PATH"));
         /// <summary>
         /// ConfigCat Public Management API Base Path (defaults to production).
         /// </summary>
@@ -42,7 +42,7 @@ namespace Pulumi.Configcat
             set => _basePath.Set(value);
         }
 
-        private static readonly __Value<string?> _basicAuthPassword = new __Value<string?>(() => __config.Get("basicAuthPassword"));
+        private static readonly __Value<string?> _basicAuthPassword = new __Value<string?>(() => __config.Get("basicAuthPassword") ?? Utilities.GetEnv("CONFIGCAT_BASIC_AUTH_PASSWORD"));
         /// <summary>
         /// ConfigCat Public API credential - Basic Auth Password
         /// </summary>
@@ -52,7 +52,7 @@ namespace Pulumi.Configcat
             set => _basicAuthPassword.Set(value);
         }
 
-        private static readonly __Value<string?> _basicAuthUsername = new __Value<string?>(() => __config.Get("basicAuthUsername"));
+        private static readonly __Value<string?> _basicAuthUsername = new __Value<string?>(() => __config.Get("basicAuthUsername") ?? Utilities.GetEnv("CONFIGCAT_BASIC_AUTH_USERNAME"));
         /// <summary>
         /// ConfigCat Public API credential - Basic Auth Username.
         /// </summary>

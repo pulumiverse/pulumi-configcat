@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Configcat
+namespace Pulumiverse.Configcat
 {
     /// <summary>
     /// The provider type for the configcat package. By default, resources use package-wide configuration
@@ -16,7 +17,7 @@ namespace Pulumi.Configcat
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
     [ConfigcatResourceType("pulumi:providers:configcat")]
-    public partial class Provider : Pulumi.ProviderResource
+    public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
         /// ConfigCat Public Management API Base Path (defaults to production).
@@ -28,13 +29,13 @@ namespace Pulumi.Configcat
         /// ConfigCat Public API credential - Basic Auth Password
         /// </summary>
         [Output("basicAuthPassword")]
-        public Output<string> BasicAuthPassword { get; private set; } = null!;
+        public Output<string?> BasicAuthPassword { get; private set; } = null!;
 
         /// <summary>
         /// ConfigCat Public API credential - Basic Auth Username.
         /// </summary>
         [Output("basicAuthUsername")]
-        public Output<string> BasicAuthUsername { get; private set; } = null!;
+        public Output<string?> BasicAuthUsername { get; private set; } = null!;
 
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace Pulumi.Configcat
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Provider(string name, ProviderArgs args, CustomResourceOptions? options = null)
+        public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
             : base("configcat", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -55,6 +56,10 @@ namespace Pulumi.Configcat
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "api://github.com/pulumiverse",
+                AdditionalSecretOutputs =
+                {
+                    "basicAuthPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -63,7 +68,7 @@ namespace Pulumi.Configcat
         }
     }
 
-    public sealed class ProviderArgs : Pulumi.ResourceArgs
+    public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ConfigCat Public Management API Base Path (defaults to production).
@@ -71,20 +76,34 @@ namespace Pulumi.Configcat
         [Input("basePath")]
         public Input<string>? BasePath { get; set; }
 
+        [Input("basicAuthPassword")]
+        private Input<string>? _basicAuthPassword;
+
         /// <summary>
         /// ConfigCat Public API credential - Basic Auth Password
         /// </summary>
-        [Input("basicAuthPassword", required: true)]
-        public Input<string> BasicAuthPassword { get; set; } = null!;
+        public Input<string>? BasicAuthPassword
+        {
+            get => _basicAuthPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _basicAuthPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// ConfigCat Public API credential - Basic Auth Username.
         /// </summary>
-        [Input("basicAuthUsername", required: true)]
-        public Input<string> BasicAuthUsername { get; set; } = null!;
+        [Input("basicAuthUsername")]
+        public Input<string>? BasicAuthUsername { get; set; }
 
         public ProviderArgs()
         {
+            BasePath = Utilities.GetEnv("CONFIGCAT_BASE_PATH");
+            BasicAuthPassword = Utilities.GetEnv("CONFIGCAT_BASIC_AUTH_PASSWORD");
+            BasicAuthUsername = Utilities.GetEnv("CONFIGCAT_BASIC_AUTH_USERNAME");
         }
+        public static new ProviderArgs Empty => new ProviderArgs();
     }
 }

@@ -22,7 +22,7 @@ export class Provider extends pulumi.ProviderResource {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === Provider.__pulumiType;
+        return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
     /**
@@ -32,11 +32,11 @@ export class Provider extends pulumi.ProviderResource {
     /**
      * ConfigCat Public API credential - Basic Auth Password
      */
-    public readonly basicAuthPassword!: pulumi.Output<string>;
+    public readonly basicAuthPassword!: pulumi.Output<string | undefined>;
     /**
      * ConfigCat Public API credential - Basic Auth Username.
      */
-    public readonly basicAuthUsername!: pulumi.Output<string>;
+    public readonly basicAuthUsername!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -45,21 +45,17 @@ export class Provider extends pulumi.ProviderResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ProviderArgs, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, args?: ProviderArgs, opts?: pulumi.ResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            if ((!args || args.basicAuthPassword === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'basicAuthPassword'");
-            }
-            if ((!args || args.basicAuthUsername === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'basicAuthUsername'");
-            }
-            resourceInputs["basePath"] = args ? args.basePath : undefined;
-            resourceInputs["basicAuthPassword"] = args ? args.basicAuthPassword : undefined;
-            resourceInputs["basicAuthUsername"] = args ? args.basicAuthUsername : undefined;
+            resourceInputs["basePath"] = (args ? args.basePath : undefined) ?? utilities.getEnv("CONFIGCAT_BASE_PATH");
+            resourceInputs["basicAuthPassword"] = (args?.basicAuthPassword ? pulumi.secret(args.basicAuthPassword) : undefined) ?? utilities.getEnv("CONFIGCAT_BASIC_AUTH_PASSWORD");
+            resourceInputs["basicAuthUsername"] = (args ? args.basicAuthUsername : undefined) ?? utilities.getEnv("CONFIGCAT_BASIC_AUTH_USERNAME");
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["basicAuthPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -75,9 +71,9 @@ export interface ProviderArgs {
     /**
      * ConfigCat Public API credential - Basic Auth Password
      */
-    basicAuthPassword: pulumi.Input<string>;
+    basicAuthPassword?: pulumi.Input<string>;
     /**
      * ConfigCat Public API credential - Basic Auth Username.
      */
-    basicAuthUsername: pulumi.Input<string>;
+    basicAuthUsername?: pulumi.Input<string>;
 }

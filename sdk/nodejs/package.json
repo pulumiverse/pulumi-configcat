@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/configcat",
+    "name": "@pulumiverse/configcat",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing configcat cloud resources.",
     "keywords": [
@@ -11,8 +11,7 @@
     "repository": "https://github.com/pulumiverse/pulumi-configcat",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource configcat ${VERSION}"
+        "build": "tsc"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
@@ -24,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "pluginDownloadURL": "api://github.com/pulumiverse"
+        "name": "configcat",
+        "server": "api://github.com/pulumiverse"
     }
 }

@@ -13,7 +13,7 @@ const __config = new pulumi.Config("configcat");
 export declare const basePath: string | undefined;
 Object.defineProperty(exports, "basePath", {
     get() {
-        return __config.get("basePath");
+        return __config.get("basePath") ?? utilities.getEnv("CONFIGCAT_BASE_PATH");
     },
     enumerable: true,
 });
@@ -24,7 +24,7 @@ Object.defineProperty(exports, "basePath", {
 export declare const basicAuthPassword: string | undefined;
 Object.defineProperty(exports, "basicAuthPassword", {
     get() {
-        return __config.get("basicAuthPassword");
+        return __config.get("basicAuthPassword") ?? utilities.getEnv("CONFIGCAT_BASIC_AUTH_PASSWORD");
     },
     enumerable: true,
 });
@@ -35,7 +35,7 @@ Object.defineProperty(exports, "basicAuthPassword", {
 export declare const basicAuthUsername: string | undefined;
 Object.defineProperty(exports, "basicAuthUsername", {
     get() {
-        return __config.get("basicAuthUsername");
+        return __config.get("basicAuthUsername") ?? utilities.getEnv("CONFIGCAT_BASIC_AUTH_USERNAME");
     },
     enumerable: true,
 });
