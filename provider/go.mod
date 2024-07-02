@@ -10,7 +10,7 @@ replace (
 require (
 	github.com/configcat/terraform-provider-configcat v1.5.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.83.0
-	github.com/pulumi/pulumi/sdk/v3 v3.116.1
+	github.com/pulumi/pulumi/sdk/v3 v3.122.0
 )
 
 require (
