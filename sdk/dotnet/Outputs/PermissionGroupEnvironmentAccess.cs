@@ -14,7 +14,13 @@ namespace Pulumiverse.Configcat.Outputs
     [OutputType]
     public sealed class PermissionGroupEnvironmentAccess
     {
+        /// <summary>
+        /// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+        /// </summary>
         public readonly string? EnvironmentAccesstype;
+        /// <summary>
+        /// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+        /// </summary>
         public readonly string EnvironmentId;
 
         [OutputConstructor]
