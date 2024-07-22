@@ -92,10 +92,12 @@
         "configcat:index/PermissionGroupEnvironmentAccess:PermissionGroupEnvironmentAccess": {
             "properties": {
                 "environmentAccesstype": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.\n"
                 },
                 "environmentId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.\n"
                 }
             },
             "type": "object",
