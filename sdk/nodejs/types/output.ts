@@ -227,7 +227,13 @@ export interface GetTagsTag {
 }
 
 export interface PermissionGroupEnvironmentAccess {
+    /**
+     * Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+     */
     environmentAccesstype?: string;
+    /**
+     * The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+     */
     environmentId: string;
 }
 

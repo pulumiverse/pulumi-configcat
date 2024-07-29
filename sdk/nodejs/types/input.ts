@@ -6,7 +6,13 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface PermissionGroupEnvironmentAccess {
+    /**
+     * Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+     */
     environmentAccesstype?: pulumi.Input<string>;
+    /**
+     * The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+     */
     environmentId: pulumi.Input<string>;
 }
 

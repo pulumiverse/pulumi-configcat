@@ -14,8 +14,10 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type PermissionGroupEnvironmentAccess struct {
+	// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
 	EnvironmentAccesstype *string `pulumi:"environmentAccesstype"`
-	EnvironmentId         string  `pulumi:"environmentId"`
+	// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+	EnvironmentId string `pulumi:"environmentId"`
 }
 
 // PermissionGroupEnvironmentAccessInput is an input type that accepts PermissionGroupEnvironmentAccessArgs and PermissionGroupEnvironmentAccessOutput values.
@@ -30,8 +32,10 @@ type PermissionGroupEnvironmentAccessInput interface {
 }
 
 type PermissionGroupEnvironmentAccessArgs struct {
+	// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
 	EnvironmentAccesstype pulumi.StringPtrInput `pulumi:"environmentAccesstype"`
-	EnvironmentId         pulumi.StringInput    `pulumi:"environmentId"`
+	// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+	EnvironmentId pulumi.StringInput `pulumi:"environmentId"`
 }
 
 func (PermissionGroupEnvironmentAccessArgs) ElementType() reflect.Type {
@@ -85,10 +89,12 @@ func (o PermissionGroupEnvironmentAccessOutput) ToPermissionGroupEnvironmentAcce
 	return o
 }
 
+// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
 func (o PermissionGroupEnvironmentAccessOutput) EnvironmentAccesstype() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PermissionGroupEnvironmentAccess) *string { return v.EnvironmentAccesstype }).(pulumi.StringPtrOutput)
 }
 
+// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
 func (o PermissionGroupEnvironmentAccessOutput) EnvironmentId() pulumi.StringOutput {
 	return o.ApplyT(func(v PermissionGroupEnvironmentAccess) string { return v.EnvironmentId }).(pulumi.StringOutput)
 }
