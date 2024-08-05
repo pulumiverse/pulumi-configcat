@@ -13,9 +13,15 @@ namespace Pulumiverse.Configcat.Inputs
 
     public sealed class PermissionGroupEnvironmentAccessGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+        /// </summary>
         [Input("environmentAccesstype")]
         public Input<string>? EnvironmentAccesstype { get; set; }
 
+        /// <summary>
+        /// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+        /// </summary>
         [Input("environmentId", required: true)]
         public Input<string> EnvironmentId { get; set; } = null!;
 
