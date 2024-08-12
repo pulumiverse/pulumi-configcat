@@ -49,6 +49,10 @@ class PermissionGroupEnvironmentAccess(dict):
     def __init__(__self__, *,
                  environment_id: str,
                  environment_accesstype: Optional[str] = None):
+        """
+        :param str environment_id: The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+        :param str environment_accesstype: Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+        """
         pulumi.set(__self__, "environment_id", environment_id)
         if environment_accesstype is not None:
             pulumi.set(__self__, "environment_accesstype", environment_accesstype)
@@ -56,11 +60,17 @@ class PermissionGroupEnvironmentAccess(dict):
     @property
     @pulumi.getter(name="environmentId")
     def environment_id(self) -> str:
+        """
+        The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+        """
         return pulumi.get(self, "environment_id")
 
     @property
     @pulumi.getter(name="environmentAccesstype")
     def environment_accesstype(self) -> Optional[str]:
+        """
+        Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+        """
         return pulumi.get(self, "environment_accesstype")
 
 
