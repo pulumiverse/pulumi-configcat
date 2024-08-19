@@ -838,7 +838,7 @@ class PermissionGroup(pulumi.CustomResource):
                  can_view_product_auditlog: Optional[pulumi.Input[bool]] = None,
                  can_view_product_statistics: Optional[pulumi.Input[bool]] = None,
                  can_view_sdkkey: Optional[pulumi.Input[bool]] = None,
-                 environment_accesses: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PermissionGroupEnvironmentAccessArgs']]]]] = None,
+                 environment_accesses: Optional[pulumi.Input[Sequence[pulumi.Input[Union['PermissionGroupEnvironmentAccessArgs', 'PermissionGroupEnvironmentAccessArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  new_environment_accesstype: Optional[pulumi.Input[str]] = None,
                  product_id: Optional[pulumi.Input[str]] = None,
@@ -896,14 +896,14 @@ class PermissionGroup(pulumi.CustomResource):
             product_id=my_products.products[0].product_id,
             accesstype="custom",
             environment_accesses=[
-                configcat.PermissionGroupEnvironmentAccessArgs(
-                    environment_id=my_test_environments.environments[0].environment_id,
-                    environment_accesstype="full",
-                ),
-                configcat.PermissionGroupEnvironmentAccessArgs(
-                    environment_id=my_production_environments.environments[0].environment_id,
-                    environment_accesstype="none",
-                ),
+                {
+                    "environment_id": my_test_environments.environments[0].environment_id,
+                    "environment_accesstype": "full",
+                },
+                {
+                    "environment_id": my_production_environments.environments[0].environment_id,
+                    "environment_accesstype": "none",
+                },
             ])
         pulumi.export("permissionGroupId", my_permission_group.id)
         ```
@@ -945,7 +945,7 @@ class PermissionGroup(pulumi.CustomResource):
         :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs. Default: false.
         :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics. Default: false.
         :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys. Default: false.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PermissionGroupEnvironmentAccessArgs']]]] environment_accesses: The environment specific permissions list block defined as below.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['PermissionGroupEnvironmentAccessArgs', 'PermissionGroupEnvironmentAccessArgsDict']]]] environment_accesses: The environment specific permissions list block defined as below.
         :param pulumi.Input[str] name: The name of the Permission Group.
         :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environment_access list. Possible values: full, readOnly, none. Default: none.
         :param pulumi.Input[str] product_id: The ID of the Product.
@@ -1009,14 +1009,14 @@ class PermissionGroup(pulumi.CustomResource):
             product_id=my_products.products[0].product_id,
             accesstype="custom",
             environment_accesses=[
-                configcat.PermissionGroupEnvironmentAccessArgs(
-                    environment_id=my_test_environments.environments[0].environment_id,
-                    environment_accesstype="full",
-                ),
-                configcat.PermissionGroupEnvironmentAccessArgs(
-                    environment_id=my_production_environments.environments[0].environment_id,
-                    environment_accesstype="none",
-                ),
+                {
+                    "environment_id": my_test_environments.environments[0].environment_id,
+                    "environment_accesstype": "full",
+                },
+                {
+                    "environment_id": my_production_environments.environments[0].environment_id,
+                    "environment_accesstype": "none",
+                },
             ])
         pulumi.export("permissionGroupId", my_permission_group.id)
         ```
@@ -1073,7 +1073,7 @@ class PermissionGroup(pulumi.CustomResource):
                  can_view_product_auditlog: Optional[pulumi.Input[bool]] = None,
                  can_view_product_statistics: Optional[pulumi.Input[bool]] = None,
                  can_view_sdkkey: Optional[pulumi.Input[bool]] = None,
-                 environment_accesses: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PermissionGroupEnvironmentAccessArgs']]]]] = None,
+                 environment_accesses: Optional[pulumi.Input[Sequence[pulumi.Input[Union['PermissionGroupEnvironmentAccessArgs', 'PermissionGroupEnvironmentAccessArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  new_environment_accesstype: Optional[pulumi.Input[str]] = None,
                  product_id: Optional[pulumi.Input[str]] = None,
@@ -1144,7 +1144,7 @@ class PermissionGroup(pulumi.CustomResource):
             can_view_product_auditlog: Optional[pulumi.Input[bool]] = None,
             can_view_product_statistics: Optional[pulumi.Input[bool]] = None,
             can_view_sdkkey: Optional[pulumi.Input[bool]] = None,
-            environment_accesses: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PermissionGroupEnvironmentAccessArgs']]]]] = None,
+            environment_accesses: Optional[pulumi.Input[Sequence[pulumi.Input[Union['PermissionGroupEnvironmentAccessArgs', 'PermissionGroupEnvironmentAccessArgsDict']]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             new_environment_accesstype: Optional[pulumi.Input[str]] = None,
             product_id: Optional[pulumi.Input[str]] = None) -> 'PermissionGroup':
@@ -1174,7 +1174,7 @@ class PermissionGroup(pulumi.CustomResource):
         :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs. Default: false.
         :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics. Default: false.
         :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys. Default: false.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PermissionGroupEnvironmentAccessArgs']]]] environment_accesses: The environment specific permissions list block defined as below.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['PermissionGroupEnvironmentAccessArgs', 'PermissionGroupEnvironmentAccessArgsDict']]]] environment_accesses: The environment specific permissions list block defined as below.
         :param pulumi.Input[str] name: The name of the Permission Group.
         :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environment_access list. Possible values: full, readOnly, none. Default: none.
         :param pulumi.Input[str] product_id: The ID of the Product.
