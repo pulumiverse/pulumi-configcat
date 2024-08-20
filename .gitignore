@@ -22,4 +22,4 @@ provider/**/schema.go
 **/nuget
 **/dist
 
-go.work.sum
+go.work*
