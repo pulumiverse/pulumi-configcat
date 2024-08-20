@@ -282,8 +282,8 @@ class SettingValue(pulumi.CustomResource):
                  environment_id: Optional[pulumi.Input[str]] = None,
                  init_only: Optional[pulumi.Input[bool]] = None,
                  mandatory_notes: Optional[pulumi.Input[str]] = None,
-                 percentage_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValuePercentageItemArgs']]]]] = None,
-                 rollout_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValueRolloutRuleArgs']]]]] = None,
+                 percentage_items: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]]] = None,
+                 rollout_rules: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]]] = None,
                  setting_id: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -312,28 +312,28 @@ class SettingValue(pulumi.CustomResource):
             mandatory_notes="mandatory notes",
             value="true",
             rollout_rules=[
-                configcat.SettingValueRolloutRuleArgs(
-                    comparison_attribute="Email",
-                    comparator="contains",
-                    comparison_value="@mycompany.com",
-                    value="true",
-                ),
-                configcat.SettingValueRolloutRuleArgs(
-                    comparison_attribute="custom",
-                    comparator="isOneOf",
-                    comparison_value="red",
-                    value="false",
-                ),
+                {
+                    "comparison_attribute": "Email",
+                    "comparator": "contains",
+                    "comparison_value": "@mycompany.com",
+                    "value": "true",
+                },
+                {
+                    "comparison_attribute": "custom",
+                    "comparator": "isOneOf",
+                    "comparison_value": "red",
+                    "value": "false",
+                },
             ],
             percentage_items=[
-                configcat.SettingValuePercentageItemArgs(
-                    percentage="20",
-                    value="true",
-                ),
-                configcat.SettingValuePercentageItemArgs(
-                    percentage="80",
-                    value="false",
-                ),
+                {
+                    "percentage": "20",
+                    "value": "true",
+                },
+                {
+                    "percentage": "80",
+                    "value": "false",
+                },
             ])
         ```
 
@@ -363,8 +363,8 @@ class SettingValue(pulumi.CustomResource):
                
                The Feature Flag/Setting's value
         :param pulumi.Input[str] mandatory_notes: Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValuePercentageItemArgs']]]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValueRolloutRuleArgs']]]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
         :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
         :param pulumi.Input[str] value: The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
@@ -399,28 +399,28 @@ class SettingValue(pulumi.CustomResource):
             mandatory_notes="mandatory notes",
             value="true",
             rollout_rules=[
-                configcat.SettingValueRolloutRuleArgs(
-                    comparison_attribute="Email",
-                    comparator="contains",
-                    comparison_value="@mycompany.com",
-                    value="true",
-                ),
-                configcat.SettingValueRolloutRuleArgs(
-                    comparison_attribute="custom",
-                    comparator="isOneOf",
-                    comparison_value="red",
-                    value="false",
-                ),
+                {
+                    "comparison_attribute": "Email",
+                    "comparator": "contains",
+                    "comparison_value": "@mycompany.com",
+                    "value": "true",
+                },
+                {
+                    "comparison_attribute": "custom",
+                    "comparator": "isOneOf",
+                    "comparison_value": "red",
+                    "value": "false",
+                },
             ],
             percentage_items=[
-                configcat.SettingValuePercentageItemArgs(
-                    percentage="20",
-                    value="true",
-                ),
-                configcat.SettingValuePercentageItemArgs(
-                    percentage="80",
-                    value="false",
-                ),
+                {
+                    "percentage": "20",
+                    "value": "true",
+                },
+                {
+                    "percentage": "80",
+                    "value": "false",
+                },
             ])
         ```
 
@@ -461,8 +461,8 @@ class SettingValue(pulumi.CustomResource):
                  environment_id: Optional[pulumi.Input[str]] = None,
                  init_only: Optional[pulumi.Input[bool]] = None,
                  mandatory_notes: Optional[pulumi.Input[str]] = None,
-                 percentage_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValuePercentageItemArgs']]]]] = None,
-                 rollout_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValueRolloutRuleArgs']]]]] = None,
+                 percentage_items: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]]] = None,
+                 rollout_rules: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]]] = None,
                  setting_id: Optional[pulumi.Input[str]] = None,
                  value: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -501,8 +501,8 @@ class SettingValue(pulumi.CustomResource):
             environment_id: Optional[pulumi.Input[str]] = None,
             init_only: Optional[pulumi.Input[bool]] = None,
             mandatory_notes: Optional[pulumi.Input[str]] = None,
-            percentage_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValuePercentageItemArgs']]]]] = None,
-            rollout_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValueRolloutRuleArgs']]]]] = None,
+            percentage_items: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]]] = None,
+            rollout_rules: Optional[pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]]] = None,
             setting_id: Optional[pulumi.Input[str]] = None,
             setting_type: Optional[pulumi.Input[str]] = None,
             value: Optional[pulumi.Input[str]] = None) -> 'SettingValue':
@@ -518,8 +518,8 @@ class SettingValue(pulumi.CustomResource):
                
                The Feature Flag/Setting's value
         :param pulumi.Input[str] mandatory_notes: Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValuePercentageItemArgs']]]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SettingValueRolloutRuleArgs']]]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
         :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
         :param pulumi.Input[str] setting_type: The Setting's type.
         :param pulumi.Input[str] value: The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
