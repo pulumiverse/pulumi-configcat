@@ -38,7 +38,6 @@ import * as utilities from "./utilities";
  * - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
  */
 export function getSdkKeys(args: GetSdkKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetSdkKeysResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getSdkKeys:getSdkKeys", {
         "configId": args.configId,
@@ -113,7 +112,11 @@ export interface GetSdkKeysResult {
  * - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
  */
 export function getSdkKeysOutput(args: GetSdkKeysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSdkKeysResult> {
-    return pulumi.output(args).apply((a: any) => getSdkKeys(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getSdkKeys:getSdkKeys", {
+        "configId": args.configId,
+        "environmentId": args.environmentId,
+    }, opts);
 }
 
 /**

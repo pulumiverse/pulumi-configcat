@@ -89,14 +89,20 @@ type GetSettingsResult struct {
 
 func GetSettingsOutput(ctx *pulumi.Context, args GetSettingsOutputArgs, opts ...pulumi.InvokeOption) GetSettingsResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetSettingsResult, error) {
+		ApplyT(func(v interface{}) (GetSettingsResultOutput, error) {
 			args := v.(GetSettingsArgs)
-			r, err := GetSettings(ctx, &args, opts...)
-			var s GetSettingsResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetSettingsResult
+			secret, err := ctx.InvokePackageRaw("configcat:index/getSettings:getSettings", args, &rv, "", opts...)
+			if err != nil {
+				return GetSettingsResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetSettingsResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetSettingsResultOutput), nil
+			}
+			return output, nil
 		}).(GetSettingsResultOutput)
 }
 

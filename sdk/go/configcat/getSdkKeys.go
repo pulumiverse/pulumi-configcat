@@ -98,14 +98,20 @@ type GetSdkKeysResult struct {
 
 func GetSdkKeysOutput(ctx *pulumi.Context, args GetSdkKeysOutputArgs, opts ...pulumi.InvokeOption) GetSdkKeysResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetSdkKeysResult, error) {
+		ApplyT(func(v interface{}) (GetSdkKeysResultOutput, error) {
 			args := v.(GetSdkKeysArgs)
-			r, err := GetSdkKeys(ctx, &args, opts...)
-			var s GetSdkKeysResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetSdkKeysResult
+			secret, err := ctx.InvokePackageRaw("configcat:index/getSdkKeys:getSdkKeys", args, &rv, "", opts...)
+			if err != nil {
+				return GetSdkKeysResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetSdkKeysResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetSdkKeysResultOutput), nil
+			}
+			return output, nil
 		}).(GetSdkKeysResultOutput)
 }
 

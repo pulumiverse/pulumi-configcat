@@ -4,16 +4,39 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'PermissionGroupEnvironmentAccessArgs',
+    'PermissionGroupEnvironmentAccessArgsDict',
     'SettingValuePercentageItemArgs',
+    'SettingValuePercentageItemArgsDict',
     'SettingValueRolloutRuleArgs',
+    'SettingValueRolloutRuleArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class PermissionGroupEnvironmentAccessArgsDict(TypedDict):
+        environment_id: pulumi.Input[str]
+        """
+        The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
+        """
+        environment_accesstype: NotRequired[pulumi.Input[str]]
+        """
+        Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
+        """
+elif False:
+    PermissionGroupEnvironmentAccessArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class PermissionGroupEnvironmentAccessArgs:
@@ -53,6 +76,19 @@ class PermissionGroupEnvironmentAccessArgs:
         pulumi.set(self, "environment_accesstype", value)
 
 
+if not MYPY:
+    class SettingValuePercentageItemArgsDict(TypedDict):
+        percentage: pulumi.Input[str]
+        """
+        Any [number](https://configcat.com/docs/advanced/targeting/#-value) between 0 and 100 that represents a randomly allocated fraction of your users.
+        """
+        value: pulumi.Input[str]
+        """
+        The exact [value](https://configcat.com/docs/advanced/targeting/#served-value-1) that will be served to the users that fall into that fraction. Type: `string`. It must be compatible with the `setting_type`.
+        """
+elif False:
+    SettingValuePercentageItemArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class SettingValuePercentageItemArgs:
     def __init__(__self__, *,
@@ -89,6 +125,35 @@ class SettingValuePercentageItemArgs:
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
 
+
+if not MYPY:
+    class SettingValueRolloutRuleArgsDict(TypedDict):
+        value: pulumi.Input[str]
+        """
+        The exact [value](https://configcat.com/docs/advanced/targeting/#served-value) that will be served to the users who match the targeting rule. Type: `string`. It must be compatible with the `setting_type`.
+        """
+        comparator: NotRequired[pulumi.Input[str]]
+        """
+        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        """
+        comparison_attribute: NotRequired[pulumi.Input[str]]
+        """
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        """
+        comparison_value: NotRequired[pulumi.Input[str]]
+        """
+        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        """
+        segment_comparator: NotRequired[pulumi.Input[str]]
+        """
+        The segment_comparator. Possible values: isIn, isNotIn.
+        """
+        segment_id: NotRequired[pulumi.Input[str]]
+        """
+        The [Segment's](https://configcat.com/docs/advanced/segments) unique identifier.
+        """
+elif False:
+    SettingValueRolloutRuleArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class SettingValueRolloutRuleArgs:

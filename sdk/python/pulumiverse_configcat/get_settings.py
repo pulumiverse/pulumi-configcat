@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -116,9 +121,6 @@ def get_settings(config_id: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'),
         key_filter_regex=pulumi.get(__ret__, 'key_filter_regex'),
         settings=pulumi.get(__ret__, 'settings'))
-
-
-@_utilities.lift_output_func(get_settings)
 def get_settings_output(config_id: Optional[pulumi.Input[str]] = None,
                         key_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
                         opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSettingsResult]:
@@ -149,4 +151,13 @@ def get_settings_output(config_id: Optional[pulumi.Input[str]] = None,
     :param str config_id: The ID of the Config.
     :param str key_filter_regex: Filter the Settings by key.
     """
-    ...
+    __args__ = dict()
+    __args__['configId'] = config_id
+    __args__['keyFilterRegex'] = key_filter_regex
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('configcat:index/getSettings:getSettings', __args__, opts=opts, typ=GetSettingsResult)
+    return __ret__.apply(lambda __response__: GetSettingsResult(
+        config_id=pulumi.get(__response__, 'config_id'),
+        id=pulumi.get(__response__, 'id'),
+        key_filter_regex=pulumi.get(__response__, 'key_filter_regex'),
+        settings=pulumi.get(__response__, 'settings')))

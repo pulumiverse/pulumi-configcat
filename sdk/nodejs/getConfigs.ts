@@ -32,7 +32,6 @@ import * as utilities from "./utilities";
  * [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
  */
 export function getConfigs(args: GetConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigsResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getConfigs:getConfigs", {
         "nameFilterRegex": args.nameFilterRegex,
@@ -95,7 +94,11 @@ export interface GetConfigsResult {
  * [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
  */
 export function getConfigsOutput(args: GetConfigsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigsResult> {
-    return pulumi.output(args).apply((a: any) => getConfigs(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getConfigs:getConfigs", {
+        "nameFilterRegex": args.nameFilterRegex,
+        "productId": args.productId,
+    }, opts);
 }
 
 /**

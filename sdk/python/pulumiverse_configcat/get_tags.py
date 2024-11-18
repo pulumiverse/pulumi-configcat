@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -113,9 +118,6 @@ def get_tags(name_filter_regex: Optional[str] = None,
         name_filter_regex=pulumi.get(__ret__, 'name_filter_regex'),
         product_id=pulumi.get(__ret__, 'product_id'),
         tags=pulumi.get(__ret__, 'tags'))
-
-
-@_utilities.lift_output_func(get_tags)
 def get_tags_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
                     product_id: Optional[pulumi.Input[str]] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTagsResult]:
@@ -143,4 +145,13 @@ def get_tags_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = N
     :param str name_filter_regex: Filter the Tags by name.
     :param str product_id: The ID of the Product.
     """
-    ...
+    __args__ = dict()
+    __args__['nameFilterRegex'] = name_filter_regex
+    __args__['productId'] = product_id
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('configcat:index/getTags:getTags', __args__, opts=opts, typ=GetTagsResult)
+    return __ret__.apply(lambda __response__: GetTagsResult(
+        id=pulumi.get(__response__, 'id'),
+        name_filter_regex=pulumi.get(__response__, 'name_filter_regex'),
+        product_id=pulumi.get(__response__, 'product_id'),
+        tags=pulumi.get(__response__, 'tags')))
