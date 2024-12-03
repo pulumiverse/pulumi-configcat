@@ -2,7 +2,7 @@ module github.com/pulumiverse/pulumi-configcat/provider
 
 go 1.21.12
 
-toolchain go1.21.13
+toolchain go1.23.4
 
 replace (
 	github.com/hashicorp/go-getter v1.5.0 => github.com/hashicorp/go-getter v1.4.0
