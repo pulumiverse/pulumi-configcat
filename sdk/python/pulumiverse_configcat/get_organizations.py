@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -99,9 +104,6 @@ def get_organizations(name_filter_regex: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'),
         name_filter_regex=pulumi.get(__ret__, 'name_filter_regex'),
         organizations=pulumi.get(__ret__, 'organizations'))
-
-
-@_utilities.lift_output_func(get_organizations)
 def get_organizations_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
                              opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrganizationsResult]:
     """
@@ -126,4 +128,11 @@ def get_organizations_output(name_filter_regex: Optional[pulumi.Input[Optional[s
 
     :param str name_filter_regex: Filter the Organizations by name.
     """
-    ...
+    __args__ = dict()
+    __args__['nameFilterRegex'] = name_filter_regex
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('configcat:index/getOrganizations:getOrganizations', __args__, opts=opts, typ=GetOrganizationsResult)
+    return __ret__.apply(lambda __response__: GetOrganizationsResult(
+        id=pulumi.get(__response__, 'id'),
+        name_filter_regex=pulumi.get(__response__, 'name_filter_regex'),
+        organizations=pulumi.get(__response__, 'organizations')))

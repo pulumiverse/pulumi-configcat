@@ -82,14 +82,20 @@ type GetPermissionGroupsResult struct {
 
 func GetPermissionGroupsOutput(ctx *pulumi.Context, args GetPermissionGroupsOutputArgs, opts ...pulumi.InvokeOption) GetPermissionGroupsResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetPermissionGroupsResult, error) {
+		ApplyT(func(v interface{}) (GetPermissionGroupsResultOutput, error) {
 			args := v.(GetPermissionGroupsArgs)
-			r, err := GetPermissionGroups(ctx, &args, opts...)
-			var s GetPermissionGroupsResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetPermissionGroupsResult
+			secret, err := ctx.InvokePackageRaw("configcat:index/getPermissionGroups:getPermissionGroups", args, &rv, "", opts...)
+			if err != nil {
+				return GetPermissionGroupsResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetPermissionGroupsResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetPermissionGroupsResultOutput), nil
+			}
+			return output, nil
 		}).(GetPermissionGroupsResultOutput)
 }
 

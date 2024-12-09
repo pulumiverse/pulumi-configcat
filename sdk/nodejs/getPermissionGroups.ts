@@ -32,7 +32,6 @@ import * as utilities from "./utilities";
  * - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
  */
 export function getPermissionGroups(args: GetPermissionGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetPermissionGroupsResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getPermissionGroups:getPermissionGroups", {
         "nameFilterRegex": args.nameFilterRegex,
@@ -95,7 +94,11 @@ export interface GetPermissionGroupsResult {
  * - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
  */
 export function getPermissionGroupsOutput(args: GetPermissionGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPermissionGroupsResult> {
-    return pulumi.output(args).apply((a: any) => getPermissionGroups(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getPermissionGroups:getPermissionGroups", {
+        "nameFilterRegex": args.nameFilterRegex,
+        "productId": args.productId,
+    }, opts);
 }
 
 /**

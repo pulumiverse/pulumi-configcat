@@ -29,7 +29,6 @@ import * as utilities from "./utilities";
  */
 export function getProducts(args?: GetProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetProductsResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getProducts:getProducts", {
         "nameFilterRegex": args.nameFilterRegex,
@@ -82,7 +81,11 @@ export interface GetProductsResult {
  * - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
  */
 export function getProductsOutput(args?: GetProductsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProductsResult> {
-    return pulumi.output(args).apply((a: any) => getProducts(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getProducts:getProducts", {
+        "nameFilterRegex": args.nameFilterRegex,
+    }, opts);
 }
 
 /**
