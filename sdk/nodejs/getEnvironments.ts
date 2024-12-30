@@ -32,7 +32,6 @@ import * as utilities from "./utilities";
  * - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
  */
 export function getEnvironments(args: GetEnvironmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetEnvironmentsResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getEnvironments:getEnvironments", {
         "nameFilterRegex": args.nameFilterRegex,
@@ -94,8 +93,12 @@ export interface GetEnvironmentsResult {
  *
  * - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
  */
-export function getEnvironmentsOutput(args: GetEnvironmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEnvironmentsResult> {
-    return pulumi.output(args).apply((a: any) => getEnvironments(a, opts))
+export function getEnvironmentsOutput(args: GetEnvironmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEnvironmentsResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getEnvironments:getEnvironments", {
+        "nameFilterRegex": args.nameFilterRegex,
+        "productId": args.productId,
+    }, opts);
 }
 
 /**

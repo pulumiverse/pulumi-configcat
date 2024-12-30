@@ -71,15 +71,11 @@ type GetOrganizationsResult struct {
 }
 
 func GetOrganizationsOutput(ctx *pulumi.Context, args GetOrganizationsOutputArgs, opts ...pulumi.InvokeOption) GetOrganizationsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetOrganizationsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetOrganizationsResultOutput, error) {
 			args := v.(GetOrganizationsArgs)
-			r, err := GetOrganizations(ctx, &args, opts...)
-			var s GetOrganizationsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("configcat:index/getOrganizations:getOrganizations", args, GetOrganizationsResultOutput{}, options).(GetOrganizationsResultOutput), nil
 		}).(GetOrganizationsResultOutput)
 }
 

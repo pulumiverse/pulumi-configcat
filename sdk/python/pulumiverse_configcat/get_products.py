@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -99,11 +104,8 @@ def get_products(name_filter_regex: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'),
         name_filter_regex=pulumi.get(__ret__, 'name_filter_regex'),
         products=pulumi.get(__ret__, 'products'))
-
-
-@_utilities.lift_output_func(get_products)
 def get_products_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
-                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetProductsResult]:
+                        opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetProductsResult]:
     """
     ## # get_products Resource
 
@@ -126,4 +128,11 @@ def get_products_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]]
 
     :param str name_filter_regex: Filter the Products by name.
     """
-    ...
+    __args__ = dict()
+    __args__['nameFilterRegex'] = name_filter_regex
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('configcat:index/getProducts:getProducts', __args__, opts=opts, typ=GetProductsResult)
+    return __ret__.apply(lambda __response__: GetProductsResult(
+        id=pulumi.get(__response__, 'id'),
+        name_filter_regex=pulumi.get(__response__, 'name_filter_regex'),
+        products=pulumi.get(__response__, 'products')))

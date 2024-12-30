@@ -36,7 +36,6 @@ import * as utilities from "./utilities";
  * - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
  */
 export function getSettings(args: GetSettingsArgs, opts?: pulumi.InvokeOptions): Promise<GetSettingsResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getSettings:getSettings", {
         "configId": args.configId,
@@ -102,8 +101,12 @@ export interface GetSettingsResult {
  *
  * - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
  */
-export function getSettingsOutput(args: GetSettingsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSettingsResult> {
-    return pulumi.output(args).apply((a: any) => getSettings(a, opts))
+export function getSettingsOutput(args: GetSettingsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSettingsResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getSettings:getSettings", {
+        "configId": args.configId,
+        "keyFilterRegex": args.keyFilterRegex,
+    }, opts);
 }
 
 /**

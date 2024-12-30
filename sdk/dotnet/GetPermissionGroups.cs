@@ -91,6 +91,46 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetPermissionGroupsResult> Invoke(GetPermissionGroupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPermissionGroupsResult>("configcat:index/getPermissionGroups:getPermissionGroups", args ?? new GetPermissionGroupsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getPermissionGroups Resource
+        /// 
+        /// Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     var myPermissionGroups = Configcat.GetPermissionGroups.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Administrators",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["permissionGroupId"] = myPermissionGroups.Apply(getPermissionGroupsResult =&gt; getPermissionGroupsResult.PermissionGroups[0]?.PermissionGroupId),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
+        /// </summary>
+        public static Output<GetPermissionGroupsResult> Invoke(GetPermissionGroupsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetPermissionGroupsResult>("configcat:index/getPermissionGroups:getPermissionGroups", args ?? new GetPermissionGroupsInvokeArgs(), options.WithDefaults());
     }
 
 

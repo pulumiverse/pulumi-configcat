@@ -103,6 +103,52 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetSettingsResult> Invoke(GetSettingsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getSettings Resource
+        /// 
+        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Main Config",
+        ///     });
+        /// 
+        ///     var settings = Configcat.GetSettings.Invoke(new()
+        ///     {
+        ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["settingId"] = settings.Apply(getSettingsResult =&gt; getSettingsResult.Settings[0]?.SettingId),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
+        /// </summary>
+        public static Output<GetSettingsResult> Invoke(GetSettingsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsInvokeArgs(), options.WithDefaults());
     }
 
 

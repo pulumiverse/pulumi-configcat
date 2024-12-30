@@ -91,6 +91,46 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetConfigsResult> Invoke(GetConfigsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigsResult>("configcat:index/getConfigs:getConfigs", args ?? new GetConfigsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getConfigs Resource
+        /// 
+        /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Main Config",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["configId"] = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
+        /// </summary>
+        public static Output<GetConfigsResult> Invoke(GetConfigsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigsResult>("configcat:index/getConfigs:getConfigs", args ?? new GetConfigsInvokeArgs(), options.WithDefaults());
     }
 
 
