@@ -79,6 +79,40 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetOrganizationsResult> Invoke(GetOrganizationsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationsResult>("configcat:index/getOrganizations:getOrganizations", args ?? new GetOrganizationsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getOrganizations Resource
+        /// 
+        /// Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myOrganizations = Configcat.GetOrganizations.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["organizationId"] = myOrganizations.Apply(getOrganizationsResult =&gt; getOrganizationsResult.Organizations[0]?.OrganizationId),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
+        /// </summary>
+        public static Output<GetOrganizationsResult> Invoke(GetOrganizationsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationsResult>("configcat:index/getOrganizations:getOrganizations", args ?? new GetOrganizationsInvokeArgs(), options.WithDefaults());
     }
 
 

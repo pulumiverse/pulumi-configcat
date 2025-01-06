@@ -32,7 +32,6 @@ import * as utilities from "./utilities";
  * - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
  */
 export function getSegments(args: GetSegmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetSegmentsResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getSegments:getSegments", {
         "nameFilterRegex": args.nameFilterRegex,
@@ -94,8 +93,12 @@ export interface GetSegmentsResult {
  *
  * - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
  */
-export function getSegmentsOutput(args: GetSegmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSegmentsResult> {
-    return pulumi.output(args).apply((a: any) => getSegments(a, opts))
+export function getSegmentsOutput(args: GetSegmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSegmentsResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getSegments:getSegments", {
+        "nameFilterRegex": args.nameFilterRegex,
+        "productId": args.productId,
+    }, opts);
 }
 
 /**

@@ -71,15 +71,11 @@ type GetProductsResult struct {
 }
 
 func GetProductsOutput(ctx *pulumi.Context, args GetProductsOutputArgs, opts ...pulumi.InvokeOption) GetProductsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetProductsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetProductsResultOutput, error) {
 			args := v.(GetProductsArgs)
-			r, err := GetProducts(ctx, &args, opts...)
-			var s GetProductsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("configcat:index/getProducts:getProducts", args, GetProductsResultOutput{}, options).(GetProductsResultOutput), nil
 		}).(GetProductsResultOutput)
 }
 
