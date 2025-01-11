@@ -81,15 +81,11 @@ type GetSegmentsResult struct {
 }
 
 func GetSegmentsOutput(ctx *pulumi.Context, args GetSegmentsOutputArgs, opts ...pulumi.InvokeOption) GetSegmentsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetSegmentsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetSegmentsResultOutput, error) {
 			args := v.(GetSegmentsArgs)
-			r, err := GetSegments(ctx, &args, opts...)
-			var s GetSegmentsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("configcat:index/getSegments:getSegments", args, GetSegmentsResultOutput{}, options).(GetSegmentsResultOutput), nil
 		}).(GetSegmentsResultOutput)
 }
 
