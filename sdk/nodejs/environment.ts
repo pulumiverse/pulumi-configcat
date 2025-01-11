@@ -19,8 +19,9 @@ import * as utilities from "./utilities";
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myEnvironment = new configcat.Environment("myEnvironment", {
+ * const myEnvironment = new configcat.Environment("my_environment", {
  *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     name: "Staging",
  *     description: "Staging description",
  *     color: "blue",
  * });

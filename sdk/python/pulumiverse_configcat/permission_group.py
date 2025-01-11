@@ -858,8 +858,9 @@ class PermissionGroup(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_permission_group = configcat.PermissionGroup("myPermissionGroup",
+        my_permission_group = configcat.PermissionGroup("my_permission_group",
             product_id=my_products.products[0].product_id,
+            name="Administrators",
             accesstype="full",
             can_manage_members=True,
             can_createorupdate_config=True,
@@ -892,8 +893,9 @@ class PermissionGroup(pulumi.CustomResource):
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
         my_test_environments = configcat.get_environments(name_filter_regex="Test")
         my_production_environments = configcat.get_environments(name_filter_regex="Production")
-        my_permission_group = configcat.PermissionGroup("myPermissionGroup",
+        my_permission_group = configcat.PermissionGroup("my_permission_group",
             product_id=my_products.products[0].product_id,
+            name="Read only except Test environment",
             accesstype="custom",
             environment_accesses=[
                 {
@@ -971,8 +973,9 @@ class PermissionGroup(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_permission_group = configcat.PermissionGroup("myPermissionGroup",
+        my_permission_group = configcat.PermissionGroup("my_permission_group",
             product_id=my_products.products[0].product_id,
+            name="Administrators",
             accesstype="full",
             can_manage_members=True,
             can_createorupdate_config=True,
@@ -1005,8 +1008,9 @@ class PermissionGroup(pulumi.CustomResource):
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
         my_test_environments = configcat.get_environments(name_filter_regex="Test")
         my_production_environments = configcat.get_environments(name_filter_regex="Production")
-        my_permission_group = configcat.PermissionGroup("myPermissionGroup",
+        my_permission_group = configcat.PermissionGroup("my_permission_group",
             product_id=my_products.products[0].product_id,
+            name="Read only except Test environment",
             accesstype="custom",
             environment_accesses=[
                 {

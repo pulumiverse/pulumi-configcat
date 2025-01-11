@@ -144,8 +144,9 @@ class Configuration(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_config = configcat.Configuration("myConfig",
+        my_config = configcat.Configuration("my_config",
             product_id=my_products.products[0].product_id,
+            name="My config",
             description="My config description")
         pulumi.export("configId", my_config.id)
         ```
@@ -191,8 +192,9 @@ class Configuration(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_config = configcat.Configuration("myConfig",
+        my_config = configcat.Configuration("my_config",
             product_id=my_products.products[0].product_id,
+            name="My config",
             description="My config description")
         pulumi.export("configId", my_config.id)
         ```

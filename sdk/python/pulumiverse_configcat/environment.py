@@ -177,8 +177,9 @@ class Environment(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_environment = configcat.Environment("myEnvironment",
+        my_environment = configcat.Environment("my_environment",
             product_id=my_products.products[0].product_id,
+            name="Staging",
             description="Staging description",
             color="blue")
         pulumi.export("environmentId", my_environment.id)
@@ -226,8 +227,9 @@ class Environment(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_environment = configcat.Environment("myEnvironment",
+        my_environment = configcat.Environment("my_environment",
             product_id=my_products.products[0].product_id,
+            name="Staging",
             description="Staging description",
             color="blue")
         pulumi.export("environmentId", my_environment.id)

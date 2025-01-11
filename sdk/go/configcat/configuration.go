@@ -36,8 +36,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myConfig, err := configcat.NewConfiguration(ctx, "myConfig", &configcat.ConfigurationArgs{
+//			myConfig, err := configcat.NewConfiguration(ctx, "my_config", &configcat.ConfigurationArgs{
 //				ProductId:   pulumi.String(myProducts.Products[0].ProductId),
+//				Name:        pulumi.String("My config"),
 //				Description: pulumi.String("My config description"),
 //			})
 //			if err != nil {

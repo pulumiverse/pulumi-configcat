@@ -49,7 +49,7 @@ namespace Pulumiverse.Configcat
     ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
     ///     });
     /// 
-    ///     var mySettingTag = new Configcat.SettingTag("mySettingTag", new()
+    ///     var mySettingTag = new Configcat.SettingTag("my_setting_tag", new()
     ///     {
     ///         SettingId = mySettings.Apply(getSettingsResult =&gt; getSettingsResult.Settings[0]?.SettingId),
     ///         TagId = myTags.Apply(getTagsResult =&gt; getTagsResult.Tags[0]?.TagId),

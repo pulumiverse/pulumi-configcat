@@ -33,7 +33,7 @@ import * as utilities from "./utilities";
  *     configId: myConfigs.configs?.[0]?.configId,
  *     keyFilterRegex: "isAwesomeFeatureEnabled",
  * }));
- * const mySettingValue = new configcat.SettingValue("mySettingValue", {
+ * const mySettingValue = new configcat.SettingValue("my_setting_value", {
  *     environmentId: myEnvironments.then(myEnvironments => myEnvironments.environments?.[0]?.environmentId),
  *     settingId: mySettings.then(mySettings => mySettings.settings?.[0]?.settingId),
  *     mandatoryNotes: "mandatory notes",

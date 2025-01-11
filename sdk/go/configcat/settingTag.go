@@ -57,7 +57,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = configcat.NewSettingTag(ctx, "mySettingTag", &configcat.SettingTagArgs{
+//			_, err = configcat.NewSettingTag(ctx, "my_setting_tag", &configcat.SettingTagArgs{
 //				SettingId: pulumi.String(mySettings.Settings[0].SettingId),
 //				TagId:     pulumi.String(myTags.Tags[0].TagId),
 //			})

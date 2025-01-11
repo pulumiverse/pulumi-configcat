@@ -23,9 +23,10 @@ import * as utilities from "./utilities";
  *     productId: myProducts.products?.[0]?.productId,
  *     nameFilterRegex: "Main Config",
  * }));
- * const mySetting = new configcat.Setting("mySetting", {
+ * const mySetting = new configcat.Setting("my_setting", {
  *     configId: myConfigs.then(myConfigs => myConfigs.configs?.[0]?.configId),
  *     key: "isAwesomeFeatureEnabled",
+ *     name: "My awesome feature flag",
  *     hint: "This is the hint for my awesome feature flag",
  *     settingType: "boolean",
  * });

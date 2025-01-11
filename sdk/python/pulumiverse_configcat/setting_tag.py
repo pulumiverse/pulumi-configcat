@@ -116,7 +116,7 @@ class SettingTag(pulumi.CustomResource):
             name_filter_regex="Tag")
         my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
             key_filter_regex="isAwesomeFeatureEnabled")
-        my_setting_tag = configcat.SettingTag("mySettingTag",
+        my_setting_tag = configcat.SettingTag("my_setting_tag",
             setting_id=my_settings.settings[0].setting_id,
             tag_id=my_tags.tags[0].tag_id)
         ```
@@ -170,7 +170,7 @@ class SettingTag(pulumi.CustomResource):
             name_filter_regex="Tag")
         my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
             key_filter_regex="isAwesomeFeatureEnabled")
-        my_setting_tag = configcat.SettingTag("mySettingTag",
+        my_setting_tag = configcat.SettingTag("my_setting_tag",
             setting_id=my_settings.settings[0].setting_id,
             tag_id=my_tags.tags[0].tag_id)
         ```

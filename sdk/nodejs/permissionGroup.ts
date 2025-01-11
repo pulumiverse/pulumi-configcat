@@ -23,8 +23,9 @@ import * as utilities from "./utilities";
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myPermissionGroup = new configcat.PermissionGroup("myPermissionGroup", {
+ * const myPermissionGroup = new configcat.PermissionGroup("my_permission_group", {
  *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     name: "Administrators",
  *     accesstype: "full",
  *     canManageMembers: true,
  *     canCreateorupdateConfig: true,
@@ -64,8 +65,9 @@ import * as utilities from "./utilities";
  * const myProductionEnvironments = configcat.getEnvironments({
  *     nameFilterRegex: "Production",
  * });
- * const myPermissionGroup = new configcat.PermissionGroup("myPermissionGroup", {
+ * const myPermissionGroup = new configcat.PermissionGroup("my_permission_group", {
  *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     name: "Read only except Test environment",
  *     accesstype: "custom",
  *     environmentAccesses: [
  *         {

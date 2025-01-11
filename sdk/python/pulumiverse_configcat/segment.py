@@ -240,8 +240,9 @@ class Segment(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_segment = configcat.Segment("mySegment",
+        my_segment = configcat.Segment("my_segment",
             product_id=my_products.products[0].product_id,
+            name="Beta users",
             description="Beta users' description",
             comparison_attribute="email",
             comparator="sensitiveIsOneOf",
@@ -293,8 +294,9 @@ class Segment(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_segment = configcat.Segment("mySegment",
+        my_segment = configcat.Segment("my_segment",
             product_id=my_products.products[0].product_id,
+            name="Beta users",
             description="Beta users' description",
             comparison_attribute="email",
             comparator="sensitiveIsOneOf",

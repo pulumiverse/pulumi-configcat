@@ -36,8 +36,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			mySegment, err := configcat.NewSegment(ctx, "mySegment", &configcat.SegmentArgs{
+//			mySegment, err := configcat.NewSegment(ctx, "my_segment", &configcat.SegmentArgs{
 //				ProductId:           pulumi.String(myProducts.Products[0].ProductId),
+//				Name:                pulumi.String("Beta users"),
 //				Description:         pulumi.String("Beta users' description"),
 //				ComparisonAttribute: pulumi.String("email"),
 //				Comparator:          pulumi.String("sensitiveIsOneOf"),

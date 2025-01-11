@@ -144,8 +144,9 @@ class Product(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_organizations = configcat.get_organizations(name_filter_regex="ConfigCat")
-        my_product = configcat.Product("myProduct",
+        my_product = configcat.Product("my_product",
             organization_id=my_organizations.organizations[0].organization_id,
+            name="My product",
             description="My product description")
         pulumi.export("productId", my_product.id)
         ```
@@ -191,8 +192,9 @@ class Product(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_organizations = configcat.get_organizations(name_filter_regex="ConfigCat")
-        my_product = configcat.Product("myProduct",
+        my_product = configcat.Product("my_product",
             organization_id=my_organizations.organizations[0].organization_id,
+            name="My product",
             description="My product description")
         pulumi.export("productId", my_product.id)
         ```

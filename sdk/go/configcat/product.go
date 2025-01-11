@@ -36,8 +36,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myProduct, err := configcat.NewProduct(ctx, "myProduct", &configcat.ProductArgs{
+//			myProduct, err := configcat.NewProduct(ctx, "my_product", &configcat.ProductArgs{
 //				OrganizationId: pulumi.String(myOrganizations.Organizations[0].OrganizationId),
+//				Name:           pulumi.String("My product"),
 //				Description:    pulumi.String("My product description"),
 //			})
 //			if err != nil {

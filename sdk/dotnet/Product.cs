@@ -31,9 +31,10 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "ConfigCat",
     ///     });
     /// 
-    ///     var myProduct = new Configcat.Product("myProduct", new()
+    ///     var myProduct = new Configcat.Product("my_product", new()
     ///     {
     ///         OrganizationId = myOrganizations.Apply(getOrganizationsResult =&gt; getOrganizationsResult.Organizations[0]?.OrganizationId),
+    ///         Name = "My product",
     ///         Description = "My product description",
     ///     });
     /// 

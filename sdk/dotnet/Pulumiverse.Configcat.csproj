@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pulumiverse/pulumi-configcat</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
-    <Version>0.0.1-alpha.1724136488+8abc0494.dirty</Version>
+    <Version>0.0.0-alpha.0+dev</Version>
 
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>

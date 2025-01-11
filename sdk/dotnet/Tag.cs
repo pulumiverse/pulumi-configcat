@@ -31,9 +31,10 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "ConfigCat's product",
     ///     });
     /// 
-    ///     var myTag = new Configcat.Tag("myTag", new()
+    ///     var myTag = new Configcat.Tag("my_tag", new()
     ///     {
     ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         Name = "Created by Terraform",
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;

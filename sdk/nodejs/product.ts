@@ -19,8 +19,9 @@ import * as utilities from "./utilities";
  * const myOrganizations = configcat.getOrganizations({
  *     nameFilterRegex: "ConfigCat",
  * });
- * const myProduct = new configcat.Product("myProduct", {
+ * const myProduct = new configcat.Product("my_product", {
  *     organizationId: myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId),
+ *     name: "My product",
  *     description: "My product description",
  * });
  * export const productId = myProduct.id;

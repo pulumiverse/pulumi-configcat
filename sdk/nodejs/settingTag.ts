@@ -31,7 +31,7 @@ import * as utilities from "./utilities";
  *     configId: myConfigs.configs?.[0]?.configId,
  *     keyFilterRegex: "isAwesomeFeatureEnabled",
  * }));
- * const mySettingTag = new configcat.SettingTag("mySettingTag", {
+ * const mySettingTag = new configcat.SettingTag("my_setting_tag", {
  *     settingId: mySettings.then(mySettings => mySettings.settings?.[0]?.settingId),
  *     tagId: myTags.then(myTags => myTags.tags?.[0]?.tagId),
  * });

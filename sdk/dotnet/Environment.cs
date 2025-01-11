@@ -31,9 +31,10 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "ConfigCat's product",
     ///     });
     /// 
-    ///     var myEnvironment = new Configcat.Environment("myEnvironment", new()
+    ///     var myEnvironment = new Configcat.Environment("my_environment", new()
     ///     {
     ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         Name = "Staging",
     ///         Description = "Staging description",
     ///         Color = "blue",
     ///     });

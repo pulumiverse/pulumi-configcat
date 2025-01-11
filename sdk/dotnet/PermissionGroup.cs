@@ -33,9 +33,10 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "ConfigCat's product",
     ///     });
     /// 
-    ///     var myPermissionGroup = new Configcat.PermissionGroup("myPermissionGroup", new()
+    ///     var myPermissionGroup = new Configcat.PermissionGroup("my_permission_group", new()
     ///     {
     ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         Name = "Administrators",
     ///         Accesstype = "full",
     ///         CanManageMembers = true,
     ///         CanCreateorupdateConfig = true,
@@ -90,9 +91,10 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "Production",
     ///     });
     /// 
-    ///     var myPermissionGroup = new Configcat.PermissionGroup("myPermissionGroup", new()
+    ///     var myPermissionGroup = new Configcat.PermissionGroup("my_permission_group", new()
     ///     {
     ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         Name = "Read only except Test environment",
     ///         Accesstype = "custom",
     ///         EnvironmentAccesses = new[]
     ///         {

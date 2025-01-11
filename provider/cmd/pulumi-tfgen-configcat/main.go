@@ -16,6 +16,7 @@ package main
 
 import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+
 	configcat "github.com/pulumiverse/pulumi-configcat/provider"
 	"github.com/pulumiverse/pulumi-configcat/provider/pkg/version"
 )

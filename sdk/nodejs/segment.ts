@@ -19,8 +19,9 @@ import * as utilities from "./utilities";
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const mySegment = new configcat.Segment("mySegment", {
+ * const mySegment = new configcat.Segment("my_segment", {
  *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     name: "Beta users",
  *     description: "Beta users' description",
  *     comparisonAttribute: "email",
  *     comparator: "sensitiveIsOneOf",

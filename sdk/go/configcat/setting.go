@@ -43,9 +43,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			mySetting, err := configcat.NewSetting(ctx, "mySetting", &configcat.SettingArgs{
+//			mySetting, err := configcat.NewSetting(ctx, "my_setting", &configcat.SettingArgs{
 //				ConfigId:    pulumi.String(myConfigs.Configs[0].ConfigId),
 //				Key:         pulumi.String("isAwesomeFeatureEnabled"),
+//				Name:        pulumi.String("My awesome feature flag"),
 //				Hint:        pulumi.String("This is the hint for my awesome feature flag"),
 //				SettingType: pulumi.String("boolean"),
 //			})

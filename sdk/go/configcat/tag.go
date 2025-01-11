@@ -36,8 +36,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myTag, err := configcat.NewTag(ctx, "myTag", &configcat.TagArgs{
+//			myTag, err := configcat.NewTag(ctx, "my_tag", &configcat.TagArgs{
 //				ProductId: pulumi.String(myProducts.Products[0].ProductId),
+//				Name:      pulumi.String("Created by Terraform"),
 //			})
 //			if err != nil {
 //				return err

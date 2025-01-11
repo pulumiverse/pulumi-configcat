@@ -37,10 +37,11 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "Main Config",
     ///     });
     /// 
-    ///     var mySetting = new Configcat.Setting("mySetting", new()
+    ///     var mySetting = new Configcat.Setting("my_setting", new()
     ///     {
     ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
     ///         Key = "isAwesomeFeatureEnabled",
+    ///         Name = "My awesome feature flag",
     ///         Hint = "This is the hint for my awesome feature flag",
     ///         SettingType = "boolean",
     ///     });

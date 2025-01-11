@@ -57,7 +57,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = configcat.NewSettingValue(ctx, "mySettingValue", &configcat.SettingValueArgs{
+//			_, err = configcat.NewSettingValue(ctx, "my_setting_value", &configcat.SettingValueArgs{
 //				EnvironmentId:  pulumi.String(myEnvironments.Environments[0].EnvironmentId),
 //				SettingId:      pulumi.String(mySettings.Settings[0].SettingId),
 //				MandatoryNotes: pulumi.String("mandatory notes"),

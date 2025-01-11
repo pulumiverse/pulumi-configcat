@@ -38,8 +38,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myPermissionGroup, err := configcat.NewPermissionGroup(ctx, "myPermissionGroup", &configcat.PermissionGroupArgs{
+//			myPermissionGroup, err := configcat.NewPermissionGroup(ctx, "my_permission_group", &configcat.PermissionGroupArgs{
 //				ProductId:                    pulumi.String(myProducts.Products[0].ProductId),
+//				Name:                         pulumi.String("Administrators"),
 //				Accesstype:                   pulumi.String("full"),
 //				CanManageMembers:             pulumi.Bool(true),
 //				CanCreateorupdateConfig:      pulumi.Bool(true),
@@ -102,8 +103,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myPermissionGroup, err := configcat.NewPermissionGroup(ctx, "myPermissionGroup", &configcat.PermissionGroupArgs{
+//			myPermissionGroup, err := configcat.NewPermissionGroup(ctx, "my_permission_group", &configcat.PermissionGroupArgs{
 //				ProductId:  pulumi.String(myProducts.Products[0].ProductId),
+//				Name:       pulumi.String("Read only except Test environment"),
 //				Accesstype: pulumi.String("custom"),
 //				EnvironmentAccesses: configcat.PermissionGroupEnvironmentAccessArray{
 //					&configcat.PermissionGroupEnvironmentAccessArgs{

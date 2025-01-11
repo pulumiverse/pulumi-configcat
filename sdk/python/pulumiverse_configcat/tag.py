@@ -144,7 +144,9 @@ class Tag(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_tag = configcat.Tag("myTag", product_id=my_products.products[0].product_id)
+        my_tag = configcat.Tag("my_tag",
+            product_id=my_products.products[0].product_id,
+            name="Created by Terraform")
         pulumi.export("tagId", my_tag.id)
         ```
 
@@ -189,7 +191,9 @@ class Tag(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_tag = configcat.Tag("myTag", product_id=my_products.products[0].product_id)
+        my_tag = configcat.Tag("my_tag",
+            product_id=my_products.products[0].product_id,
+            name="Created by Terraform")
         pulumi.export("tagId", my_tag.id)
         ```
 

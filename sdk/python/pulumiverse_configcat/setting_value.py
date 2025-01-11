@@ -306,7 +306,7 @@ class SettingValue(pulumi.CustomResource):
             name_filter_regex="Test")
         my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
             key_filter_regex="isAwesomeFeatureEnabled")
-        my_setting_value = configcat.SettingValue("mySettingValue",
+        my_setting_value = configcat.SettingValue("my_setting_value",
             environment_id=my_environments.environments[0].environment_id,
             setting_id=my_settings.settings[0].setting_id,
             mandatory_notes="mandatory notes",
@@ -393,7 +393,7 @@ class SettingValue(pulumi.CustomResource):
             name_filter_regex="Test")
         my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
             key_filter_regex="isAwesomeFeatureEnabled")
-        my_setting_value = configcat.SettingValue("mySettingValue",
+        my_setting_value = configcat.SettingValue("my_setting_value",
             environment_id=my_environments.environments[0].environment_id,
             setting_id=my_settings.settings[0].setting_id,
             mandatory_notes="mandatory notes",

@@ -36,8 +36,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myEnvironment, err := configcat.NewEnvironment(ctx, "myEnvironment", &configcat.EnvironmentArgs{
+//			myEnvironment, err := configcat.NewEnvironment(ctx, "my_environment", &configcat.EnvironmentArgs{
 //				ProductId:   pulumi.String(myProducts.Products[0].ProductId),
+//				Name:        pulumi.String("Staging"),
 //				Description: pulumi.String("Staging description"),
 //				Color:       pulumi.String("blue"),
 //			})

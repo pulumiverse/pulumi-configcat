@@ -19,7 +19,10 @@ import * as utilities from "./utilities";
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myTag = new configcat.Tag("myTag", {productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId)});
+ * const myTag = new configcat.Tag("my_tag", {
+ *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     name: "Created by Terraform",
+ * });
  * export const tagId = myTag.id;
  * ```
  *
