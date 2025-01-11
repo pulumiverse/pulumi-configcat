@@ -115,6 +115,58 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetSdkKeysResult> Invoke(GetSdkKeysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getSdkKeys Resource
+        /// 
+        /// Use this data source to access information about **SDK Keys**.
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Main Config",
+        ///     });
+        /// 
+        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Test",
+        ///     });
+        /// 
+        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
+        ///     {
+        ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         EnvironmentId = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
+        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
+        /// </summary>
+        public static Output<GetSdkKeysResult> Invoke(GetSdkKeysInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysInvokeArgs(), options.WithDefaults());
     }
 
 

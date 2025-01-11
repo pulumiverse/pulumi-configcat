@@ -91,6 +91,46 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetSegmentsResult> Invoke(GetSegmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSegmentsResult>("configcat:index/getSegments:getSegments", args ?? new GetSegmentsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getSegments Resource
+        /// 
+        /// Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     var mySegments = Configcat.GetSegments.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Test",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["segmentId"] = mySegments.Apply(getSegmentsResult =&gt; getSegmentsResult.Segments[0]?.SegmentId),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
+        /// </summary>
+        public static Output<GetSegmentsResult> Invoke(GetSegmentsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetSegmentsResult>("configcat:index/getSegments:getSegments", args ?? new GetSegmentsInvokeArgs(), options.WithDefaults());
     }
 
 

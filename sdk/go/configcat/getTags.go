@@ -80,15 +80,11 @@ type GetTagsResult struct {
 }
 
 func GetTagsOutput(ctx *pulumi.Context, args GetTagsOutputArgs, opts ...pulumi.InvokeOption) GetTagsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetTagsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetTagsResultOutput, error) {
 			args := v.(GetTagsArgs)
-			r, err := GetTags(ctx, &args, opts...)
-			var s GetTagsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("configcat:index/getTags:getTags", args, GetTagsResultOutput{}, options).(GetTagsResultOutput), nil
 		}).(GetTagsResultOutput)
 }
 

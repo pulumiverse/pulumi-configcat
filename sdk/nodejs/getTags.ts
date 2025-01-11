@@ -31,7 +31,6 @@ import * as utilities from "./utilities";
  * - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
  */
 export function getTags(args: GetTagsArgs, opts?: pulumi.InvokeOptions): Promise<GetTagsResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getTags:getTags", {
         "nameFilterRegex": args.nameFilterRegex,
@@ -92,8 +91,12 @@ export interface GetTagsResult {
  *
  * - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
  */
-export function getTagsOutput(args: GetTagsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTagsResult> {
-    return pulumi.output(args).apply((a: any) => getTags(a, opts))
+export function getTagsOutput(args: GetTagsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTagsResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("configcat:index/getTags:getTags", {
+        "nameFilterRegex": args.nameFilterRegex,
+        "productId": args.productId,
+    }, opts);
 }
 
 /**

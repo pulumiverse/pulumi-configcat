@@ -81,15 +81,11 @@ type GetEnvironmentsResult struct {
 }
 
 func GetEnvironmentsOutput(ctx *pulumi.Context, args GetEnvironmentsOutputArgs, opts ...pulumi.InvokeOption) GetEnvironmentsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetEnvironmentsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetEnvironmentsResultOutput, error) {
 			args := v.(GetEnvironmentsArgs)
-			r, err := GetEnvironments(ctx, &args, opts...)
-			var s GetEnvironmentsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("configcat:index/getEnvironments:getEnvironments", args, GetEnvironmentsResultOutput{}, options).(GetEnvironmentsResultOutput), nil
 		}).(GetEnvironmentsResultOutput)
 }
 

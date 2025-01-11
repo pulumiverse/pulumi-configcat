@@ -89,6 +89,45 @@ namespace Pulumiverse.Configcat
         /// </summary>
         public static Output<GetTagsResult> Invoke(GetTagsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTagsResult>("configcat:index/getTags:getTags", args ?? new GetTagsInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// ## # configcat.getTags Resource
+        /// 
+        /// Use this data source to access information about existing **Tags**.
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     var myTags = Configcat.GetTags.Invoke(new()
+        ///     {
+        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         NameFilterRegex = "Test",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["tagId"] = myTags.Apply(getTagsResult =&gt; getTagsResult.Tags[0]?.TagId),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ## Endpoints used
+        /// 
+        /// - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
+        /// </summary>
+        public static Output<GetTagsResult> Invoke(GetTagsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetTagsResult>("configcat:index/getTags:getTags", args ?? new GetTagsInvokeArgs(), options.WithDefaults());
     }
 
 
