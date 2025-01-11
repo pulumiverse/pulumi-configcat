@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"path/filepath"
 
+	// The linter requires unnamed imports to have a doc comment
 	_ "embed"
 
 	"github.com/configcat/terraform-provider-configcat/configcat"

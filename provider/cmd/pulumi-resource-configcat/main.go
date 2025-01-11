@@ -17,6 +17,7 @@
 package main
 
 import (
+	// The linter requires unnamed imports to have a doc comment
 	_ "embed"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
