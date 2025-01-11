@@ -23,3 +23,7 @@ provider/**/schema.go
 **/dist
 
 go.work*
+
+
+# Ignore local build tracking directory
+.make

@@ -1,1 +1,6 @@
+---
 upstream-provider-name: terraform-provider-configcat
+upstream-provider-org: configcat
+remove-plugins: true
+pulumi-infer-version: true
+pr-reviewers: ringods
