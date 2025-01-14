@@ -1,4 +1,4 @@
-module github.com/pulumiverse/pulumi-configcat/sdk
+module github.com/pulumiverse/pulumi-configcat/sdk/v2
 
 go 1.21
 
