@@ -24,6 +24,7 @@ import (
 	"github.com/configcat/terraform-provider-configcat/configcat"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
@@ -117,41 +118,11 @@ func Provider() tfbridge.ProviderInfo {
 				// Changed from Config to Configuration to not conflict with Pulumi's generated provider `Config` type.
 				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Configuration"),
 			},
-			"configcat_environment": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Environment"),
-			},
-			"configcat_permission_group": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "PermissionGroup"),
-			},
-			"configcat_product": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Product"),
-			},
-			"configcat_segment": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Segment"),
-			},
-			"configcat_setting": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Setting"),
-			},
-			"configcat_setting_tag": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SettingTag"),
-			},
-			"configcat_setting_value": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SettingValue"),
-			},
-			"configcat_tag": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "Tag"),
-			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"configcat_configs":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getConfigs")},
-			"configcat_environments":      {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getEnvironments")},
-			"configcat_organizations":     {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getOrganizations")},
-			"configcat_permission_groups": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getPermissionGroups")},
-			"configcat_products":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getProducts")},
-			"configcat_sdkkeys":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSdkKeys")},
-			"configcat_segments":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSegments")},
-			"configcat_settings":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSettings")},
-			"configcat_tags":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTags")},
+			// Changed from getConfig to getConfiguration to align with the similarly named resource type.
+			"configcat_configs": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getConfigurations")},
+			"configcat_sdkkeys": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSdkKeys")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/configcat",
@@ -181,6 +152,14 @@ func Provider() tfbridge.ProviderInfo {
 			RespectSchemaVersion: true,
 		},
 	}
+
+	prov.MustComputeTokens(
+		tks.SingleModule(
+			"configcat_",
+			"index",
+			tks.MakeStandard(mainPkg),
+		),
+	)
 
 	prov.SetAutonaming(255, "-")
 	prov.MustApplyAutoAliases()

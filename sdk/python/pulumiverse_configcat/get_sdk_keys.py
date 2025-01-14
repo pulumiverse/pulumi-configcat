@@ -105,7 +105,7 @@ def get_sdk_keys(config_id: Optional[str] = None,
     import pulumi_configcat as configcat
 
     my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
         name_filter_regex="Main Config")
     my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
         name_filter_regex="Test")
@@ -149,7 +149,7 @@ def get_sdk_keys_output(config_id: Optional[pulumi.Input[str]] = None,
     import pulumi_configcat as configcat
 
     my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
         name_filter_regex="Main Config")
     my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
         name_filter_regex="Test")

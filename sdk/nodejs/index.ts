@@ -15,10 +15,10 @@ export type Environment = import("./environment").Environment;
 export const Environment: typeof import("./environment").Environment = null as any;
 utilities.lazyLoad(exports, ["Environment"], () => require("./environment"));
 
-export { GetConfigsArgs, GetConfigsResult, GetConfigsOutputArgs } from "./getConfigs";
-export const getConfigs: typeof import("./getConfigs").getConfigs = null as any;
-export const getConfigsOutput: typeof import("./getConfigs").getConfigsOutput = null as any;
-utilities.lazyLoad(exports, ["getConfigs","getConfigsOutput"], () => require("./getConfigs"));
+export { GetConfigurationsArgs, GetConfigurationsResult, GetConfigurationsOutputArgs } from "./getConfigurations";
+export const getConfigurations: typeof import("./getConfigurations").getConfigurations = null as any;
+export const getConfigurationsOutput: typeof import("./getConfigurations").getConfigurationsOutput = null as any;
+utilities.lazyLoad(exports, ["getConfigurations","getConfigurationsOutput"], () => require("./getConfigurations"));
 
 export { GetEnvironmentsArgs, GetEnvironmentsResult, GetEnvironmentsOutputArgs } from "./getEnvironments";
 export const getEnvironments: typeof import("./getEnvironments").getEnvironments = null as any;

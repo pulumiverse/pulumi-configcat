@@ -12,7 +12,7 @@ namespace Pulumiverse.Configcat.Outputs
 {
 
     [OutputType]
-    public sealed class GetConfigsConfigResult
+    public sealed class GetConfigurationsConfigResult
     {
         /// <summary>
         /// The unique Config ID.
@@ -28,7 +28,7 @@ namespace Pulumiverse.Configcat.Outputs
         public readonly string Name;
 
         [OutputConstructor]
-        private GetConfigsConfigResult(
+        private GetConfigurationsConfigResult(
             string configId,
 
             string description,

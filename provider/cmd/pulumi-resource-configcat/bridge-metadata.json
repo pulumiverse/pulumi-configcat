@@ -44,7 +44,7 @@
         },
         "datasources": {
             "configcat_configs": {
-                "current": "configcat:index/getConfigs:getConfigs",
+                "current": "configcat:index/getConfigurations:getConfigurations",
                 "fields": {
                     "configs": {
                         "maxItemsOne": false

@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface GetConfigsConfig {
+export interface GetConfigurationsConfig {
     /**
      * The unique Config ID.
      */

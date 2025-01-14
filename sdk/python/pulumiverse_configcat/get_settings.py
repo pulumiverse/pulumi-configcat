@@ -95,7 +95,7 @@ def get_settings(config_id: Optional[str] = None,
     import pulumi_configcat as configcat
 
     my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
         name_filter_regex="Main Config")
     settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
         key_filter_regex="isAwesomeFeatureEnabled")
@@ -136,7 +136,7 @@ def get_settings_output(config_id: Optional[pulumi.Input[str]] = None,
     import pulumi_configcat as configcat
 
     my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
         name_filter_regex="Main Config")
     settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
         key_filter_regex="isAwesomeFeatureEnabled")

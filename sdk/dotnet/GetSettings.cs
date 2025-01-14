@@ -32,7 +32,7 @@ namespace Pulumiverse.Configcat
         ///         NameFilterRegex = "ConfigCat's product",
         ///     });
         /// 
-        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
         ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
         ///         NameFilterRegex = "Main Config",
@@ -40,7 +40,7 @@ namespace Pulumiverse.Configcat
         /// 
         ///     var settings = Configcat.GetSettings.Invoke(new()
         ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
         ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
         ///     });
         /// 
@@ -78,7 +78,7 @@ namespace Pulumiverse.Configcat
         ///         NameFilterRegex = "ConfigCat's product",
         ///     });
         /// 
-        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
         ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
         ///         NameFilterRegex = "Main Config",
@@ -86,7 +86,7 @@ namespace Pulumiverse.Configcat
         /// 
         ///     var settings = Configcat.GetSettings.Invoke(new()
         ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
         ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
         ///     });
         /// 
@@ -124,7 +124,7 @@ namespace Pulumiverse.Configcat
         ///         NameFilterRegex = "ConfigCat's product",
         ///     });
         /// 
-        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
         ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
         ///         NameFilterRegex = "Main Config",
@@ -132,7 +132,7 @@ namespace Pulumiverse.Configcat
         /// 
         ///     var settings = Configcat.GetSettings.Invoke(new()
         ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
         ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
         ///     });
         /// 

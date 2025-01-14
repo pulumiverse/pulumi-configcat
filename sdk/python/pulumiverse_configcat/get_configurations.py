@@ -16,16 +16,16 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
-    'GetConfigsResult',
-    'AwaitableGetConfigsResult',
-    'get_configs',
-    'get_configs_output',
+    'GetConfigurationsResult',
+    'AwaitableGetConfigurationsResult',
+    'get_configurations',
+    'get_configurations_output',
 ]
 
 @pulumi.output_type
-class GetConfigsResult:
+class GetConfigurationsResult:
     """
-    A collection of values returned by getConfigs.
+    A collection of values returned by getConfigurations.
     """
     def __init__(__self__, configs=None, id=None, name_filter_regex=None, product_id=None):
         if configs and not isinstance(configs, list):
@@ -43,7 +43,7 @@ class GetConfigsResult:
 
     @property
     @pulumi.getter
-    def configs(self) -> Sequence['outputs.GetConfigsConfigResult']:
+    def configs(self) -> Sequence['outputs.GetConfigurationsConfigResult']:
         """
         A config list block defined as below.
         """
@@ -68,23 +68,23 @@ class GetConfigsResult:
         return pulumi.get(self, "product_id")
 
 
-class AwaitableGetConfigsResult(GetConfigsResult):
+class AwaitableGetConfigurationsResult(GetConfigurationsResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
-        return GetConfigsResult(
+        return GetConfigurationsResult(
             configs=self.configs,
             id=self.id,
             name_filter_regex=self.name_filter_regex,
             product_id=self.product_id)
 
 
-def get_configs(name_filter_regex: Optional[str] = None,
-                product_id: Optional[str] = None,
-                opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigsResult:
+def get_configurations(name_filter_regex: Optional[str] = None,
+                       product_id: Optional[str] = None,
+                       opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigurationsResult:
     """
-    ## # get_configs Resource
+    ## # get_configurations Resource
 
     Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
 
@@ -95,7 +95,7 @@ def get_configs(name_filter_regex: Optional[str] = None,
     import pulumi_configcat as configcat
 
     my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
         name_filter_regex="Main Config")
     pulumi.export("configId", my_configs.configs[0].config_id)
     ```
@@ -112,18 +112,18 @@ def get_configs(name_filter_regex: Optional[str] = None,
     __args__['nameFilterRegex'] = name_filter_regex
     __args__['productId'] = product_id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
-    __ret__ = pulumi.runtime.invoke('configcat:index/getConfigs:getConfigs', __args__, opts=opts, typ=GetConfigsResult).value
+    __ret__ = pulumi.runtime.invoke('configcat:index/getConfigurations:getConfigurations', __args__, opts=opts, typ=GetConfigurationsResult).value
 
-    return AwaitableGetConfigsResult(
+    return AwaitableGetConfigurationsResult(
         configs=pulumi.get(__ret__, 'configs'),
         id=pulumi.get(__ret__, 'id'),
         name_filter_regex=pulumi.get(__ret__, 'name_filter_regex'),
         product_id=pulumi.get(__ret__, 'product_id'))
-def get_configs_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
-                       product_id: Optional[pulumi.Input[str]] = None,
-                       opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigsResult]:
+def get_configurations_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
+                              product_id: Optional[pulumi.Input[str]] = None,
+                              opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigurationsResult]:
     """
-    ## # get_configs Resource
+    ## # get_configurations Resource
 
     Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
 
@@ -134,7 +134,7 @@ def get_configs_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] 
     import pulumi_configcat as configcat
 
     my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
         name_filter_regex="Main Config")
     pulumi.export("configId", my_configs.configs[0].config_id)
     ```
@@ -151,8 +151,8 @@ def get_configs_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] 
     __args__['nameFilterRegex'] = name_filter_regex
     __args__['productId'] = product_id
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
-    __ret__ = pulumi.runtime.invoke_output('configcat:index/getConfigs:getConfigs', __args__, opts=opts, typ=GetConfigsResult)
-    return __ret__.apply(lambda __response__: GetConfigsResult(
+    __ret__ = pulumi.runtime.invoke_output('configcat:index/getConfigurations:getConfigurations', __args__, opts=opts, typ=GetConfigurationsResult)
+    return __ret__.apply(lambda __response__: GetConfigurationsResult(
         configs=pulumi.get(__response__, 'configs'),
         id=pulumi.get(__response__, 'id'),
         name_filter_regex=pulumi.get(__response__, 'name_filter_regex'),

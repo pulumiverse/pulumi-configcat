@@ -367,7 +367,7 @@ func (o SettingValueRolloutRuleArrayOutput) Index(i pulumi.IntInput) SettingValu
 	}).(SettingValueRolloutRuleOutput)
 }
 
-type GetConfigsConfig struct {
+type GetConfigurationsConfig struct {
 	// The unique Config ID.
 	ConfigId string `pulumi:"configId"`
 	// The description of the Config.
@@ -376,18 +376,18 @@ type GetConfigsConfig struct {
 	Name string `pulumi:"name"`
 }
 
-// GetConfigsConfigInput is an input type that accepts GetConfigsConfigArgs and GetConfigsConfigOutput values.
-// You can construct a concrete instance of `GetConfigsConfigInput` via:
+// GetConfigurationsConfigInput is an input type that accepts GetConfigurationsConfigArgs and GetConfigurationsConfigOutput values.
+// You can construct a concrete instance of `GetConfigurationsConfigInput` via:
 //
-//	GetConfigsConfigArgs{...}
-type GetConfigsConfigInput interface {
+//	GetConfigurationsConfigArgs{...}
+type GetConfigurationsConfigInput interface {
 	pulumi.Input
 
-	ToGetConfigsConfigOutput() GetConfigsConfigOutput
-	ToGetConfigsConfigOutputWithContext(context.Context) GetConfigsConfigOutput
+	ToGetConfigurationsConfigOutput() GetConfigurationsConfigOutput
+	ToGetConfigurationsConfigOutputWithContext(context.Context) GetConfigurationsConfigOutput
 }
 
-type GetConfigsConfigArgs struct {
+type GetConfigurationsConfigArgs struct {
 	// The unique Config ID.
 	ConfigId pulumi.StringInput `pulumi:"configId"`
 	// The description of the Config.
@@ -396,90 +396,90 @@ type GetConfigsConfigArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 }
 
-func (GetConfigsConfigArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetConfigsConfig)(nil)).Elem()
+func (GetConfigurationsConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationsConfig)(nil)).Elem()
 }
 
-func (i GetConfigsConfigArgs) ToGetConfigsConfigOutput() GetConfigsConfigOutput {
-	return i.ToGetConfigsConfigOutputWithContext(context.Background())
+func (i GetConfigurationsConfigArgs) ToGetConfigurationsConfigOutput() GetConfigurationsConfigOutput {
+	return i.ToGetConfigurationsConfigOutputWithContext(context.Background())
 }
 
-func (i GetConfigsConfigArgs) ToGetConfigsConfigOutputWithContext(ctx context.Context) GetConfigsConfigOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetConfigsConfigOutput)
+func (i GetConfigurationsConfigArgs) ToGetConfigurationsConfigOutputWithContext(ctx context.Context) GetConfigurationsConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationsConfigOutput)
 }
 
-// GetConfigsConfigArrayInput is an input type that accepts GetConfigsConfigArray and GetConfigsConfigArrayOutput values.
-// You can construct a concrete instance of `GetConfigsConfigArrayInput` via:
+// GetConfigurationsConfigArrayInput is an input type that accepts GetConfigurationsConfigArray and GetConfigurationsConfigArrayOutput values.
+// You can construct a concrete instance of `GetConfigurationsConfigArrayInput` via:
 //
-//	GetConfigsConfigArray{ GetConfigsConfigArgs{...} }
-type GetConfigsConfigArrayInput interface {
+//	GetConfigurationsConfigArray{ GetConfigurationsConfigArgs{...} }
+type GetConfigurationsConfigArrayInput interface {
 	pulumi.Input
 
-	ToGetConfigsConfigArrayOutput() GetConfigsConfigArrayOutput
-	ToGetConfigsConfigArrayOutputWithContext(context.Context) GetConfigsConfigArrayOutput
+	ToGetConfigurationsConfigArrayOutput() GetConfigurationsConfigArrayOutput
+	ToGetConfigurationsConfigArrayOutputWithContext(context.Context) GetConfigurationsConfigArrayOutput
 }
 
-type GetConfigsConfigArray []GetConfigsConfigInput
+type GetConfigurationsConfigArray []GetConfigurationsConfigInput
 
-func (GetConfigsConfigArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetConfigsConfig)(nil)).Elem()
+func (GetConfigurationsConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConfigurationsConfig)(nil)).Elem()
 }
 
-func (i GetConfigsConfigArray) ToGetConfigsConfigArrayOutput() GetConfigsConfigArrayOutput {
-	return i.ToGetConfigsConfigArrayOutputWithContext(context.Background())
+func (i GetConfigurationsConfigArray) ToGetConfigurationsConfigArrayOutput() GetConfigurationsConfigArrayOutput {
+	return i.ToGetConfigurationsConfigArrayOutputWithContext(context.Background())
 }
 
-func (i GetConfigsConfigArray) ToGetConfigsConfigArrayOutputWithContext(ctx context.Context) GetConfigsConfigArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetConfigsConfigArrayOutput)
+func (i GetConfigurationsConfigArray) ToGetConfigurationsConfigArrayOutputWithContext(ctx context.Context) GetConfigurationsConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConfigurationsConfigArrayOutput)
 }
 
-type GetConfigsConfigOutput struct{ *pulumi.OutputState }
+type GetConfigurationsConfigOutput struct{ *pulumi.OutputState }
 
-func (GetConfigsConfigOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetConfigsConfig)(nil)).Elem()
+func (GetConfigurationsConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConfigurationsConfig)(nil)).Elem()
 }
 
-func (o GetConfigsConfigOutput) ToGetConfigsConfigOutput() GetConfigsConfigOutput {
+func (o GetConfigurationsConfigOutput) ToGetConfigurationsConfigOutput() GetConfigurationsConfigOutput {
 	return o
 }
 
-func (o GetConfigsConfigOutput) ToGetConfigsConfigOutputWithContext(ctx context.Context) GetConfigsConfigOutput {
+func (o GetConfigurationsConfigOutput) ToGetConfigurationsConfigOutputWithContext(ctx context.Context) GetConfigurationsConfigOutput {
 	return o
 }
 
 // The unique Config ID.
-func (o GetConfigsConfigOutput) ConfigId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetConfigsConfig) string { return v.ConfigId }).(pulumi.StringOutput)
+func (o GetConfigurationsConfigOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationsConfig) string { return v.ConfigId }).(pulumi.StringOutput)
 }
 
 // The description of the Config.
-func (o GetConfigsConfigOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v GetConfigsConfig) string { return v.Description }).(pulumi.StringOutput)
+func (o GetConfigurationsConfigOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationsConfig) string { return v.Description }).(pulumi.StringOutput)
 }
 
 // The name of the Config.
-func (o GetConfigsConfigOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v GetConfigsConfig) string { return v.Name }).(pulumi.StringOutput)
+func (o GetConfigurationsConfigOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationsConfig) string { return v.Name }).(pulumi.StringOutput)
 }
 
-type GetConfigsConfigArrayOutput struct{ *pulumi.OutputState }
+type GetConfigurationsConfigArrayOutput struct{ *pulumi.OutputState }
 
-func (GetConfigsConfigArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetConfigsConfig)(nil)).Elem()
+func (GetConfigurationsConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetConfigurationsConfig)(nil)).Elem()
 }
 
-func (o GetConfigsConfigArrayOutput) ToGetConfigsConfigArrayOutput() GetConfigsConfigArrayOutput {
+func (o GetConfigurationsConfigArrayOutput) ToGetConfigurationsConfigArrayOutput() GetConfigurationsConfigArrayOutput {
 	return o
 }
 
-func (o GetConfigsConfigArrayOutput) ToGetConfigsConfigArrayOutputWithContext(ctx context.Context) GetConfigsConfigArrayOutput {
+func (o GetConfigurationsConfigArrayOutput) ToGetConfigurationsConfigArrayOutputWithContext(ctx context.Context) GetConfigurationsConfigArrayOutput {
 	return o
 }
 
-func (o GetConfigsConfigArrayOutput) Index(i pulumi.IntInput) GetConfigsConfigOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetConfigsConfig {
-		return vs[0].([]GetConfigsConfig)[vs[1].(int)]
-	}).(GetConfigsConfigOutput)
+func (o GetConfigurationsConfigArrayOutput) Index(i pulumi.IntInput) GetConfigurationsConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetConfigurationsConfig {
+		return vs[0].([]GetConfigurationsConfig)[vs[1].(int)]
+	}).(GetConfigurationsConfigOutput)
 }
 
 type GetEnvironmentsEnvironment struct {
@@ -1612,8 +1612,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValuePercentageItemArrayInput)(nil)).Elem(), SettingValuePercentageItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueRolloutRuleInput)(nil)).Elem(), SettingValueRolloutRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueRolloutRuleArrayInput)(nil)).Elem(), SettingValueRolloutRuleArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigsConfigInput)(nil)).Elem(), GetConfigsConfigArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigsConfigArrayInput)(nil)).Elem(), GetConfigsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationsConfigInput)(nil)).Elem(), GetConfigurationsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationsConfigArrayInput)(nil)).Elem(), GetConfigurationsConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvironmentInput)(nil)).Elem(), GetEnvironmentsEnvironmentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvironmentArrayInput)(nil)).Elem(), GetEnvironmentsEnvironmentArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrganizationsOrganizationInput)(nil)).Elem(), GetOrganizationsOrganizationArgs{})
@@ -1636,8 +1636,8 @@ func init() {
 	pulumi.RegisterOutputType(SettingValuePercentageItemArrayOutput{})
 	pulumi.RegisterOutputType(SettingValueRolloutRuleOutput{})
 	pulumi.RegisterOutputType(SettingValueRolloutRuleArrayOutput{})
-	pulumi.RegisterOutputType(GetConfigsConfigOutput{})
-	pulumi.RegisterOutputType(GetConfigsConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetConfigurationsConfigOutput{})
+	pulumi.RegisterOutputType(GetConfigurationsConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetEnvironmentsEnvironmentOutput{})
 	pulumi.RegisterOutputType(GetEnvironmentsEnvironmentArrayOutput{})
 	pulumi.RegisterOutputType(GetOrganizationsOrganizationOutput{})

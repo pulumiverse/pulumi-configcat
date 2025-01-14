@@ -20,7 +20,7 @@ import * as utilities from "./utilities";
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigs({
+ * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
  *     productId: myProducts.products?.[0]?.productId,
  *     nameFilterRegex: "Main Config",
  * }));
@@ -86,7 +86,7 @@ export interface GetSettingsResult {
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigs({
+ * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
  *     productId: myProducts.products?.[0]?.productId,
  *     nameFilterRegex: "Main Config",
  * }));

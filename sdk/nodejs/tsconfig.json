@@ -17,7 +17,7 @@
         "config/vars.ts",
         "configuration.ts",
         "environment.ts",
-        "getConfigs.ts",
+        "getConfigurations.ts",
         "getEnvironments.ts",
         "getOrganizations.ts",
         "getPermissionGroups.ts",

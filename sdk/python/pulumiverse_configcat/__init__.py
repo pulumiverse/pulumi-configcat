@@ -7,7 +7,7 @@ import typing
 # Export this package's modules as members:
 from .configuration import *
 from .environment import *
-from .get_configs import *
+from .get_configurations import *
 from .get_environments import *
 from .get_organizations import *
 from .get_permission_groups import *

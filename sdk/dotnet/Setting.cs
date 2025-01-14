@@ -31,7 +31,7 @@ namespace Pulumiverse.Configcat
     ///         NameFilterRegex = "ConfigCat's product",
     ///     });
     /// 
-    ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+    ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
     ///     {
     ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
     ///         NameFilterRegex = "Main Config",
@@ -39,7 +39,7 @@ namespace Pulumiverse.Configcat
     /// 
     ///     var mySetting = new Configcat.Setting("my_setting", new()
     ///     {
-    ///         ConfigId = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+    ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
     ///         Key = "isAwesomeFeatureEnabled",
     ///         Name = "My awesome feature flag",
     ///         Hint = "This is the hint for my awesome feature flag",

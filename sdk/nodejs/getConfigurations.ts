@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getConfigs Resource
+ * ## # configcat.getConfigurations Resource
  *
  * Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
@@ -20,7 +20,7 @@ import * as utilities from "./utilities";
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigs({
+ * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
  *     productId: myProducts.products?.[0]?.productId,
  *     nameFilterRegex: "Main Config",
  * }));
@@ -31,18 +31,18 @@ import * as utilities from "./utilities";
  *
  * [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
  */
-export function getConfigs(args: GetConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigsResult> {
+export function getConfigurations(args: GetConfigurationsArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigurationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
-    return pulumi.runtime.invoke("configcat:index/getConfigs:getConfigs", {
+    return pulumi.runtime.invoke("configcat:index/getConfigurations:getConfigurations", {
         "nameFilterRegex": args.nameFilterRegex,
         "productId": args.productId,
     }, opts);
 }
 
 /**
- * A collection of arguments for invoking getConfigs.
+ * A collection of arguments for invoking getConfigurations.
  */
-export interface GetConfigsArgs {
+export interface GetConfigurationsArgs {
     /**
      * Filter the Configs by name.
      */
@@ -54,13 +54,13 @@ export interface GetConfigsArgs {
 }
 
 /**
- * A collection of values returned by getConfigs.
+ * A collection of values returned by getConfigurations.
  */
-export interface GetConfigsResult {
+export interface GetConfigurationsResult {
     /**
      * A config list block defined as below.
      */
-    readonly configs: outputs.GetConfigsConfig[];
+    readonly configs: outputs.GetConfigurationsConfig[];
     /**
      * The provider-assigned unique ID for this managed resource.
      */
@@ -69,7 +69,7 @@ export interface GetConfigsResult {
     readonly productId: string;
 }
 /**
- * ## # configcat.getConfigs Resource
+ * ## # configcat.getConfigurations Resource
  *
  * Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
@@ -82,7 +82,7 @@ export interface GetConfigsResult {
  * const myProducts = configcat.getProducts({
  *     nameFilterRegex: "ConfigCat's product",
  * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigs({
+ * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
  *     productId: myProducts.products?.[0]?.productId,
  *     nameFilterRegex: "Main Config",
  * }));
@@ -93,18 +93,18 @@ export interface GetConfigsResult {
  *
  * [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
  */
-export function getConfigsOutput(args: GetConfigsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigsResult> {
+export function getConfigurationsOutput(args: GetConfigurationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigurationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
-    return pulumi.runtime.invokeOutput("configcat:index/getConfigs:getConfigs", {
+    return pulumi.runtime.invokeOutput("configcat:index/getConfigurations:getConfigurations", {
         "nameFilterRegex": args.nameFilterRegex,
         "productId": args.productId,
     }, opts);
 }
 
 /**
- * A collection of arguments for invoking getConfigs.
+ * A collection of arguments for invoking getConfigurations.
  */
-export interface GetConfigsOutputArgs {
+export interface GetConfigurationsOutputArgs {
     /**
      * Filter the Configs by name.
      */

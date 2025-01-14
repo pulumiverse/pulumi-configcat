@@ -305,7 +305,7 @@ class SettingValue(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
             name_filter_regex="Main Config")
         my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
             name_filter_regex="Test")
@@ -392,7 +392,7 @@ class SettingValue(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
             name_filter_regex="Main Config")
         my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
             name_filter_regex="Test")

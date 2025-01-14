@@ -10,10 +10,10 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
-    public static class GetConfigs
+    public static class GetConfigurations
     {
         /// <summary>
-        /// ## # configcat.getConfigs Resource
+        /// ## # configcat.getConfigurations Resource
         /// 
         /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
@@ -32,7 +32,7 @@ namespace Pulumiverse.Configcat
         ///         NameFilterRegex = "ConfigCat's product",
         ///     });
         /// 
-        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
         ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
         ///         NameFilterRegex = "Main Config",
@@ -40,7 +40,7 @@ namespace Pulumiverse.Configcat
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["configId"] = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         ["configId"] = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
         ///     };
         /// });
         /// ```
@@ -49,11 +49,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
         /// </summary>
-        public static Task<GetConfigsResult> InvokeAsync(GetConfigsArgs args, InvokeOptions? options = null)
-            => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigsResult>("configcat:index/getConfigs:getConfigs", args ?? new GetConfigsArgs(), options.WithDefaults());
+        public static Task<GetConfigurationsResult> InvokeAsync(GetConfigurationsArgs args, InvokeOptions? options = null)
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigurationsResult>("configcat:index/getConfigurations:getConfigurations", args ?? new GetConfigurationsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getConfigs Resource
+        /// ## # configcat.getConfigurations Resource
         /// 
         /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
@@ -72,7 +72,7 @@ namespace Pulumiverse.Configcat
         ///         NameFilterRegex = "ConfigCat's product",
         ///     });
         /// 
-        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
         ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
         ///         NameFilterRegex = "Main Config",
@@ -80,7 +80,7 @@ namespace Pulumiverse.Configcat
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["configId"] = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         ["configId"] = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
         ///     };
         /// });
         /// ```
@@ -89,11 +89,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
         /// </summary>
-        public static Output<GetConfigsResult> Invoke(GetConfigsInvokeArgs args, InvokeOptions? options = null)
-            => global::Pulumi.Deployment.Instance.Invoke<GetConfigsResult>("configcat:index/getConfigs:getConfigs", args ?? new GetConfigsInvokeArgs(), options.WithDefaults());
+        public static Output<GetConfigurationsResult> Invoke(GetConfigurationsInvokeArgs args, InvokeOptions? options = null)
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationsResult>("configcat:index/getConfigurations:getConfigurations", args ?? new GetConfigurationsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getConfigs Resource
+        /// ## # configcat.getConfigurations Resource
         /// 
         /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
@@ -112,7 +112,7 @@ namespace Pulumiverse.Configcat
         ///         NameFilterRegex = "ConfigCat's product",
         ///     });
         /// 
-        ///     var myConfigs = Configcat.GetConfigs.Invoke(new()
+        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
         ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
         ///         NameFilterRegex = "Main Config",
@@ -120,7 +120,7 @@ namespace Pulumiverse.Configcat
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
         ///     {
-        ///         ["configId"] = myConfigs.Apply(getConfigsResult =&gt; getConfigsResult.Configs[0]?.ConfigId),
+        ///         ["configId"] = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
         ///     };
         /// });
         /// ```
@@ -129,12 +129,12 @@ namespace Pulumiverse.Configcat
         /// 
         /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
         /// </summary>
-        public static Output<GetConfigsResult> Invoke(GetConfigsInvokeArgs args, InvokeOutputOptions options)
-            => global::Pulumi.Deployment.Instance.Invoke<GetConfigsResult>("configcat:index/getConfigs:getConfigs", args ?? new GetConfigsInvokeArgs(), options.WithDefaults());
+        public static Output<GetConfigurationsResult> Invoke(GetConfigurationsInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationsResult>("configcat:index/getConfigurations:getConfigurations", args ?? new GetConfigurationsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetConfigsArgs : global::Pulumi.InvokeArgs
+    public sealed class GetConfigurationsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter the Configs by name.
@@ -148,13 +148,13 @@ namespace Pulumiverse.Configcat
         [Input("productId", required: true)]
         public string ProductId { get; set; } = null!;
 
-        public GetConfigsArgs()
+        public GetConfigurationsArgs()
         {
         }
-        public static new GetConfigsArgs Empty => new GetConfigsArgs();
+        public static new GetConfigurationsArgs Empty => new GetConfigurationsArgs();
     }
 
-    public sealed class GetConfigsInvokeArgs : global::Pulumi.InvokeArgs
+    public sealed class GetConfigurationsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter the Configs by name.
@@ -168,20 +168,20 @@ namespace Pulumiverse.Configcat
         [Input("productId", required: true)]
         public Input<string> ProductId { get; set; } = null!;
 
-        public GetConfigsInvokeArgs()
+        public GetConfigurationsInvokeArgs()
         {
         }
-        public static new GetConfigsInvokeArgs Empty => new GetConfigsInvokeArgs();
+        public static new GetConfigurationsInvokeArgs Empty => new GetConfigurationsInvokeArgs();
     }
 
 
     [OutputType]
-    public sealed class GetConfigsResult
+    public sealed class GetConfigurationsResult
     {
         /// <summary>
         /// A config list block defined as below.
         /// </summary>
-        public readonly ImmutableArray<Outputs.GetConfigsConfigResult> Configs;
+        public readonly ImmutableArray<Outputs.GetConfigurationsConfigResult> Configs;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
@@ -190,8 +190,8 @@ namespace Pulumiverse.Configcat
         public readonly string ProductId;
 
         [OutputConstructor]
-        private GetConfigsResult(
-            ImmutableArray<Outputs.GetConfigsConfigResult> configs,
+        private GetConfigurationsResult(
+            ImmutableArray<Outputs.GetConfigurationsConfigResult> configs,
 
             string id,
 

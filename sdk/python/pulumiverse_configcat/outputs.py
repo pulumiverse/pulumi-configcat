@@ -19,7 +19,7 @@ __all__ = [
     'PermissionGroupEnvironmentAccess',
     'SettingValuePercentageItem',
     'SettingValueRolloutRule',
-    'GetConfigsConfigResult',
+    'GetConfigurationsConfigResult',
     'GetEnvironmentsEnvironmentResult',
     'GetOrganizationsOrganizationResult',
     'GetPermissionGroupsPermissionGroupResult',
@@ -210,7 +210,7 @@ class SettingValueRolloutRule(dict):
 
 
 @pulumi.output_type
-class GetConfigsConfigResult(dict):
+class GetConfigurationsConfigResult(dict):
     def __init__(__self__, *,
                  config_id: str,
                  description: str,

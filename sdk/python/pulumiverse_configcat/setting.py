@@ -218,7 +218,7 @@ class Setting(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
             name_filter_regex="Main Config")
         my_setting = configcat.Setting("my_setting",
             config_id=my_configs.configs[0].config_id,
@@ -273,7 +273,7 @@ class Setting(pulumi.CustomResource):
         import pulumiverse_configcat as configcat
 
         my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configs(product_id=my_products.products[0].product_id,
+        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
             name_filter_regex="Main Config")
         my_setting = configcat.Setting("my_setting",
             config_id=my_configs.configs[0].config_id,

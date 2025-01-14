@@ -34,7 +34,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myConfigs, err := configcat.GetConfigs(ctx, &configcat.GetConfigsArgs{
+//			myConfigs, err := configcat.GetConfigurations(ctx, &configcat.GetConfigurationsArgs{
 //				ProductId:       myProducts.Products[0].ProductId,
 //				NameFilterRegex: pulumi.StringRef("Main Config"),
 //			}, nil)
