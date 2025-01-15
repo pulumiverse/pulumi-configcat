@@ -93,9 +93,9 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly bool CanViewSdkkey;
         /// <summary>
-        /// The environment specific permissions list block defined as below.
+        /// The environment specific permissions map block defined as below.
         /// </summary>
-        public readonly ImmutableArray<Outputs.GetPermissionGroupsPermissionGroupEnvironmentAccessResult> EnvironmentAccesses;
+        public readonly ImmutableDictionary<string, string>? EnvironmentAccesses;
         /// <summary>
         /// The name of the Permission Group.
         /// </summary>
@@ -153,7 +153,7 @@ namespace Pulumiverse.Configcat.Outputs
 
             bool canViewSdkkey,
 
-            ImmutableArray<Outputs.GetPermissionGroupsPermissionGroupEnvironmentAccessResult> environmentAccesses,
+            ImmutableDictionary<string, string>? environmentAccesses,
 
             string name,
 

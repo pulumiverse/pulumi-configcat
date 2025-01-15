@@ -96,19 +96,16 @@ namespace Pulumiverse.Configcat
     ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
     ///         Name = "Read only except Test environment",
     ///         Accesstype = "custom",
-    ///         EnvironmentAccesses = new[]
+    ///         EnvironmentAccesses = Output.Tuple(myTestEnvironments, myTestEnvironments).Apply(values =&gt;
     ///         {
-    ///             new Configcat.Inputs.PermissionGroupEnvironmentAccessArgs
+    ///             var myTestEnvironments = values.Item1;
+    ///             var myTestEnvironments1 = values.Item2;
+    ///             return 
     ///             {
-    ///                 EnvironmentId = myTestEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-    ///                 EnvironmentAccesstype = "full",
-    ///             },
-    ///             new Configcat.Inputs.PermissionGroupEnvironmentAccessArgs
-    ///             {
-    ///                 EnvironmentId = myProductionEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-    ///                 EnvironmentAccesstype = "none",
-    ///             },
-    ///         },
+    ///                 { myTestEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId), "full" },
+    ///                 { myTestEnvironments1.Environments[1]?.EnvironmentId, "readOnly" },
+    ///             };
+    ///         }),
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -258,10 +255,10 @@ namespace Pulumiverse.Configcat
         public Output<bool?> CanViewSdkkey { get; private set; } = null!;
 
         /// <summary>
-        /// The environment specific permissions list block defined as below.
+        /// The environment specific permissions map block defined as below.
         /// </summary>
         [Output("environmentAccesses")]
-        public Output<ImmutableArray<Outputs.PermissionGroupEnvironmentAccess>> EnvironmentAccesses { get; private set; } = null!;
+        public Output<ImmutableDictionary<string, string>?> EnvironmentAccesses { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Permission Group.
@@ -270,7 +267,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environment_access list. Possible values: full, readOnly, none. Default: none.
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
         /// </summary>
         [Output("newEnvironmentAccesstype")]
         public Output<string?> NewEnvironmentAccesstype { get; private set; } = null!;
@@ -449,14 +446,14 @@ namespace Pulumiverse.Configcat
         public Input<bool>? CanViewSdkkey { get; set; }
 
         [Input("environmentAccesses")]
-        private InputList<Inputs.PermissionGroupEnvironmentAccessArgs>? _environmentAccesses;
+        private InputMap<string>? _environmentAccesses;
 
         /// <summary>
-        /// The environment specific permissions list block defined as below.
+        /// The environment specific permissions map block defined as below.
         /// </summary>
-        public InputList<Inputs.PermissionGroupEnvironmentAccessArgs> EnvironmentAccesses
+        public InputMap<string> EnvironmentAccesses
         {
-            get => _environmentAccesses ?? (_environmentAccesses = new InputList<Inputs.PermissionGroupEnvironmentAccessArgs>());
+            get => _environmentAccesses ?? (_environmentAccesses = new InputMap<string>());
             set => _environmentAccesses = value;
         }
 
@@ -467,7 +464,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environment_access list. Possible values: full, readOnly, none. Default: none.
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
         /// </summary>
         [Input("newEnvironmentAccesstype")]
         public Input<string>? NewEnvironmentAccesstype { get; set; }
@@ -607,14 +604,14 @@ namespace Pulumiverse.Configcat
         public Input<bool>? CanViewSdkkey { get; set; }
 
         [Input("environmentAccesses")]
-        private InputList<Inputs.PermissionGroupEnvironmentAccessGetArgs>? _environmentAccesses;
+        private InputMap<string>? _environmentAccesses;
 
         /// <summary>
-        /// The environment specific permissions list block defined as below.
+        /// The environment specific permissions map block defined as below.
         /// </summary>
-        public InputList<Inputs.PermissionGroupEnvironmentAccessGetArgs> EnvironmentAccesses
+        public InputMap<string> EnvironmentAccesses
         {
-            get => _environmentAccesses ?? (_environmentAccesses = new InputList<Inputs.PermissionGroupEnvironmentAccessGetArgs>());
+            get => _environmentAccesses ?? (_environmentAccesses = new InputMap<string>());
             set => _environmentAccesses = value;
         }
 
@@ -625,7 +622,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environment_access list. Possible values: full, readOnly, none. Default: none.
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
         /// </summary>
         [Input("newEnvironmentAccesstype")]
         public Input<string>? NewEnvironmentAccesstype { get; set; }

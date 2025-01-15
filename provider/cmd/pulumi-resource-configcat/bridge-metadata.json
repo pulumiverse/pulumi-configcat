@@ -8,12 +8,7 @@
                 "current": "configcat:index/environment:Environment"
             },
             "configcat_permission_group": {
-                "current": "configcat:index/permissionGroup:PermissionGroup",
-                "fields": {
-                    "environment_access": {
-                        "maxItemsOne": false
-                    }
-                }
+                "current": "configcat:index/permissionGroup:PermissionGroup"
             },
             "configcat_product": {
                 "current": "configcat:index/product:Product"
@@ -71,14 +66,7 @@
                 "current": "configcat:index/getPermissionGroups:getPermissionGroups",
                 "fields": {
                     "permission_groups": {
-                        "maxItemsOne": false,
-                        "elem": {
-                            "fields": {
-                                "environment_access": {
-                                    "maxItemsOne": false
-                                }
-                            }
-                        }
+                        "maxItemsOne": false
                     }
                 }
             },

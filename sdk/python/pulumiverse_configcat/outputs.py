@@ -13,71 +13,19 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
-from . import outputs
 
 __all__ = [
-    'PermissionGroupEnvironmentAccess',
     'SettingValuePercentageItem',
     'SettingValueRolloutRule',
     'GetConfigurationsConfigResult',
     'GetEnvironmentsEnvironmentResult',
     'GetOrganizationsOrganizationResult',
     'GetPermissionGroupsPermissionGroupResult',
-    'GetPermissionGroupsPermissionGroupEnvironmentAccessResult',
     'GetProductsProductResult',
     'GetSegmentsSegmentResult',
     'GetSettingsSettingResult',
     'GetTagsTagResult',
 ]
-
-@pulumi.output_type
-class PermissionGroupEnvironmentAccess(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "environmentId":
-            suggest = "environment_id"
-        elif key == "environmentAccesstype":
-            suggest = "environment_accesstype"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in PermissionGroupEnvironmentAccess. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        PermissionGroupEnvironmentAccess.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        PermissionGroupEnvironmentAccess.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 environment_id: str,
-                 environment_accesstype: Optional[str] = None):
-        """
-        :param str environment_id: The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        :param str environment_accesstype: Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-        """
-        pulumi.set(__self__, "environment_id", environment_id)
-        if environment_accesstype is not None:
-            pulumi.set(__self__, "environment_accesstype", environment_accesstype)
-
-    @property
-    @pulumi.getter(name="environmentId")
-    def environment_id(self) -> str:
-        """
-        The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        """
-        return pulumi.get(self, "environment_id")
-
-    @property
-    @pulumi.getter(name="environmentAccesstype")
-    def environment_accesstype(self) -> Optional[str]:
-        """
-        Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-        """
-        return pulumi.get(self, "environment_accesstype")
-
 
 @pulumi.output_type
 class SettingValuePercentageItem(dict):
@@ -353,10 +301,10 @@ class GetPermissionGroupsPermissionGroupResult(dict):
                  can_view_product_auditlog: bool,
                  can_view_product_statistics: bool,
                  can_view_sdkkey: bool,
-                 environment_accesses: Sequence['outputs.GetPermissionGroupsPermissionGroupEnvironmentAccessResult'],
                  name: str,
                  new_environment_accesstype: str,
-                 permission_group_id: int):
+                 permission_group_id: int,
+                 environment_accesses: Optional[Mapping[str, str]] = None):
         """
         :param str accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom
         :param bool can_createorupdate_config: Group members can create/update Configs.
@@ -377,10 +325,10 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         :param bool can_view_product_auditlog: Group members has access to audit logs.
         :param bool can_view_product_statistics: Group members has access to product statistics.
         :param bool can_view_sdkkey: Group members has access to SDK keys.
-        :param Sequence['GetPermissionGroupsPermissionGroupEnvironmentAccessArgs'] environment_accesses: The environment specific permissions list block defined as below.
         :param str name: The name of the Permission Group.
         :param str new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         :param int permission_group_id: The unique Permission Groups ID.
+        :param Mapping[str, str] environment_accesses: The environment specific permissions map block defined as below.
         """
         pulumi.set(__self__, "accesstype", accesstype)
         pulumi.set(__self__, "can_createorupdate_config", can_createorupdate_config)
@@ -403,10 +351,11 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         pulumi.set(__self__, "can_view_product_auditlog", can_view_product_auditlog)
         pulumi.set(__self__, "can_view_product_statistics", can_view_product_statistics)
         pulumi.set(__self__, "can_view_sdkkey", can_view_sdkkey)
-        pulumi.set(__self__, "environment_accesses", environment_accesses)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "new_environment_accesstype", new_environment_accesstype)
         pulumi.set(__self__, "permission_group_id", permission_group_id)
+        if environment_accesses is not None:
+            pulumi.set(__self__, "environment_accesses", environment_accesses)
 
     @property
     @pulumi.getter
@@ -571,14 +520,6 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         return pulumi.get(self, "can_view_sdkkey")
 
     @property
-    @pulumi.getter(name="environmentAccesses")
-    def environment_accesses(self) -> Sequence['outputs.GetPermissionGroupsPermissionGroupEnvironmentAccessResult']:
-        """
-        The environment specific permissions list block defined as below.
-        """
-        return pulumi.get(self, "environment_accesses")
-
-    @property
     @pulumi.getter
     def name(self) -> str:
         """
@@ -602,34 +543,13 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         """
         return pulumi.get(self, "permission_group_id")
 
-
-@pulumi.output_type
-class GetPermissionGroupsPermissionGroupEnvironmentAccessResult(dict):
-    def __init__(__self__, *,
-                 environment_accesstype: str,
-                 environment_id: str):
-        """
-        :param str environment_accesstype: Represent the environment specific Feature Management permission. Possible values: full, readOnly, none
-        :param str environment_id: The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        """
-        pulumi.set(__self__, "environment_accesstype", environment_accesstype)
-        pulumi.set(__self__, "environment_id", environment_id)
-
     @property
-    @pulumi.getter(name="environmentAccesstype")
-    def environment_accesstype(self) -> str:
+    @pulumi.getter(name="environmentAccesses")
+    def environment_accesses(self) -> Optional[Mapping[str, str]]:
         """
-        Represent the environment specific Feature Management permission. Possible values: full, readOnly, none
+        The environment specific permissions map block defined as below.
         """
-        return pulumi.get(self, "environment_accesstype")
-
-    @property
-    @pulumi.getter(name="environmentId")
-    def environment_id(self) -> str:
-        """
-        The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        """
-        return pulumi.get(self, "environment_id")
+        return pulumi.get(self, "environment_accesses")
 
 
 @pulumi.output_type

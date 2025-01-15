@@ -5,17 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface PermissionGroupEnvironmentAccess {
-    /**
-     * Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-     */
-    environmentAccesstype?: pulumi.Input<string>;
-    /**
-     * The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-     */
-    environmentId: pulumi.Input<string>;
-}
-
 export interface SettingValuePercentageItem {
     /**
      * Any [number](https://configcat.com/docs/advanced/targeting/#-value) between 0 and 100 that represents a randomly allocated fraction of your users.

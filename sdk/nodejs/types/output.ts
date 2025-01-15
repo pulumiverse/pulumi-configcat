@@ -130,9 +130,9 @@ export interface GetPermissionGroupsPermissionGroup {
      */
     canViewSdkkey: boolean;
     /**
-     * The environment specific permissions list block defined as below.
+     * The environment specific permissions map block defined as below.
      */
-    environmentAccesses: outputs.GetPermissionGroupsPermissionGroupEnvironmentAccess[];
+    environmentAccesses?: {[key: string]: string};
     /**
      * The name of the Permission Group.
      */
@@ -145,17 +145,6 @@ export interface GetPermissionGroupsPermissionGroup {
      * The unique Permission Groups ID.
      */
     permissionGroupId: number;
-}
-
-export interface GetPermissionGroupsPermissionGroupEnvironmentAccess {
-    /**
-     * Represent the environment specific Feature Management permission. Possible values: full, readOnly, none
-     */
-    environmentAccesstype: string;
-    /**
-     * The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-     */
-    environmentId: string;
 }
 
 export interface GetProductsProduct {
@@ -224,17 +213,6 @@ export interface GetTagsTag {
      * The unique Tag ID.
      */
     tagId: string;
-}
-
-export interface PermissionGroupEnvironmentAccess {
-    /**
-     * Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-     */
-    environmentAccesstype?: string;
-    /**
-     * The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-     */
-    environmentId: string;
 }
 
 export interface SettingValuePercentageItem {

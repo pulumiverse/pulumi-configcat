@@ -13,112 +13,6 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-type PermissionGroupEnvironmentAccess struct {
-	// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-	EnvironmentAccesstype *string `pulumi:"environmentAccesstype"`
-	// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-	EnvironmentId string `pulumi:"environmentId"`
-}
-
-// PermissionGroupEnvironmentAccessInput is an input type that accepts PermissionGroupEnvironmentAccessArgs and PermissionGroupEnvironmentAccessOutput values.
-// You can construct a concrete instance of `PermissionGroupEnvironmentAccessInput` via:
-//
-//	PermissionGroupEnvironmentAccessArgs{...}
-type PermissionGroupEnvironmentAccessInput interface {
-	pulumi.Input
-
-	ToPermissionGroupEnvironmentAccessOutput() PermissionGroupEnvironmentAccessOutput
-	ToPermissionGroupEnvironmentAccessOutputWithContext(context.Context) PermissionGroupEnvironmentAccessOutput
-}
-
-type PermissionGroupEnvironmentAccessArgs struct {
-	// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-	EnvironmentAccesstype pulumi.StringPtrInput `pulumi:"environmentAccesstype"`
-	// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-	EnvironmentId pulumi.StringInput `pulumi:"environmentId"`
-}
-
-func (PermissionGroupEnvironmentAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*PermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (i PermissionGroupEnvironmentAccessArgs) ToPermissionGroupEnvironmentAccessOutput() PermissionGroupEnvironmentAccessOutput {
-	return i.ToPermissionGroupEnvironmentAccessOutputWithContext(context.Background())
-}
-
-func (i PermissionGroupEnvironmentAccessArgs) ToPermissionGroupEnvironmentAccessOutputWithContext(ctx context.Context) PermissionGroupEnvironmentAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PermissionGroupEnvironmentAccessOutput)
-}
-
-// PermissionGroupEnvironmentAccessArrayInput is an input type that accepts PermissionGroupEnvironmentAccessArray and PermissionGroupEnvironmentAccessArrayOutput values.
-// You can construct a concrete instance of `PermissionGroupEnvironmentAccessArrayInput` via:
-//
-//	PermissionGroupEnvironmentAccessArray{ PermissionGroupEnvironmentAccessArgs{...} }
-type PermissionGroupEnvironmentAccessArrayInput interface {
-	pulumi.Input
-
-	ToPermissionGroupEnvironmentAccessArrayOutput() PermissionGroupEnvironmentAccessArrayOutput
-	ToPermissionGroupEnvironmentAccessArrayOutputWithContext(context.Context) PermissionGroupEnvironmentAccessArrayOutput
-}
-
-type PermissionGroupEnvironmentAccessArray []PermissionGroupEnvironmentAccessInput
-
-func (PermissionGroupEnvironmentAccessArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (i PermissionGroupEnvironmentAccessArray) ToPermissionGroupEnvironmentAccessArrayOutput() PermissionGroupEnvironmentAccessArrayOutput {
-	return i.ToPermissionGroupEnvironmentAccessArrayOutputWithContext(context.Background())
-}
-
-func (i PermissionGroupEnvironmentAccessArray) ToPermissionGroupEnvironmentAccessArrayOutputWithContext(ctx context.Context) PermissionGroupEnvironmentAccessArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PermissionGroupEnvironmentAccessArrayOutput)
-}
-
-type PermissionGroupEnvironmentAccessOutput struct{ *pulumi.OutputState }
-
-func (PermissionGroupEnvironmentAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (o PermissionGroupEnvironmentAccessOutput) ToPermissionGroupEnvironmentAccessOutput() PermissionGroupEnvironmentAccessOutput {
-	return o
-}
-
-func (o PermissionGroupEnvironmentAccessOutput) ToPermissionGroupEnvironmentAccessOutputWithContext(ctx context.Context) PermissionGroupEnvironmentAccessOutput {
-	return o
-}
-
-// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-func (o PermissionGroupEnvironmentAccessOutput) EnvironmentAccesstype() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v PermissionGroupEnvironmentAccess) *string { return v.EnvironmentAccesstype }).(pulumi.StringPtrOutput)
-}
-
-// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-func (o PermissionGroupEnvironmentAccessOutput) EnvironmentId() pulumi.StringOutput {
-	return o.ApplyT(func(v PermissionGroupEnvironmentAccess) string { return v.EnvironmentId }).(pulumi.StringOutput)
-}
-
-type PermissionGroupEnvironmentAccessArrayOutput struct{ *pulumi.OutputState }
-
-func (PermissionGroupEnvironmentAccessArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]PermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (o PermissionGroupEnvironmentAccessArrayOutput) ToPermissionGroupEnvironmentAccessArrayOutput() PermissionGroupEnvironmentAccessArrayOutput {
-	return o
-}
-
-func (o PermissionGroupEnvironmentAccessArrayOutput) ToPermissionGroupEnvironmentAccessArrayOutputWithContext(ctx context.Context) PermissionGroupEnvironmentAccessArrayOutput {
-	return o
-}
-
-func (o PermissionGroupEnvironmentAccessArrayOutput) Index(i pulumi.IntInput) PermissionGroupEnvironmentAccessOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PermissionGroupEnvironmentAccess {
-		return vs[0].([]PermissionGroupEnvironmentAccess)[vs[1].(int)]
-	}).(PermissionGroupEnvironmentAccessOutput)
-}
-
 type SettingValuePercentageItem struct {
 	// Any [number](https://configcat.com/docs/advanced/targeting/#-value) between 0 and 100 that represents a randomly allocated fraction of your users.
 	Percentage string `pulumi:"percentage"`
@@ -753,8 +647,8 @@ type GetPermissionGroupsPermissionGroup struct {
 	CanViewProductStatistics bool `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey bool `pulumi:"canViewSdkkey"`
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses []GetPermissionGroupsPermissionGroupEnvironmentAccess `pulumi:"environmentAccesses"`
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses map[string]string `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name string `pulumi:"name"`
 	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
@@ -815,8 +709,8 @@ type GetPermissionGroupsPermissionGroupArgs struct {
 	CanViewProductStatistics pulumi.BoolInput `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey pulumi.BoolInput `pulumi:"canViewSdkkey"`
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses GetPermissionGroupsPermissionGroupEnvironmentAccessArrayInput `pulumi:"environmentAccesses"`
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses pulumi.StringMapInput `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
@@ -979,11 +873,9 @@ func (o GetPermissionGroupsPermissionGroupOutput) CanViewSdkkey() pulumi.BoolOut
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanViewSdkkey }).(pulumi.BoolOutput)
 }
 
-// The environment specific permissions list block defined as below.
-func (o GetPermissionGroupsPermissionGroupOutput) EnvironmentAccesses() GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput {
-	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) []GetPermissionGroupsPermissionGroupEnvironmentAccess {
-		return v.EnvironmentAccesses
-	}).(GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput)
+// The environment specific permissions map block defined as below.
+func (o GetPermissionGroupsPermissionGroupOutput) EnvironmentAccesses() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) map[string]string { return v.EnvironmentAccesses }).(pulumi.StringMapOutput)
 }
 
 // The name of the Permission Group.
@@ -1019,112 +911,6 @@ func (o GetPermissionGroupsPermissionGroupArrayOutput) Index(i pulumi.IntInput) 
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPermissionGroupsPermissionGroup {
 		return vs[0].([]GetPermissionGroupsPermissionGroup)[vs[1].(int)]
 	}).(GetPermissionGroupsPermissionGroupOutput)
-}
-
-type GetPermissionGroupsPermissionGroupEnvironmentAccess struct {
-	// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none
-	EnvironmentAccesstype string `pulumi:"environmentAccesstype"`
-	// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-	EnvironmentId string `pulumi:"environmentId"`
-}
-
-// GetPermissionGroupsPermissionGroupEnvironmentAccessInput is an input type that accepts GetPermissionGroupsPermissionGroupEnvironmentAccessArgs and GetPermissionGroupsPermissionGroupEnvironmentAccessOutput values.
-// You can construct a concrete instance of `GetPermissionGroupsPermissionGroupEnvironmentAccessInput` via:
-//
-//	GetPermissionGroupsPermissionGroupEnvironmentAccessArgs{...}
-type GetPermissionGroupsPermissionGroupEnvironmentAccessInput interface {
-	pulumi.Input
-
-	ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutput() GetPermissionGroupsPermissionGroupEnvironmentAccessOutput
-	ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutputWithContext(context.Context) GetPermissionGroupsPermissionGroupEnvironmentAccessOutput
-}
-
-type GetPermissionGroupsPermissionGroupEnvironmentAccessArgs struct {
-	// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none
-	EnvironmentAccesstype pulumi.StringInput `pulumi:"environmentAccesstype"`
-	// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-	EnvironmentId pulumi.StringInput `pulumi:"environmentId"`
-}
-
-func (GetPermissionGroupsPermissionGroupEnvironmentAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetPermissionGroupsPermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (i GetPermissionGroupsPermissionGroupEnvironmentAccessArgs) ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutput() GetPermissionGroupsPermissionGroupEnvironmentAccessOutput {
-	return i.ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutputWithContext(context.Background())
-}
-
-func (i GetPermissionGroupsPermissionGroupEnvironmentAccessArgs) ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutputWithContext(ctx context.Context) GetPermissionGroupsPermissionGroupEnvironmentAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetPermissionGroupsPermissionGroupEnvironmentAccessOutput)
-}
-
-// GetPermissionGroupsPermissionGroupEnvironmentAccessArrayInput is an input type that accepts GetPermissionGroupsPermissionGroupEnvironmentAccessArray and GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput values.
-// You can construct a concrete instance of `GetPermissionGroupsPermissionGroupEnvironmentAccessArrayInput` via:
-//
-//	GetPermissionGroupsPermissionGroupEnvironmentAccessArray{ GetPermissionGroupsPermissionGroupEnvironmentAccessArgs{...} }
-type GetPermissionGroupsPermissionGroupEnvironmentAccessArrayInput interface {
-	pulumi.Input
-
-	ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput() GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput
-	ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutputWithContext(context.Context) GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput
-}
-
-type GetPermissionGroupsPermissionGroupEnvironmentAccessArray []GetPermissionGroupsPermissionGroupEnvironmentAccessInput
-
-func (GetPermissionGroupsPermissionGroupEnvironmentAccessArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetPermissionGroupsPermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (i GetPermissionGroupsPermissionGroupEnvironmentAccessArray) ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput() GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput {
-	return i.ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutputWithContext(context.Background())
-}
-
-func (i GetPermissionGroupsPermissionGroupEnvironmentAccessArray) ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutputWithContext(ctx context.Context) GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput)
-}
-
-type GetPermissionGroupsPermissionGroupEnvironmentAccessOutput struct{ *pulumi.OutputState }
-
-func (GetPermissionGroupsPermissionGroupEnvironmentAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetPermissionGroupsPermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessOutput) ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutput() GetPermissionGroupsPermissionGroupEnvironmentAccessOutput {
-	return o
-}
-
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessOutput) ToGetPermissionGroupsPermissionGroupEnvironmentAccessOutputWithContext(ctx context.Context) GetPermissionGroupsPermissionGroupEnvironmentAccessOutput {
-	return o
-}
-
-// Represent the environment specific Feature Management permission. Possible values: full, readOnly, none
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessOutput) EnvironmentAccesstype() pulumi.StringOutput {
-	return o.ApplyT(func(v GetPermissionGroupsPermissionGroupEnvironmentAccess) string { return v.EnvironmentAccesstype }).(pulumi.StringOutput)
-}
-
-// The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessOutput) EnvironmentId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetPermissionGroupsPermissionGroupEnvironmentAccess) string { return v.EnvironmentId }).(pulumi.StringOutput)
-}
-
-type GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput struct{ *pulumi.OutputState }
-
-func (GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetPermissionGroupsPermissionGroupEnvironmentAccess)(nil)).Elem()
-}
-
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput) ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput() GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput {
-	return o
-}
-
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput) ToGetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutputWithContext(ctx context.Context) GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput {
-	return o
-}
-
-func (o GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput) Index(i pulumi.IntInput) GetPermissionGroupsPermissionGroupEnvironmentAccessOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPermissionGroupsPermissionGroupEnvironmentAccess {
-		return vs[0].([]GetPermissionGroupsPermissionGroupEnvironmentAccess)[vs[1].(int)]
-	}).(GetPermissionGroupsPermissionGroupEnvironmentAccessOutput)
 }
 
 type GetProductsProduct struct {
@@ -1606,8 +1392,6 @@ func (o GetTagsTagArrayOutput) Index(i pulumi.IntInput) GetTagsTagOutput {
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*PermissionGroupEnvironmentAccessInput)(nil)).Elem(), PermissionGroupEnvironmentAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*PermissionGroupEnvironmentAccessArrayInput)(nil)).Elem(), PermissionGroupEnvironmentAccessArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValuePercentageItemInput)(nil)).Elem(), SettingValuePercentageItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValuePercentageItemArrayInput)(nil)).Elem(), SettingValuePercentageItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueRolloutRuleInput)(nil)).Elem(), SettingValueRolloutRuleArgs{})
@@ -1620,8 +1404,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrganizationsOrganizationArrayInput)(nil)).Elem(), GetOrganizationsOrganizationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPermissionGroupsPermissionGroupInput)(nil)).Elem(), GetPermissionGroupsPermissionGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPermissionGroupsPermissionGroupArrayInput)(nil)).Elem(), GetPermissionGroupsPermissionGroupArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetPermissionGroupsPermissionGroupEnvironmentAccessInput)(nil)).Elem(), GetPermissionGroupsPermissionGroupEnvironmentAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetPermissionGroupsPermissionGroupEnvironmentAccessArrayInput)(nil)).Elem(), GetPermissionGroupsPermissionGroupEnvironmentAccessArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductsProductInput)(nil)).Elem(), GetProductsProductArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductsProductArrayInput)(nil)).Elem(), GetProductsProductArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSegmentsSegmentInput)(nil)).Elem(), GetSegmentsSegmentArgs{})
@@ -1630,8 +1412,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSettingsSettingArrayInput)(nil)).Elem(), GetSettingsSettingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTagsTagInput)(nil)).Elem(), GetTagsTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTagsTagArrayInput)(nil)).Elem(), GetTagsTagArray{})
-	pulumi.RegisterOutputType(PermissionGroupEnvironmentAccessOutput{})
-	pulumi.RegisterOutputType(PermissionGroupEnvironmentAccessArrayOutput{})
 	pulumi.RegisterOutputType(SettingValuePercentageItemOutput{})
 	pulumi.RegisterOutputType(SettingValuePercentageItemArrayOutput{})
 	pulumi.RegisterOutputType(SettingValueRolloutRuleOutput{})
@@ -1644,8 +1424,6 @@ func init() {
 	pulumi.RegisterOutputType(GetOrganizationsOrganizationArrayOutput{})
 	pulumi.RegisterOutputType(GetPermissionGroupsPermissionGroupOutput{})
 	pulumi.RegisterOutputType(GetPermissionGroupsPermissionGroupArrayOutput{})
-	pulumi.RegisterOutputType(GetPermissionGroupsPermissionGroupEnvironmentAccessOutput{})
-	pulumi.RegisterOutputType(GetPermissionGroupsPermissionGroupEnvironmentAccessArrayOutput{})
 	pulumi.RegisterOutputType(GetProductsProductOutput{})
 	pulumi.RegisterOutputType(GetProductsProductArrayOutput{})
 	pulumi.RegisterOutputType(GetSegmentsSegmentOutput{})
