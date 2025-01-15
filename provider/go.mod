@@ -1,4 +1,4 @@
-module github.com/pulumiverse/pulumi-configcat/provider
+module github.com/pulumiverse/pulumi-configcat/provider/v2
 
 go 1.22.3
 
