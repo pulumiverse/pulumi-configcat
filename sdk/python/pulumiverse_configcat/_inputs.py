@@ -15,8 +15,6 @@ else:
 from . import _utilities
 
 __all__ = [
-    'PermissionGroupEnvironmentAccessArgs',
-    'PermissionGroupEnvironmentAccessArgsDict',
     'SettingValuePercentageItemArgs',
     'SettingValuePercentageItemArgsDict',
     'SettingValueRolloutRuleArgs',
@@ -24,57 +22,6 @@ __all__ = [
 ]
 
 MYPY = False
-
-if not MYPY:
-    class PermissionGroupEnvironmentAccessArgsDict(TypedDict):
-        environment_id: pulumi.Input[str]
-        """
-        The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        """
-        environment_accesstype: NotRequired[pulumi.Input[str]]
-        """
-        Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-        """
-elif False:
-    PermissionGroupEnvironmentAccessArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class PermissionGroupEnvironmentAccessArgs:
-    def __init__(__self__, *,
-                 environment_id: pulumi.Input[str],
-                 environment_accesstype: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] environment_id: The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        :param pulumi.Input[str] environment_accesstype: Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-        """
-        pulumi.set(__self__, "environment_id", environment_id)
-        if environment_accesstype is not None:
-            pulumi.set(__self__, "environment_accesstype", environment_accesstype)
-
-    @property
-    @pulumi.getter(name="environmentId")
-    def environment_id(self) -> pulumi.Input[str]:
-        """
-        The unique [Environment](https://configcat.com/docs/main-concepts/#environment) ID.
-        """
-        return pulumi.get(self, "environment_id")
-
-    @environment_id.setter
-    def environment_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "environment_id", value)
-
-    @property
-    @pulumi.getter(name="environmentAccesstype")
-    def environment_accesstype(self) -> Optional[pulumi.Input[str]]:
-        """
-        Represent the environment specific Feature Management permission. Possible values: full, readOnly, none. Default: none.
-        """
-        return pulumi.get(self, "environment_accesstype")
-
-    @environment_accesstype.setter
-    def environment_accesstype(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "environment_accesstype", value)
-
 
 if not MYPY:
     class SettingValuePercentageItemArgsDict(TypedDict):

@@ -97,7 +97,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			myProductionEnvironments, err := configcat.GetEnvironments(ctx, &configcat.GetEnvironmentsArgs{
+//			_, err = configcat.GetEnvironments(ctx, &configcat.GetEnvironmentsArgs{
 //				NameFilterRegex: pulumi.StringRef("Production"),
 //			}, nil)
 //			if err != nil {
@@ -107,15 +107,9 @@ import (
 //				ProductId:  pulumi.String(myProducts.Products[0].ProductId),
 //				Name:       pulumi.String("Read only except Test environment"),
 //				Accesstype: pulumi.String("custom"),
-//				EnvironmentAccesses: configcat.PermissionGroupEnvironmentAccessArray{
-//					&configcat.PermissionGroupEnvironmentAccessArgs{
-//						EnvironmentId:         pulumi.String(myTestEnvironments.Environments[0].EnvironmentId),
-//						EnvironmentAccesstype: pulumi.String("full"),
-//					},
-//					&configcat.PermissionGroupEnvironmentAccessArgs{
-//						EnvironmentId:         pulumi.String(myProductionEnvironments.Environments[0].EnvironmentId),
-//						EnvironmentAccesstype: pulumi.String("none"),
-//					},
+//				EnvironmentAccesses: pulumi.StringMap{
+//					myTestEnvironments.Environments[0].EnvironmentId: pulumi.String("full"),
+//					myTestEnvironments.Environments[1].EnvironmentId: pulumi.String("readOnly"),
 //				},
 //			})
 //			if err != nil {
@@ -186,11 +180,11 @@ type PermissionGroup struct {
 	CanViewProductStatistics pulumi.BoolPtrOutput `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys. Default: false.
 	CanViewSdkkey pulumi.BoolPtrOutput `pulumi:"canViewSdkkey"`
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses PermissionGroupEnvironmentAccessArrayOutput `pulumi:"environmentAccesses"`
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses pulumi.StringMapOutput `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
 	NewEnvironmentAccesstype pulumi.StringPtrOutput `pulumi:"newEnvironmentAccesstype"`
 	// The ID of the Product.
 	ProductId pulumi.StringOutput `pulumi:"productId"`
@@ -269,11 +263,11 @@ type permissionGroupState struct {
 	CanViewProductStatistics *bool `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys. Default: false.
 	CanViewSdkkey *bool `pulumi:"canViewSdkkey"`
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses []PermissionGroupEnvironmentAccess `pulumi:"environmentAccesses"`
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses map[string]string `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name *string `pulumi:"name"`
-	// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
 	NewEnvironmentAccesstype *string `pulumi:"newEnvironmentAccesstype"`
 	// The ID of the Product.
 	ProductId *string `pulumi:"productId"`
@@ -320,11 +314,11 @@ type PermissionGroupState struct {
 	CanViewProductStatistics pulumi.BoolPtrInput
 	// Group members has access to SDK keys. Default: false.
 	CanViewSdkkey pulumi.BoolPtrInput
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses PermissionGroupEnvironmentAccessArrayInput
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses pulumi.StringMapInput
 	// The name of the Permission Group.
 	Name pulumi.StringPtrInput
-	// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
 	NewEnvironmentAccesstype pulumi.StringPtrInput
 	// The ID of the Product.
 	ProductId pulumi.StringPtrInput
@@ -375,11 +369,11 @@ type permissionGroupArgs struct {
 	CanViewProductStatistics *bool `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys. Default: false.
 	CanViewSdkkey *bool `pulumi:"canViewSdkkey"`
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses []PermissionGroupEnvironmentAccess `pulumi:"environmentAccesses"`
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses map[string]string `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name *string `pulumi:"name"`
-	// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
 	NewEnvironmentAccesstype *string `pulumi:"newEnvironmentAccesstype"`
 	// The ID of the Product.
 	ProductId string `pulumi:"productId"`
@@ -427,11 +421,11 @@ type PermissionGroupArgs struct {
 	CanViewProductStatistics pulumi.BoolPtrInput
 	// Group members has access to SDK keys. Default: false.
 	CanViewSdkkey pulumi.BoolPtrInput
-	// The environment specific permissions list block defined as below.
-	EnvironmentAccesses PermissionGroupEnvironmentAccessArrayInput
+	// The environment specific permissions map block defined as below.
+	EnvironmentAccesses pulumi.StringMapInput
 	// The name of the Permission Group.
 	Name pulumi.StringPtrInput
-	// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
 	NewEnvironmentAccesstype pulumi.StringPtrInput
 	// The ID of the Product.
 	ProductId pulumi.StringInput
@@ -627,9 +621,9 @@ func (o PermissionGroupOutput) CanViewSdkkey() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.BoolPtrOutput { return v.CanViewSdkkey }).(pulumi.BoolPtrOutput)
 }
 
-// The environment specific permissions list block defined as below.
-func (o PermissionGroupOutput) EnvironmentAccesses() PermissionGroupEnvironmentAccessArrayOutput {
-	return o.ApplyT(func(v *PermissionGroup) PermissionGroupEnvironmentAccessArrayOutput { return v.EnvironmentAccesses }).(PermissionGroupEnvironmentAccessArrayOutput)
+// The environment specific permissions map block defined as below.
+func (o PermissionGroupOutput) EnvironmentAccesses() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *PermissionGroup) pulumi.StringMapOutput { return v.EnvironmentAccesses }).(pulumi.StringMapOutput)
 }
 
 // The name of the Permission Group.
@@ -637,7 +631,7 @@ func (o PermissionGroupOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
 func (o PermissionGroupOutput) NewEnvironmentAccesstype() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.StringPtrOutput { return v.NewEnvironmentAccesstype }).(pulumi.StringPtrOutput)
 }

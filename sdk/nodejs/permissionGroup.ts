@@ -2,8 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -69,16 +67,10 @@ import * as utilities from "./utilities";
  *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
  *     name: "Read only except Test environment",
  *     accesstype: "custom",
- *     environmentAccesses: [
- *         {
- *             environmentId: myTestEnvironments.then(myTestEnvironments => myTestEnvironments.environments?.[0]?.environmentId),
- *             environmentAccesstype: "full",
- *         },
- *         {
- *             environmentId: myProductionEnvironments.then(myProductionEnvironments => myProductionEnvironments.environments?.[0]?.environmentId),
- *             environmentAccesstype: "none",
- *         },
- *     ],
+ *     environmentAccesses: Promise.all([myTestEnvironments, myTestEnvironments]).then(([myTestEnvironments, myTestEnvironments1]) => {
+ *         [myTestEnvironments.environments?.[0]?.environmentId]: "full",
+ *         [myTestEnvironments1.environments?.[1]?.environmentId]: "readOnly",
+ *     }),
  * });
  * export const permissionGroupId = myPermissionGroup.id;
  * ```
@@ -206,15 +198,15 @@ export class PermissionGroup extends pulumi.CustomResource {
      */
     public readonly canViewSdkkey!: pulumi.Output<boolean | undefined>;
     /**
-     * The environment specific permissions list block defined as below.
+     * The environment specific permissions map block defined as below.
      */
-    public readonly environmentAccesses!: pulumi.Output<outputs.PermissionGroupEnvironmentAccess[] | undefined>;
+    public readonly environmentAccesses!: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * The name of the Permission Group.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
      */
     public readonly newEnvironmentAccesstype!: pulumi.Output<string | undefined>;
     /**
@@ -379,15 +371,15 @@ export interface PermissionGroupState {
      */
     canViewSdkkey?: pulumi.Input<boolean>;
     /**
-     * The environment specific permissions list block defined as below.
+     * The environment specific permissions map block defined as below.
      */
-    environmentAccesses?: pulumi.Input<pulumi.Input<inputs.PermissionGroupEnvironmentAccess>[]>;
+    environmentAccesses?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * The name of the Permission Group.
      */
     name?: pulumi.Input<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
      */
     newEnvironmentAccesstype?: pulumi.Input<string>;
     /**
@@ -479,15 +471,15 @@ export interface PermissionGroupArgs {
      */
     canViewSdkkey?: pulumi.Input<boolean>;
     /**
-     * The environment specific permissions list block defined as below.
+     * The environment specific permissions map block defined as below.
      */
-    environmentAccesses?: pulumi.Input<pulumi.Input<inputs.PermissionGroupEnvironmentAccess>[]>;
+    environmentAccesses?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * The name of the Permission Group.
      */
     name?: pulumi.Input<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments and for those that are not specified in the environmentAccess list. Possible values: full, readOnly, none. Default: none.
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
      */
     newEnvironmentAccesstype?: pulumi.Input<string>;
     /**
