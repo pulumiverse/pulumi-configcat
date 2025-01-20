@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
 )
 
 var _ = internal.GetEnvOrDefault
@@ -268,6 +268,8 @@ type GetConfigurationsConfig struct {
 	Description string `pulumi:"description"`
 	// The name of the Config.
 	Name string `pulumi:"name"`
+	// The order of the Config within a Product (zero-based).
+	Order int `pulumi:"order"`
 }
 
 // GetConfigurationsConfigInput is an input type that accepts GetConfigurationsConfigArgs and GetConfigurationsConfigOutput values.
@@ -288,6 +290,8 @@ type GetConfigurationsConfigArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
 	// The name of the Config.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The order of the Config within a Product (zero-based).
+	Order pulumi.IntInput `pulumi:"order"`
 }
 
 func (GetConfigurationsConfigArgs) ElementType() reflect.Type {
@@ -356,6 +360,11 @@ func (o GetConfigurationsConfigOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigurationsConfig) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The order of the Config within a Product (zero-based).
+func (o GetConfigurationsConfigOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v GetConfigurationsConfig) int { return v.Order }).(pulumi.IntOutput)
+}
+
 type GetConfigurationsConfigArrayOutput struct{ *pulumi.OutputState }
 
 func (GetConfigurationsConfigArrayOutput) ElementType() reflect.Type {
@@ -385,6 +394,8 @@ type GetEnvironmentsEnvironment struct {
 	EnvironmentId string `pulumi:"environmentId"`
 	// The name of the Environment.
 	Name string `pulumi:"name"`
+	// The order of the Environment within a Product (zero-based).
+	Order int `pulumi:"order"`
 }
 
 // GetEnvironmentsEnvironmentInput is an input type that accepts GetEnvironmentsEnvironmentArgs and GetEnvironmentsEnvironmentOutput values.
@@ -407,6 +418,8 @@ type GetEnvironmentsEnvironmentArgs struct {
 	EnvironmentId pulumi.StringInput `pulumi:"environmentId"`
 	// The name of the Environment.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The order of the Environment within a Product (zero-based).
+	Order pulumi.IntInput `pulumi:"order"`
 }
 
 func (GetEnvironmentsEnvironmentArgs) ElementType() reflect.Type {
@@ -478,6 +491,11 @@ func (o GetEnvironmentsEnvironmentOutput) EnvironmentId() pulumi.StringOutput {
 // The name of the Environment.
 func (o GetEnvironmentsEnvironmentOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The order of the Environment within a Product (zero-based).
+func (o GetEnvironmentsEnvironmentOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) int { return v.Order }).(pulumi.IntOutput)
 }
 
 type GetEnvironmentsEnvironmentArrayOutput struct{ *pulumi.OutputState }
@@ -918,6 +936,8 @@ type GetProductsProduct struct {
 	Description string `pulumi:"description"`
 	// The name of the Product.
 	Name string `pulumi:"name"`
+	// The order of the Product within an Organization (zero-based).
+	Order int `pulumi:"order"`
 	// The unique Product ID.
 	ProductId string `pulumi:"productId"`
 }
@@ -938,6 +958,8 @@ type GetProductsProductArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
 	// The name of the Product.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The order of the Product within an Organization (zero-based).
+	Order pulumi.IntInput `pulumi:"order"`
 	// The unique Product ID.
 	ProductId pulumi.StringInput `pulumi:"productId"`
 }
@@ -1001,6 +1023,11 @@ func (o GetProductsProductOutput) Description() pulumi.StringOutput {
 // The name of the Product.
 func (o GetProductsProductOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProductsProduct) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The order of the Product within an Organization (zero-based).
+func (o GetProductsProductOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProductsProduct) int { return v.Order }).(pulumi.IntOutput)
 }
 
 // The unique Product ID.
@@ -1150,6 +1177,8 @@ type GetSettingsSetting struct {
 	Key string `pulumi:"key"`
 	// The name of the Setting.
 	Name string `pulumi:"name"`
+	// The order of the Setting within a Config (zero-based).
+	Order int `pulumi:"order"`
 	// The unique Setting ID.
 	SettingId string `pulumi:"settingId"`
 	// The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
@@ -1174,6 +1203,8 @@ type GetSettingsSettingArgs struct {
 	Key pulumi.StringInput `pulumi:"key"`
 	// The name of the Setting.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The order of the Setting within a Config (zero-based).
+	Order pulumi.IntInput `pulumi:"order"`
 	// The unique Setting ID.
 	SettingId pulumi.StringInput `pulumi:"settingId"`
 	// The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
@@ -1244,6 +1275,11 @@ func (o GetSettingsSettingOutput) Key() pulumi.StringOutput {
 // The name of the Setting.
 func (o GetSettingsSettingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsSetting) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The order of the Setting within a Config (zero-based).
+func (o GetSettingsSettingOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSettingsSetting) int { return v.Order }).(pulumi.IntOutput)
 }
 
 // The unique Setting ID.

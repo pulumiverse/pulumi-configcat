@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
 )
 
 // The provider type for the configcat package. By default, resources use package-wide configuration

@@ -26,6 +26,10 @@ namespace Pulumiverse.Configcat.Outputs
         /// The name of the Config.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The order of the Config within a Product (zero-based).
+        /// </summary>
+        public readonly int Order;
 
         [OutputConstructor]
         private GetConfigurationsConfigResult(
@@ -33,11 +37,14 @@ namespace Pulumiverse.Configcat.Outputs
 
             string description,
 
-            string name)
+            string name,
+
+            int order)
         {
             ConfigId = configId;
             Description = description;
             Name = name;
+            Order = order;
         }
     }
 }

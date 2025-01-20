@@ -23,6 +23,7 @@ import * as utilities from "./utilities";
  *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
  *     name: "My config",
  *     description: "My config description",
+ *     order: 0,
  * });
  * export const configId = myConfig.id;
  * ```
@@ -80,6 +81,10 @@ export class Configuration extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+     */
+    public readonly order!: pulumi.Output<number>;
+    /**
      * The ID of the Product.
      */
     public readonly productId!: pulumi.Output<string>;
@@ -99,14 +104,19 @@ export class Configuration extends pulumi.CustomResource {
             const state = argsOrState as ConfigurationState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["order"] = state ? state.order : undefined;
             resourceInputs["productId"] = state ? state.productId : undefined;
         } else {
             const args = argsOrState as ConfigurationArgs | undefined;
+            if ((!args || args.order === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'order'");
+            }
             if ((!args || args.productId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'productId'");
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["order"] = args ? args.order : undefined;
             resourceInputs["productId"] = args ? args.productId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -127,6 +137,10 @@ export interface ConfigurationState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+     */
+    order?: pulumi.Input<number>;
+    /**
      * The ID of the Product.
      */
     productId?: pulumi.Input<string>;
@@ -144,6 +158,10 @@ export interface ConfigurationArgs {
      * The name of the Config.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+     */
+    order: pulumi.Input<number>;
     /**
      * The ID of the Product.
      */

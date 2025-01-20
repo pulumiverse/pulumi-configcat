@@ -9,7 +9,7 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
 )
 
 // ## # Product Resource
@@ -24,7 +24,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
 //
 // )
 //
@@ -40,6 +40,7 @@ import (
 //				OrganizationId: pulumi.String(myOrganizations.Organizations[0].OrganizationId),
 //				Name:           pulumi.String("My product"),
 //				Description:    pulumi.String("My product description"),
+//				Order:          pulumi.Int(0),
 //			})
 //			if err != nil {
 //				return err
@@ -73,6 +74,8 @@ type Product struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Product.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntOutput `pulumi:"order"`
 	// The ID of the Organization.
 	OrganizationId pulumi.StringOutput `pulumi:"organizationId"`
 }
@@ -84,6 +87,9 @@ func NewProduct(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Order == nil {
+		return nil, errors.New("invalid value for required argument 'Order'")
+	}
 	if args.OrganizationId == nil {
 		return nil, errors.New("invalid value for required argument 'OrganizationId'")
 	}
@@ -114,6 +120,8 @@ type productState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Product.
 	Name *string `pulumi:"name"`
+	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	Order *int `pulumi:"order"`
 	// The ID of the Organization.
 	OrganizationId *string `pulumi:"organizationId"`
 }
@@ -123,6 +131,8 @@ type ProductState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Product.
 	Name pulumi.StringPtrInput
+	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntPtrInput
 	// The ID of the Organization.
 	OrganizationId pulumi.StringPtrInput
 }
@@ -136,6 +146,8 @@ type productArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Product.
 	Name *string `pulumi:"name"`
+	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	Order int `pulumi:"order"`
 	// The ID of the Organization.
 	OrganizationId string `pulumi:"organizationId"`
 }
@@ -146,6 +158,8 @@ type ProductArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Product.
 	Name pulumi.StringPtrInput
+	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntInput
 	// The ID of the Organization.
 	OrganizationId pulumi.StringInput
 }
@@ -245,6 +259,11 @@ func (o ProductOutput) Description() pulumi.StringPtrOutput {
 // The name of the Product.
 func (o ProductOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Product) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+func (o ProductOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v *Product) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }
 
 // The ID of the Organization.

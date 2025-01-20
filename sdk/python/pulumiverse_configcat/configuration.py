@@ -19,20 +19,35 @@ __all__ = ['ConfigurationArgs', 'Configuration']
 @pulumi.input_type
 class ConfigurationArgs:
     def __init__(__self__, *,
+                 order: pulumi.Input[int],
                  product_id: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Configuration resource.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[str] description: The description of the Config.
         :param pulumi.Input[str] name: The name of the Config.
         """
+        pulumi.set(__self__, "order", order)
         pulumi.set(__self__, "product_id", product_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Input[int]:
+        """
+        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: pulumi.Input[int]):
+        pulumi.set(self, "order", value)
 
     @property
     @pulumi.getter(name="productId")
@@ -76,17 +91,21 @@ class _ConfigurationState:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  product_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Configuration resources.
         :param pulumi.Input[str] description: The description of the Config.
         :param pulumi.Input[str] name: The name of the Config.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if order is not None:
+            pulumi.set(__self__, "order", order)
         if product_id is not None:
             pulumi.set(__self__, "product_id", product_id)
 
@@ -115,6 +134,18 @@ class _ConfigurationState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter
+    def order(self) -> Optional[pulumi.Input[int]]:
+        """
+        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "order", value)
+
+    @property
     @pulumi.getter(name="productId")
     def product_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -134,6 +165,7 @@ class Configuration(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -152,7 +184,8 @@ class Configuration(pulumi.CustomResource):
         my_config = configcat.Configuration("my_config",
             product_id=my_products.products[0].product_id,
             name="My config",
-            description="My config description")
+            description="My config description",
+            order=0)
         pulumi.export("configId", my_config.id)
         ```
 
@@ -176,6 +209,7 @@ class Configuration(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Config.
         :param pulumi.Input[str] name: The name of the Config.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         ...
@@ -200,7 +234,8 @@ class Configuration(pulumi.CustomResource):
         my_config = configcat.Configuration("my_config",
             product_id=my_products.products[0].product_id,
             name="My config",
-            description="My config description")
+            description="My config description",
+            order=0)
         pulumi.export("configId", my_config.id)
         ```
 
@@ -237,6 +272,7 @@ class Configuration(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -249,6 +285,9 @@ class Configuration(pulumi.CustomResource):
 
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            if order is None and not opts.urn:
+                raise TypeError("Missing required property 'order'")
+            __props__.__dict__["order"] = order
             if product_id is None and not opts.urn:
                 raise TypeError("Missing required property 'product_id'")
             __props__.__dict__["product_id"] = product_id
@@ -264,6 +303,7 @@ class Configuration(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            order: Optional[pulumi.Input[int]] = None,
             product_id: Optional[pulumi.Input[str]] = None) -> 'Configuration':
         """
         Get an existing Configuration resource's state with the given name, id, and optional extra
@@ -274,6 +314,7 @@ class Configuration(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Config.
         :param pulumi.Input[str] name: The name of the Config.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -282,6 +323,7 @@ class Configuration(pulumi.CustomResource):
 
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
+        __props__.__dict__["order"] = order
         __props__.__dict__["product_id"] = product_id
         return Configuration(resource_name, opts=opts, __props__=__props__)
 
@@ -300,6 +342,14 @@ class Configuration(pulumi.CustomResource):
         The name of the Config.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Output[int]:
+        """
+        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="productId")

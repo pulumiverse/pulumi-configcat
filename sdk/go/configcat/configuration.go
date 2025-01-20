@@ -9,7 +9,7 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
 )
 
 // ## # Configuration Resource
@@ -24,7 +24,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
 //
 // )
 //
@@ -40,6 +40,7 @@ import (
 //				ProductId:   pulumi.String(myProducts.Products[0].ProductId),
 //				Name:        pulumi.String("My config"),
 //				Description: pulumi.String("My config description"),
+//				Order:       pulumi.Int(0),
 //			})
 //			if err != nil {
 //				return err
@@ -73,6 +74,8 @@ type Configuration struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Config.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntOutput `pulumi:"order"`
 	// The ID of the Product.
 	ProductId pulumi.StringOutput `pulumi:"productId"`
 }
@@ -84,6 +87,9 @@ func NewConfiguration(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Order == nil {
+		return nil, errors.New("invalid value for required argument 'Order'")
+	}
 	if args.ProductId == nil {
 		return nil, errors.New("invalid value for required argument 'ProductId'")
 	}
@@ -114,6 +120,8 @@ type configurationState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Config.
 	Name *string `pulumi:"name"`
+	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+	Order *int `pulumi:"order"`
 	// The ID of the Product.
 	ProductId *string `pulumi:"productId"`
 }
@@ -123,6 +131,8 @@ type ConfigurationState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Config.
 	Name pulumi.StringPtrInput
+	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntPtrInput
 	// The ID of the Product.
 	ProductId pulumi.StringPtrInput
 }
@@ -136,6 +146,8 @@ type configurationArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Config.
 	Name *string `pulumi:"name"`
+	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+	Order int `pulumi:"order"`
 	// The ID of the Product.
 	ProductId string `pulumi:"productId"`
 }
@@ -146,6 +158,8 @@ type ConfigurationArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Config.
 	Name pulumi.StringPtrInput
+	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntInput
 	// The ID of the Product.
 	ProductId pulumi.StringInput
 }
@@ -245,6 +259,11 @@ func (o ConfigurationOutput) Description() pulumi.StringPtrOutput {
 // The name of the Config.
 func (o ConfigurationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Configuration) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+func (o ConfigurationOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v *Configuration) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }
 
 // The ID of the Product.

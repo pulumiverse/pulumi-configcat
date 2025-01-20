@@ -36,6 +36,7 @@ namespace Pulumiverse.Configcat
     ///         OrganizationId = myOrganizations.Apply(getOrganizationsResult =&gt; getOrganizationsResult.Organizations[0]?.OrganizationId),
     ///         Name = "My product",
     ///         Description = "My product description",
+    ///         Order = 0,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -75,6 +76,12 @@ namespace Pulumiverse.Configcat
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Output("order")]
+        public Output<int> Order { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the Organization.
@@ -142,6 +149,12 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Input("order", required: true)]
+        public Input<int> Order { get; set; } = null!;
+
+        /// <summary>
         /// The ID of the Organization.
         /// </summary>
         [Input("organizationId", required: true)]
@@ -166,6 +179,12 @@ namespace Pulumiverse.Configcat
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Input("order")]
+        public Input<int>? Order { get; set; }
 
         /// <summary>
         /// The ID of the Organization.
