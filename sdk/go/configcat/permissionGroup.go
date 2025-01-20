@@ -26,7 +26,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
 //
 // )
 //
@@ -79,7 +79,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
 //
 // )
 //
