@@ -9,7 +9,7 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
 )
 
 // ## # Tag Resource

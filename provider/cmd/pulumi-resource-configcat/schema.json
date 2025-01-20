@@ -24,7 +24,7 @@
             "respectSchemaVersion": true
         },
         "go": {
-            "importBasePath": "github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat",
+            "importBasePath": "github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat",
             "generateResourceContainerTypes": true,
             "generateExtraInputTypes": true,
             "respectSchemaVersion": true
