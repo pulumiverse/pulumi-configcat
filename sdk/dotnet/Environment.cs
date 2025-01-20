@@ -37,6 +37,7 @@ namespace Pulumiverse.Configcat
     ///         Name = "Staging",
     ///         Description = "Staging description",
     ///         Color = "blue",
+    ///         Order = 0,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -82,6 +83,12 @@ namespace Pulumiverse.Configcat
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Output("order")]
+        public Output<int> Order { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the Product.
@@ -155,6 +162,12 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Input("order", required: true)]
+        public Input<int> Order { get; set; } = null!;
+
+        /// <summary>
         /// The ID of the Product.
         /// </summary>
         [Input("productId", required: true)]
@@ -185,6 +198,12 @@ namespace Pulumiverse.Configcat
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Input("order")]
+        public Input<int>? Order { get; set; }
 
         /// <summary>
         /// The ID of the Product.

@@ -21,6 +21,7 @@ class SettingArgs:
     def __init__(__self__, *,
                  config_id: pulumi.Input[str],
                  key: pulumi.Input[str],
+                 order: pulumi.Input[int],
                  hint: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  setting_type: Optional[pulumi.Input[str]] = None):
@@ -28,6 +29,7 @@ class SettingArgs:
         The set of arguments for constructing a Setting resource.
         :param pulumi.Input[str] config_id: The ID of the Config.
         :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
+        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] hint: The hint of the Setting.
         :param pulumi.Input[str] name: The name of the Setting.
         :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
@@ -35,6 +37,7 @@ class SettingArgs:
         """
         pulumi.set(__self__, "config_id", config_id)
         pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "order", order)
         if hint is not None:
             pulumi.set(__self__, "hint", hint)
         if name is not None:
@@ -65,6 +68,18 @@ class SettingArgs:
     @key.setter
     def key(self, value: pulumi.Input[str]):
         pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Input[int]:
+        """
+        The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: pulumi.Input[int]):
+        pulumi.set(self, "order", value)
 
     @property
     @pulumi.getter
@@ -111,6 +126,7 @@ class _SettingState:
                  hint: Optional[pulumi.Input[str]] = None,
                  key: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  setting_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Setting resources.
@@ -118,6 +134,7 @@ class _SettingState:
         :param pulumi.Input[str] hint: The hint of the Setting.
         :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
         :param pulumi.Input[str] name: The name of the Setting.
+        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
                Available values: `boolean`|`string`|`int`|`double`.
         """
@@ -129,6 +146,8 @@ class _SettingState:
             pulumi.set(__self__, "key", key)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if order is not None:
+            pulumi.set(__self__, "order", order)
         if setting_type is not None:
             pulumi.set(__self__, "setting_type", setting_type)
 
@@ -181,6 +200,18 @@ class _SettingState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter
+    def order(self) -> Optional[pulumi.Input[int]]:
+        """
+        The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "order", value)
+
+    @property
     @pulumi.getter(name="settingType")
     def setting_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -203,6 +234,7 @@ class Setting(pulumi.CustomResource):
                  hint: Optional[pulumi.Input[str]] = None,
                  key: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  setting_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -225,7 +257,8 @@ class Setting(pulumi.CustomResource):
             key="isAwesomeFeatureEnabled",
             name="My awesome feature flag",
             hint="This is the hint for my awesome feature flag",
-            setting_type="boolean")
+            setting_type="boolean",
+            order=0)
         pulumi.export("settingId", my_setting.id)
         ```
 
@@ -251,6 +284,7 @@ class Setting(pulumi.CustomResource):
         :param pulumi.Input[str] hint: The hint of the Setting.
         :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
         :param pulumi.Input[str] name: The name of the Setting.
+        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
                Available values: `boolean`|`string`|`int`|`double`.
         """
@@ -280,7 +314,8 @@ class Setting(pulumi.CustomResource):
             key="isAwesomeFeatureEnabled",
             name="My awesome feature flag",
             hint="This is the hint for my awesome feature flag",
-            setting_type="boolean")
+            setting_type="boolean",
+            order=0)
         pulumi.export("settingId", my_setting.id)
         ```
 
@@ -319,6 +354,7 @@ class Setting(pulumi.CustomResource):
                  hint: Optional[pulumi.Input[str]] = None,
                  key: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  setting_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -337,6 +373,9 @@ class Setting(pulumi.CustomResource):
                 raise TypeError("Missing required property 'key'")
             __props__.__dict__["key"] = key
             __props__.__dict__["name"] = name
+            if order is None and not opts.urn:
+                raise TypeError("Missing required property 'order'")
+            __props__.__dict__["order"] = order
             __props__.__dict__["setting_type"] = setting_type
         super(Setting, __self__).__init__(
             'configcat:index/setting:Setting',
@@ -352,6 +391,7 @@ class Setting(pulumi.CustomResource):
             hint: Optional[pulumi.Input[str]] = None,
             key: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            order: Optional[pulumi.Input[int]] = None,
             setting_type: Optional[pulumi.Input[str]] = None) -> 'Setting':
         """
         Get an existing Setting resource's state with the given name, id, and optional extra
@@ -364,6 +404,7 @@ class Setting(pulumi.CustomResource):
         :param pulumi.Input[str] hint: The hint of the Setting.
         :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
         :param pulumi.Input[str] name: The name of the Setting.
+        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
                Available values: `boolean`|`string`|`int`|`double`.
         """
@@ -375,6 +416,7 @@ class Setting(pulumi.CustomResource):
         __props__.__dict__["hint"] = hint
         __props__.__dict__["key"] = key
         __props__.__dict__["name"] = name
+        __props__.__dict__["order"] = order
         __props__.__dict__["setting_type"] = setting_type
         return Setting(resource_name, opts=opts, __props__=__props__)
 
@@ -409,6 +451,14 @@ class Setting(pulumi.CustomResource):
         The name of the Setting.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Output[int]:
+        """
+        The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="settingType")

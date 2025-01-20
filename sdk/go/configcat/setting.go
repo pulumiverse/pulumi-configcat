@@ -49,6 +49,7 @@ import (
 //				Name:        pulumi.String("My awesome feature flag"),
 //				Hint:        pulumi.String("This is the hint for my awesome feature flag"),
 //				SettingType: pulumi.String("boolean"),
+//				Order:       pulumi.Int(0),
 //			})
 //			if err != nil {
 //				return err
@@ -86,6 +87,8 @@ type Setting struct {
 	Key pulumi.StringOutput `pulumi:"key"`
 	// The name of the Setting.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntOutput `pulumi:"order"`
 	// Default: `boolean`. The Setting's type.\
 	// Available values: `boolean`|`string`|`int`|`double`.
 	SettingType pulumi.StringPtrOutput `pulumi:"settingType"`
@@ -103,6 +106,9 @@ func NewSetting(ctx *pulumi.Context,
 	}
 	if args.Key == nil {
 		return nil, errors.New("invalid value for required argument 'Key'")
+	}
+	if args.Order == nil {
+		return nil, errors.New("invalid value for required argument 'Order'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Setting
@@ -135,6 +141,8 @@ type settingState struct {
 	Key *string `pulumi:"key"`
 	// The name of the Setting.
 	Name *string `pulumi:"name"`
+	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	Order *int `pulumi:"order"`
 	// Default: `boolean`. The Setting's type.\
 	// Available values: `boolean`|`string`|`int`|`double`.
 	SettingType *string `pulumi:"settingType"`
@@ -149,6 +157,8 @@ type SettingState struct {
 	Key pulumi.StringPtrInput
 	// The name of the Setting.
 	Name pulumi.StringPtrInput
+	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntPtrInput
 	// Default: `boolean`. The Setting's type.\
 	// Available values: `boolean`|`string`|`int`|`double`.
 	SettingType pulumi.StringPtrInput
@@ -167,6 +177,8 @@ type settingArgs struct {
 	Key string `pulumi:"key"`
 	// The name of the Setting.
 	Name *string `pulumi:"name"`
+	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	Order int `pulumi:"order"`
 	// Default: `boolean`. The Setting's type.\
 	// Available values: `boolean`|`string`|`int`|`double`.
 	SettingType *string `pulumi:"settingType"`
@@ -182,6 +194,8 @@ type SettingArgs struct {
 	Key pulumi.StringInput
 	// The name of the Setting.
 	Name pulumi.StringPtrInput
+	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	Order pulumi.IntInput
 	// Default: `boolean`. The Setting's type.\
 	// Available values: `boolean`|`string`|`int`|`double`.
 	SettingType pulumi.StringPtrInput
@@ -292,6 +306,11 @@ func (o SettingOutput) Key() pulumi.StringOutput {
 // The name of the Setting.
 func (o SettingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+func (o SettingOutput) Order() pulumi.IntOutput {
+	return o.ApplyT(func(v *Setting) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }
 
 // Default: `boolean`. The Setting's type.\

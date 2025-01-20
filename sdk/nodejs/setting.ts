@@ -29,6 +29,7 @@ import * as utilities from "./utilities";
  *     name: "My awesome feature flag",
  *     hint: "This is the hint for my awesome feature flag",
  *     settingType: "boolean",
+ *     order: 0,
  * });
  * export const settingId = mySetting.id;
  * ```
@@ -94,6 +95,10 @@ export class Setting extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+     */
+    public readonly order!: pulumi.Output<number>;
+    /**
      * Default: `boolean`. The Setting's type.  
      * Available values: `boolean`|`string`|`int`|`double`.
      */
@@ -116,6 +121,7 @@ export class Setting extends pulumi.CustomResource {
             resourceInputs["hint"] = state ? state.hint : undefined;
             resourceInputs["key"] = state ? state.key : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["order"] = state ? state.order : undefined;
             resourceInputs["settingType"] = state ? state.settingType : undefined;
         } else {
             const args = argsOrState as SettingArgs | undefined;
@@ -125,10 +131,14 @@ export class Setting extends pulumi.CustomResource {
             if ((!args || args.key === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'key'");
             }
+            if ((!args || args.order === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'order'");
+            }
             resourceInputs["configId"] = args ? args.configId : undefined;
             resourceInputs["hint"] = args ? args.hint : undefined;
             resourceInputs["key"] = args ? args.key : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["order"] = args ? args.order : undefined;
             resourceInputs["settingType"] = args ? args.settingType : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -157,6 +167,10 @@ export interface SettingState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+     */
+    order?: pulumi.Input<number>;
+    /**
      * Default: `boolean`. The Setting's type.  
      * Available values: `boolean`|`string`|`int`|`double`.
      */
@@ -183,6 +197,10 @@ export interface SettingArgs {
      * The name of the Setting.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+     */
+    order: pulumi.Input<number>;
     /**
      * Default: `boolean`. The Setting's type.  
      * Available values: `boolean`|`string`|`int`|`double`.

@@ -18,6 +18,10 @@ export interface GetConfigurationsConfig {
      * The name of the Config.
      */
     name: string;
+    /**
+     * The order of the Config within a Product (zero-based).
+     */
+    order: number;
 }
 
 export interface GetEnvironmentsEnvironment {
@@ -37,6 +41,10 @@ export interface GetEnvironmentsEnvironment {
      * The name of the Environment.
      */
     name: string;
+    /**
+     * The order of the Environment within a Product (zero-based).
+     */
+    order: number;
 }
 
 export interface GetOrganizationsOrganization {
@@ -157,6 +165,10 @@ export interface GetProductsProduct {
      */
     name: string;
     /**
+     * The order of the Product within an Organization (zero-based).
+     */
+    order: number;
+    /**
      * The unique Product ID.
      */
     productId: string;
@@ -190,6 +202,10 @@ export interface GetSettingsSetting {
      * The name of the Setting.
      */
     name: string;
+    /**
+     * The order of the Setting within a Config (zero-based).
+     */
+    order: number;
     /**
      * The unique Setting ID.
      */

@@ -1,4 +1,4 @@
-module github.com/pulumiverse/pulumi-configcat/provider/v2
+module github.com/pulumiverse/pulumi-configcat/provider/v3
 
 go 1.22.3
 
@@ -10,7 +10,7 @@ replace (
 )
 
 require (
-	github.com/configcat/terraform-provider-configcat v1.5.1-0.20231215124507-307fd604065c
+	github.com/configcat/terraform-provider-configcat v1.5.1-0.20240123095417-5587702c3a34
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.100.0
 	github.com/pulumi/pulumi/sdk/v3 v3.145.0
 )
@@ -85,7 +85,6 @@ require (
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.25.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
-	github.com/hashicorp/terraform-plugin-sdk v1.9.1 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.33.0 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
@@ -149,7 +148,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/cobra v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/teekennedy/goldmark-markdown v0.3.0 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect

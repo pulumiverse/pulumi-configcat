@@ -19,20 +19,35 @@ __all__ = ['ProductArgs', 'Product']
 @pulumi.input_type
 class ProductArgs:
     def __init__(__self__, *,
+                 order: pulumi.Input[int],
                  organization_id: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Product resource.
+        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
         """
+        pulumi.set(__self__, "order", order)
         pulumi.set(__self__, "organization_id", organization_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Input[int]:
+        """
+        The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: pulumi.Input[int]):
+        pulumi.set(self, "order", value)
 
     @property
     @pulumi.getter(name="organizationId")
@@ -76,17 +91,21 @@ class _ProductState:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  organization_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Product resources.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
+        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         """
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if order is not None:
+            pulumi.set(__self__, "order", order)
         if organization_id is not None:
             pulumi.set(__self__, "organization_id", organization_id)
 
@@ -115,6 +134,18 @@ class _ProductState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter
+    def order(self) -> Optional[pulumi.Input[int]]:
+        """
+        The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "order", value)
+
+    @property
     @pulumi.getter(name="organizationId")
     def organization_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -134,6 +165,7 @@ class Product(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  organization_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -152,7 +184,8 @@ class Product(pulumi.CustomResource):
         my_product = configcat.Product("my_product",
             organization_id=my_organizations.organizations[0].organization_id,
             name="My product",
-            description="My product description")
+            description="My product description",
+            order=0)
         pulumi.export("productId", my_product.id)
         ```
 
@@ -176,6 +209,7 @@ class Product(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
+        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         """
         ...
@@ -200,7 +234,8 @@ class Product(pulumi.CustomResource):
         my_product = configcat.Product("my_product",
             organization_id=my_organizations.organizations[0].organization_id,
             name="My product",
-            description="My product description")
+            description="My product description",
+            order=0)
         pulumi.export("productId", my_product.id)
         ```
 
@@ -237,6 +272,7 @@ class Product(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  organization_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -249,6 +285,9 @@ class Product(pulumi.CustomResource):
 
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            if order is None and not opts.urn:
+                raise TypeError("Missing required property 'order'")
+            __props__.__dict__["order"] = order
             if organization_id is None and not opts.urn:
                 raise TypeError("Missing required property 'organization_id'")
             __props__.__dict__["organization_id"] = organization_id
@@ -264,6 +303,7 @@ class Product(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            order: Optional[pulumi.Input[int]] = None,
             organization_id: Optional[pulumi.Input[str]] = None) -> 'Product':
         """
         Get an existing Product resource's state with the given name, id, and optional extra
@@ -274,6 +314,7 @@ class Product(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
+        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -282,6 +323,7 @@ class Product(pulumi.CustomResource):
 
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
+        __props__.__dict__["order"] = order
         __props__.__dict__["organization_id"] = organization_id
         return Product(resource_name, opts=opts, __props__=__props__)
 
@@ -300,6 +342,14 @@ class Product(pulumi.CustomResource):
         The name of the Product.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Output[int]:
+        """
+        The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="organizationId")

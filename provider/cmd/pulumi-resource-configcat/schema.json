@@ -150,13 +150,18 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the Config.\n"
+                },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Config within a Product (zero-based).\n"
                 }
             },
             "type": "object",
             "required": [
                 "configId",
                 "description",
-                "name"
+                "name",
+                "order"
             ],
             "language": {
                 "nodejs": {
@@ -181,6 +186,10 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the Environment.\n"
+                },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Environment within a Product (zero-based).\n"
                 }
             },
             "type": "object",
@@ -188,7 +197,8 @@
                 "color",
                 "description",
                 "environmentId",
-                "name"
+                "name",
+                "order"
             ],
             "language": {
                 "nodejs": {
@@ -365,6 +375,10 @@
                     "type": "string",
                     "description": "The name of the Product.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Product within an Organization (zero-based).\n"
+                },
                 "productId": {
                     "type": "string",
                     "description": "The unique Product ID.\n"
@@ -374,6 +388,7 @@
             "required": [
                 "description",
                 "name",
+                "order",
                 "productId"
             ],
             "language": {
@@ -423,6 +438,10 @@
                     "type": "string",
                     "description": "The name of the Setting.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Setting within a Config (zero-based).\n"
+                },
                 "settingId": {
                     "type": "string",
                     "description": "The unique Setting ID.\n"
@@ -437,6 +456,7 @@
                 "hint",
                 "key",
                 "name",
+                "order",
                 "settingId",
                 "settingType"
             ],
@@ -524,7 +544,7 @@
     },
     "resources": {
         "configcat:index/configuration:Configuration": {
-            "description": "## # configcat.Configuration Resource\n\nCreates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myProducts = configcat.getProducts({\n    nameFilterRegex: \"ConfigCat's product\",\n});\nconst myConfig = new configcat.Configuration(\"my_config\", {\n    productId: myProducts.then(myProducts =\u003e myProducts.products?.[0]?.productId),\n    name: \"My config\",\n    description: \"My config description\",\n});\nexport const configId = myConfig.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_products = configcat.get_products(name_filter_regex=\"ConfigCat's product\")\nmy_config = configcat.Configuration(\"my_config\",\n    product_id=my_products.products[0].product_id,\n    name=\"My config\",\n    description=\"My config description\")\npulumi.export(\"configId\", my_config.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myProducts = Configcat.GetProducts.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat's product\",\n    });\n\n    var myConfig = new Configcat.Configuration(\"my_config\", new()\n    {\n        ProductId = myProducts.Apply(getProductsResult =\u003e getProductsResult.Products[0]?.ProductId),\n        Name = \"My config\",\n        Description = \"My config description\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"configId\"] = myConfig.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyProducts, err := configcat.GetProducts(ctx, \u0026configcat.GetProductsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat's product\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyConfig, err := configcat.NewConfiguration(ctx, \"my_config\", \u0026configcat.ConfigurationArgs{\n\t\t\tProductId:   pulumi.String(myProducts.Products[0].ProductId),\n\t\t\tName:        pulumi.String(\"My config\"),\n\t\t\tDescription: pulumi.String(\"My config description\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"configId\", myConfig.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetProductsArgs;\nimport com.pulumi.configcat.Configuration;\nimport com.pulumi.configcat.ConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myProducts = ConfigcatFunctions.getProducts(GetProductsArgs.builder()\n            .nameFilterRegex(\"ConfigCat's product\")\n            .build());\n\n        var myConfig = new Configuration(\"myConfig\", ConfigurationArgs.builder()\n            .productId(myProducts.applyValue(getProductsResult -\u003e getProductsResult.products()[0].productId()))\n            .name(\"My config\")\n            .description(\"My config description\")\n            .build());\n\n        ctx.export(\"configId\", myConfig.id());\n    }\n}\n```\n```yaml\nresources:\n  myConfig:\n    type: configcat:Configuration\n    name: my_config\n    properties:\n      productId: ${myProducts.products[0].productId}\n      name: My config\n      description: My config description\nvariables:\n  myProducts:\n    fn::invoke:\n      function: configcat:getProducts\n      arguments:\n        nameFilterRegex: ConfigCat's product\noutputs:\n  configId: ${myConfig.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Config](https://api.configcat.com/docs/#tag/Configs/operation/get-config)\n* [Create Config](https://api.configcat.com/docs/#tag/Configs/operation/create-config)\n* [Update Config](https://api.configcat.com/docs/#tag/Configs/operation/update-config)\n* [Delete Config](https://api.configcat.com/docs/#tag/Configs/operation/delete-config)\n\n## Import\n\nConfigs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.\n\n```sh\n$ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2\n```\nRead more about importing.\n\n",
+            "description": "## # configcat.Configuration Resource\n\nCreates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myProducts = configcat.getProducts({\n    nameFilterRegex: \"ConfigCat's product\",\n});\nconst myConfig = new configcat.Configuration(\"my_config\", {\n    productId: myProducts.then(myProducts =\u003e myProducts.products?.[0]?.productId),\n    name: \"My config\",\n    description: \"My config description\",\n    order: 0,\n});\nexport const configId = myConfig.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_products = configcat.get_products(name_filter_regex=\"ConfigCat's product\")\nmy_config = configcat.Configuration(\"my_config\",\n    product_id=my_products.products[0].product_id,\n    name=\"My config\",\n    description=\"My config description\",\n    order=0)\npulumi.export(\"configId\", my_config.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myProducts = Configcat.GetProducts.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat's product\",\n    });\n\n    var myConfig = new Configcat.Configuration(\"my_config\", new()\n    {\n        ProductId = myProducts.Apply(getProductsResult =\u003e getProductsResult.Products[0]?.ProductId),\n        Name = \"My config\",\n        Description = \"My config description\",\n        Order = 0,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"configId\"] = myConfig.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyProducts, err := configcat.GetProducts(ctx, \u0026configcat.GetProductsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat's product\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyConfig, err := configcat.NewConfiguration(ctx, \"my_config\", \u0026configcat.ConfigurationArgs{\n\t\t\tProductId:   pulumi.String(myProducts.Products[0].ProductId),\n\t\t\tName:        pulumi.String(\"My config\"),\n\t\t\tDescription: pulumi.String(\"My config description\"),\n\t\t\tOrder:       pulumi.Int(0),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"configId\", myConfig.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetProductsArgs;\nimport com.pulumi.configcat.Configuration;\nimport com.pulumi.configcat.ConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myProducts = ConfigcatFunctions.getProducts(GetProductsArgs.builder()\n            .nameFilterRegex(\"ConfigCat's product\")\n            .build());\n\n        var myConfig = new Configuration(\"myConfig\", ConfigurationArgs.builder()\n            .productId(myProducts.applyValue(getProductsResult -\u003e getProductsResult.products()[0].productId()))\n            .name(\"My config\")\n            .description(\"My config description\")\n            .order(0)\n            .build());\n\n        ctx.export(\"configId\", myConfig.id());\n    }\n}\n```\n```yaml\nresources:\n  myConfig:\n    type: configcat:Configuration\n    name: my_config\n    properties:\n      productId: ${myProducts.products[0].productId}\n      name: My config\n      description: My config description\n      order: 0\nvariables:\n  myProducts:\n    fn::invoke:\n      function: configcat:getProducts\n      arguments:\n        nameFilterRegex: ConfigCat's product\noutputs:\n  configId: ${myConfig.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Config](https://api.configcat.com/docs/#tag/Configs/operation/get-config)\n* [Create Config](https://api.configcat.com/docs/#tag/Configs/operation/create-config)\n* [Update Config](https://api.configcat.com/docs/#tag/Configs/operation/update-config)\n* [Delete Config](https://api.configcat.com/docs/#tag/Configs/operation/delete-config)\n\n## Import\n\nConfigs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.\n\n```sh\n$ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2\n```\nRead more about importing.\n\n",
             "properties": {
                 "description": {
                     "type": "string",
@@ -534,6 +554,10 @@
                     "type": "string",
                     "description": "The name of the Config.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.\n"
+                },
                 "productId": {
                     "type": "string",
                     "description": "The ID of the Product.\n"
@@ -541,6 +565,7 @@
             },
             "required": [
                 "name",
+                "order",
                 "productId"
             ],
             "inputProperties": {
@@ -552,6 +577,10 @@
                     "type": "string",
                     "description": "The name of the Config.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.\n"
+                },
                 "productId": {
                     "type": "string",
                     "description": "The ID of the Product.\n",
@@ -559,6 +588,7 @@
                 }
             },
             "requiredInputs": [
+                "order",
                 "productId"
             ],
             "stateInputs": {
@@ -572,6 +602,10 @@
                         "type": "string",
                         "description": "The name of the Config.\n"
                     },
+                    "order": {
+                        "type": "integer",
+                        "description": "The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.\n"
+                    },
                     "productId": {
                         "type": "string",
                         "description": "The ID of the Product.\n",
@@ -582,7 +616,7 @@
             }
         },
         "configcat:index/environment:Environment": {
-            "description": "## # configcat.Environment Resource\n\nCreates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myProducts = configcat.getProducts({\n    nameFilterRegex: \"ConfigCat's product\",\n});\nconst myEnvironment = new configcat.Environment(\"my_environment\", {\n    productId: myProducts.then(myProducts =\u003e myProducts.products?.[0]?.productId),\n    name: \"Staging\",\n    description: \"Staging description\",\n    color: \"blue\",\n});\nexport const environmentId = myEnvironment.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_products = configcat.get_products(name_filter_regex=\"ConfigCat's product\")\nmy_environment = configcat.Environment(\"my_environment\",\n    product_id=my_products.products[0].product_id,\n    name=\"Staging\",\n    description=\"Staging description\",\n    color=\"blue\")\npulumi.export(\"environmentId\", my_environment.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myProducts = Configcat.GetProducts.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat's product\",\n    });\n\n    var myEnvironment = new Configcat.Environment(\"my_environment\", new()\n    {\n        ProductId = myProducts.Apply(getProductsResult =\u003e getProductsResult.Products[0]?.ProductId),\n        Name = \"Staging\",\n        Description = \"Staging description\",\n        Color = \"blue\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"environmentId\"] = myEnvironment.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyProducts, err := configcat.GetProducts(ctx, \u0026configcat.GetProductsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat's product\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyEnvironment, err := configcat.NewEnvironment(ctx, \"my_environment\", \u0026configcat.EnvironmentArgs{\n\t\t\tProductId:   pulumi.String(myProducts.Products[0].ProductId),\n\t\t\tName:        pulumi.String(\"Staging\"),\n\t\t\tDescription: pulumi.String(\"Staging description\"),\n\t\t\tColor:       pulumi.String(\"blue\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"environmentId\", myEnvironment.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetProductsArgs;\nimport com.pulumi.configcat.Environment;\nimport com.pulumi.configcat.EnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myProducts = ConfigcatFunctions.getProducts(GetProductsArgs.builder()\n            .nameFilterRegex(\"ConfigCat's product\")\n            .build());\n\n        var myEnvironment = new Environment(\"myEnvironment\", EnvironmentArgs.builder()\n            .productId(myProducts.applyValue(getProductsResult -\u003e getProductsResult.products()[0].productId()))\n            .name(\"Staging\")\n            .description(\"Staging description\")\n            .color(\"blue\")\n            .build());\n\n        ctx.export(\"environmentId\", myEnvironment.id());\n    }\n}\n```\n```yaml\nresources:\n  myEnvironment:\n    type: configcat:Environment\n    name: my_environment\n    properties:\n      productId: ${myProducts.products[0].productId}\n      name: Staging\n      description: Staging description\n      color: blue\nvariables:\n  myProducts:\n    fn::invoke:\n      function: configcat:getProducts\n      arguments:\n        nameFilterRegex: ConfigCat's product\noutputs:\n  environmentId: ${myEnvironment.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Environment](https://api.configcat.com/docs/#tag/Environments/operation/get-environment)\n* [Create Environment](https://api.configcat.com/docs/#tag/Environments/operation/create-environment)\n* [Update Environment](https://api.configcat.com/docs/#tag/Environments/operation/update-environment)\n* [Delete Environment](https://api.configcat.com/docs/#tag/Environments/operation/delete-environment)\n\n## Import\n\nEnvironments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.\n\n```sh\n$ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2\n```\nRead more about importing.\n\n",
+            "description": "## # configcat.Environment Resource\n\nCreates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myProducts = configcat.getProducts({\n    nameFilterRegex: \"ConfigCat's product\",\n});\nconst myEnvironment = new configcat.Environment(\"my_environment\", {\n    productId: myProducts.then(myProducts =\u003e myProducts.products?.[0]?.productId),\n    name: \"Staging\",\n    description: \"Staging description\",\n    color: \"blue\",\n    order: 0,\n});\nexport const environmentId = myEnvironment.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_products = configcat.get_products(name_filter_regex=\"ConfigCat's product\")\nmy_environment = configcat.Environment(\"my_environment\",\n    product_id=my_products.products[0].product_id,\n    name=\"Staging\",\n    description=\"Staging description\",\n    color=\"blue\",\n    order=0)\npulumi.export(\"environmentId\", my_environment.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myProducts = Configcat.GetProducts.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat's product\",\n    });\n\n    var myEnvironment = new Configcat.Environment(\"my_environment\", new()\n    {\n        ProductId = myProducts.Apply(getProductsResult =\u003e getProductsResult.Products[0]?.ProductId),\n        Name = \"Staging\",\n        Description = \"Staging description\",\n        Color = \"blue\",\n        Order = 0,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"environmentId\"] = myEnvironment.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyProducts, err := configcat.GetProducts(ctx, \u0026configcat.GetProductsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat's product\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyEnvironment, err := configcat.NewEnvironment(ctx, \"my_environment\", \u0026configcat.EnvironmentArgs{\n\t\t\tProductId:   pulumi.String(myProducts.Products[0].ProductId),\n\t\t\tName:        pulumi.String(\"Staging\"),\n\t\t\tDescription: pulumi.String(\"Staging description\"),\n\t\t\tColor:       pulumi.String(\"blue\"),\n\t\t\tOrder:       pulumi.Int(0),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"environmentId\", myEnvironment.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetProductsArgs;\nimport com.pulumi.configcat.Environment;\nimport com.pulumi.configcat.EnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myProducts = ConfigcatFunctions.getProducts(GetProductsArgs.builder()\n            .nameFilterRegex(\"ConfigCat's product\")\n            .build());\n\n        var myEnvironment = new Environment(\"myEnvironment\", EnvironmentArgs.builder()\n            .productId(myProducts.applyValue(getProductsResult -\u003e getProductsResult.products()[0].productId()))\n            .name(\"Staging\")\n            .description(\"Staging description\")\n            .color(\"blue\")\n            .order(0)\n            .build());\n\n        ctx.export(\"environmentId\", myEnvironment.id());\n    }\n}\n```\n```yaml\nresources:\n  myEnvironment:\n    type: configcat:Environment\n    name: my_environment\n    properties:\n      productId: ${myProducts.products[0].productId}\n      name: Staging\n      description: Staging description\n      color: blue\n      order: 0\nvariables:\n  myProducts:\n    fn::invoke:\n      function: configcat:getProducts\n      arguments:\n        nameFilterRegex: ConfigCat's product\noutputs:\n  environmentId: ${myEnvironment.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Environment](https://api.configcat.com/docs/#tag/Environments/operation/get-environment)\n* [Create Environment](https://api.configcat.com/docs/#tag/Environments/operation/create-environment)\n* [Update Environment](https://api.configcat.com/docs/#tag/Environments/operation/update-environment)\n* [Delete Environment](https://api.configcat.com/docs/#tag/Environments/operation/delete-environment)\n\n## Import\n\nEnvironments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.\n\n```sh\n$ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2\n```\nRead more about importing.\n\n",
             "properties": {
                 "color": {
                     "type": "string",
@@ -596,6 +630,10 @@
                     "type": "string",
                     "description": "The name of the Environment.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.\n"
+                },
                 "productId": {
                     "type": "string",
                     "description": "The ID of the Product.\n"
@@ -603,6 +641,7 @@
             },
             "required": [
                 "name",
+                "order",
                 "productId"
             ],
             "inputProperties": {
@@ -618,6 +657,10 @@
                     "type": "string",
                     "description": "The name of the Environment.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.\n"
+                },
                 "productId": {
                     "type": "string",
                     "description": "The ID of the Product.\n",
@@ -625,6 +668,7 @@
                 }
             },
             "requiredInputs": [
+                "order",
                 "productId"
             ],
             "stateInputs": {
@@ -641,6 +685,10 @@
                     "name": {
                         "type": "string",
                         "description": "The name of the Environment.\n"
+                    },
+                    "order": {
+                        "type": "integer",
+                        "description": "The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.\n"
                     },
                     "productId": {
                         "type": "string",
@@ -977,7 +1025,7 @@
             }
         },
         "configcat:index/product:Product": {
-            "description": "## # configcat.Product Resource\n\nCreates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myOrganizations = configcat.getOrganizations({\n    nameFilterRegex: \"ConfigCat\",\n});\nconst myProduct = new configcat.Product(\"my_product\", {\n    organizationId: myOrganizations.then(myOrganizations =\u003e myOrganizations.organizations?.[0]?.organizationId),\n    name: \"My product\",\n    description: \"My product description\",\n});\nexport const productId = myProduct.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_organizations = configcat.get_organizations(name_filter_regex=\"ConfigCat\")\nmy_product = configcat.Product(\"my_product\",\n    organization_id=my_organizations.organizations[0].organization_id,\n    name=\"My product\",\n    description=\"My product description\")\npulumi.export(\"productId\", my_product.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myOrganizations = Configcat.GetOrganizations.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat\",\n    });\n\n    var myProduct = new Configcat.Product(\"my_product\", new()\n    {\n        OrganizationId = myOrganizations.Apply(getOrganizationsResult =\u003e getOrganizationsResult.Organizations[0]?.OrganizationId),\n        Name = \"My product\",\n        Description = \"My product description\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"productId\"] = myProduct.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyOrganizations, err := configcat.GetOrganizations(ctx, \u0026configcat.GetOrganizationsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyProduct, err := configcat.NewProduct(ctx, \"my_product\", \u0026configcat.ProductArgs{\n\t\t\tOrganizationId: pulumi.String(myOrganizations.Organizations[0].OrganizationId),\n\t\t\tName:           pulumi.String(\"My product\"),\n\t\t\tDescription:    pulumi.String(\"My product description\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"productId\", myProduct.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetOrganizationsArgs;\nimport com.pulumi.configcat.Product;\nimport com.pulumi.configcat.ProductArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myOrganizations = ConfigcatFunctions.getOrganizations(GetOrganizationsArgs.builder()\n            .nameFilterRegex(\"ConfigCat\")\n            .build());\n\n        var myProduct = new Product(\"myProduct\", ProductArgs.builder()\n            .organizationId(myOrganizations.applyValue(getOrganizationsResult -\u003e getOrganizationsResult.organizations()[0].organizationId()))\n            .name(\"My product\")\n            .description(\"My product description\")\n            .build());\n\n        ctx.export(\"productId\", myProduct.id());\n    }\n}\n```\n```yaml\nresources:\n  myProduct:\n    type: configcat:Product\n    name: my_product\n    properties:\n      organizationId: ${myOrganizations.organizations[0].organizationId}\n      name: My product\n      description: My product description\nvariables:\n  myOrganizations:\n    fn::invoke:\n      function: configcat:getOrganizations\n      arguments:\n        nameFilterRegex: ConfigCat\noutputs:\n  productId: ${myProduct.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Product](https://api.configcat.com/docs/#tag/Products/operation/get-product)\n* [Create Product](https://api.configcat.com/docs/#tag/Products/operation/create-product)\n* [Update Product](https://api.configcat.com/docs/#tag/Products/operation/update-product)\n* [Delete Product](https://api.configcat.com/docs/#tag/Products/operation/delete-product)\n\n## Import\n\nProducts can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.\n\n```sh\n$ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2\n```\nRead more about importing.\n\n",
+            "description": "## # configcat.Product Resource\n\nCreates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myOrganizations = configcat.getOrganizations({\n    nameFilterRegex: \"ConfigCat\",\n});\nconst myProduct = new configcat.Product(\"my_product\", {\n    organizationId: myOrganizations.then(myOrganizations =\u003e myOrganizations.organizations?.[0]?.organizationId),\n    name: \"My product\",\n    description: \"My product description\",\n    order: 0,\n});\nexport const productId = myProduct.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_organizations = configcat.get_organizations(name_filter_regex=\"ConfigCat\")\nmy_product = configcat.Product(\"my_product\",\n    organization_id=my_organizations.organizations[0].organization_id,\n    name=\"My product\",\n    description=\"My product description\",\n    order=0)\npulumi.export(\"productId\", my_product.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myOrganizations = Configcat.GetOrganizations.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat\",\n    });\n\n    var myProduct = new Configcat.Product(\"my_product\", new()\n    {\n        OrganizationId = myOrganizations.Apply(getOrganizationsResult =\u003e getOrganizationsResult.Organizations[0]?.OrganizationId),\n        Name = \"My product\",\n        Description = \"My product description\",\n        Order = 0,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"productId\"] = myProduct.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyOrganizations, err := configcat.GetOrganizations(ctx, \u0026configcat.GetOrganizationsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyProduct, err := configcat.NewProduct(ctx, \"my_product\", \u0026configcat.ProductArgs{\n\t\t\tOrganizationId: pulumi.String(myOrganizations.Organizations[0].OrganizationId),\n\t\t\tName:           pulumi.String(\"My product\"),\n\t\t\tDescription:    pulumi.String(\"My product description\"),\n\t\t\tOrder:          pulumi.Int(0),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"productId\", myProduct.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetOrganizationsArgs;\nimport com.pulumi.configcat.Product;\nimport com.pulumi.configcat.ProductArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myOrganizations = ConfigcatFunctions.getOrganizations(GetOrganizationsArgs.builder()\n            .nameFilterRegex(\"ConfigCat\")\n            .build());\n\n        var myProduct = new Product(\"myProduct\", ProductArgs.builder()\n            .organizationId(myOrganizations.applyValue(getOrganizationsResult -\u003e getOrganizationsResult.organizations()[0].organizationId()))\n            .name(\"My product\")\n            .description(\"My product description\")\n            .order(0)\n            .build());\n\n        ctx.export(\"productId\", myProduct.id());\n    }\n}\n```\n```yaml\nresources:\n  myProduct:\n    type: configcat:Product\n    name: my_product\n    properties:\n      organizationId: ${myOrganizations.organizations[0].organizationId}\n      name: My product\n      description: My product description\n      order: 0\nvariables:\n  myOrganizations:\n    fn::invoke:\n      function: configcat:getOrganizations\n      arguments:\n        nameFilterRegex: ConfigCat\noutputs:\n  productId: ${myProduct.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Product](https://api.configcat.com/docs/#tag/Products/operation/get-product)\n* [Create Product](https://api.configcat.com/docs/#tag/Products/operation/create-product)\n* [Update Product](https://api.configcat.com/docs/#tag/Products/operation/update-product)\n* [Delete Product](https://api.configcat.com/docs/#tag/Products/operation/delete-product)\n\n## Import\n\nProducts can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.\n\n```sh\n$ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2\n```\nRead more about importing.\n\n",
             "properties": {
                 "description": {
                     "type": "string",
@@ -987,6 +1035,10 @@
                     "type": "string",
                     "description": "The name of the Product.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.\n"
+                },
                 "organizationId": {
                     "type": "string",
                     "description": "The ID of the Organization.\n"
@@ -994,6 +1046,7 @@
             },
             "required": [
                 "name",
+                "order",
                 "organizationId"
             ],
             "inputProperties": {
@@ -1005,6 +1058,10 @@
                     "type": "string",
                     "description": "The name of the Product.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.\n"
+                },
                 "organizationId": {
                     "type": "string",
                     "description": "The ID of the Organization.\n",
@@ -1012,6 +1069,7 @@
                 }
             },
             "requiredInputs": [
+                "order",
                 "organizationId"
             ],
             "stateInputs": {
@@ -1024,6 +1082,10 @@
                     "name": {
                         "type": "string",
                         "description": "The name of the Product.\n"
+                    },
+                    "order": {
+                        "type": "integer",
+                        "description": "The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.\n"
                     },
                     "organizationId": {
                         "type": "string",
@@ -1135,7 +1197,7 @@
             }
         },
         "configcat:index/setting:Setting": {
-            "description": "## # configcat.Setting Resource\n\nCreates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) \n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myProducts = configcat.getProducts({\n    nameFilterRegex: \"ConfigCat's product\",\n});\nconst myConfigs = myProducts.then(myProducts =\u003e configcat.getConfigurations({\n    productId: myProducts.products?.[0]?.productId,\n    nameFilterRegex: \"Main Config\",\n}));\nconst mySetting = new configcat.Setting(\"my_setting\", {\n    configId: myConfigs.then(myConfigs =\u003e myConfigs.configs?.[0]?.configId),\n    key: \"isAwesomeFeatureEnabled\",\n    name: \"My awesome feature flag\",\n    hint: \"This is the hint for my awesome feature flag\",\n    settingType: \"boolean\",\n});\nexport const settingId = mySetting.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_products = configcat.get_products(name_filter_regex=\"ConfigCat's product\")\nmy_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,\n    name_filter_regex=\"Main Config\")\nmy_setting = configcat.Setting(\"my_setting\",\n    config_id=my_configs.configs[0].config_id,\n    key=\"isAwesomeFeatureEnabled\",\n    name=\"My awesome feature flag\",\n    hint=\"This is the hint for my awesome feature flag\",\n    setting_type=\"boolean\")\npulumi.export(\"settingId\", my_setting.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myProducts = Configcat.GetProducts.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat's product\",\n    });\n\n    var myConfigs = Configcat.GetConfigurations.Invoke(new()\n    {\n        ProductId = myProducts.Apply(getProductsResult =\u003e getProductsResult.Products[0]?.ProductId),\n        NameFilterRegex = \"Main Config\",\n    });\n\n    var mySetting = new Configcat.Setting(\"my_setting\", new()\n    {\n        ConfigId = myConfigs.Apply(getConfigurationsResult =\u003e getConfigurationsResult.Configs[0]?.ConfigId),\n        Key = \"isAwesomeFeatureEnabled\",\n        Name = \"My awesome feature flag\",\n        Hint = \"This is the hint for my awesome feature flag\",\n        SettingType = \"boolean\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"settingId\"] = mySetting.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyProducts, err := configcat.GetProducts(ctx, \u0026configcat.GetProductsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat's product\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyConfigs, err := configcat.GetConfigurations(ctx, \u0026configcat.GetConfigurationsArgs{\n\t\t\tProductId:       myProducts.Products[0].ProductId,\n\t\t\tNameFilterRegex: pulumi.StringRef(\"Main Config\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmySetting, err := configcat.NewSetting(ctx, \"my_setting\", \u0026configcat.SettingArgs{\n\t\t\tConfigId:    pulumi.String(myConfigs.Configs[0].ConfigId),\n\t\t\tKey:         pulumi.String(\"isAwesomeFeatureEnabled\"),\n\t\t\tName:        pulumi.String(\"My awesome feature flag\"),\n\t\t\tHint:        pulumi.String(\"This is the hint for my awesome feature flag\"),\n\t\t\tSettingType: pulumi.String(\"boolean\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"settingId\", mySetting.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetProductsArgs;\nimport com.pulumi.configcat.inputs.GetConfigurationsArgs;\nimport com.pulumi.configcat.Setting;\nimport com.pulumi.configcat.SettingArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myProducts = ConfigcatFunctions.getProducts(GetProductsArgs.builder()\n            .nameFilterRegex(\"ConfigCat's product\")\n            .build());\n\n        final var myConfigs = ConfigcatFunctions.getConfigurations(GetConfigurationsArgs.builder()\n            .productId(myProducts.applyValue(getProductsResult -\u003e getProductsResult.products()[0].productId()))\n            .nameFilterRegex(\"Main Config\")\n            .build());\n\n        var mySetting = new Setting(\"mySetting\", SettingArgs.builder()\n            .configId(myConfigs.applyValue(getConfigurationsResult -\u003e getConfigurationsResult.configs()[0].configId()))\n            .key(\"isAwesomeFeatureEnabled\")\n            .name(\"My awesome feature flag\")\n            .hint(\"This is the hint for my awesome feature flag\")\n            .settingType(\"boolean\")\n            .build());\n\n        ctx.export(\"settingId\", mySetting.id());\n    }\n}\n```\n```yaml\nresources:\n  mySetting:\n    type: configcat:Setting\n    name: my_setting\n    properties:\n      configId: ${myConfigs.configs[0].configId}\n      key: isAwesomeFeatureEnabled\n      name: My awesome feature flag\n      hint: This is the hint for my awesome feature flag\n      settingType: boolean\nvariables:\n  myProducts:\n    fn::invoke:\n      function: configcat:getProducts\n      arguments:\n        nameFilterRegex: ConfigCat's product\n  myConfigs:\n    fn::invoke:\n      function: configcat:getConfigurations\n      arguments:\n        productId: ${myProducts.products[0].productId}\n        nameFilterRegex: Main Config\noutputs:\n  settingId: ${mySetting.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)\n* [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)\n* [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)\n* [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)\n\n## Import\n\nFeature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).\n\n```sh\n$ pulumi import configcat:index/setting:Setting example 1234\n```\nRead more about importing.\n\n",
+            "description": "## # configcat.Setting Resource\n\nCreates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) \n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as configcat from \"@pulumi/configcat\";\nimport * as configcat from \"@pulumiverse/configcat\";\n\nconst myProducts = configcat.getProducts({\n    nameFilterRegex: \"ConfigCat's product\",\n});\nconst myConfigs = myProducts.then(myProducts =\u003e configcat.getConfigurations({\n    productId: myProducts.products?.[0]?.productId,\n    nameFilterRegex: \"Main Config\",\n}));\nconst mySetting = new configcat.Setting(\"my_setting\", {\n    configId: myConfigs.then(myConfigs =\u003e myConfigs.configs?.[0]?.configId),\n    key: \"isAwesomeFeatureEnabled\",\n    name: \"My awesome feature flag\",\n    hint: \"This is the hint for my awesome feature flag\",\n    settingType: \"boolean\",\n    order: 0,\n});\nexport const settingId = mySetting.id;\n```\n```python\nimport pulumi\nimport pulumi_configcat as configcat\nimport pulumiverse_configcat as configcat\n\nmy_products = configcat.get_products(name_filter_regex=\"ConfigCat's product\")\nmy_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,\n    name_filter_regex=\"Main Config\")\nmy_setting = configcat.Setting(\"my_setting\",\n    config_id=my_configs.configs[0].config_id,\n    key=\"isAwesomeFeatureEnabled\",\n    name=\"My awesome feature flag\",\n    hint=\"This is the hint for my awesome feature flag\",\n    setting_type=\"boolean\",\n    order=0)\npulumi.export(\"settingId\", my_setting.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Configcat = Pulumi.Configcat;\nusing Configcat = Pulumiverse.Configcat;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var myProducts = Configcat.GetProducts.Invoke(new()\n    {\n        NameFilterRegex = \"ConfigCat's product\",\n    });\n\n    var myConfigs = Configcat.GetConfigurations.Invoke(new()\n    {\n        ProductId = myProducts.Apply(getProductsResult =\u003e getProductsResult.Products[0]?.ProductId),\n        NameFilterRegex = \"Main Config\",\n    });\n\n    var mySetting = new Configcat.Setting(\"my_setting\", new()\n    {\n        ConfigId = myConfigs.Apply(getConfigurationsResult =\u003e getConfigurationsResult.Configs[0]?.ConfigId),\n        Key = \"isAwesomeFeatureEnabled\",\n        Name = \"My awesome feature flag\",\n        Hint = \"This is the hint for my awesome feature flag\",\n        SettingType = \"boolean\",\n        Order = 0,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"settingId\"] = mySetting.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-configcat/sdk/v2/go/configcat\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmyProducts, err := configcat.GetProducts(ctx, \u0026configcat.GetProductsArgs{\n\t\t\tNameFilterRegex: pulumi.StringRef(\"ConfigCat's product\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmyConfigs, err := configcat.GetConfigurations(ctx, \u0026configcat.GetConfigurationsArgs{\n\t\t\tProductId:       myProducts.Products[0].ProductId,\n\t\t\tNameFilterRegex: pulumi.StringRef(\"Main Config\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tmySetting, err := configcat.NewSetting(ctx, \"my_setting\", \u0026configcat.SettingArgs{\n\t\t\tConfigId:    pulumi.String(myConfigs.Configs[0].ConfigId),\n\t\t\tKey:         pulumi.String(\"isAwesomeFeatureEnabled\"),\n\t\t\tName:        pulumi.String(\"My awesome feature flag\"),\n\t\t\tHint:        pulumi.String(\"This is the hint for my awesome feature flag\"),\n\t\t\tSettingType: pulumi.String(\"boolean\"),\n\t\t\tOrder:       pulumi.Int(0),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"settingId\", mySetting.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.configcat.ConfigcatFunctions;\nimport com.pulumi.configcat.inputs.GetProductsArgs;\nimport com.pulumi.configcat.inputs.GetConfigurationsArgs;\nimport com.pulumi.configcat.Setting;\nimport com.pulumi.configcat.SettingArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var myProducts = ConfigcatFunctions.getProducts(GetProductsArgs.builder()\n            .nameFilterRegex(\"ConfigCat's product\")\n            .build());\n\n        final var myConfigs = ConfigcatFunctions.getConfigurations(GetConfigurationsArgs.builder()\n            .productId(myProducts.applyValue(getProductsResult -\u003e getProductsResult.products()[0].productId()))\n            .nameFilterRegex(\"Main Config\")\n            .build());\n\n        var mySetting = new Setting(\"mySetting\", SettingArgs.builder()\n            .configId(myConfigs.applyValue(getConfigurationsResult -\u003e getConfigurationsResult.configs()[0].configId()))\n            .key(\"isAwesomeFeatureEnabled\")\n            .name(\"My awesome feature flag\")\n            .hint(\"This is the hint for my awesome feature flag\")\n            .settingType(\"boolean\")\n            .order(0)\n            .build());\n\n        ctx.export(\"settingId\", mySetting.id());\n    }\n}\n```\n```yaml\nresources:\n  mySetting:\n    type: configcat:Setting\n    name: my_setting\n    properties:\n      configId: ${myConfigs.configs[0].configId}\n      key: isAwesomeFeatureEnabled\n      name: My awesome feature flag\n      hint: This is the hint for my awesome feature flag\n      settingType: boolean\n      order: 0\nvariables:\n  myProducts:\n    fn::invoke:\n      function: configcat:getProducts\n      arguments:\n        nameFilterRegex: ConfigCat's product\n  myConfigs:\n    fn::invoke:\n      function: configcat:getConfigurations\n      arguments:\n        productId: ${myProducts.products[0].productId}\n        nameFilterRegex: Main Config\noutputs:\n  settingId: ${mySetting.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Endpoints used\n\n* [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)\n* [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)\n* [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)\n* [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)\n\n## Import\n\nFeature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).\n\n```sh\n$ pulumi import configcat:index/setting:Setting example 1234\n```\nRead more about importing.\n\n",
             "properties": {
                 "configId": {
                     "type": "string",
@@ -1153,6 +1215,10 @@
                     "type": "string",
                     "description": "The name of the Setting.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.\n"
+                },
                 "settingType": {
                     "type": "string",
                     "description": "Default: `boolean`. The Setting's type.  \nAvailable values: `boolean`|`string`|`int`|`double`.\n"
@@ -1161,7 +1227,8 @@
             "required": [
                 "configId",
                 "key",
-                "name"
+                "name",
+                "order"
             ],
             "inputProperties": {
                 "configId": {
@@ -1182,6 +1249,10 @@
                     "type": "string",
                     "description": "The name of the Setting.\n"
                 },
+                "order": {
+                    "type": "integer",
+                    "description": "The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.\n"
+                },
                 "settingType": {
                     "type": "string",
                     "description": "Default: `boolean`. The Setting's type.  \nAvailable values: `boolean`|`string`|`int`|`double`.\n",
@@ -1190,7 +1261,8 @@
             },
             "requiredInputs": [
                 "configId",
-                "key"
+                "key",
+                "order"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Setting resources.\n",
@@ -1212,6 +1284,10 @@
                     "name": {
                         "type": "string",
                         "description": "The name of the Setting.\n"
+                    },
+                    "order": {
+                        "type": "integer",
+                        "description": "The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.\n"
                     },
                     "settingType": {
                         "type": "string",

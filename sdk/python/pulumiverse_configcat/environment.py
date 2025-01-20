@@ -19,17 +19,20 @@ __all__ = ['EnvironmentArgs', 'Environment']
 @pulumi.input_type
 class EnvironmentArgs:
     def __init__(__self__, *,
+                 order: pulumi.Input[int],
                  product_id: pulumi.Input[str],
                  color: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Environment resource.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[str] color: The color (HTML color code) of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
         """
+        pulumi.set(__self__, "order", order)
         pulumi.set(__self__, "product_id", product_id)
         if color is not None:
             pulumi.set(__self__, "color", color)
@@ -37,6 +40,18 @@ class EnvironmentArgs:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Input[int]:
+        """
+        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: pulumi.Input[int]):
+        pulumi.set(self, "order", value)
 
     @property
     @pulumi.getter(name="productId")
@@ -93,12 +108,14 @@ class _EnvironmentState:
                  color: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  product_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Environment resources.
         :param pulumi.Input[str] color: The color (HTML color code) of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         if color is not None:
@@ -107,6 +124,8 @@ class _EnvironmentState:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if order is not None:
+            pulumi.set(__self__, "order", order)
         if product_id is not None:
             pulumi.set(__self__, "product_id", product_id)
 
@@ -147,6 +166,18 @@ class _EnvironmentState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter
+    def order(self) -> Optional[pulumi.Input[int]]:
+        """
+        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
+
+    @order.setter
+    def order(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "order", value)
+
+    @property
     @pulumi.getter(name="productId")
     def product_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -167,6 +198,7 @@ class Environment(pulumi.CustomResource):
                  color: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -186,7 +218,8 @@ class Environment(pulumi.CustomResource):
             product_id=my_products.products[0].product_id,
             name="Staging",
             description="Staging description",
-            color="blue")
+            color="blue",
+            order=0)
         pulumi.export("environmentId", my_environment.id)
         ```
 
@@ -211,6 +244,7 @@ class Environment(pulumi.CustomResource):
         :param pulumi.Input[str] color: The color (HTML color code) of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         ...
@@ -236,7 +270,8 @@ class Environment(pulumi.CustomResource):
             product_id=my_products.products[0].product_id,
             name="Staging",
             description="Staging description",
-            color="blue")
+            color="blue",
+            order=0)
         pulumi.export("environmentId", my_environment.id)
         ```
 
@@ -274,6 +309,7 @@ class Environment(pulumi.CustomResource):
                  color: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 order: Optional[pulumi.Input[int]] = None,
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -287,6 +323,9 @@ class Environment(pulumi.CustomResource):
             __props__.__dict__["color"] = color
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            if order is None and not opts.urn:
+                raise TypeError("Missing required property 'order'")
+            __props__.__dict__["order"] = order
             if product_id is None and not opts.urn:
                 raise TypeError("Missing required property 'product_id'")
             __props__.__dict__["product_id"] = product_id
@@ -303,6 +342,7 @@ class Environment(pulumi.CustomResource):
             color: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            order: Optional[pulumi.Input[int]] = None,
             product_id: Optional[pulumi.Input[str]] = None) -> 'Environment':
         """
         Get an existing Environment resource's state with the given name, id, and optional extra
@@ -314,6 +354,7 @@ class Environment(pulumi.CustomResource):
         :param pulumi.Input[str] color: The color (HTML color code) of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -323,6 +364,7 @@ class Environment(pulumi.CustomResource):
         __props__.__dict__["color"] = color
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
+        __props__.__dict__["order"] = order
         __props__.__dict__["product_id"] = product_id
         return Environment(resource_name, opts=opts, __props__=__props__)
 
@@ -349,6 +391,14 @@ class Environment(pulumi.CustomResource):
         The name of the Environment.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> pulumi.Output[int]:
+        """
+        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        """
+        return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="productId")

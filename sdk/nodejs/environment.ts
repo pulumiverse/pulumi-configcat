@@ -24,6 +24,7 @@ import * as utilities from "./utilities";
  *     name: "Staging",
  *     description: "Staging description",
  *     color: "blue",
+ *     order: 0,
  * });
  * export const environmentId = myEnvironment.id;
  * ```
@@ -85,6 +86,10 @@ export class Environment extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+     */
+    public readonly order!: pulumi.Output<number>;
+    /**
      * The ID of the Product.
      */
     public readonly productId!: pulumi.Output<string>;
@@ -105,15 +110,20 @@ export class Environment extends pulumi.CustomResource {
             resourceInputs["color"] = state ? state.color : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["order"] = state ? state.order : undefined;
             resourceInputs["productId"] = state ? state.productId : undefined;
         } else {
             const args = argsOrState as EnvironmentArgs | undefined;
+            if ((!args || args.order === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'order'");
+            }
             if ((!args || args.productId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'productId'");
             }
             resourceInputs["color"] = args ? args.color : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["order"] = args ? args.order : undefined;
             resourceInputs["productId"] = args ? args.productId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -138,6 +148,10 @@ export interface EnvironmentState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+     */
+    order?: pulumi.Input<number>;
+    /**
      * The ID of the Product.
      */
     productId?: pulumi.Input<string>;
@@ -159,6 +173,10 @@ export interface EnvironmentArgs {
      * The name of the Environment.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+     */
+    order: pulumi.Input<number>;
     /**
      * The ID of the Product.
      */

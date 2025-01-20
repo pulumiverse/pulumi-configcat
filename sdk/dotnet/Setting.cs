@@ -44,6 +44,7 @@ namespace Pulumiverse.Configcat
     ///         Name = "My awesome feature flag",
     ///         Hint = "This is the hint for my awesome feature flag",
     ///         SettingType = "boolean",
+    ///         Order = 0,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -95,6 +96,12 @@ namespace Pulumiverse.Configcat
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Output("order")]
+        public Output<int> Order { get; private set; } = null!;
 
         /// <summary>
         /// Default: `boolean`. The Setting's type.  
@@ -175,6 +182,12 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Input("order", required: true)]
+        public Input<int> Order { get; set; } = null!;
+
+        /// <summary>
         /// Default: `boolean`. The Setting's type.  
         /// Available values: `boolean`|`string`|`int`|`double`.
         /// </summary>
@@ -212,6 +225,12 @@ namespace Pulumiverse.Configcat
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        /// </summary>
+        [Input("order")]
+        public Input<int>? Order { get; set; }
 
         /// <summary>
         /// Default: `boolean`. The Setting's type.  

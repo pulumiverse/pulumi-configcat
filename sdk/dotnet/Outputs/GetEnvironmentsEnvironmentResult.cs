@@ -30,6 +30,10 @@ namespace Pulumiverse.Configcat.Outputs
         /// The name of the Environment.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The order of the Environment within a Product (zero-based).
+        /// </summary>
+        public readonly int Order;
 
         [OutputConstructor]
         private GetEnvironmentsEnvironmentResult(
@@ -39,12 +43,15 @@ namespace Pulumiverse.Configcat.Outputs
 
             string environmentId,
 
-            string name)
+            string name,
+
+            int order)
         {
             Color = color;
             Description = description;
             EnvironmentId = environmentId;
             Name = name;
+            Order = order;
         }
     }
 }

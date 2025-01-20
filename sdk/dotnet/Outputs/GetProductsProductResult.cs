@@ -23,6 +23,10 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// The order of the Product within an Organization (zero-based).
+        /// </summary>
+        public readonly int Order;
+        /// <summary>
         /// The unique Product ID.
         /// </summary>
         public readonly string ProductId;
@@ -33,10 +37,13 @@ namespace Pulumiverse.Configcat.Outputs
 
             string name,
 
+            int order,
+
             string productId)
         {
             Description = description;
             Name = name;
+            Order = order;
             ProductId = productId;
         }
     }

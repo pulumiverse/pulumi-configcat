@@ -27,6 +27,10 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// The order of the Setting within a Config (zero-based).
+        /// </summary>
+        public readonly int Order;
+        /// <summary>
         /// The unique Setting ID.
         /// </summary>
         public readonly string SettingId;
@@ -43,6 +47,8 @@ namespace Pulumiverse.Configcat.Outputs
 
             string name,
 
+            int order,
+
             string settingId,
 
             string settingType)
@@ -50,6 +56,7 @@ namespace Pulumiverse.Configcat.Outputs
             Hint = hint;
             Key = key;
             Name = name;
+            Order = order;
             SettingId = settingId;
             SettingType = settingType;
         }

@@ -162,15 +162,18 @@ class GetConfigurationsConfigResult(dict):
     def __init__(__self__, *,
                  config_id: str,
                  description: str,
-                 name: str):
+                 name: str,
+                 order: int):
         """
         :param str config_id: The unique Config ID.
         :param str description: The description of the Config.
         :param str name: The name of the Config.
+        :param int order: The order of the Config within a Product (zero-based).
         """
         pulumi.set(__self__, "config_id", config_id)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "order", order)
 
     @property
     @pulumi.getter(name="configId")
@@ -196,6 +199,14 @@ class GetConfigurationsConfigResult(dict):
         """
         return pulumi.get(self, "name")
 
+    @property
+    @pulumi.getter
+    def order(self) -> int:
+        """
+        The order of the Config within a Product (zero-based).
+        """
+        return pulumi.get(self, "order")
+
 
 @pulumi.output_type
 class GetEnvironmentsEnvironmentResult(dict):
@@ -203,17 +214,20 @@ class GetEnvironmentsEnvironmentResult(dict):
                  color: str,
                  description: str,
                  environment_id: str,
-                 name: str):
+                 name: str,
+                 order: int):
         """
         :param str color: The color of the Environment.
         :param str description: The description of the Environment.
         :param str environment_id: The unique Environment ID.
         :param str name: The name of the Environment.
+        :param int order: The order of the Environment within a Product (zero-based).
         """
         pulumi.set(__self__, "color", color)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "environment_id", environment_id)
         pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "order", order)
 
     @property
     @pulumi.getter
@@ -246,6 +260,14 @@ class GetEnvironmentsEnvironmentResult(dict):
         The name of the Environment.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> int:
+        """
+        The order of the Environment within a Product (zero-based).
+        """
+        return pulumi.get(self, "order")
 
 
 @pulumi.output_type
@@ -557,14 +579,17 @@ class GetProductsProductResult(dict):
     def __init__(__self__, *,
                  description: str,
                  name: str,
+                 order: int,
                  product_id: str):
         """
         :param str description: The description of the Product.
         :param str name: The name of the Product.
+        :param int order: The order of the Product within an Organization (zero-based).
         :param str product_id: The unique Product ID.
         """
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "order", order)
         pulumi.set(__self__, "product_id", product_id)
 
     @property
@@ -582,6 +607,14 @@ class GetProductsProductResult(dict):
         The name of the Product.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> int:
+        """
+        The order of the Product within an Organization (zero-based).
+        """
+        return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="productId")
@@ -638,18 +671,21 @@ class GetSettingsSettingResult(dict):
                  hint: str,
                  key: str,
                  name: str,
+                 order: int,
                  setting_id: str,
                  setting_type: str):
         """
         :param str hint: The hint of the Setting.
         :param str key: The key of the Feature Flag/Setting.
         :param str name: The name of the Setting.
+        :param int order: The order of the Setting within a Config (zero-based).
         :param str setting_id: The unique Setting ID.
         :param str setting_type: The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
         """
         pulumi.set(__self__, "hint", hint)
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "order", order)
         pulumi.set(__self__, "setting_id", setting_id)
         pulumi.set(__self__, "setting_type", setting_type)
 
@@ -676,6 +712,14 @@ class GetSettingsSettingResult(dict):
         The name of the Setting.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def order(self) -> int:
+        """
+        The order of the Setting within a Config (zero-based).
+        """
+        return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="settingId")

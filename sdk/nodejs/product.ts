@@ -23,6 +23,7 @@ import * as utilities from "./utilities";
  *     organizationId: myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId),
  *     name: "My product",
  *     description: "My product description",
+ *     order: 0,
  * });
  * export const productId = myProduct.id;
  * ```
@@ -80,6 +81,10 @@ export class Product extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+     */
+    public readonly order!: pulumi.Output<number>;
+    /**
      * The ID of the Organization.
      */
     public readonly organizationId!: pulumi.Output<string>;
@@ -99,14 +104,19 @@ export class Product extends pulumi.CustomResource {
             const state = argsOrState as ProductState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["order"] = state ? state.order : undefined;
             resourceInputs["organizationId"] = state ? state.organizationId : undefined;
         } else {
             const args = argsOrState as ProductArgs | undefined;
+            if ((!args || args.order === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'order'");
+            }
             if ((!args || args.organizationId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'organizationId'");
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["order"] = args ? args.order : undefined;
             resourceInputs["organizationId"] = args ? args.organizationId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -127,6 +137,10 @@ export interface ProductState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+     */
+    order?: pulumi.Input<number>;
+    /**
      * The ID of the Organization.
      */
     organizationId?: pulumi.Input<string>;
@@ -144,6 +158,10 @@ export interface ProductArgs {
      * The name of the Product.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+     */
+    order: pulumi.Input<number>;
     /**
      * The ID of the Organization.
      */
