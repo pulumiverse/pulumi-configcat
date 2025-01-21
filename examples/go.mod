@@ -1,4 +1,4 @@
-module github.com/pulumiverse/pulumi-configcat/examples/v3
+module github.com/pulumiverse/pulumi-configcat/examples/v5
 
 go 1.21
 
