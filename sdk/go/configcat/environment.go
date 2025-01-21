@@ -9,11 +9,9 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # Environment Resource
-//
 // Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
 //
 // ## Example Usage
@@ -24,20 +22,17 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
 //			myEnvironment, err := configcat.NewEnvironment(ctx, "my_environment", &configcat.EnvironmentArgs{
-//				ProductId:   pulumi.String(myProducts.Products[0].ProductId),
+//				ProductId:   pulumi.String(productId),
 //				Name:        pulumi.String("Staging"),
 //				Description: pulumi.String("Staging description"),
 //				Color:       pulumi.String("blue"),
@@ -53,13 +48,6 @@ import (
 //
 // ```
 //
-// ## Endpoints used
-//
-// * [Get Environment](https://api.configcat.com/docs/#tag/Environments/operation/get-environment)
-// * [Create Environment](https://api.configcat.com/docs/#tag/Environments/operation/create-environment)
-// * [Update Environment](https://api.configcat.com/docs/#tag/Environments/operation/update-environment)
-// * [Delete Environment](https://api.configcat.com/docs/#tag/Environments/operation/delete-environment)
-//
 // ## Import
 //
 // Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
@@ -67,14 +55,13 @@ import (
 // ```sh
 // $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
 // ```
-// Read more about importing.
 type Environment struct {
 	pulumi.CustomResourceState
 
-	// The color (HTML color code) of the Environment.
-	Color pulumi.StringPtrOutput `pulumi:"color"`
+	// The color of the Environment.
+	Color pulumi.StringOutput `pulumi:"color"`
 	// The description of the Environment.
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description pulumi.StringOutput `pulumi:"description"`
 	// The name of the Environment.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
@@ -119,7 +106,7 @@ func GetEnvironment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Environment resources.
 type environmentState struct {
-	// The color (HTML color code) of the Environment.
+	// The color of the Environment.
 	Color *string `pulumi:"color"`
 	// The description of the Environment.
 	Description *string `pulumi:"description"`
@@ -132,7 +119,7 @@ type environmentState struct {
 }
 
 type EnvironmentState struct {
-	// The color (HTML color code) of the Environment.
+	// The color of the Environment.
 	Color pulumi.StringPtrInput
 	// The description of the Environment.
 	Description pulumi.StringPtrInput
@@ -149,7 +136,7 @@ func (EnvironmentState) ElementType() reflect.Type {
 }
 
 type environmentArgs struct {
-	// The color (HTML color code) of the Environment.
+	// The color of the Environment.
 	Color *string `pulumi:"color"`
 	// The description of the Environment.
 	Description *string `pulumi:"description"`
@@ -163,7 +150,7 @@ type environmentArgs struct {
 
 // The set of arguments for constructing a Environment resource.
 type EnvironmentArgs struct {
-	// The color (HTML color code) of the Environment.
+	// The color of the Environment.
 	Color pulumi.StringPtrInput
 	// The description of the Environment.
 	Description pulumi.StringPtrInput
@@ -262,14 +249,14 @@ func (o EnvironmentOutput) ToEnvironmentOutputWithContext(ctx context.Context) E
 	return o
 }
 
-// The color (HTML color code) of the Environment.
-func (o EnvironmentOutput) Color() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Environment) pulumi.StringPtrOutput { return v.Color }).(pulumi.StringPtrOutput)
+// The color of the Environment.
+func (o EnvironmentOutput) Color() pulumi.StringOutput {
+	return o.ApplyT(func(v *Environment) pulumi.StringOutput { return v.Color }).(pulumi.StringOutput)
 }
 
 // The description of the Environment.
-func (o EnvironmentOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Environment) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+func (o EnvironmentOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *Environment) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
 // The name of the Environment.

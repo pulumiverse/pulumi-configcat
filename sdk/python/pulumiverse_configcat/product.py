@@ -25,7 +25,7 @@ class ProductArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Product resource.
-        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
@@ -41,7 +41,7 @@ class ProductArgs:
     @pulumi.getter
     def order(self) -> pulumi.Input[int]:
         """
-        The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -97,7 +97,7 @@ class _ProductState:
         Input properties used for looking up and filtering Product resources.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
-        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         """
         if description is not None:
@@ -137,7 +137,7 @@ class _ProductState:
     @pulumi.getter
     def order(self) -> Optional[pulumi.Input[int]]:
         """
-        The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -169,32 +169,23 @@ class Product(pulumi.CustomResource):
                  organization_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # Product Resource
-
         Creates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_organizations = configcat.get_organizations(name_filter_regex="ConfigCat")
-        my_product = configcat.Product("my_product",
-            organization_id=my_organizations.organizations[0].organization_id,
+        config = pulumi.Config()
+        organization_id = config.require("organizationId")
+        my_config = configcat.Product("my_config",
+            organization_id=organization_id,
             name="My product",
             description="My product description",
             order=0)
-        pulumi.export("productId", my_product.id)
+        pulumi.export("productId", my_product["id"])
         ```
-
-        ## Endpoints used
-
-        * [Get Product](https://api.configcat.com/docs/#tag/Products/operation/get-product)
-        * [Create Product](https://api.configcat.com/docs/#tag/Products/operation/create-product)
-        * [Update Product](https://api.configcat.com/docs/#tag/Products/operation/update-product)
-        * [Delete Product](https://api.configcat.com/docs/#tag/Products/operation/delete-product)
 
         ## Import
 
@@ -203,13 +194,12 @@ class Product(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2
         ```
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
-        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         """
         ...
@@ -219,32 +209,23 @@ class Product(pulumi.CustomResource):
                  args: ProductArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Product Resource
-
         Creates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_organizations = configcat.get_organizations(name_filter_regex="ConfigCat")
-        my_product = configcat.Product("my_product",
-            organization_id=my_organizations.organizations[0].organization_id,
+        config = pulumi.Config()
+        organization_id = config.require("organizationId")
+        my_config = configcat.Product("my_config",
+            organization_id=organization_id,
             name="My product",
             description="My product description",
             order=0)
-        pulumi.export("productId", my_product.id)
+        pulumi.export("productId", my_product["id"])
         ```
-
-        ## Endpoints used
-
-        * [Get Product](https://api.configcat.com/docs/#tag/Products/operation/get-product)
-        * [Create Product](https://api.configcat.com/docs/#tag/Products/operation/create-product)
-        * [Update Product](https://api.configcat.com/docs/#tag/Products/operation/update-product)
-        * [Delete Product](https://api.configcat.com/docs/#tag/Products/operation/delete-product)
 
         ## Import
 
@@ -253,7 +234,6 @@ class Product(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2
         ```
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param ProductArgs args: The arguments to use to populate this resource's properties.
@@ -314,7 +294,7 @@ class Product(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Product.
         :param pulumi.Input[str] name: The name of the Product.
-        :param pulumi.Input[int] order: The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] organization_id: The ID of the Organization.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -329,7 +309,7 @@ class Product(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[Optional[str]]:
+    def description(self) -> pulumi.Output[str]:
         """
         The description of the Product.
         """
@@ -347,7 +327,7 @@ class Product(pulumi.CustomResource):
     @pulumi.getter
     def order(self) -> pulumi.Output[int]:
         """
-        The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+        The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 

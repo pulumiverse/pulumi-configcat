@@ -1,7 +1,7 @@
 template: external-bridged-provider
 provider: configcat
 organization: pulumiverse
-major-version: 3
+major-version: 5
 providerDefaultBranch: main
 upstreamProviderOrg: configcat
 publishRegistry: false

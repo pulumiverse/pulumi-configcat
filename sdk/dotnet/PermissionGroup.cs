@@ -11,31 +11,25 @@ using Pulumi;
 namespace Pulumiverse.Configcat
 {
     /// <summary>
-    /// ## # configcat.PermissionGroup Resource
-    /// 
     /// Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
     /// 
     /// ## Example Usage
-    /// 
-    /// ### S
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Configcat = Pulumi.Configcat;
     /// using Configcat = Pulumiverse.Configcat;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myProducts = Configcat.GetProducts.Invoke(new()
+    ///     var config = new Config();
+    ///     var productId = config.Require("productId");
+    ///     var testEnvironmentId = config.Require("testEnvironmentId");
+    ///     var productuctionEnvironmentId = config.Require("productuctionEnvironmentId");
+    ///     var adminPermissionGroup = new Configcat.PermissionGroup("admin_permission_group", new()
     ///     {
-    ///         NameFilterRegex = "ConfigCat's product",
-    ///     });
-    /// 
-    ///     var myPermissionGroup = new Configcat.PermissionGroup("my_permission_group", new()
-    ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         ProductId = productId,
     ///         Name = "Administrators",
     ///         Accesstype = "full",
     ///         CanManageMembers = true,
@@ -60,67 +54,25 @@ namespace Pulumiverse.Configcat
     ///         CanViewProductStatistics = true,
     ///     });
     /// 
-    ///     return new Dictionary&lt;string, object?&gt;
+    ///     var customPermissionGroup = new Configcat.PermissionGroup("custom_permission_group", new()
     ///     {
-    ///         ["permissionGroupId"] = myPermissionGroup.Id,
-    ///     };
-    /// });
-    /// ```
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Configcat = Pulumi.Configcat;
-    /// using Configcat = Pulumiverse.Configcat;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var myProducts = Configcat.GetProducts.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "ConfigCat's product",
-    ///     });
-    /// 
-    ///     var myTestEnvironments = Configcat.GetEnvironments.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "Test",
-    ///     });
-    /// 
-    ///     var myProductionEnvironments = Configcat.GetEnvironments.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "Production",
-    ///     });
-    /// 
-    ///     var myPermissionGroup = new Configcat.PermissionGroup("my_permission_group", new()
-    ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         ProductId = productId,
     ///         Name = "Read only except Test environment",
     ///         Accesstype = "custom",
-    ///         EnvironmentAccesses = Output.Tuple(myTestEnvironments, myTestEnvironments).Apply(values =&gt;
+    ///         EnvironmentAccesses = 
     ///         {
-    ///             var myTestEnvironments = values.Item1;
-    ///             var myTestEnvironments1 = values.Item2;
-    ///             return 
-    ///             {
-    ///                 { myTestEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId), "full" },
-    ///                 { myTestEnvironments1.Environments[1]?.EnvironmentId, "readOnly" },
-    ///             };
-    ///         }),
+    ///             { testEnvironmentId, "full" },
+    ///             { productuctionEnvironmentId, "readOnly" },
+    ///         },
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
-    ///         ["permissionGroupId"] = myPermissionGroup.Id,
+    ///         ["adminPermissionGroupId"] = adminPermissionGroup.Id,
+    ///         ["customPermissionGroupId"] = customPermissionGroup.Id,
     ///     };
     /// });
     /// ```
-    /// 
-    /// ## Endpoints used
-    /// 
-    /// * [Get Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-group)
-    /// * [Create Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/create-permission-group)
-    /// * [Update Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/update-permission-group)
-    /// * [Delete Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/delete-permission-group)
     /// 
     /// ## Import
     /// 
@@ -129,136 +81,147 @@ namespace Pulumiverse.Configcat
     /// ```sh
     /// $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
     /// ```
-    /// Read more about importing.
     /// </summary>
     [ConfigcatResourceType("configcat:index/permissionGroup:PermissionGroup")]
     public partial class PermissionGroup : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+        /// Represent the Feature Management permission. Possible values: readOnly, full, custom
         /// </summary>
         [Output("accesstype")]
-        public Output<string?> Accesstype { get; private set; } = null!;
+        public Output<string> Accesstype { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can create/update Configs. Default: false.
+        /// Group members can create/update Configs.
         /// </summary>
         [Output("canCreateorupdateConfig")]
-        public Output<bool?> CanCreateorupdateConfig { get; private set; } = null!;
+        public Output<bool> CanCreateorupdateConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can create/update Environments. Default: false.
+        /// Group members can create/update Environments.
         /// </summary>
         [Output("canCreateorupdateEnvironment")]
-        public Output<bool?> CanCreateorupdateEnvironment { get; private set; } = null!;
-
-        [Output("canCreateorupdateSegment")]
-        public Output<bool?> CanCreateorupdateSegment { get; private set; } = null!;
+        public Output<bool> CanCreateorupdateEnvironment { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can create/update Feature Flags and Settings. Default: false.
+        /// Group members can create/update Segments.
+        /// </summary>
+        [Output("canCreateorupdateSegment")]
+        public Output<bool> CanCreateorupdateSegment { get; private set; } = null!;
+
+        /// <summary>
+        /// Group members can create/update Feature Flags and Settings.
         /// </summary>
         [Output("canCreateorupdateSetting")]
-        public Output<bool?> CanCreateorupdateSetting { get; private set; } = null!;
+        public Output<bool> CanCreateorupdateSetting { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can create/update Tags. Default: false.
+        /// Group members can create/update Tags.
         /// </summary>
         [Output("canCreateorupdateTag")]
-        public Output<bool?> CanCreateorupdateTag { get; private set; } = null!;
+        public Output<bool> CanCreateorupdateTag { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can delete Configs. Default: false.
+        /// Group members can delete Configs.
         /// </summary>
         [Output("canDeleteConfig")]
-        public Output<bool?> CanDeleteConfig { get; private set; } = null!;
+        public Output<bool> CanDeleteConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can delete Environments. Default: false.
+        /// Group members can delete Environments.
         /// </summary>
         [Output("canDeleteEnvironment")]
-        public Output<bool?> CanDeleteEnvironment { get; private set; } = null!;
-
-        [Output("canDeleteSegment")]
-        public Output<bool?> CanDeleteSegment { get; private set; } = null!;
+        public Output<bool> CanDeleteEnvironment { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can delete Feature Flags and Settings. Default: false.
+        /// Group members can delete Segments.
+        /// </summary>
+        [Output("canDeleteSegment")]
+        public Output<bool> CanDeleteSegment { get; private set; } = null!;
+
+        /// <summary>
+        /// Group members can delete Feature Flags and Settings.
         /// </summary>
         [Output("canDeleteSetting")]
-        public Output<bool?> CanDeleteSetting { get; private set; } = null!;
+        public Output<bool> CanDeleteSetting { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can delete Tags. Default: false.
+        /// Group members can delete Tags.
         /// </summary>
         [Output("canDeleteTag")]
-        public Output<bool?> CanDeleteTag { get; private set; } = null!;
+        public Output<bool> CanDeleteTag { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can add and configure integrations. Default: false.
+        /// Group members can disable two-factor authentication for other members.
+        /// </summary>
+        [Output("canDisable2fa")]
+        public Output<bool> CanDisable2fa { get; private set; } = null!;
+
+        /// <summary>
+        /// Group members can add and configure integrations.
         /// </summary>
         [Output("canManageIntegrations")]
-        public Output<bool?> CanManageIntegrations { get; private set; } = null!;
+        public Output<bool> CanManageIntegrations { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can manage team members. Default: false.
+        /// Group members can manage team members.
         /// </summary>
         [Output("canManageMembers")]
-        public Output<bool?> CanManageMembers { get; private set; } = null!;
+        public Output<bool> CanManageMembers { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can update Product preferences. Default: false.
+        /// Group members can update Product preferences.
         /// </summary>
         [Output("canManageProductPreferences")]
-        public Output<bool?> CanManageProductPreferences { get; private set; } = null!;
+        public Output<bool> CanManageProductPreferences { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can create/update/delete Webhooks. Default: false.
+        /// Group members can create/update/delete Webhooks.
         /// </summary>
         [Output("canManageWebhook")]
-        public Output<bool?> CanManageWebhook { get; private set; } = null!;
+        public Output<bool> CanManageWebhook { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can rotate SDK keys. Default: false.
+        /// Group members can rotate SDK keys.
         /// </summary>
         [Output("canRotateSdkkey")]
-        public Output<bool?> CanRotateSdkkey { get; private set; } = null!;
+        public Output<bool> CanRotateSdkkey { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+        /// Group members can attach/detach Tags to Feature Flags and Settings.
         /// </summary>
         [Output("canTagSetting")]
-        public Output<bool?> CanTagSetting { get; private set; } = null!;
+        public Output<bool> CanTagSetting { get; private set; } = null!;
 
         /// <summary>
-        /// Group members can use the export/import feature. Default: false.
+        /// Group members can use the export/import feature.
         /// </summary>
         [Output("canUseExportimport")]
-        public Output<bool?> CanUseExportimport { get; private set; } = null!;
+        public Output<bool> CanUseExportimport { get; private set; } = null!;
 
         /// <summary>
-        /// Group members has access to audit logs. Default: false.
+        /// Group members has access to audit logs.
         /// </summary>
         [Output("canViewProductAuditlog")]
-        public Output<bool?> CanViewProductAuditlog { get; private set; } = null!;
+        public Output<bool> CanViewProductAuditlog { get; private set; } = null!;
 
         /// <summary>
-        /// Group members has access to product statistics. Default: false.
+        /// Group members has access to product statistics.
         /// </summary>
         [Output("canViewProductStatistics")]
-        public Output<bool?> CanViewProductStatistics { get; private set; } = null!;
+        public Output<bool> CanViewProductStatistics { get; private set; } = null!;
 
         /// <summary>
-        /// Group members has access to SDK keys. Default: false.
+        /// Group members has access to SDK keys.
         /// </summary>
         [Output("canViewSdkkey")]
-        public Output<bool?> CanViewSdkkey { get; private set; } = null!;
+        public Output<bool> CanViewSdkkey { get; private set; } = null!;
 
         /// <summary>
-        /// The environment specific permissions map block defined as below.
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
         [Output("environmentAccesses")]
-        public Output<ImmutableDictionary<string, string>?> EnvironmentAccesses { get; private set; } = null!;
+        public Output<ImmutableDictionary<string, string>> EnvironmentAccesses { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Permission Group.
@@ -267,10 +230,10 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         /// </summary>
         [Output("newEnvironmentAccesstype")]
-        public Output<string?> NewEnvironmentAccesstype { get; private set; } = null!;
+        public Output<string> NewEnvironmentAccesstype { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the Product.
@@ -326,121 +289,133 @@ namespace Pulumiverse.Configcat
     public sealed class PermissionGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+        /// Represent the Feature Management permission. Possible values: readOnly, full, custom
         /// </summary>
         [Input("accesstype")]
         public Input<string>? Accesstype { get; set; }
 
         /// <summary>
-        /// Group members can create/update Configs. Default: false.
+        /// Group members can create/update Configs.
         /// </summary>
         [Input("canCreateorupdateConfig")]
         public Input<bool>? CanCreateorupdateConfig { get; set; }
 
         /// <summary>
-        /// Group members can create/update Environments. Default: false.
+        /// Group members can create/update Environments.
         /// </summary>
         [Input("canCreateorupdateEnvironment")]
         public Input<bool>? CanCreateorupdateEnvironment { get; set; }
 
+        /// <summary>
+        /// Group members can create/update Segments.
+        /// </summary>
         [Input("canCreateorupdateSegment")]
         public Input<bool>? CanCreateorupdateSegment { get; set; }
 
         /// <summary>
-        /// Group members can create/update Feature Flags and Settings. Default: false.
+        /// Group members can create/update Feature Flags and Settings.
         /// </summary>
         [Input("canCreateorupdateSetting")]
         public Input<bool>? CanCreateorupdateSetting { get; set; }
 
         /// <summary>
-        /// Group members can create/update Tags. Default: false.
+        /// Group members can create/update Tags.
         /// </summary>
         [Input("canCreateorupdateTag")]
         public Input<bool>? CanCreateorupdateTag { get; set; }
 
         /// <summary>
-        /// Group members can delete Configs. Default: false.
+        /// Group members can delete Configs.
         /// </summary>
         [Input("canDeleteConfig")]
         public Input<bool>? CanDeleteConfig { get; set; }
 
         /// <summary>
-        /// Group members can delete Environments. Default: false.
+        /// Group members can delete Environments.
         /// </summary>
         [Input("canDeleteEnvironment")]
         public Input<bool>? CanDeleteEnvironment { get; set; }
 
+        /// <summary>
+        /// Group members can delete Segments.
+        /// </summary>
         [Input("canDeleteSegment")]
         public Input<bool>? CanDeleteSegment { get; set; }
 
         /// <summary>
-        /// Group members can delete Feature Flags and Settings. Default: false.
+        /// Group members can delete Feature Flags and Settings.
         /// </summary>
         [Input("canDeleteSetting")]
         public Input<bool>? CanDeleteSetting { get; set; }
 
         /// <summary>
-        /// Group members can delete Tags. Default: false.
+        /// Group members can delete Tags.
         /// </summary>
         [Input("canDeleteTag")]
         public Input<bool>? CanDeleteTag { get; set; }
 
         /// <summary>
-        /// Group members can add and configure integrations. Default: false.
+        /// Group members can disable two-factor authentication for other members.
+        /// </summary>
+        [Input("canDisable2fa")]
+        public Input<bool>? CanDisable2fa { get; set; }
+
+        /// <summary>
+        /// Group members can add and configure integrations.
         /// </summary>
         [Input("canManageIntegrations")]
         public Input<bool>? CanManageIntegrations { get; set; }
 
         /// <summary>
-        /// Group members can manage team members. Default: false.
+        /// Group members can manage team members.
         /// </summary>
         [Input("canManageMembers")]
         public Input<bool>? CanManageMembers { get; set; }
 
         /// <summary>
-        /// Group members can update Product preferences. Default: false.
+        /// Group members can update Product preferences.
         /// </summary>
         [Input("canManageProductPreferences")]
         public Input<bool>? CanManageProductPreferences { get; set; }
 
         /// <summary>
-        /// Group members can create/update/delete Webhooks. Default: false.
+        /// Group members can create/update/delete Webhooks.
         /// </summary>
         [Input("canManageWebhook")]
         public Input<bool>? CanManageWebhook { get; set; }
 
         /// <summary>
-        /// Group members can rotate SDK keys. Default: false.
+        /// Group members can rotate SDK keys.
         /// </summary>
         [Input("canRotateSdkkey")]
         public Input<bool>? CanRotateSdkkey { get; set; }
 
         /// <summary>
-        /// Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+        /// Group members can attach/detach Tags to Feature Flags and Settings.
         /// </summary>
         [Input("canTagSetting")]
         public Input<bool>? CanTagSetting { get; set; }
 
         /// <summary>
-        /// Group members can use the export/import feature. Default: false.
+        /// Group members can use the export/import feature.
         /// </summary>
         [Input("canUseExportimport")]
         public Input<bool>? CanUseExportimport { get; set; }
 
         /// <summary>
-        /// Group members has access to audit logs. Default: false.
+        /// Group members has access to audit logs.
         /// </summary>
         [Input("canViewProductAuditlog")]
         public Input<bool>? CanViewProductAuditlog { get; set; }
 
         /// <summary>
-        /// Group members has access to product statistics. Default: false.
+        /// Group members has access to product statistics.
         /// </summary>
         [Input("canViewProductStatistics")]
         public Input<bool>? CanViewProductStatistics { get; set; }
 
         /// <summary>
-        /// Group members has access to SDK keys. Default: false.
+        /// Group members has access to SDK keys.
         /// </summary>
         [Input("canViewSdkkey")]
         public Input<bool>? CanViewSdkkey { get; set; }
@@ -449,7 +424,7 @@ namespace Pulumiverse.Configcat
         private InputMap<string>? _environmentAccesses;
 
         /// <summary>
-        /// The environment specific permissions map block defined as below.
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
         public InputMap<string> EnvironmentAccesses
         {
@@ -464,7 +439,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         /// </summary>
         [Input("newEnvironmentAccesstype")]
         public Input<string>? NewEnvironmentAccesstype { get; set; }
@@ -484,121 +459,133 @@ namespace Pulumiverse.Configcat
     public sealed class PermissionGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+        /// Represent the Feature Management permission. Possible values: readOnly, full, custom
         /// </summary>
         [Input("accesstype")]
         public Input<string>? Accesstype { get; set; }
 
         /// <summary>
-        /// Group members can create/update Configs. Default: false.
+        /// Group members can create/update Configs.
         /// </summary>
         [Input("canCreateorupdateConfig")]
         public Input<bool>? CanCreateorupdateConfig { get; set; }
 
         /// <summary>
-        /// Group members can create/update Environments. Default: false.
+        /// Group members can create/update Environments.
         /// </summary>
         [Input("canCreateorupdateEnvironment")]
         public Input<bool>? CanCreateorupdateEnvironment { get; set; }
 
+        /// <summary>
+        /// Group members can create/update Segments.
+        /// </summary>
         [Input("canCreateorupdateSegment")]
         public Input<bool>? CanCreateorupdateSegment { get; set; }
 
         /// <summary>
-        /// Group members can create/update Feature Flags and Settings. Default: false.
+        /// Group members can create/update Feature Flags and Settings.
         /// </summary>
         [Input("canCreateorupdateSetting")]
         public Input<bool>? CanCreateorupdateSetting { get; set; }
 
         /// <summary>
-        /// Group members can create/update Tags. Default: false.
+        /// Group members can create/update Tags.
         /// </summary>
         [Input("canCreateorupdateTag")]
         public Input<bool>? CanCreateorupdateTag { get; set; }
 
         /// <summary>
-        /// Group members can delete Configs. Default: false.
+        /// Group members can delete Configs.
         /// </summary>
         [Input("canDeleteConfig")]
         public Input<bool>? CanDeleteConfig { get; set; }
 
         /// <summary>
-        /// Group members can delete Environments. Default: false.
+        /// Group members can delete Environments.
         /// </summary>
         [Input("canDeleteEnvironment")]
         public Input<bool>? CanDeleteEnvironment { get; set; }
 
+        /// <summary>
+        /// Group members can delete Segments.
+        /// </summary>
         [Input("canDeleteSegment")]
         public Input<bool>? CanDeleteSegment { get; set; }
 
         /// <summary>
-        /// Group members can delete Feature Flags and Settings. Default: false.
+        /// Group members can delete Feature Flags and Settings.
         /// </summary>
         [Input("canDeleteSetting")]
         public Input<bool>? CanDeleteSetting { get; set; }
 
         /// <summary>
-        /// Group members can delete Tags. Default: false.
+        /// Group members can delete Tags.
         /// </summary>
         [Input("canDeleteTag")]
         public Input<bool>? CanDeleteTag { get; set; }
 
         /// <summary>
-        /// Group members can add and configure integrations. Default: false.
+        /// Group members can disable two-factor authentication for other members.
+        /// </summary>
+        [Input("canDisable2fa")]
+        public Input<bool>? CanDisable2fa { get; set; }
+
+        /// <summary>
+        /// Group members can add and configure integrations.
         /// </summary>
         [Input("canManageIntegrations")]
         public Input<bool>? CanManageIntegrations { get; set; }
 
         /// <summary>
-        /// Group members can manage team members. Default: false.
+        /// Group members can manage team members.
         /// </summary>
         [Input("canManageMembers")]
         public Input<bool>? CanManageMembers { get; set; }
 
         /// <summary>
-        /// Group members can update Product preferences. Default: false.
+        /// Group members can update Product preferences.
         /// </summary>
         [Input("canManageProductPreferences")]
         public Input<bool>? CanManageProductPreferences { get; set; }
 
         /// <summary>
-        /// Group members can create/update/delete Webhooks. Default: false.
+        /// Group members can create/update/delete Webhooks.
         /// </summary>
         [Input("canManageWebhook")]
         public Input<bool>? CanManageWebhook { get; set; }
 
         /// <summary>
-        /// Group members can rotate SDK keys. Default: false.
+        /// Group members can rotate SDK keys.
         /// </summary>
         [Input("canRotateSdkkey")]
         public Input<bool>? CanRotateSdkkey { get; set; }
 
         /// <summary>
-        /// Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+        /// Group members can attach/detach Tags to Feature Flags and Settings.
         /// </summary>
         [Input("canTagSetting")]
         public Input<bool>? CanTagSetting { get; set; }
 
         /// <summary>
-        /// Group members can use the export/import feature. Default: false.
+        /// Group members can use the export/import feature.
         /// </summary>
         [Input("canUseExportimport")]
         public Input<bool>? CanUseExportimport { get; set; }
 
         /// <summary>
-        /// Group members has access to audit logs. Default: false.
+        /// Group members has access to audit logs.
         /// </summary>
         [Input("canViewProductAuditlog")]
         public Input<bool>? CanViewProductAuditlog { get; set; }
 
         /// <summary>
-        /// Group members has access to product statistics. Default: false.
+        /// Group members has access to product statistics.
         /// </summary>
         [Input("canViewProductStatistics")]
         public Input<bool>? CanViewProductStatistics { get; set; }
 
         /// <summary>
-        /// Group members has access to SDK keys. Default: false.
+        /// Group members has access to SDK keys.
         /// </summary>
         [Input("canViewSdkkey")]
         public Input<bool>? CanViewSdkkey { get; set; }
@@ -607,7 +594,7 @@ namespace Pulumiverse.Configcat
         private InputMap<string>? _environmentAccesses;
 
         /// <summary>
-        /// The environment specific permissions map block defined as below.
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
         public InputMap<string> EnvironmentAccesses
         {
@@ -622,7 +609,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         /// </summary>
         [Input("newEnvironmentAccesstype")]
         public Input<string>? NewEnvironmentAccesstype { get; set; }

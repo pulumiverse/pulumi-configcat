@@ -7,8 +7,6 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getConfigurations Resource
- *
  * Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -17,19 +15,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myConfigs = configcat.getConfigurations({
+ *     productId: productId,
  *     nameFilterRegex: "Main Config",
- * }));
+ * });
  * export const configId = myConfigs.then(myConfigs => myConfigs.configs?.[0]?.configId);
  * ```
- *
- * ## Endpoints used
- *
- * [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
  */
 export function getConfigurations(args: GetConfigurationsArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigurationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -57,20 +50,21 @@ export interface GetConfigurationsArgs {
  * A collection of values returned by getConfigurations.
  */
 export interface GetConfigurationsResult {
-    /**
-     * A config list block defined as below.
-     */
     readonly configs: outputs.GetConfigurationsConfig[];
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
+    /**
+     * Filter the Configs by name.
+     */
     readonly nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
     readonly productId: string;
 }
 /**
- * ## # configcat.getConfigurations Resource
- *
  * Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -79,19 +73,14 @@ export interface GetConfigurationsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myConfigs = configcat.getConfigurations({
+ *     productId: productId,
  *     nameFilterRegex: "Main Config",
- * }));
+ * });
  * export const configId = myConfigs.then(myConfigs => myConfigs.configs?.[0]?.configId);
  * ```
- *
- * ## Endpoints used
- *
- * [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
  */
 export function getConfigurationsOutput(args: GetConfigurationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigurationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

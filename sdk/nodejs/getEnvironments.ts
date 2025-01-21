@@ -7,8 +7,6 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getEnvironments Resource
- *
  * Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -17,19 +15,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myEnvironments = myProducts.then(myProducts => configcat.getEnvironments({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myEnvironments = configcat.getEnvironments({
+ *     productId: productId,
  *     nameFilterRegex: "Test",
- * }));
+ * });
  * export const environmentId = myEnvironments.then(myEnvironments => myEnvironments.environments?.[0]?.environmentId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
  */
 export function getEnvironments(args: GetEnvironmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetEnvironmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -57,20 +50,21 @@ export interface GetEnvironmentsArgs {
  * A collection of values returned by getEnvironments.
  */
 export interface GetEnvironmentsResult {
-    /**
-     * An environment list block defined as below.
-     */
     readonly environments: outputs.GetEnvironmentsEnvironment[];
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
+    /**
+     * Filter the Environments by name.
+     */
     readonly nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
     readonly productId: string;
 }
 /**
- * ## # configcat.getEnvironments Resource
- *
  * Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -79,19 +73,14 @@ export interface GetEnvironmentsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myEnvironments = myProducts.then(myProducts => configcat.getEnvironments({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myEnvironments = configcat.getEnvironments({
+ *     productId: productId,
  *     nameFilterRegex: "Test",
- * }));
+ * });
  * export const environmentId = myEnvironments.then(myEnvironments => myEnvironments.environments?.[0]?.environmentId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
  */
 export function getEnvironmentsOutput(args: GetEnvironmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEnvironmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

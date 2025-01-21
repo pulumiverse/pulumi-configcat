@@ -13,8 +13,6 @@ namespace Pulumiverse.Configcat
     public static class GetPermissionGroups
     {
         /// <summary>
-        /// ## # configcat.getPermissionGroups Resource
-        /// 
         /// Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
         /// 
         /// ## Example Usage
@@ -27,14 +25,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myPermissionGroups = Configcat.GetPermissionGroups.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Administrators",
         ///     });
         /// 
@@ -44,17 +39,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
         /// </summary>
         public static Task<GetPermissionGroupsResult> InvokeAsync(GetPermissionGroupsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPermissionGroupsResult>("configcat:index/getPermissionGroups:getPermissionGroups", args ?? new GetPermissionGroupsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getPermissionGroups Resource
-        /// 
         /// Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
         /// 
         /// ## Example Usage
@@ -67,14 +56,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myPermissionGroups = Configcat.GetPermissionGroups.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Administrators",
         ///     });
         /// 
@@ -84,17 +70,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
         /// </summary>
         public static Output<GetPermissionGroupsResult> Invoke(GetPermissionGroupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPermissionGroupsResult>("configcat:index/getPermissionGroups:getPermissionGroups", args ?? new GetPermissionGroupsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getPermissionGroups Resource
-        /// 
         /// Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
         /// 
         /// ## Example Usage
@@ -107,14 +87,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myPermissionGroups = Configcat.GetPermissionGroups.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Administrators",
         ///     });
         /// 
@@ -124,10 +101,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
         /// </summary>
         public static Output<GetPermissionGroupsResult> Invoke(GetPermissionGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPermissionGroupsResult>("configcat:index/getPermissionGroups:getPermissionGroups", args ?? new GetPermissionGroupsInvokeArgs(), options.WithDefaults());
@@ -179,14 +152,17 @@ namespace Pulumiverse.Configcat
     public sealed class GetPermissionGroupsResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
-        public readonly string? NameFilterRegex;
         /// <summary>
-        /// A permission group list block defined as below.
+        /// Filter the Permission Groups by name.
         /// </summary>
+        public readonly string? NameFilterRegex;
         public readonly ImmutableArray<Outputs.GetPermissionGroupsPermissionGroupResult> PermissionGroups;
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
         public readonly string ProductId;
 
         [OutputConstructor]

@@ -8,12 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getSdkKeys Resource
+// Use this data source to access information about existing **SDK Keys**.
 //
-// Use this data source to access information about **SDK Keys**.
 // ## Example Usage
 //
 // ```go
@@ -22,35 +21,19 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myConfigs, err := configcat.GetConfigurations(ctx, &configcat.GetConfigurationsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Main Config"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myEnvironments, err := configcat.GetEnvironments(ctx, &configcat.GetEnvironmentsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
+//			cfg := config.New(ctx, "")
+//			configId := cfg.Require("configId")
+//			environmentId := cfg.Require("environmentId")
 //			mySdkkey, err := configcat.GetSdkKeys(ctx, &configcat.GetSdkKeysArgs{
-//				ConfigId:      myConfigs.Configs[0].ConfigId,
-//				EnvironmentId: myEnvironments.Environments[0].EnvironmentId,
+//				ConfigId:      configId,
+//				EnvironmentId: environmentId,
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -62,10 +45,6 @@ import (
 //	}
 //
 // ```
-//
-// ## Endpoints used
-//
-// - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
 func GetSdkKeys(ctx *pulumi.Context, args *GetSdkKeysArgs, opts ...pulumi.InvokeOption) (*GetSdkKeysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSdkKeysResult
@@ -86,9 +65,11 @@ type GetSdkKeysArgs struct {
 
 // A collection of values returned by getSdkKeys.
 type GetSdkKeysResult struct {
-	ConfigId      string `pulumi:"configId"`
+	// The ID of the Config.
+	ConfigId string `pulumi:"configId"`
+	// The ID of the Environment.
 	EnvironmentId string `pulumi:"environmentId"`
-	// The provider-assigned unique ID for this managed resource.
+	// Internal ID of the data source. Do not use.
 	Id string `pulumi:"id"`
 	// The primary SDK Key associated with your **Config** and **Environment**.
 	Primary string `pulumi:"primary"`
@@ -132,15 +113,17 @@ func (o GetSdkKeysResultOutput) ToGetSdkKeysResultOutputWithContext(ctx context.
 	return o
 }
 
+// The ID of the Config.
 func (o GetSdkKeysResultOutput) ConfigId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSdkKeysResult) string { return v.ConfigId }).(pulumi.StringOutput)
 }
 
+// The ID of the Environment.
 func (o GetSdkKeysResultOutput) EnvironmentId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSdkKeysResult) string { return v.EnvironmentId }).(pulumi.StringOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
+// Internal ID of the data source. Do not use.
 func (o GetSdkKeysResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSdkKeysResult) string { return v.Id }).(pulumi.StringOutput)
 }

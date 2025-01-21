@@ -5,33 +5,23 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.Tag Resource
- *
  * Creates and manages a **Tag**.
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
  * import * as configcat from "@pulumiverse/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
  * const myTag = new configcat.Tag("my_tag", {
- *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     productId: productId,
  *     name: "Created by Terraform",
+ *     color: "panther",
  * });
  * export const tagId = myTag.id;
  * ```
- *
- * ## Endpoints used
- *
- * * [Get Tag](https://api.configcat.com/docs/#tag/Tags/operation/get-tag)
- * * [Create Tag](https://api.configcat.com/docs/#tag/Tags/operation/create-tag)
- * * [Update Tag](https://api.configcat.com/docs/#tag/Tags/operation/update-tag)
- * * [Delete Tag](https://api.configcat.com/docs/#tag/Tags/operation/delete-tag)
  *
  * ## Import
  *
@@ -40,7 +30,6 @@ import * as utilities from "./utilities";
  * ```sh
  * $ pulumi import configcat:index/tag:Tag example 1234
  * ```
- * Read more about importing.
  */
 export class Tag extends pulumi.CustomResource {
     /**
@@ -71,9 +60,9 @@ export class Tag extends pulumi.CustomResource {
     }
 
     /**
-     * Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+     * The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
      */
-    public readonly color!: pulumi.Output<string | undefined>;
+    public readonly color!: pulumi.Output<string>;
     /**
      * The name of the Tag.
      */
@@ -118,7 +107,7 @@ export class Tag extends pulumi.CustomResource {
  */
 export interface TagState {
     /**
-     * Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+     * The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
      */
     color?: pulumi.Input<string>;
     /**
@@ -136,7 +125,7 @@ export interface TagState {
  */
 export interface TagArgs {
     /**
-     * Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+     * The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
      */
     color?: pulumi.Input<string>;
     /**

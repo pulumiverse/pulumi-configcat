@@ -26,18 +26,23 @@
         "getSegments.ts",
         "getSettings.ts",
         "getTags.ts",
+        "getWebhookSigningKeys.ts",
         "index.ts",
+        "integration.ts",
         "permissionGroup.ts",
         "product.ts",
+        "productPreferences.ts",
         "provider.ts",
         "segment.ts",
         "setting.ts",
         "settingTag.ts",
         "settingValue.ts",
+        "settingValueV2.ts",
         "tag.ts",
         "types/index.ts",
         "types/input.ts",
         "types/output.ts",
-        "utilities.ts"
+        "utilities.ts",
+        "webhook.ts"
     ]
 }

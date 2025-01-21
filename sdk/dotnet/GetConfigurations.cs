@@ -13,8 +13,6 @@ namespace Pulumiverse.Configcat
     public static class GetConfigurations
     {
         /// <summary>
-        /// ## # configcat.getConfigurations Resource
-        /// 
         /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -27,14 +25,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Main Config",
         ///     });
         /// 
@@ -44,17 +39,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
         /// </summary>
         public static Task<GetConfigurationsResult> InvokeAsync(GetConfigurationsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigurationsResult>("configcat:index/getConfigurations:getConfigurations", args ?? new GetConfigurationsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getConfigurations Resource
-        /// 
         /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -67,14 +56,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Main Config",
         ///     });
         /// 
@@ -84,17 +70,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
         /// </summary>
         public static Output<GetConfigurationsResult> Invoke(GetConfigurationsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationsResult>("configcat:index/getConfigurations:getConfigurations", args ?? new GetConfigurationsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getConfigurations Resource
-        /// 
         /// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -107,14 +87,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Main Config",
         ///     });
         /// 
@@ -124,10 +101,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
         /// </summary>
         public static Output<GetConfigurationsResult> Invoke(GetConfigurationsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationsResult>("configcat:index/getConfigurations:getConfigurations", args ?? new GetConfigurationsInvokeArgs(), options.WithDefaults());
@@ -178,15 +151,18 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetConfigurationsResult
     {
-        /// <summary>
-        /// A config list block defined as below.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetConfigurationsConfigResult> Configs;
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Filter the Configs by name.
+        /// </summary>
         public readonly string? NameFilterRegex;
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
         public readonly string ProductId;
 
         [OutputConstructor]

@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
 // The provider type for the configcat package. By default, resources use package-wide configuration
@@ -18,11 +18,16 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
-	// ConfigCat Public Management API Base Path (defaults to production).
+	// ConfigCat Public Management API's `basePath`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+	// can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
 	BasePath pulumi.StringPtrOutput `pulumi:"basePath"`
-	// ConfigCat Public API credential - Basic Auth Password
+	// Get your `basicAuthPassword` at [ConfigCat Public API
+	// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+	// `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
 	BasicAuthPassword pulumi.StringPtrOutput `pulumi:"basicAuthPassword"`
-	// ConfigCat Public API credential - Basic Auth Username.
+	// Get your `basicAuthUsername` at [ConfigCat Public API
+	// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+	// `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
 	BasicAuthUsername pulumi.StringPtrOutput `pulumi:"basicAuthUsername"`
 }
 
@@ -65,21 +70,31 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	// ConfigCat Public Management API Base Path (defaults to production).
+	// ConfigCat Public Management API's `basePath`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+	// can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
 	BasePath *string `pulumi:"basePath"`
-	// ConfigCat Public API credential - Basic Auth Password
+	// Get your `basicAuthPassword` at [ConfigCat Public API
+	// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+	// `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
 	BasicAuthPassword *string `pulumi:"basicAuthPassword"`
-	// ConfigCat Public API credential - Basic Auth Username.
+	// Get your `basicAuthUsername` at [ConfigCat Public API
+	// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+	// `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
 	BasicAuthUsername *string `pulumi:"basicAuthUsername"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	// ConfigCat Public Management API Base Path (defaults to production).
+	// ConfigCat Public Management API's `basePath`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+	// can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
 	BasePath pulumi.StringPtrInput
-	// ConfigCat Public API credential - Basic Auth Password
+	// Get your `basicAuthPassword` at [ConfigCat Public API
+	// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+	// `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
 	BasicAuthPassword pulumi.StringPtrInput
-	// ConfigCat Public API credential - Basic Auth Username.
+	// Get your `basicAuthUsername` at [ConfigCat Public API
+	// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+	// `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
 	BasicAuthUsername pulumi.StringPtrInput
 }
 
@@ -120,17 +135,22 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
-// ConfigCat Public Management API Base Path (defaults to production).
+// ConfigCat Public Management API's `basePath`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+// can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
 func (o ProviderOutput) BasePath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BasePath }).(pulumi.StringPtrOutput)
 }
 
-// ConfigCat Public API credential - Basic Auth Password
+// Get your `basicAuthPassword` at [ConfigCat Public API
+// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+// `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
 func (o ProviderOutput) BasicAuthPassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BasicAuthPassword }).(pulumi.StringPtrOutput)
 }
 
-// ConfigCat Public API credential - Basic Auth Username.
+// Get your `basicAuthUsername` at [ConfigCat Public API
+// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+// `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
 func (o ProviderOutput) BasicAuthUsername() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BasicAuthUsername }).(pulumi.StringPtrOutput)
 }

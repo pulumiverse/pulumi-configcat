@@ -21,15 +21,15 @@ import (
 	// The linter requires unnamed imports to have a doc comment
 	_ "embed"
 
-	"github.com/configcat/terraform-provider-configcat/configcat"
+	configcat "github.com/configcat/terraform-provider-configcat/v5/providerlink"
 
+	pf "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
-	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 
-	"github.com/pulumiverse/pulumi-configcat/provider/v3/pkg/version"
+	"github.com/pulumiverse/pulumi-configcat/provider/v5/pkg/version"
 )
 
 // all of the token components used below.
@@ -55,7 +55,7 @@ var metadata []byte
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(configcat.Provider())
+	p := pf.ShimProvider(configcat.New(version.Version)())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -88,8 +88,9 @@ func Provider() tfbridge.ProviderInfo {
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/pulumiverse/pulumi-configcat",
 		// The GitHub Org for the provider - defaults to `terraform-providers`
-		GitHubOrg:    "configcat",
-		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
+		GitHubOrg:               "configcat",
+		TFProviderModuleVersion: "v5",
+		MetadataInfo:            tfbridge.NewProviderMetadata(metadata),
 		Config: map[string]*tfbridge.SchemaInfo{
 			"basic_auth_username": {
 				Type: "string",

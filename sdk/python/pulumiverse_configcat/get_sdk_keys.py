@@ -46,18 +46,24 @@ class GetSdkKeysResult:
     @property
     @pulumi.getter(name="configId")
     def config_id(self) -> str:
+        """
+        The ID of the Config.
+        """
         return pulumi.get(self, "config_id")
 
     @property
     @pulumi.getter(name="environmentId")
     def environment_id(self) -> str:
+        """
+        The ID of the Environment.
+        """
         return pulumi.get(self, "environment_id")
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        Internal ID of the data source. Do not use.
         """
         return pulumi.get(self, "id")
 
@@ -95,29 +101,22 @@ def get_sdk_keys(config_id: Optional[str] = None,
                  environment_id: Optional[str] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSdkKeysResult:
     """
-    ## # get_sdk_keys Resource
+    Use this data source to access information about existing **SDK Keys**.
 
-    Use this data source to access information about **SDK Keys**.
     ## Example Usage
 
     ```python
     import pulumi
     import pulumi_configcat as configcat
 
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-        name_filter_regex="Main Config")
-    my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    my_sdkkey = configcat.get_sdk_keys(config_id=my_configs.configs[0].config_id,
-        environment_id=my_environments.environments[0].environment_id)
+    config = pulumi.Config()
+    config_id = config.require("configId")
+    environment_id = config.require("environmentId")
+    my_sdkkey = configcat.get_sdk_keys(config_id=config_id,
+        environment_id=environment_id)
     pulumi.export("primarySdkkey", my_sdkkey.primary)
     pulumi.export("secondarySdkkey", my_sdkkey.secondary)
     ```
-
-    ## Endpoints used
-
-    - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
 
 
     :param str config_id: The ID of the Config.
@@ -139,29 +138,22 @@ def get_sdk_keys_output(config_id: Optional[pulumi.Input[str]] = None,
                         environment_id: Optional[pulumi.Input[str]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSdkKeysResult]:
     """
-    ## # get_sdk_keys Resource
+    Use this data source to access information about existing **SDK Keys**.
 
-    Use this data source to access information about **SDK Keys**.
     ## Example Usage
 
     ```python
     import pulumi
     import pulumi_configcat as configcat
 
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-        name_filter_regex="Main Config")
-    my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    my_sdkkey = configcat.get_sdk_keys(config_id=my_configs.configs[0].config_id,
-        environment_id=my_environments.environments[0].environment_id)
+    config = pulumi.Config()
+    config_id = config.require("configId")
+    environment_id = config.require("environmentId")
+    my_sdkkey = configcat.get_sdk_keys(config_id=config_id,
+        environment_id=environment_id)
     pulumi.export("primarySdkkey", my_sdkkey.primary)
     pulumi.export("secondarySdkkey", my_sdkkey.secondary)
     ```
-
-    ## Endpoints used
-
-    - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
 
 
     :param str config_id: The ID of the Config.

@@ -7,8 +7,6 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getSegments Resource
- *
  * Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
  *
  * ## Example Usage
@@ -17,19 +15,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const mySegments = configcat.getSegments({
+ *     productId: productId,
+ *     nameFilterRegex: "Beta users",
  * });
- * const mySegments = myProducts.then(myProducts => configcat.getSegments({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Test",
- * }));
  * export const segmentId = mySegments.then(mySegments => mySegments.segments?.[0]?.segmentId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
  */
 export function getSegments(args: GetSegmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetSegmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -58,19 +51,20 @@ export interface GetSegmentsArgs {
  */
 export interface GetSegmentsResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
-    readonly nameFilterRegex?: string;
-    readonly productId: string;
     /**
-     * A segment list block defined as below.
+     * Filter the Segments by name.
      */
+    readonly nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
+    readonly productId: string;
     readonly segments: outputs.GetSegmentsSegment[];
 }
 /**
- * ## # configcat.getSegments Resource
- *
  * Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
  *
  * ## Example Usage
@@ -79,19 +73,14 @@ export interface GetSegmentsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const mySegments = configcat.getSegments({
+ *     productId: productId,
+ *     nameFilterRegex: "Beta users",
  * });
- * const mySegments = myProducts.then(myProducts => configcat.getSegments({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Test",
- * }));
  * export const segmentId = mySegments.then(mySegments => mySegments.segments?.[0]?.segmentId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
  */
 export function getSegmentsOutput(args: GetSegmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSegmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

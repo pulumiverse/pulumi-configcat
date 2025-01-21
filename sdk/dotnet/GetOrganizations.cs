@@ -13,8 +13,6 @@ namespace Pulumiverse.Configcat
     public static class GetOrganizations
     {
         /// <summary>
-        /// ## # configcat.getOrganizations Resource
-        /// 
         /// Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -38,17 +36,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
         /// </summary>
         public static Task<GetOrganizationsResult> InvokeAsync(GetOrganizationsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrganizationsResult>("configcat:index/getOrganizations:getOrganizations", args ?? new GetOrganizationsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getOrganizations Resource
-        /// 
         /// Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -72,17 +64,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
         /// </summary>
         public static Output<GetOrganizationsResult> Invoke(GetOrganizationsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationsResult>("configcat:index/getOrganizations:getOrganizations", args ?? new GetOrganizationsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getOrganizations Resource
-        /// 
         /// Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -106,10 +92,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
         /// </summary>
         public static Output<GetOrganizationsResult> Invoke(GetOrganizationsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationsResult>("configcat:index/getOrganizations:getOrganizations", args ?? new GetOrganizationsInvokeArgs(), options.WithDefaults());
@@ -149,13 +131,13 @@ namespace Pulumiverse.Configcat
     public sealed class GetOrganizationsResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
-        public readonly string? NameFilterRegex;
         /// <summary>
-        /// An organization list block defined as below.
+        /// Filter the Organizations by name.
         /// </summary>
+        public readonly string? NameFilterRegex;
         public readonly ImmutableArray<Outputs.GetOrganizationsOrganizationResult> Organizations;
 
         [OutputConstructor]

@@ -9,12 +9,10 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # SettingTag Resource
-//
-// Adds/Removes **Tags** to/from **Feature Flags and Settings**.
+// Adds/Removes **Tags** to/from **Feature Flags or Settings**.
 //
 // ## Example Usage
 //
@@ -24,42 +22,19 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myConfigs, err := configcat.GetConfigurations(ctx, &configcat.GetConfigurationsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Main Config"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myTags, err := configcat.GetTags(ctx, &configcat.GetTagsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Tag"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			mySettings, err := configcat.GetSettings(ctx, &configcat.GetSettingsArgs{
-//				ConfigId:       myConfigs.Configs[0].ConfigId,
-//				KeyFilterRegex: pulumi.StringRef("isAwesomeFeatureEnabled"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = configcat.NewSettingTag(ctx, "my_setting_tag", &configcat.SettingTagArgs{
-//				SettingId: pulumi.String(mySettings.Settings[0].SettingId),
-//				TagId:     pulumi.String(myTags.Tags[0].TagId),
+//			cfg := config.New(ctx, "")
+//			settingId := cfg.Require("settingId")
+//			tagId := cfg.Require("tagId")
+//			_, err := configcat.NewSettingTag(ctx, "my_setting_tag", &configcat.SettingTagArgs{
+//				SettingId: pulumi.String(settingId),
+//				TagId:     pulumi.String(tagId),
 //			})
 //			if err != nil {
 //				return err
@@ -70,14 +45,9 @@ import (
 //
 // ```
 //
-// ## Endpoints used
-//
-// * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-// * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
-//
 // ## Import
 //
-// Tags can be imported using a combined SettingId:TagId ID.
+// Setting Tags can be imported using a combined SettingId:TagId ID.
 //
 // Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
 //
@@ -86,12 +56,10 @@ import (
 // ```sh
 // $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
 // ```
-//
-// Read more about importing.
 type SettingTag struct {
 	pulumi.CustomResourceState
 
-	// The ID of the Feature Flag/Setting.
+	// The ID of the Feature Flag or Setting.
 	SettingId pulumi.StringOutput `pulumi:"settingId"`
 	// The ID of the Tag.
 	TagId pulumi.StringOutput `pulumi:"tagId"`
@@ -133,14 +101,14 @@ func GetSettingTag(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SettingTag resources.
 type settingTagState struct {
-	// The ID of the Feature Flag/Setting.
+	// The ID of the Feature Flag or Setting.
 	SettingId *string `pulumi:"settingId"`
 	// The ID of the Tag.
 	TagId *string `pulumi:"tagId"`
 }
 
 type SettingTagState struct {
-	// The ID of the Feature Flag/Setting.
+	// The ID of the Feature Flag or Setting.
 	SettingId pulumi.StringPtrInput
 	// The ID of the Tag.
 	TagId pulumi.StringPtrInput
@@ -151,7 +119,7 @@ func (SettingTagState) ElementType() reflect.Type {
 }
 
 type settingTagArgs struct {
-	// The ID of the Feature Flag/Setting.
+	// The ID of the Feature Flag or Setting.
 	SettingId string `pulumi:"settingId"`
 	// The ID of the Tag.
 	TagId string `pulumi:"tagId"`
@@ -159,7 +127,7 @@ type settingTagArgs struct {
 
 // The set of arguments for constructing a SettingTag resource.
 type SettingTagArgs struct {
-	// The ID of the Feature Flag/Setting.
+	// The ID of the Feature Flag or Setting.
 	SettingId pulumi.StringInput
 	// The ID of the Tag.
 	TagId pulumi.StringInput
@@ -252,7 +220,7 @@ func (o SettingTagOutput) ToSettingTagOutputWithContext(ctx context.Context) Set
 	return o
 }
 
-// The ID of the Feature Flag/Setting.
+// The ID of the Feature Flag or Setting.
 func (o SettingTagOutput) SettingId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SettingTag) pulumi.StringOutput { return v.SettingId }).(pulumi.StringOutput)
 }

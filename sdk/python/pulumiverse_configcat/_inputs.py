@@ -19,6 +19,34 @@ __all__ = [
     'SettingValuePercentageItemArgsDict',
     'SettingValueRolloutRuleArgs',
     'SettingValueRolloutRuleArgsDict',
+    'SettingValueV2TargetingRuleArgs',
+    'SettingValueV2TargetingRuleArgsDict',
+    'SettingValueV2TargetingRuleConditionArgs',
+    'SettingValueV2TargetingRuleConditionArgsDict',
+    'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs',
+    'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgsDict',
+    'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs',
+    'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgsDict',
+    'SettingValueV2TargetingRuleConditionSegmentConditionArgs',
+    'SettingValueV2TargetingRuleConditionSegmentConditionArgsDict',
+    'SettingValueV2TargetingRuleConditionUserConditionArgs',
+    'SettingValueV2TargetingRuleConditionUserConditionArgsDict',
+    'SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs',
+    'SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgsDict',
+    'SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs',
+    'SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgsDict',
+    'SettingValueV2TargetingRulePercentageOptionArgs',
+    'SettingValueV2TargetingRulePercentageOptionArgsDict',
+    'SettingValueV2TargetingRulePercentageOptionValueArgs',
+    'SettingValueV2TargetingRulePercentageOptionValueArgsDict',
+    'SettingValueV2TargetingRuleValueArgs',
+    'SettingValueV2TargetingRuleValueArgsDict',
+    'SettingValueV2ValueArgs',
+    'SettingValueV2ValueArgsDict',
+    'WebhookSecureWebhookHeaderArgs',
+    'WebhookSecureWebhookHeaderArgsDict',
+    'WebhookWebhookHeaderArgs',
+    'WebhookWebhookHeaderArgsDict',
 ]
 
 MYPY = False
@@ -85,7 +113,7 @@ if not MYPY:
         """
         comparison_attribute: NotRequired[pulumi.Input[str]]
         """
-        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         """
         comparison_value: NotRequired[pulumi.Input[str]]
         """
@@ -114,7 +142,7 @@ class SettingValueRolloutRuleArgs:
         """
         :param pulumi.Input[str] value: The exact [value](https://configcat.com/docs/advanced/targeting/#served-value) that will be served to the users who match the targeting rule. Type: `string`. It must be compatible with the `setting_type`.
         :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
-        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
         :param pulumi.Input[str] segment_comparator: The segment_comparator. Possible values: isIn, isNotIn.
         :param pulumi.Input[str] segment_id: The [Segment's](https://configcat.com/docs/advanced/segments) unique identifier.
@@ -159,7 +187,7 @@ class SettingValueRolloutRuleArgs:
     @pulumi.getter(name="comparisonAttribute")
     def comparison_attribute(self) -> Optional[pulumi.Input[str]]:
         """
-        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         """
         return pulumi.get(self, "comparison_attribute")
 
@@ -202,5 +230,978 @@ class SettingValueRolloutRuleArgs:
     @segment_id.setter
     def segment_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "segment_id", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleArgsDict(TypedDict):
+        conditions: NotRequired[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionArgsDict']]]]
+        """
+        The conditions that are combined with the AND logical operator.
+        """
+        percentage_options: NotRequired[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRulePercentageOptionArgsDict']]]]
+        """
+        The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+        """
+        value: NotRequired[pulumi.Input['SettingValueV2TargetingRuleValueArgsDict']]
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+elif False:
+    SettingValueV2TargetingRuleArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleArgs:
+    def __init__(__self__, *,
+                 conditions: Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionArgs']]]] = None,
+                 percentage_options: Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRulePercentageOptionArgs']]]] = None,
+                 value: Optional[pulumi.Input['SettingValueV2TargetingRuleValueArgs']] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionArgs']]] conditions: The conditions that are combined with the AND logical operator.
+        :param pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRulePercentageOptionArgs']]] percentage_options: The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+        :param pulumi.Input['SettingValueV2TargetingRuleValueArgs'] value: Represents the value of a Feature Flag or Setting.
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if percentage_options is not None:
+            pulumi.set(__self__, "percentage_options", percentage_options)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionArgs']]]]:
+        """
+        The conditions that are combined with the AND logical operator.
+        """
+        return pulumi.get(self, "conditions")
+
+    @conditions.setter
+    def conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionArgs']]]]):
+        pulumi.set(self, "conditions", value)
+
+    @property
+    @pulumi.getter(name="percentageOptions")
+    def percentage_options(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRulePercentageOptionArgs']]]]:
+        """
+        The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+        """
+        return pulumi.get(self, "percentage_options")
+
+    @percentage_options.setter
+    def percentage_options(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRulePercentageOptionArgs']]]]):
+        pulumi.set(self, "percentage_options", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input['SettingValueV2TargetingRuleValueArgs']]:
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input['SettingValueV2TargetingRuleValueArgs']]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionArgsDict(TypedDict):
+        prerequisite_flag_condition: NotRequired[pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgsDict']]
+        """
+        Describes a condition that is based on a prerequisite flag.
+        """
+        segment_condition: NotRequired[pulumi.Input['SettingValueV2TargetingRuleConditionSegmentConditionArgsDict']]
+        """
+        Describes a condition that is based on a segment.
+        """
+        user_condition: NotRequired[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionArgsDict']]
+        """
+        Describes a condition that is based on user attributes.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionArgs:
+    def __init__(__self__, *,
+                 prerequisite_flag_condition: Optional[pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs']] = None,
+                 segment_condition: Optional[pulumi.Input['SettingValueV2TargetingRuleConditionSegmentConditionArgs']] = None,
+                 user_condition: Optional[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionArgs']] = None):
+        """
+        :param pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs'] prerequisite_flag_condition: Describes a condition that is based on a prerequisite flag.
+        :param pulumi.Input['SettingValueV2TargetingRuleConditionSegmentConditionArgs'] segment_condition: Describes a condition that is based on a segment.
+        :param pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionArgs'] user_condition: Describes a condition that is based on user attributes.
+        """
+        if prerequisite_flag_condition is not None:
+            pulumi.set(__self__, "prerequisite_flag_condition", prerequisite_flag_condition)
+        if segment_condition is not None:
+            pulumi.set(__self__, "segment_condition", segment_condition)
+        if user_condition is not None:
+            pulumi.set(__self__, "user_condition", user_condition)
+
+    @property
+    @pulumi.getter(name="prerequisiteFlagCondition")
+    def prerequisite_flag_condition(self) -> Optional[pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs']]:
+        """
+        Describes a condition that is based on a prerequisite flag.
+        """
+        return pulumi.get(self, "prerequisite_flag_condition")
+
+    @prerequisite_flag_condition.setter
+    def prerequisite_flag_condition(self, value: Optional[pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs']]):
+        pulumi.set(self, "prerequisite_flag_condition", value)
+
+    @property
+    @pulumi.getter(name="segmentCondition")
+    def segment_condition(self) -> Optional[pulumi.Input['SettingValueV2TargetingRuleConditionSegmentConditionArgs']]:
+        """
+        Describes a condition that is based on a segment.
+        """
+        return pulumi.get(self, "segment_condition")
+
+    @segment_condition.setter
+    def segment_condition(self, value: Optional[pulumi.Input['SettingValueV2TargetingRuleConditionSegmentConditionArgs']]):
+        pulumi.set(self, "segment_condition", value)
+
+    @property
+    @pulumi.getter(name="userCondition")
+    def user_condition(self) -> Optional[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionArgs']]:
+        """
+        Describes a condition that is based on user attributes.
+        """
+        return pulumi.get(self, "user_condition")
+
+    @user_condition.setter
+    def user_condition(self, value: Optional[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionArgs']]):
+        pulumi.set(self, "user_condition", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgsDict(TypedDict):
+        comparator: pulumi.Input[str]
+        """
+        Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+        """
+        comparison_value: pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgsDict']
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        prerequisite_setting_id: pulumi.Input[str]
+        """
+        The prerequisite flag's identifier.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs:
+    def __init__(__self__, *,
+                 comparator: pulumi.Input[str],
+                 comparison_value: pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs'],
+                 prerequisite_setting_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] comparator: Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+        :param pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs'] comparison_value: Represents the value of a Feature Flag or Setting.
+        :param pulumi.Input[str] prerequisite_setting_id: The prerequisite flag's identifier.
+        """
+        pulumi.set(__self__, "comparator", comparator)
+        pulumi.set(__self__, "comparison_value", comparison_value)
+        pulumi.set(__self__, "prerequisite_setting_id", prerequisite_setting_id)
+
+    @property
+    @pulumi.getter
+    def comparator(self) -> pulumi.Input[str]:
+        """
+        Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+        """
+        return pulumi.get(self, "comparator")
+
+    @comparator.setter
+    def comparator(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparator", value)
+
+    @property
+    @pulumi.getter(name="comparisonValue")
+    def comparison_value(self) -> pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs']:
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        return pulumi.get(self, "comparison_value")
+
+    @comparison_value.setter
+    def comparison_value(self, value: pulumi.Input['SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs']):
+        pulumi.set(self, "comparison_value", value)
+
+    @property
+    @pulumi.getter(name="prerequisiteSettingId")
+    def prerequisite_setting_id(self) -> pulumi.Input[str]:
+        """
+        The prerequisite flag's identifier.
+        """
+        return pulumi.get(self, "prerequisite_setting_id")
+
+    @prerequisite_setting_id.setter
+    def prerequisite_setting_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "prerequisite_setting_id", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgsDict(TypedDict):
+        bool_value: NotRequired[pulumi.Input[bool]]
+        """
+        The boolean representation of the value.
+        """
+        double_value: NotRequired[pulumi.Input[float]]
+        """
+        The decimal number representation of the value.
+        """
+        int_value: NotRequired[pulumi.Input[int]]
+        """
+        The whole number representation of the value.
+        """
+        string_value: NotRequired[pulumi.Input[str]]
+        """
+        The string representation of the value.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs:
+    def __init__(__self__, *,
+                 bool_value: Optional[pulumi.Input[bool]] = None,
+                 double_value: Optional[pulumi.Input[float]] = None,
+                 int_value: Optional[pulumi.Input[int]] = None,
+                 string_value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] bool_value: The boolean representation of the value.
+        :param pulumi.Input[float] double_value: The decimal number representation of the value.
+        :param pulumi.Input[int] int_value: The whole number representation of the value.
+        :param pulumi.Input[str] string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @bool_value.setter
+    def bool_value(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "bool_value", value)
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[pulumi.Input[float]]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @double_value.setter
+    def double_value(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "double_value", value)
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @int_value.setter
+    def int_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "int_value", value)
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+    @string_value.setter
+    def string_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "string_value", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionSegmentConditionArgsDict(TypedDict):
+        comparator: pulumi.Input[str]
+        """
+        The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+        """
+        segment_id: pulumi.Input[str]
+        """
+        The segment's identifier.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionSegmentConditionArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionSegmentConditionArgs:
+    def __init__(__self__, *,
+                 comparator: pulumi.Input[str],
+                 segment_id: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] comparator: The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+        :param pulumi.Input[str] segment_id: The segment's identifier.
+        """
+        pulumi.set(__self__, "comparator", comparator)
+        pulumi.set(__self__, "segment_id", segment_id)
+
+    @property
+    @pulumi.getter
+    def comparator(self) -> pulumi.Input[str]:
+        """
+        The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+        """
+        return pulumi.get(self, "comparator")
+
+    @comparator.setter
+    def comparator(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparator", value)
+
+    @property
+    @pulumi.getter(name="segmentId")
+    def segment_id(self) -> pulumi.Input[str]:
+        """
+        The segment's identifier.
+        """
+        return pulumi.get(self, "segment_id")
+
+    @segment_id.setter
+    def segment_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "segment_id", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionUserConditionArgsDict(TypedDict):
+        comparator: pulumi.Input[str]
+        """
+        The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+        """
+        comparison_attribute: pulumi.Input[str]
+        """
+        The User Object attribute that the condition is based on.
+        """
+        comparison_value: pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgsDict']
+        """
+        The value that the user object's attribute is compared to.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionUserConditionArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionUserConditionArgs:
+    def __init__(__self__, *,
+                 comparator: pulumi.Input[str],
+                 comparison_attribute: pulumi.Input[str],
+                 comparison_value: pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs']):
+        """
+        :param pulumi.Input[str] comparator: The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+        :param pulumi.Input[str] comparison_attribute: The User Object attribute that the condition is based on.
+        :param pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs'] comparison_value: The value that the user object's attribute is compared to.
+        """
+        pulumi.set(__self__, "comparator", comparator)
+        pulumi.set(__self__, "comparison_attribute", comparison_attribute)
+        pulumi.set(__self__, "comparison_value", comparison_value)
+
+    @property
+    @pulumi.getter
+    def comparator(self) -> pulumi.Input[str]:
+        """
+        The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+        """
+        return pulumi.get(self, "comparator")
+
+    @comparator.setter
+    def comparator(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparator", value)
+
+    @property
+    @pulumi.getter(name="comparisonAttribute")
+    def comparison_attribute(self) -> pulumi.Input[str]:
+        """
+        The User Object attribute that the condition is based on.
+        """
+        return pulumi.get(self, "comparison_attribute")
+
+    @comparison_attribute.setter
+    def comparison_attribute(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparison_attribute", value)
+
+    @property
+    @pulumi.getter(name="comparisonValue")
+    def comparison_value(self) -> pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs']:
+        """
+        The value that the user object's attribute is compared to.
+        """
+        return pulumi.get(self, "comparison_value")
+
+    @comparison_value.setter
+    def comparison_value(self, value: pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs']):
+        pulumi.set(self, "comparison_value", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgsDict(TypedDict):
+        double_value: NotRequired[pulumi.Input[float]]
+        """
+        The number representation of the comparison value.
+        """
+        list_values: NotRequired[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgsDict']]]]
+        """
+        The list representation of the comparison value.
+        """
+        string_value: NotRequired[pulumi.Input[str]]
+        """
+        The string representation of the comparison value.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs:
+    def __init__(__self__, *,
+                 double_value: Optional[pulumi.Input[float]] = None,
+                 list_values: Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs']]]] = None,
+                 string_value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[float] double_value: The number representation of the comparison value.
+        :param pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs']]] list_values: The list representation of the comparison value.
+        :param pulumi.Input[str] string_value: The string representation of the comparison value.
+        """
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if list_values is not None:
+            pulumi.set(__self__, "list_values", list_values)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[pulumi.Input[float]]:
+        """
+        The number representation of the comparison value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @double_value.setter
+    def double_value(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "double_value", value)
+
+    @property
+    @pulumi.getter(name="listValues")
+    def list_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs']]]]:
+        """
+        The list representation of the comparison value.
+        """
+        return pulumi.get(self, "list_values")
+
+    @list_values.setter
+    def list_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs']]]]):
+        pulumi.set(self, "list_values", value)
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The string representation of the comparison value.
+        """
+        return pulumi.get(self, "string_value")
+
+    @string_value.setter
+    def string_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "string_value", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgsDict(TypedDict):
+        value: pulumi.Input[str]
+        """
+        The actual comparison value.
+        """
+        hint: NotRequired[pulumi.Input[str]]
+        """
+        An optional hint for the comparison value.
+        """
+elif False:
+    SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs:
+    def __init__(__self__, *,
+                 value: pulumi.Input[str],
+                 hint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] value: The actual comparison value.
+        :param pulumi.Input[str] hint: An optional hint for the comparison value.
+        """
+        pulumi.set(__self__, "value", value)
+        if hint is not None:
+            pulumi.set(__self__, "hint", hint)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The actual comparison value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def hint(self) -> Optional[pulumi.Input[str]]:
+        """
+        An optional hint for the comparison value.
+        """
+        return pulumi.get(self, "hint")
+
+    @hint.setter
+    def hint(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hint", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRulePercentageOptionArgsDict(TypedDict):
+        percentage: pulumi.Input[int]
+        """
+        A number between 0 and 100 that represents a randomly allocated fraction of the users.
+        """
+        value: pulumi.Input['SettingValueV2TargetingRulePercentageOptionValueArgsDict']
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+elif False:
+    SettingValueV2TargetingRulePercentageOptionArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRulePercentageOptionArgs:
+    def __init__(__self__, *,
+                 percentage: pulumi.Input[int],
+                 value: pulumi.Input['SettingValueV2TargetingRulePercentageOptionValueArgs']):
+        """
+        :param pulumi.Input[int] percentage: A number between 0 and 100 that represents a randomly allocated fraction of the users.
+        :param pulumi.Input['SettingValueV2TargetingRulePercentageOptionValueArgs'] value: Represents the value of a Feature Flag or Setting.
+        """
+        pulumi.set(__self__, "percentage", percentage)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def percentage(self) -> pulumi.Input[int]:
+        """
+        A number between 0 and 100 that represents a randomly allocated fraction of the users.
+        """
+        return pulumi.get(self, "percentage")
+
+    @percentage.setter
+    def percentage(self, value: pulumi.Input[int]):
+        pulumi.set(self, "percentage", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input['SettingValueV2TargetingRulePercentageOptionValueArgs']:
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input['SettingValueV2TargetingRulePercentageOptionValueArgs']):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRulePercentageOptionValueArgsDict(TypedDict):
+        bool_value: NotRequired[pulumi.Input[bool]]
+        """
+        The boolean representation of the value.
+        """
+        double_value: NotRequired[pulumi.Input[float]]
+        """
+        The decimal number representation of the value.
+        """
+        int_value: NotRequired[pulumi.Input[int]]
+        """
+        The whole number representation of the value.
+        """
+        string_value: NotRequired[pulumi.Input[str]]
+        """
+        The string representation of the value.
+        """
+elif False:
+    SettingValueV2TargetingRulePercentageOptionValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRulePercentageOptionValueArgs:
+    def __init__(__self__, *,
+                 bool_value: Optional[pulumi.Input[bool]] = None,
+                 double_value: Optional[pulumi.Input[float]] = None,
+                 int_value: Optional[pulumi.Input[int]] = None,
+                 string_value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] bool_value: The boolean representation of the value.
+        :param pulumi.Input[float] double_value: The decimal number representation of the value.
+        :param pulumi.Input[int] int_value: The whole number representation of the value.
+        :param pulumi.Input[str] string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @bool_value.setter
+    def bool_value(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "bool_value", value)
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[pulumi.Input[float]]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @double_value.setter
+    def double_value(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "double_value", value)
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @int_value.setter
+    def int_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "int_value", value)
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+    @string_value.setter
+    def string_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "string_value", value)
+
+
+if not MYPY:
+    class SettingValueV2TargetingRuleValueArgsDict(TypedDict):
+        bool_value: NotRequired[pulumi.Input[bool]]
+        """
+        The boolean representation of the value.
+        """
+        double_value: NotRequired[pulumi.Input[float]]
+        """
+        The decimal number representation of the value.
+        """
+        int_value: NotRequired[pulumi.Input[int]]
+        """
+        The whole number representation of the value.
+        """
+        string_value: NotRequired[pulumi.Input[str]]
+        """
+        The string representation of the value.
+        """
+elif False:
+    SettingValueV2TargetingRuleValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2TargetingRuleValueArgs:
+    def __init__(__self__, *,
+                 bool_value: Optional[pulumi.Input[bool]] = None,
+                 double_value: Optional[pulumi.Input[float]] = None,
+                 int_value: Optional[pulumi.Input[int]] = None,
+                 string_value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] bool_value: The boolean representation of the value.
+        :param pulumi.Input[float] double_value: The decimal number representation of the value.
+        :param pulumi.Input[int] int_value: The whole number representation of the value.
+        :param pulumi.Input[str] string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @bool_value.setter
+    def bool_value(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "bool_value", value)
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[pulumi.Input[float]]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @double_value.setter
+    def double_value(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "double_value", value)
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @int_value.setter
+    def int_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "int_value", value)
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+    @string_value.setter
+    def string_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "string_value", value)
+
+
+if not MYPY:
+    class SettingValueV2ValueArgsDict(TypedDict):
+        bool_value: NotRequired[pulumi.Input[bool]]
+        """
+        The boolean representation of the value.
+        """
+        double_value: NotRequired[pulumi.Input[float]]
+        """
+        The decimal number representation of the value.
+        """
+        int_value: NotRequired[pulumi.Input[int]]
+        """
+        The whole number representation of the value.
+        """
+        string_value: NotRequired[pulumi.Input[str]]
+        """
+        The string representation of the value.
+        """
+elif False:
+    SettingValueV2ValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SettingValueV2ValueArgs:
+    def __init__(__self__, *,
+                 bool_value: Optional[pulumi.Input[bool]] = None,
+                 double_value: Optional[pulumi.Input[float]] = None,
+                 int_value: Optional[pulumi.Input[int]] = None,
+                 string_value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] bool_value: The boolean representation of the value.
+        :param pulumi.Input[float] double_value: The decimal number representation of the value.
+        :param pulumi.Input[int] int_value: The whole number representation of the value.
+        :param pulumi.Input[str] string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @bool_value.setter
+    def bool_value(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "bool_value", value)
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[pulumi.Input[float]]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @double_value.setter
+    def double_value(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "double_value", value)
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @int_value.setter
+    def int_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "int_value", value)
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+    @string_value.setter
+    def string_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "string_value", value)
+
+
+if not MYPY:
+    class WebhookSecureWebhookHeaderArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The HTTP header key.
+        """
+        value: pulumi.Input[str]
+        """
+        The HTTP header value.
+        """
+elif False:
+    WebhookSecureWebhookHeaderArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class WebhookSecureWebhookHeaderArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The HTTP header key.
+        :param pulumi.Input[str] value: The HTTP header value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The HTTP header key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The HTTP header value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class WebhookWebhookHeaderArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The HTTP header key.
+        """
+        value: pulumi.Input[str]
+        """
+        The HTTP header value.
+        """
+elif False:
+    WebhookWebhookHeaderArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class WebhookWebhookHeaderArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The HTTP header key.
+        :param pulumi.Input[str] value: The HTTP header value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The HTTP header key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The HTTP header value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
 
 

@@ -24,9 +24,14 @@ class ProviderArgs:
                  basic_auth_username: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
-        :param pulumi.Input[str] base_path: ConfigCat Public Management API Base Path (defaults to production).
-        :param pulumi.Input[str] basic_auth_password: ConfigCat Public API credential - Basic Auth Password
-        :param pulumi.Input[str] basic_auth_username: ConfigCat Public API credential - Basic Auth Username.
+        :param pulumi.Input[str] base_path: ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+               can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
+        :param pulumi.Input[str] basic_auth_password: Get your `basic_auth_password` at [ConfigCat Public API
+               credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+               `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
+        :param pulumi.Input[str] basic_auth_username: Get your `basic_auth_username` at [ConfigCat Public API
+               credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+               `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         """
         if base_path is None:
             base_path = _utilities.get_env('CONFIGCAT_BASE_PATH')
@@ -45,7 +50,8 @@ class ProviderArgs:
     @pulumi.getter(name="basePath")
     def base_path(self) -> Optional[pulumi.Input[str]]:
         """
-        ConfigCat Public Management API Base Path (defaults to production).
+        ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+        can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
         """
         return pulumi.get(self, "base_path")
 
@@ -57,7 +63,9 @@ class ProviderArgs:
     @pulumi.getter(name="basicAuthPassword")
     def basic_auth_password(self) -> Optional[pulumi.Input[str]]:
         """
-        ConfigCat Public API credential - Basic Auth Password
+        Get your `basic_auth_password` at [ConfigCat Public API
+        credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
         """
         return pulumi.get(self, "basic_auth_password")
 
@@ -69,7 +77,9 @@ class ProviderArgs:
     @pulumi.getter(name="basicAuthUsername")
     def basic_auth_username(self) -> Optional[pulumi.Input[str]]:
         """
-        ConfigCat Public API credential - Basic Auth Username.
+        Get your `basic_auth_username` at [ConfigCat Public API
+        credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         """
         return pulumi.get(self, "basic_auth_username")
 
@@ -95,9 +105,14 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] base_path: ConfigCat Public Management API Base Path (defaults to production).
-        :param pulumi.Input[str] basic_auth_password: ConfigCat Public API credential - Basic Auth Password
-        :param pulumi.Input[str] basic_auth_username: ConfigCat Public API credential - Basic Auth Username.
+        :param pulumi.Input[str] base_path: ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+               can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
+        :param pulumi.Input[str] basic_auth_password: Get your `basic_auth_password` at [ConfigCat Public API
+               credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+               `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
+        :param pulumi.Input[str] basic_auth_username: Get your `basic_auth_username` at [ConfigCat Public API
+               credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+               `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         """
         ...
     @overload
@@ -159,7 +174,8 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="basePath")
     def base_path(self) -> pulumi.Output[Optional[str]]:
         """
-        ConfigCat Public Management API Base Path (defaults to production).
+        ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+        can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
         """
         return pulumi.get(self, "base_path")
 
@@ -167,7 +183,9 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="basicAuthPassword")
     def basic_auth_password(self) -> pulumi.Output[Optional[str]]:
         """
-        ConfigCat Public API credential - Basic Auth Password
+        Get your `basic_auth_password` at [ConfigCat Public API
+        credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
         """
         return pulumi.get(self, "basic_auth_password")
 
@@ -175,7 +193,9 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="basicAuthUsername")
     def basic_auth_username(self) -> pulumi.Output[Optional[str]]:
         """
-        ConfigCat Public API credential - Basic Auth Username.
+        Get your `basic_auth_username` at [ConfigCat Public API
+        credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         """
         return pulumi.get(self, "basic_auth_username")
 

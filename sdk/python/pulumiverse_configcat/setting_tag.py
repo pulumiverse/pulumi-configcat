@@ -23,7 +23,7 @@ class SettingTagArgs:
                  tag_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a SettingTag resource.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
         :param pulumi.Input[str] tag_id: The ID of the Tag.
         """
         pulumi.set(__self__, "setting_id", setting_id)
@@ -33,7 +33,7 @@ class SettingTagArgs:
     @pulumi.getter(name="settingId")
     def setting_id(self) -> pulumi.Input[str]:
         """
-        The ID of the Feature Flag/Setting.
+        The ID of the Feature Flag or Setting.
         """
         return pulumi.get(self, "setting_id")
 
@@ -61,7 +61,7 @@ class _SettingTagState:
                  tag_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering SettingTag resources.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
         :param pulumi.Input[str] tag_id: The ID of the Tag.
         """
         if setting_id is not None:
@@ -73,7 +73,7 @@ class _SettingTagState:
     @pulumi.getter(name="settingId")
     def setting_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the Feature Flag/Setting.
+        The ID of the Feature Flag or Setting.
         """
         return pulumi.get(self, "setting_id")
 
@@ -103,37 +103,25 @@ class SettingTag(pulumi.CustomResource):
                  tag_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # SettingTag Resource
-
-        Adds/Removes **Tags** to/from **Feature Flags and Settings**.
+        Adds/Removes **Tags** to/from **Feature Flags or Settings**.
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-            name_filter_regex="Main Config")
-        my_tags = configcat.get_tags(product_id=my_products.products[0].product_id,
-            name_filter_regex="Tag")
-        my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
-            key_filter_regex="isAwesomeFeatureEnabled")
+        config = pulumi.Config()
+        setting_id = config.require("settingId")
+        tag_id = config.require("tagId")
         my_setting_tag = configcat.SettingTag("my_setting_tag",
-            setting_id=my_settings.settings[0].setting_id,
-            tag_id=my_tags.tags[0].tag_id)
+            setting_id=setting_id,
+            tag_id=tag_id)
         ```
-
-        ## Endpoints used
-
-        * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-        * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
 
         ## Import
 
-        Tags can be imported using a combined SettingId:TagId ID.
+        Setting Tags can be imported using a combined SettingId:TagId ID.
 
         Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
 
@@ -143,11 +131,9 @@ class SettingTag(pulumi.CustomResource):
         $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
         ```
 
-        Read more about importing.
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
         :param pulumi.Input[str] tag_id: The ID of the Tag.
         """
         ...
@@ -157,37 +143,25 @@ class SettingTag(pulumi.CustomResource):
                  args: SettingTagArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # SettingTag Resource
-
-        Adds/Removes **Tags** to/from **Feature Flags and Settings**.
+        Adds/Removes **Tags** to/from **Feature Flags or Settings**.
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-            name_filter_regex="Main Config")
-        my_tags = configcat.get_tags(product_id=my_products.products[0].product_id,
-            name_filter_regex="Tag")
-        my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
-            key_filter_regex="isAwesomeFeatureEnabled")
+        config = pulumi.Config()
+        setting_id = config.require("settingId")
+        tag_id = config.require("tagId")
         my_setting_tag = configcat.SettingTag("my_setting_tag",
-            setting_id=my_settings.settings[0].setting_id,
-            tag_id=my_tags.tags[0].tag_id)
+            setting_id=setting_id,
+            tag_id=tag_id)
         ```
-
-        ## Endpoints used
-
-        * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-        * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
 
         ## Import
 
-        Tags can be imported using a combined SettingId:TagId ID.
+        Setting Tags can be imported using a combined SettingId:TagId ID.
 
         Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
 
@@ -196,8 +170,6 @@ class SettingTag(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
         ```
-
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param SettingTagArgs args: The arguments to use to populate this resource's properties.
@@ -250,7 +222,7 @@ class SettingTag(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
         :param pulumi.Input[str] tag_id: The ID of the Tag.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -265,7 +237,7 @@ class SettingTag(pulumi.CustomResource):
     @pulumi.getter(name="settingId")
     def setting_id(self) -> pulumi.Output[str]:
         """
-        The ID of the Feature Flag/Setting.
+        The ID of the Feature Flag or Setting.
         """
         return pulumi.get(self, "setting_id")
 

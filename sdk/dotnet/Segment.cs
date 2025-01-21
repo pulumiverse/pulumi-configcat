@@ -11,8 +11,6 @@ using Pulumi;
 namespace Pulumiverse.Configcat
 {
     /// <summary>
-    /// ## # configcat.Segment Resource
-    /// 
     /// Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
     /// 
     /// ## Example Usage
@@ -21,19 +19,15 @@ namespace Pulumiverse.Configcat
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Configcat = Pulumi.Configcat;
     /// using Configcat = Pulumiverse.Configcat;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myProducts = Configcat.GetProducts.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "ConfigCat's product",
-    ///     });
-    /// 
+    ///     var config = new Config();
+    ///     var productId = config.Require("productId");
     ///     var mySegment = new Configcat.Segment("my_segment", new()
     ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+    ///         ProductId = productId,
     ///         Name = "Beta users",
     ///         Description = "Beta users' description",
     ///         ComparisonAttribute = "email",
@@ -48,13 +42,6 @@ namespace Pulumiverse.Configcat
     /// });
     /// ```
     /// 
-    /// ## Endpoints used
-    /// 
-    /// * [Get Segment](https://api.configcat.com/docs/#tag/Segments/operation/get-segment)
-    /// * [Create Segment](https://api.configcat.com/docs/#tag/Segments/operation/create-segment)
-    /// * [Update Segment](https://api.configcat.com/docs/#tag/Segments/operation/update-segment)
-    /// * [Delete Segment](https://api.configcat.com/docs/#tag/Segments/operation/delete-segment)
-    /// 
     /// ## Import
     /// 
     /// Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
@@ -62,25 +49,24 @@ namespace Pulumiverse.Configcat
     /// ```sh
     /// $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
     /// ```
-    /// Read more about importing.
     /// </summary>
     [ConfigcatResourceType("configcat:index/segment:Segment")]
     public partial class Segment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        /// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
         /// </summary>
         [Output("comparator")]
         public Output<string> Comparator { get; private set; } = null!;
 
         /// <summary>
-        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
         /// </summary>
         [Output("comparisonAttribute")]
         public Output<string> ComparisonAttribute { get; private set; } = null!;
 
         /// <summary>
-        /// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        /// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         /// </summary>
         [Output("comparisonValue")]
         public Output<string> ComparisonValue { get; private set; } = null!;
@@ -89,7 +75,7 @@ namespace Pulumiverse.Configcat
         /// The description of the Segment.
         /// </summary>
         [Output("description")]
-        public Output<string?> Description { get; private set; } = null!;
+        public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Segment.
@@ -151,19 +137,19 @@ namespace Pulumiverse.Configcat
     public sealed class SegmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        /// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
         /// </summary>
         [Input("comparator", required: true)]
         public Input<string> Comparator { get; set; } = null!;
 
         /// <summary>
-        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
         /// </summary>
         [Input("comparisonAttribute", required: true)]
         public Input<string> ComparisonAttribute { get; set; } = null!;
 
         /// <summary>
-        /// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        /// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         /// </summary>
         [Input("comparisonValue", required: true)]
         public Input<string> ComparisonValue { get; set; } = null!;
@@ -195,19 +181,19 @@ namespace Pulumiverse.Configcat
     public sealed class SegmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        /// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
         /// </summary>
         [Input("comparator")]
         public Input<string>? Comparator { get; set; }
 
         /// <summary>
-        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
         /// </summary>
         [Input("comparisonAttribute")]
         public Input<string>? ComparisonAttribute { get; set; }
 
         /// <summary>
-        /// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        /// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         /// </summary>
         [Input("comparisonValue")]
         public Input<string>? ComparisonValue { get; set; }

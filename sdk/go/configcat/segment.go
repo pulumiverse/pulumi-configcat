@@ -9,11 +9,9 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # Segment Resource
-//
 // Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
 //
 // ## Example Usage
@@ -24,20 +22,17 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
 //			mySegment, err := configcat.NewSegment(ctx, "my_segment", &configcat.SegmentArgs{
-//				ProductId:           pulumi.String(myProducts.Products[0].ProductId),
+//				ProductId:           pulumi.String(productId),
 //				Name:                pulumi.String("Beta users"),
 //				Description:         pulumi.String("Beta users' description"),
 //				ComparisonAttribute: pulumi.String("email"),
@@ -54,13 +49,6 @@ import (
 //
 // ```
 //
-// ## Endpoints used
-//
-// * [Get Segment](https://api.configcat.com/docs/#tag/Segments/operation/get-segment)
-// * [Create Segment](https://api.configcat.com/docs/#tag/Segments/operation/create-segment)
-// * [Update Segment](https://api.configcat.com/docs/#tag/Segments/operation/update-segment)
-// * [Delete Segment](https://api.configcat.com/docs/#tag/Segments/operation/delete-segment)
-//
 // ## Import
 //
 // Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
@@ -68,18 +56,17 @@ import (
 // ```sh
 // $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
 // ```
-// Read more about importing.
 type Segment struct {
 	pulumi.CustomResourceState
 
-	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
 	Comparator pulumi.StringOutput `pulumi:"comparator"`
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
 	ComparisonAttribute pulumi.StringOutput `pulumi:"comparisonAttribute"`
-	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
 	ComparisonValue pulumi.StringOutput `pulumi:"comparisonValue"`
 	// The description of the Segment.
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description pulumi.StringOutput `pulumi:"description"`
 	// The name of the Segment.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The ID of the Product.
@@ -128,11 +115,11 @@ func GetSegment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Segment resources.
 type segmentState struct {
-	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
 	Comparator *string `pulumi:"comparator"`
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
 	ComparisonAttribute *string `pulumi:"comparisonAttribute"`
-	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
 	ComparisonValue *string `pulumi:"comparisonValue"`
 	// The description of the Segment.
 	Description *string `pulumi:"description"`
@@ -143,11 +130,11 @@ type segmentState struct {
 }
 
 type SegmentState struct {
-	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
 	Comparator pulumi.StringPtrInput
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
 	ComparisonAttribute pulumi.StringPtrInput
-	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
 	ComparisonValue pulumi.StringPtrInput
 	// The description of the Segment.
 	Description pulumi.StringPtrInput
@@ -162,11 +149,11 @@ func (SegmentState) ElementType() reflect.Type {
 }
 
 type segmentArgs struct {
-	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
 	Comparator string `pulumi:"comparator"`
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
 	ComparisonAttribute string `pulumi:"comparisonAttribute"`
-	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
 	ComparisonValue string `pulumi:"comparisonValue"`
 	// The description of the Segment.
 	Description *string `pulumi:"description"`
@@ -178,11 +165,11 @@ type segmentArgs struct {
 
 // The set of arguments for constructing a Segment resource.
 type SegmentArgs struct {
-	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
 	Comparator pulumi.StringInput
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
 	ComparisonAttribute pulumi.StringInput
-	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
 	ComparisonValue pulumi.StringInput
 	// The description of the Segment.
 	Description pulumi.StringPtrInput
@@ -279,24 +266,24 @@ func (o SegmentOutput) ToSegmentOutputWithContext(ctx context.Context) SegmentOu
 	return o
 }
 
-// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
 func (o SegmentOutput) Comparator() pulumi.StringOutput {
 	return o.ApplyT(func(v *Segment) pulumi.StringOutput { return v.Comparator }).(pulumi.StringOutput)
 }
 
-// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
 func (o SegmentOutput) ComparisonAttribute() pulumi.StringOutput {
 	return o.ApplyT(func(v *Segment) pulumi.StringOutput { return v.ComparisonAttribute }).(pulumi.StringOutput)
 }
 
-// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
 func (o SegmentOutput) ComparisonValue() pulumi.StringOutput {
 	return o.ApplyT(func(v *Segment) pulumi.StringOutput { return v.ComparisonValue }).(pulumi.StringOutput)
 }
 
 // The description of the Segment.
-func (o SegmentOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Segment) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+func (o SegmentOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *Segment) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
 // The name of the Segment.

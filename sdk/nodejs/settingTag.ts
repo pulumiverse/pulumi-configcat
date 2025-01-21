@@ -5,46 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.SettingTag Resource
- *
- * Adds/Removes **Tags** to/from **Feature Flags and Settings**.
+ * Adds/Removes **Tags** to/from **Feature Flags or Settings**.
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
  * import * as configcat from "@pulumiverse/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const myTags = myProducts.then(myProducts => configcat.getTags({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Tag",
- * }));
- * const mySettings = myConfigs.then(myConfigs => configcat.getSettings({
- *     configId: myConfigs.configs?.[0]?.configId,
- *     keyFilterRegex: "isAwesomeFeatureEnabled",
- * }));
+ * const config = new pulumi.Config();
+ * const settingId = config.require("settingId");
+ * const tagId = config.require("tagId");
  * const mySettingTag = new configcat.SettingTag("my_setting_tag", {
- *     settingId: mySettings.then(mySettings => mySettings.settings?.[0]?.settingId),
- *     tagId: myTags.then(myTags => myTags.tags?.[0]?.tagId),
+ *     settingId: settingId,
+ *     tagId: tagId,
  * });
  * ```
  *
- * ## Endpoints used
- *
- * * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
- * * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
- *
  * ## Import
  *
- * Tags can be imported using a combined SettingId:TagId ID.
+ * Setting Tags can be imported using a combined SettingId:TagId ID.
  *
  * Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
  *
@@ -53,8 +33,6 @@ import * as utilities from "./utilities";
  * ```sh
  * $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
  * ```
- *
- * Read more about importing.
  */
 export class SettingTag extends pulumi.CustomResource {
     /**
@@ -85,7 +63,7 @@ export class SettingTag extends pulumi.CustomResource {
     }
 
     /**
-     * The ID of the Feature Flag/Setting.
+     * The ID of the Feature Flag or Setting.
      */
     public readonly settingId!: pulumi.Output<string>;
     /**
@@ -129,7 +107,7 @@ export class SettingTag extends pulumi.CustomResource {
  */
 export interface SettingTagState {
     /**
-     * The ID of the Feature Flag/Setting.
+     * The ID of the Feature Flag or Setting.
      */
     settingId?: pulumi.Input<string>;
     /**
@@ -143,7 +121,7 @@ export interface SettingTagState {
  */
 export interface SettingTagArgs {
     /**
-     * The ID of the Feature Flag/Setting.
+     * The ID of the Feature Flag or Setting.
      */
     settingId: pulumi.Input<string>;
     /**

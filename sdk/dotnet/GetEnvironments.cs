@@ -13,8 +13,6 @@ namespace Pulumiverse.Configcat
     public static class GetEnvironments
     {
         /// <summary>
-        /// ## # configcat.getEnvironments Resource
-        /// 
         /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -27,14 +25,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Test",
         ///     });
         /// 
@@ -44,17 +39,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
         /// </summary>
         public static Task<GetEnvironmentsResult> InvokeAsync(GetEnvironmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getEnvironments Resource
-        /// 
         /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -67,14 +56,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Test",
         ///     });
         /// 
@@ -84,17 +70,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
         /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getEnvironments Resource
-        /// 
         /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -107,14 +87,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///         ProductId = productId,
         ///         NameFilterRegex = "Test",
         ///     });
         /// 
@@ -124,10 +101,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
         /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
@@ -178,15 +151,18 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetEnvironmentsResult
     {
-        /// <summary>
-        /// An environment list block defined as below.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetEnvironmentsEnvironmentResult> Environments;
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Filter the Environments by name.
+        /// </summary>
         public readonly string? NameFilterRegex;
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
         public readonly string ProductId;
 
         [OutputConstructor]

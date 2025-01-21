@@ -5,37 +5,24 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getSdkKeys Resource
+ * Use this data source to access information about existing **SDK Keys**.
  *
- * Use this data source to access information about **SDK Keys**.
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const environmentId = config.require("environmentId");
+ * const mySdkkey = configcat.getSdkKeys({
+ *     configId: configId,
+ *     environmentId: environmentId,
  * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const myEnvironments = myProducts.then(myProducts => configcat.getEnvironments({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Test",
- * }));
- * const mySdkkey = Promise.all([myConfigs, myEnvironments]).then(([myConfigs, myEnvironments]) => configcat.getSdkKeys({
- *     configId: myConfigs.configs?.[0]?.configId,
- *     environmentId: myEnvironments.environments?.[0]?.environmentId,
- * }));
  * export const primarySdkkey = mySdkkey.then(mySdkkey => mySdkkey.primary);
  * export const secondarySdkkey = mySdkkey.then(mySdkkey => mySdkkey.secondary);
  * ```
- *
- * ## Endpoints used
- *
- * - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
  */
 export function getSdkKeys(args: GetSdkKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetSdkKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -63,10 +50,16 @@ export interface GetSdkKeysArgs {
  * A collection of values returned by getSdkKeys.
  */
 export interface GetSdkKeysResult {
+    /**
+     * The ID of the Config.
+     */
     readonly configId: string;
+    /**
+     * The ID of the Environment.
+     */
     readonly environmentId: string;
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
     /**
@@ -79,37 +72,24 @@ export interface GetSdkKeysResult {
     readonly secondary: string;
 }
 /**
- * ## # configcat.getSdkKeys Resource
+ * Use this data source to access information about existing **SDK Keys**.
  *
- * Use this data source to access information about **SDK Keys**.
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const environmentId = config.require("environmentId");
+ * const mySdkkey = configcat.getSdkKeys({
+ *     configId: configId,
+ *     environmentId: environmentId,
  * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const myEnvironments = myProducts.then(myProducts => configcat.getEnvironments({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Test",
- * }));
- * const mySdkkey = Promise.all([myConfigs, myEnvironments]).then(([myConfigs, myEnvironments]) => configcat.getSdkKeys({
- *     configId: myConfigs.configs?.[0]?.configId,
- *     environmentId: myEnvironments.environments?.[0]?.environmentId,
- * }));
  * export const primarySdkkey = mySdkkey.then(mySdkkey => mySdkkey.primary);
  * export const secondarySdkkey = mySdkkey.then(mySdkkey => mySdkkey.secondary);
  * ```
- *
- * ## Endpoints used
- *
- * - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
  */
 export function getSdkKeysOutput(args: GetSdkKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSdkKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

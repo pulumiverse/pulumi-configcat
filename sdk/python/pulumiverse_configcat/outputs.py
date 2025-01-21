@@ -13,10 +13,25 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
 
 __all__ = [
     'SettingValuePercentageItem',
     'SettingValueRolloutRule',
+    'SettingValueV2TargetingRule',
+    'SettingValueV2TargetingRuleCondition',
+    'SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition',
+    'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue',
+    'SettingValueV2TargetingRuleConditionSegmentCondition',
+    'SettingValueV2TargetingRuleConditionUserCondition',
+    'SettingValueV2TargetingRuleConditionUserConditionComparisonValue',
+    'SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue',
+    'SettingValueV2TargetingRulePercentageOption',
+    'SettingValueV2TargetingRulePercentageOptionValue',
+    'SettingValueV2TargetingRuleValue',
+    'SettingValueV2Value',
+    'WebhookSecureWebhookHeader',
+    'WebhookWebhookHeader',
     'GetConfigurationsConfigResult',
     'GetEnvironmentsEnvironmentResult',
     'GetOrganizationsOrganizationResult',
@@ -91,7 +106,7 @@ class SettingValueRolloutRule(dict):
         """
         :param str value: The exact [value](https://configcat.com/docs/advanced/targeting/#served-value) that will be served to the users who match the targeting rule. Type: `string`. It must be compatible with the `setting_type`.
         :param str comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
-        :param str comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        :param str comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         :param str comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
         :param str segment_comparator: The segment_comparator. Possible values: isIn, isNotIn.
         :param str segment_id: The [Segment's](https://configcat.com/docs/advanced/segments) unique identifier.
@@ -128,7 +143,7 @@ class SettingValueRolloutRule(dict):
     @pulumi.getter(name="comparisonAttribute")
     def comparison_attribute(self) -> Optional[str]:
         """
-        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         """
         return pulumi.get(self, "comparison_attribute")
 
@@ -158,20 +173,804 @@ class SettingValueRolloutRule(dict):
 
 
 @pulumi.output_type
+class SettingValueV2TargetingRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "percentageOptions":
+            suggest = "percentage_options"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 conditions: Optional[Sequence['outputs.SettingValueV2TargetingRuleCondition']] = None,
+                 percentage_options: Optional[Sequence['outputs.SettingValueV2TargetingRulePercentageOption']] = None,
+                 value: Optional['outputs.SettingValueV2TargetingRuleValue'] = None):
+        """
+        :param Sequence['SettingValueV2TargetingRuleConditionArgs'] conditions: The conditions that are combined with the AND logical operator.
+        :param Sequence['SettingValueV2TargetingRulePercentageOptionArgs'] percentage_options: The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+        :param 'SettingValueV2TargetingRuleValueArgs' value: Represents the value of a Feature Flag or Setting.
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if percentage_options is not None:
+            pulumi.set(__self__, "percentage_options", percentage_options)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[Sequence['outputs.SettingValueV2TargetingRuleCondition']]:
+        """
+        The conditions that are combined with the AND logical operator.
+        """
+        return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter(name="percentageOptions")
+    def percentage_options(self) -> Optional[Sequence['outputs.SettingValueV2TargetingRulePercentageOption']]:
+        """
+        The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+        """
+        return pulumi.get(self, "percentage_options")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional['outputs.SettingValueV2TargetingRuleValue']:
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "prerequisiteFlagCondition":
+            suggest = "prerequisite_flag_condition"
+        elif key == "segmentCondition":
+            suggest = "segment_condition"
+        elif key == "userCondition":
+            suggest = "user_condition"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 prerequisite_flag_condition: Optional['outputs.SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition'] = None,
+                 segment_condition: Optional['outputs.SettingValueV2TargetingRuleConditionSegmentCondition'] = None,
+                 user_condition: Optional['outputs.SettingValueV2TargetingRuleConditionUserCondition'] = None):
+        """
+        :param 'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs' prerequisite_flag_condition: Describes a condition that is based on a prerequisite flag.
+        :param 'SettingValueV2TargetingRuleConditionSegmentConditionArgs' segment_condition: Describes a condition that is based on a segment.
+        :param 'SettingValueV2TargetingRuleConditionUserConditionArgs' user_condition: Describes a condition that is based on user attributes.
+        """
+        if prerequisite_flag_condition is not None:
+            pulumi.set(__self__, "prerequisite_flag_condition", prerequisite_flag_condition)
+        if segment_condition is not None:
+            pulumi.set(__self__, "segment_condition", segment_condition)
+        if user_condition is not None:
+            pulumi.set(__self__, "user_condition", user_condition)
+
+    @property
+    @pulumi.getter(name="prerequisiteFlagCondition")
+    def prerequisite_flag_condition(self) -> Optional['outputs.SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition']:
+        """
+        Describes a condition that is based on a prerequisite flag.
+        """
+        return pulumi.get(self, "prerequisite_flag_condition")
+
+    @property
+    @pulumi.getter(name="segmentCondition")
+    def segment_condition(self) -> Optional['outputs.SettingValueV2TargetingRuleConditionSegmentCondition']:
+        """
+        Describes a condition that is based on a segment.
+        """
+        return pulumi.get(self, "segment_condition")
+
+    @property
+    @pulumi.getter(name="userCondition")
+    def user_condition(self) -> Optional['outputs.SettingValueV2TargetingRuleConditionUserCondition']:
+        """
+        Describes a condition that is based on user attributes.
+        """
+        return pulumi.get(self, "user_condition")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "comparisonValue":
+            suggest = "comparison_value"
+        elif key == "prerequisiteSettingId":
+            suggest = "prerequisite_setting_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparator: str,
+                 comparison_value: 'outputs.SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue',
+                 prerequisite_setting_id: str):
+        """
+        :param str comparator: Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+        :param 'SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs' comparison_value: Represents the value of a Feature Flag or Setting.
+        :param str prerequisite_setting_id: The prerequisite flag's identifier.
+        """
+        pulumi.set(__self__, "comparator", comparator)
+        pulumi.set(__self__, "comparison_value", comparison_value)
+        pulumi.set(__self__, "prerequisite_setting_id", prerequisite_setting_id)
+
+    @property
+    @pulumi.getter
+    def comparator(self) -> str:
+        """
+        Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+        """
+        return pulumi.get(self, "comparator")
+
+    @property
+    @pulumi.getter(name="comparisonValue")
+    def comparison_value(self) -> 'outputs.SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue':
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        return pulumi.get(self, "comparison_value")
+
+    @property
+    @pulumi.getter(name="prerequisiteSettingId")
+    def prerequisite_setting_id(self) -> str:
+        """
+        The prerequisite flag's identifier.
+        """
+        return pulumi.get(self, "prerequisite_setting_id")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "boolValue":
+            suggest = "bool_value"
+        elif key == "doubleValue":
+            suggest = "double_value"
+        elif key == "intValue":
+            suggest = "int_value"
+        elif key == "stringValue":
+            suggest = "string_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bool_value: Optional[bool] = None,
+                 double_value: Optional[float] = None,
+                 int_value: Optional[int] = None,
+                 string_value: Optional[str] = None):
+        """
+        :param bool bool_value: The boolean representation of the value.
+        :param float double_value: The decimal number representation of the value.
+        :param int int_value: The whole number representation of the value.
+        :param str string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[bool]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[float]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[int]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[str]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleConditionSegmentCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "segmentId":
+            suggest = "segment_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleConditionSegmentCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleConditionSegmentCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleConditionSegmentCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparator: str,
+                 segment_id: str):
+        """
+        :param str comparator: The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+        :param str segment_id: The segment's identifier.
+        """
+        pulumi.set(__self__, "comparator", comparator)
+        pulumi.set(__self__, "segment_id", segment_id)
+
+    @property
+    @pulumi.getter
+    def comparator(self) -> str:
+        """
+        The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+        """
+        return pulumi.get(self, "comparator")
+
+    @property
+    @pulumi.getter(name="segmentId")
+    def segment_id(self) -> str:
+        """
+        The segment's identifier.
+        """
+        return pulumi.get(self, "segment_id")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleConditionUserCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "comparisonAttribute":
+            suggest = "comparison_attribute"
+        elif key == "comparisonValue":
+            suggest = "comparison_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleConditionUserCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleConditionUserCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleConditionUserCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparator: str,
+                 comparison_attribute: str,
+                 comparison_value: 'outputs.SettingValueV2TargetingRuleConditionUserConditionComparisonValue'):
+        """
+        :param str comparator: The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+        :param str comparison_attribute: The User Object attribute that the condition is based on.
+        :param 'SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs' comparison_value: The value that the user object's attribute is compared to.
+        """
+        pulumi.set(__self__, "comparator", comparator)
+        pulumi.set(__self__, "comparison_attribute", comparison_attribute)
+        pulumi.set(__self__, "comparison_value", comparison_value)
+
+    @property
+    @pulumi.getter
+    def comparator(self) -> str:
+        """
+        The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+        """
+        return pulumi.get(self, "comparator")
+
+    @property
+    @pulumi.getter(name="comparisonAttribute")
+    def comparison_attribute(self) -> str:
+        """
+        The User Object attribute that the condition is based on.
+        """
+        return pulumi.get(self, "comparison_attribute")
+
+    @property
+    @pulumi.getter(name="comparisonValue")
+    def comparison_value(self) -> 'outputs.SettingValueV2TargetingRuleConditionUserConditionComparisonValue':
+        """
+        The value that the user object's attribute is compared to.
+        """
+        return pulumi.get(self, "comparison_value")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleConditionUserConditionComparisonValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "doubleValue":
+            suggest = "double_value"
+        elif key == "listValues":
+            suggest = "list_values"
+        elif key == "stringValue":
+            suggest = "string_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleConditionUserConditionComparisonValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleConditionUserConditionComparisonValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleConditionUserConditionComparisonValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 double_value: Optional[float] = None,
+                 list_values: Optional[Sequence['outputs.SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue']] = None,
+                 string_value: Optional[str] = None):
+        """
+        :param float double_value: The number representation of the comparison value.
+        :param Sequence['SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs'] list_values: The list representation of the comparison value.
+        :param str string_value: The string representation of the comparison value.
+        """
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if list_values is not None:
+            pulumi.set(__self__, "list_values", list_values)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[float]:
+        """
+        The number representation of the comparison value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @property
+    @pulumi.getter(name="listValues")
+    def list_values(self) -> Optional[Sequence['outputs.SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue']]:
+        """
+        The list representation of the comparison value.
+        """
+        return pulumi.get(self, "list_values")
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[str]:
+        """
+        The string representation of the comparison value.
+        """
+        return pulumi.get(self, "string_value")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue(dict):
+    def __init__(__self__, *,
+                 value: str,
+                 hint: Optional[str] = None):
+        """
+        :param str value: The actual comparison value.
+        :param str hint: An optional hint for the comparison value.
+        """
+        pulumi.set(__self__, "value", value)
+        if hint is not None:
+            pulumi.set(__self__, "hint", hint)
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The actual comparison value.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter
+    def hint(self) -> Optional[str]:
+        """
+        An optional hint for the comparison value.
+        """
+        return pulumi.get(self, "hint")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRulePercentageOption(dict):
+    def __init__(__self__, *,
+                 percentage: int,
+                 value: 'outputs.SettingValueV2TargetingRulePercentageOptionValue'):
+        """
+        :param int percentage: A number between 0 and 100 that represents a randomly allocated fraction of the users.
+        :param 'SettingValueV2TargetingRulePercentageOptionValueArgs' value: Represents the value of a Feature Flag or Setting.
+        """
+        pulumi.set(__self__, "percentage", percentage)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def percentage(self) -> int:
+        """
+        A number between 0 and 100 that represents a randomly allocated fraction of the users.
+        """
+        return pulumi.get(self, "percentage")
+
+    @property
+    @pulumi.getter
+    def value(self) -> 'outputs.SettingValueV2TargetingRulePercentageOptionValue':
+        """
+        Represents the value of a Feature Flag or Setting.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRulePercentageOptionValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "boolValue":
+            suggest = "bool_value"
+        elif key == "doubleValue":
+            suggest = "double_value"
+        elif key == "intValue":
+            suggest = "int_value"
+        elif key == "stringValue":
+            suggest = "string_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRulePercentageOptionValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRulePercentageOptionValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRulePercentageOptionValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bool_value: Optional[bool] = None,
+                 double_value: Optional[float] = None,
+                 int_value: Optional[int] = None,
+                 string_value: Optional[str] = None):
+        """
+        :param bool bool_value: The boolean representation of the value.
+        :param float double_value: The decimal number representation of the value.
+        :param int int_value: The whole number representation of the value.
+        :param str string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[bool]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[float]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[int]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[str]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+
+@pulumi.output_type
+class SettingValueV2TargetingRuleValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "boolValue":
+            suggest = "bool_value"
+        elif key == "doubleValue":
+            suggest = "double_value"
+        elif key == "intValue":
+            suggest = "int_value"
+        elif key == "stringValue":
+            suggest = "string_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2TargetingRuleValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2TargetingRuleValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2TargetingRuleValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bool_value: Optional[bool] = None,
+                 double_value: Optional[float] = None,
+                 int_value: Optional[int] = None,
+                 string_value: Optional[str] = None):
+        """
+        :param bool bool_value: The boolean representation of the value.
+        :param float double_value: The decimal number representation of the value.
+        :param int int_value: The whole number representation of the value.
+        :param str string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[bool]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[float]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[int]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[str]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+
+@pulumi.output_type
+class SettingValueV2Value(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "boolValue":
+            suggest = "bool_value"
+        elif key == "doubleValue":
+            suggest = "double_value"
+        elif key == "intValue":
+            suggest = "int_value"
+        elif key == "stringValue":
+            suggest = "string_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SettingValueV2Value. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SettingValueV2Value.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SettingValueV2Value.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 bool_value: Optional[bool] = None,
+                 double_value: Optional[float] = None,
+                 int_value: Optional[int] = None,
+                 string_value: Optional[str] = None):
+        """
+        :param bool bool_value: The boolean representation of the value.
+        :param float double_value: The decimal number representation of the value.
+        :param int int_value: The whole number representation of the value.
+        :param str string_value: The string representation of the value.
+        """
+        if bool_value is not None:
+            pulumi.set(__self__, "bool_value", bool_value)
+        if double_value is not None:
+            pulumi.set(__self__, "double_value", double_value)
+        if int_value is not None:
+            pulumi.set(__self__, "int_value", int_value)
+        if string_value is not None:
+            pulumi.set(__self__, "string_value", string_value)
+
+    @property
+    @pulumi.getter(name="boolValue")
+    def bool_value(self) -> Optional[bool]:
+        """
+        The boolean representation of the value.
+        """
+        return pulumi.get(self, "bool_value")
+
+    @property
+    @pulumi.getter(name="doubleValue")
+    def double_value(self) -> Optional[float]:
+        """
+        The decimal number representation of the value.
+        """
+        return pulumi.get(self, "double_value")
+
+    @property
+    @pulumi.getter(name="intValue")
+    def int_value(self) -> Optional[int]:
+        """
+        The whole number representation of the value.
+        """
+        return pulumi.get(self, "int_value")
+
+    @property
+    @pulumi.getter(name="stringValue")
+    def string_value(self) -> Optional[str]:
+        """
+        The string representation of the value.
+        """
+        return pulumi.get(self, "string_value")
+
+
+@pulumi.output_type
+class WebhookSecureWebhookHeader(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: The HTTP header key.
+        :param str value: The HTTP header value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The HTTP header key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The HTTP header value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class WebhookWebhookHeader(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: The HTTP header key.
+        :param str value: The HTTP header value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The HTTP header key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The HTTP header value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
 class GetConfigurationsConfigResult(dict):
     def __init__(__self__, *,
                  config_id: str,
                  description: str,
+                 evaluation_version: str,
                  name: str,
                  order: int):
         """
         :param str config_id: The unique Config ID.
         :param str description: The description of the Config.
+        :param str evaluation_version: The evaluation version of the Config. Possible values: `v1`|`v2`
         :param str name: The name of the Config.
         :param int order: The order of the Config within a Product (zero-based).
         """
         pulumi.set(__self__, "config_id", config_id)
         pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "evaluation_version", evaluation_version)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "order", order)
 
@@ -190,6 +989,14 @@ class GetConfigurationsConfigResult(dict):
         The description of the Config.
         """
         return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="evaluationVersion")
+    def evaluation_version(self) -> str:
+        """
+        The evaluation version of the Config. Possible values: `v1`|`v2`
+        """
+        return pulumi.get(self, "evaluation_version")
 
     @property
     @pulumi.getter
@@ -313,6 +1120,7 @@ class GetPermissionGroupsPermissionGroupResult(dict):
                  can_delete_segment: bool,
                  can_delete_setting: bool,
                  can_delete_tag: bool,
+                 can_disable2fa: bool,
                  can_manage_integrations: bool,
                  can_manage_members: bool,
                  can_manage_product_preferences: bool,
@@ -323,20 +1131,23 @@ class GetPermissionGroupsPermissionGroupResult(dict):
                  can_view_product_auditlog: bool,
                  can_view_product_statistics: bool,
                  can_view_sdkkey: bool,
+                 environment_accesses: Mapping[str, str],
                  name: str,
                  new_environment_accesstype: str,
-                 permission_group_id: int,
-                 environment_accesses: Optional[Mapping[str, str]] = None):
+                 permission_group_id: int):
         """
         :param str accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom
         :param bool can_createorupdate_config: Group members can create/update Configs.
         :param bool can_createorupdate_environment: Group members can create/update Environments.
+        :param bool can_createorupdate_segment: Group members can create/update Segments.
         :param bool can_createorupdate_setting: Group members can create/update Feature Flags and Settings.
         :param bool can_createorupdate_tag: Group members can create/update Tags.
         :param bool can_delete_config: Group members can delete Configs.
         :param bool can_delete_environment: Group members can delete Environments.
+        :param bool can_delete_segment: Group members can delete Segments.
         :param bool can_delete_setting: Group members can delete Feature Flags and Settings.
         :param bool can_delete_tag: Group members can delete Tags.
+        :param bool can_disable2fa: Group members can disable two-factor authentication for other members.
         :param bool can_manage_integrations: Group members can add and configure integrations.
         :param bool can_manage_members: Group members can manage team members.
         :param bool can_manage_product_preferences: Group members can update Product preferences.
@@ -347,10 +1158,10 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         :param bool can_view_product_auditlog: Group members has access to audit logs.
         :param bool can_view_product_statistics: Group members has access to product statistics.
         :param bool can_view_sdkkey: Group members has access to SDK keys.
+        :param Mapping[str, str] environment_accesses: The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         :param str name: The name of the Permission Group.
         :param str new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
-        :param int permission_group_id: The unique Permission Groups ID.
-        :param Mapping[str, str] environment_accesses: The environment specific permissions map block defined as below.
+        :param int permission_group_id: The unique Permission Group ID.
         """
         pulumi.set(__self__, "accesstype", accesstype)
         pulumi.set(__self__, "can_createorupdate_config", can_createorupdate_config)
@@ -363,6 +1174,7 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         pulumi.set(__self__, "can_delete_segment", can_delete_segment)
         pulumi.set(__self__, "can_delete_setting", can_delete_setting)
         pulumi.set(__self__, "can_delete_tag", can_delete_tag)
+        pulumi.set(__self__, "can_disable2fa", can_disable2fa)
         pulumi.set(__self__, "can_manage_integrations", can_manage_integrations)
         pulumi.set(__self__, "can_manage_members", can_manage_members)
         pulumi.set(__self__, "can_manage_product_preferences", can_manage_product_preferences)
@@ -373,11 +1185,10 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         pulumi.set(__self__, "can_view_product_auditlog", can_view_product_auditlog)
         pulumi.set(__self__, "can_view_product_statistics", can_view_product_statistics)
         pulumi.set(__self__, "can_view_sdkkey", can_view_sdkkey)
+        pulumi.set(__self__, "environment_accesses", environment_accesses)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "new_environment_accesstype", new_environment_accesstype)
         pulumi.set(__self__, "permission_group_id", permission_group_id)
-        if environment_accesses is not None:
-            pulumi.set(__self__, "environment_accesses", environment_accesses)
 
     @property
     @pulumi.getter
@@ -406,6 +1217,9 @@ class GetPermissionGroupsPermissionGroupResult(dict):
     @property
     @pulumi.getter(name="canCreateorupdateSegment")
     def can_createorupdate_segment(self) -> bool:
+        """
+        Group members can create/update Segments.
+        """
         return pulumi.get(self, "can_createorupdate_segment")
 
     @property
@@ -443,6 +1257,9 @@ class GetPermissionGroupsPermissionGroupResult(dict):
     @property
     @pulumi.getter(name="canDeleteSegment")
     def can_delete_segment(self) -> bool:
+        """
+        Group members can delete Segments.
+        """
         return pulumi.get(self, "can_delete_segment")
 
     @property
@@ -460,6 +1277,14 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         Group members can delete Tags.
         """
         return pulumi.get(self, "can_delete_tag")
+
+    @property
+    @pulumi.getter(name="canDisable2fa")
+    def can_disable2fa(self) -> bool:
+        """
+        Group members can disable two-factor authentication for other members.
+        """
+        return pulumi.get(self, "can_disable2fa")
 
     @property
     @pulumi.getter(name="canManageIntegrations")
@@ -542,6 +1367,14 @@ class GetPermissionGroupsPermissionGroupResult(dict):
         return pulumi.get(self, "can_view_sdkkey")
 
     @property
+    @pulumi.getter(name="environmentAccesses")
+    def environment_accesses(self) -> Mapping[str, str]:
+        """
+        The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
+        """
+        return pulumi.get(self, "environment_accesses")
+
+    @property
     @pulumi.getter
     def name(self) -> str:
         """
@@ -561,17 +1394,9 @@ class GetPermissionGroupsPermissionGroupResult(dict):
     @pulumi.getter(name="permissionGroupId")
     def permission_group_id(self) -> int:
         """
-        The unique Permission Groups ID.
+        The unique Permission Group ID.
         """
         return pulumi.get(self, "permission_group_id")
-
-    @property
-    @pulumi.getter(name="environmentAccesses")
-    def environment_accesses(self) -> Optional[Mapping[str, str]]:
-        """
-        The environment specific permissions map block defined as below.
-        """
-        return pulumi.get(self, "environment_accesses")
 
 
 @pulumi.output_type
@@ -584,7 +1409,7 @@ class GetProductsProductResult(dict):
         """
         :param str description: The description of the Product.
         :param str name: The name of the Product.
-        :param int order: The order of the Product within an Organization (zero-based).
+        :param int order: The order of the Product within a Product (zero-based).
         :param str product_id: The unique Product ID.
         """
         pulumi.set(__self__, "description", description)
@@ -612,7 +1437,7 @@ class GetProductsProductResult(dict):
     @pulumi.getter
     def order(self) -> int:
         """
-        The order of the Product within an Organization (zero-based).
+        The order of the Product within a Product (zero-based).
         """
         return pulumi.get(self, "order")
 
@@ -675,12 +1500,12 @@ class GetSettingsSettingResult(dict):
                  setting_id: str,
                  setting_type: str):
         """
-        :param str hint: The hint of the Setting.
-        :param str key: The key of the Feature Flag/Setting.
-        :param str name: The name of the Setting.
-        :param int order: The order of the Setting within a Config (zero-based).
-        :param str setting_id: The unique Setting ID.
-        :param str setting_type: The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
+        :param str hint: The hint of the Feature Flag or Setting.
+        :param str key: The key of the Feature Flag or Setting.
+        :param str name: The name of the Feature Flag or Setting.
+        :param int order: The order of the Feature Flag or Setting within a Config (zero-based).
+        :param str setting_id: The unique Feature Flag or Setting ID.
+        :param str setting_type: The Feature Flag or Setting's type. Available values: `boolean`|`string`|`int`|`double`.
         """
         pulumi.set(__self__, "hint", hint)
         pulumi.set(__self__, "key", key)
@@ -693,7 +1518,7 @@ class GetSettingsSettingResult(dict):
     @pulumi.getter
     def hint(self) -> str:
         """
-        The hint of the Setting.
+        The hint of the Feature Flag or Setting.
         """
         return pulumi.get(self, "hint")
 
@@ -701,7 +1526,7 @@ class GetSettingsSettingResult(dict):
     @pulumi.getter
     def key(self) -> str:
         """
-        The key of the Feature Flag/Setting.
+        The key of the Feature Flag or Setting.
         """
         return pulumi.get(self, "key")
 
@@ -709,7 +1534,7 @@ class GetSettingsSettingResult(dict):
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the Setting.
+        The name of the Feature Flag or Setting.
         """
         return pulumi.get(self, "name")
 
@@ -717,7 +1542,7 @@ class GetSettingsSettingResult(dict):
     @pulumi.getter
     def order(self) -> int:
         """
-        The order of the Setting within a Config (zero-based).
+        The order of the Feature Flag or Setting within a Config (zero-based).
         """
         return pulumi.get(self, "order")
 
@@ -725,7 +1550,7 @@ class GetSettingsSettingResult(dict):
     @pulumi.getter(name="settingId")
     def setting_id(self) -> str:
         """
-        The unique Setting ID.
+        The unique Feature Flag or Setting ID.
         """
         return pulumi.get(self, "setting_id")
 
@@ -733,7 +1558,7 @@ class GetSettingsSettingResult(dict):
     @pulumi.getter(name="settingType")
     def setting_type(self) -> str:
         """
-        The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
+        The Feature Flag or Setting's type. Available values: `boolean`|`string`|`int`|`double`.
         """
         return pulumi.get(self, "setting_type")
 

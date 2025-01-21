@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
 type module struct {
@@ -25,10 +25,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Configuration{}
 	case "configcat:index/environment:Environment":
 		r = &Environment{}
+	case "configcat:index/integration:Integration":
+		r = &Integration{}
 	case "configcat:index/permissionGroup:PermissionGroup":
 		r = &PermissionGroup{}
 	case "configcat:index/product:Product":
 		r = &Product{}
+	case "configcat:index/productPreferences:ProductPreferences":
+		r = &ProductPreferences{}
 	case "configcat:index/segment:Segment":
 		r = &Segment{}
 	case "configcat:index/setting:Setting":
@@ -37,8 +41,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SettingTag{}
 	case "configcat:index/settingValue:SettingValue":
 		r = &SettingValue{}
+	case "configcat:index/settingValueV2:SettingValueV2":
+		r = &SettingValueV2{}
 	case "configcat:index/tag:Tag":
 		r = &Tag{}
+	case "configcat:index/webhook:Webhook":
+		r = &Webhook{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -82,12 +90,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"configcat",
+		"index/integration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"configcat",
 		"index/permissionGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"configcat",
 		"index/product",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"configcat",
+		"index/productPreferences",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -112,7 +130,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"configcat",
+		"index/settingValueV2",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"configcat",
 		"index/tag",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"configcat",
+		"index/webhook",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

@@ -13,8 +13,6 @@ namespace Pulumiverse.Configcat
     public static class GetSegments
     {
         /// <summary>
-        /// ## # configcat.getSegments Resource
-        /// 
         /// Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
         /// 
         /// ## Example Usage
@@ -27,15 +25,12 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var mySegments = Configcat.GetSegments.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
+        ///         ProductId = productId,
+        ///         NameFilterRegex = "Beta users",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
@@ -44,17 +39,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
         /// </summary>
         public static Task<GetSegmentsResult> InvokeAsync(GetSegmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSegmentsResult>("configcat:index/getSegments:getSegments", args ?? new GetSegmentsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getSegments Resource
-        /// 
         /// Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
         /// 
         /// ## Example Usage
@@ -67,15 +56,12 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var mySegments = Configcat.GetSegments.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
+        ///         ProductId = productId,
+        ///         NameFilterRegex = "Beta users",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
@@ -84,17 +70,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
         /// </summary>
         public static Output<GetSegmentsResult> Invoke(GetSegmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSegmentsResult>("configcat:index/getSegments:getSegments", args ?? new GetSegmentsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getSegments Resource
-        /// 
         /// Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
         /// 
         /// ## Example Usage
@@ -107,15 +87,12 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
         ///     var mySegments = Configcat.GetSegments.Invoke(new()
         ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
+        ///         ProductId = productId,
+        ///         NameFilterRegex = "Beta users",
         ///     });
         /// 
         ///     return new Dictionary&lt;string, object?&gt;
@@ -124,10 +101,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
         /// </summary>
         public static Output<GetSegmentsResult> Invoke(GetSegmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSegmentsResult>("configcat:index/getSegments:getSegments", args ?? new GetSegmentsInvokeArgs(), options.WithDefaults());
@@ -179,14 +152,17 @@ namespace Pulumiverse.Configcat
     public sealed class GetSegmentsResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
-        public readonly string? NameFilterRegex;
-        public readonly string ProductId;
         /// <summary>
-        /// A segment list block defined as below.
+        /// Filter the Segments by name.
         /// </summary>
+        public readonly string? NameFilterRegex;
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
+        public readonly string ProductId;
         public readonly ImmutableArray<Outputs.GetSegmentsSegmentResult> Segments;
 
         [OutputConstructor]

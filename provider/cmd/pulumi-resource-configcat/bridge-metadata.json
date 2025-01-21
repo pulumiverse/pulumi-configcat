@@ -7,11 +7,25 @@
             "configcat_environment": {
                 "current": "configcat:index/environment:Environment"
             },
+            "configcat_integration": {
+                "current": "configcat:index/integration:Integration",
+                "fields": {
+                    "configs": {
+                        "maxItemsOne": false
+                    },
+                    "environments": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "configcat_permission_group": {
                 "current": "configcat:index/permissionGroup:PermissionGroup"
             },
             "configcat_product": {
                 "current": "configcat:index/product:Product"
+            },
+            "configcat_product_preferences": {
+                "current": "configcat:index/productPreferences:ProductPreferences"
             },
             "configcat_segment": {
                 "current": "configcat:index/segment:Segment"
@@ -33,8 +47,52 @@
                     }
                 }
             },
+            "configcat_setting_value_v2": {
+                "current": "configcat:index/settingValueV2:SettingValueV2",
+                "fields": {
+                    "targeting_rules": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "conditions": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "user_condition": {
+                                                "fields": {
+                                                    "comparison_value": {
+                                                        "fields": {
+                                                            "list_values": {
+                                                                "maxItemsOne": false
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "percentage_options": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "configcat_tag": {
                 "current": "configcat:index/tag:Tag"
+            },
+            "configcat_webhook": {
+                "current": "configcat:index/webhook:Webhook",
+                "fields": {
+                    "secure_webhook_headers": {
+                        "maxItemsOne": false
+                    },
+                    "webhook_headers": {
+                        "maxItemsOne": false
+                    }
+                }
             }
         },
         "datasources": {
@@ -104,6 +162,9 @@
                         "maxItemsOne": false
                     }
                 }
+            },
+            "configcat_webhook_signing_keys": {
+                "current": "configcat:index/getWebhookSigningKeys:getWebhookSigningKeys"
             }
         }
     },

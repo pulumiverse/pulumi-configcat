@@ -23,7 +23,7 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The order of the Product within an Organization (zero-based).
+        /// The order of the Product within a Product (zero-based).
         /// </summary>
         public readonly int Order;
         /// <summary>

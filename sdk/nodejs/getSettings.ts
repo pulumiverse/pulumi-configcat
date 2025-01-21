@@ -7,9 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getSettings Resource
- *
- * Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+ * Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
  *
@@ -17,23 +15,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const settings = myConfigs.then(myConfigs => configcat.getSettings({
- *     configId: myConfigs.configs?.[0]?.configId,
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const settings = configcat.getSettings({
+ *     configId: configId,
  *     keyFilterRegex: "isAwesomeFeatureEnabled",
- * }));
+ * });
  * export const settingId = settings.then(settings => settings.settings?.[0]?.settingId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
  */
 export function getSettings(args: GetSettingsArgs, opts?: pulumi.InvokeOptions): Promise<GetSettingsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -52,7 +41,7 @@ export interface GetSettingsArgs {
      */
     configId: string;
     /**
-     * Filter the Settings by key.
+     * Filter the Feature Flags or Settingss by key.
      */
     keyFilterRegex?: string;
 }
@@ -61,21 +50,22 @@ export interface GetSettingsArgs {
  * A collection of values returned by getSettings.
  */
 export interface GetSettingsResult {
+    /**
+     * The ID of the Config.
+     */
     readonly configId: string;
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
-    readonly keyFilterRegex?: string;
     /**
-     * A setting list block defined as below.
+     * Filter the Feature Flags or Settingss by key.
      */
+    readonly keyFilterRegex?: string;
     readonly settings: outputs.GetSettingsSetting[];
 }
 /**
- * ## # configcat.getSettings Resource
- *
- * Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+ * Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
  *
@@ -83,23 +73,14 @@ export interface GetSettingsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const settings = myConfigs.then(myConfigs => configcat.getSettings({
- *     configId: myConfigs.configs?.[0]?.configId,
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const settings = configcat.getSettings({
+ *     configId: configId,
  *     keyFilterRegex: "isAwesomeFeatureEnabled",
- * }));
+ * });
  * export const settingId = settings.then(settings => settings.settings?.[0]?.settingId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
  */
 export function getSettingsOutput(args: GetSettingsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSettingsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -118,7 +99,7 @@ export interface GetSettingsOutputArgs {
      */
     configId: pulumi.Input<string>;
     /**
-     * Filter the Settings by key.
+     * Filter the Feature Flags or Settingss by key.
      */
     keyFilterRegex?: pulumi.Input<string>;
 }

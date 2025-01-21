@@ -7,35 +7,20 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.SettingValue Resource
- *
- * Initializes and updates **Feature Flag and Setting** values. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+ * Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
  * import * as configcat from "@pulumiverse/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const myEnvironments = myProducts.then(myProducts => configcat.getEnvironments({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Test",
- * }));
- * const mySettings = myConfigs.then(myConfigs => configcat.getSettings({
- *     configId: myConfigs.configs?.[0]?.configId,
- *     keyFilterRegex: "isAwesomeFeatureEnabled",
- * }));
+ * const config = new pulumi.Config();
+ * const environmentId = config.require("environmentId");
+ * const settingId = config.require("settingId");
  * const mySettingValue = new configcat.SettingValue("my_setting_value", {
- *     environmentId: myEnvironments.then(myEnvironments => myEnvironments.environments?.[0]?.environmentId),
- *     settingId: mySettings.then(mySettings => mySettings.settings?.[0]?.settingId),
+ *     environmentId: environmentId,
+ *     settingId: settingId,
  *     mandatoryNotes: "mandatory notes",
  *     value: "true",
  *     rolloutRules: [
@@ -65,24 +50,17 @@ import * as utilities from "./utilities";
  * });
  * ```
  *
- * ## Endpoints used
- *
- * * [Get Value](https://api.configcat.com/docs/#tag/Feature-Flag-and-Setting-values/operation/get-setting-value)
- * * [Replace Value](https://api.configcat.com/docs/#tag/Feature-Flag-and-Setting-values/operation/replace-setting-value)
- *
  * ## Import
  *
- * Feature Flag/Setting values can be imported using a combined EnvironmentID:SettingId ID.
- *
- * Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+ * Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
  *
  * Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+ *
+ * Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
  *
  * ```sh
  * $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
  * ```
- *
- * Read more about importing.
  */
 export class SettingValue extends pulumi.CustomResource {
     /**
@@ -116,34 +94,23 @@ export class SettingValue extends pulumi.CustomResource {
      * The ID of the Environment.
      */
     public readonly environmentId!: pulumi.Output<string>;
+    public readonly initOnly!: pulumi.Output<boolean>;
     /**
-     * Default: true. Read more below.  
-     *
-     * The Feature Flag/Setting's value
-     */
-    public readonly initOnly!: pulumi.Output<boolean | undefined>;
-    /**
-     * Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+     * If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
      */
     public readonly mandatoryNotes!: pulumi.Output<string | undefined>;
-    /**
-     * A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-     */
     public readonly percentageItems!: pulumi.Output<outputs.SettingValuePercentageItem[] | undefined>;
-    /**
-     * A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-     */
     public readonly rolloutRules!: pulumi.Output<outputs.SettingValueRolloutRule[] | undefined>;
     /**
-     * The ID of the Feature Flag/Setting.
+     * The ID of the Feature Flag or Setting.
      */
     public readonly settingId!: pulumi.Output<string>;
     /**
-     * The Setting's type.
+     * The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`.
      */
     public /*out*/ readonly settingType!: pulumi.Output<string>;
     /**
-     * The Setting's value. Type: `string`. It must be compatible with the `settingType`.
+     * The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `settingType`.
      */
     public readonly value!: pulumi.Output<string>;
 
@@ -201,34 +168,23 @@ export interface SettingValueState {
      * The ID of the Environment.
      */
     environmentId?: pulumi.Input<string>;
-    /**
-     * Default: true. Read more below.  
-     *
-     * The Feature Flag/Setting's value
-     */
     initOnly?: pulumi.Input<boolean>;
     /**
-     * Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+     * If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
      */
     mandatoryNotes?: pulumi.Input<string>;
-    /**
-     * A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-     */
     percentageItems?: pulumi.Input<pulumi.Input<inputs.SettingValuePercentageItem>[]>;
-    /**
-     * A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-     */
     rolloutRules?: pulumi.Input<pulumi.Input<inputs.SettingValueRolloutRule>[]>;
     /**
-     * The ID of the Feature Flag/Setting.
+     * The ID of the Feature Flag or Setting.
      */
     settingId?: pulumi.Input<string>;
     /**
-     * The Setting's type.
+     * The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`.
      */
     settingType?: pulumi.Input<string>;
     /**
-     * The Setting's value. Type: `string`. It must be compatible with the `settingType`.
+     * The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `settingType`.
      */
     value?: pulumi.Input<string>;
 }
@@ -241,30 +197,19 @@ export interface SettingValueArgs {
      * The ID of the Environment.
      */
     environmentId: pulumi.Input<string>;
-    /**
-     * Default: true. Read more below.  
-     *
-     * The Feature Flag/Setting's value
-     */
     initOnly?: pulumi.Input<boolean>;
     /**
-     * Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+     * If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
      */
     mandatoryNotes?: pulumi.Input<string>;
-    /**
-     * A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-     */
     percentageItems?: pulumi.Input<pulumi.Input<inputs.SettingValuePercentageItem>[]>;
-    /**
-     * A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-     */
     rolloutRules?: pulumi.Input<pulumi.Input<inputs.SettingValueRolloutRule>[]>;
     /**
-     * The ID of the Feature Flag/Setting.
+     * The ID of the Feature Flag or Setting.
      */
     settingId: pulumi.Input<string>;
     /**
-     * The Setting's value. Type: `string`. It must be compatible with the `settingType`.
+     * The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `settingType`.
      */
     value: pulumi.Input<string>;
 }

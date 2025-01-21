@@ -13,9 +13,7 @@ namespace Pulumiverse.Configcat
     public static class GetSettings
     {
         /// <summary>
-        /// ## # configcat.getSettings Resource
-        /// 
-        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
+        /// Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
         /// 
@@ -27,20 +25,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var configId = config.Require("configId");
         ///     var settings = Configcat.GetSettings.Invoke(new()
         ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
+        ///         ConfigId = configId,
         ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
         ///     });
         /// 
@@ -50,18 +39,12 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
         /// </summary>
         public static Task<GetSettingsResult> InvokeAsync(GetSettingsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getSettings Resource
-        /// 
-        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
+        /// Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
         /// 
@@ -73,20 +56,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var configId = config.Require("configId");
         ///     var settings = Configcat.GetSettings.Invoke(new()
         ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
+        ///         ConfigId = configId,
         ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
         ///     });
         /// 
@@ -96,18 +70,12 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
         /// </summary>
         public static Output<GetSettingsResult> Invoke(GetSettingsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getSettings Resource
-        /// 
-        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
+        /// Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
         /// 
@@ -119,20 +87,11 @@ namespace Pulumiverse.Configcat
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
+        ///     var config = new Config();
+        ///     var configId = config.Require("configId");
         ///     var settings = Configcat.GetSettings.Invoke(new()
         ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
+        ///         ConfigId = configId,
         ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
         ///     });
         /// 
@@ -142,10 +101,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
         /// </summary>
         public static Output<GetSettingsResult> Invoke(GetSettingsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsInvokeArgs(), options.WithDefaults());
@@ -161,7 +116,7 @@ namespace Pulumiverse.Configcat
         public string ConfigId { get; set; } = null!;
 
         /// <summary>
-        /// Filter the Settings by key.
+        /// Filter the Feature Flags or Settingss by key.
         /// </summary>
         [Input("keyFilterRegex")]
         public string? KeyFilterRegex { get; set; }
@@ -181,7 +136,7 @@ namespace Pulumiverse.Configcat
         public Input<string> ConfigId { get; set; } = null!;
 
         /// <summary>
-        /// Filter the Settings by key.
+        /// Filter the Feature Flags or Settingss by key.
         /// </summary>
         [Input("keyFilterRegex")]
         public Input<string>? KeyFilterRegex { get; set; }
@@ -196,15 +151,18 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetSettingsResult
     {
+        /// <summary>
+        /// The ID of the Config.
+        /// </summary>
         public readonly string ConfigId;
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
-        public readonly string? KeyFilterRegex;
         /// <summary>
-        /// A setting list block defined as below.
+        /// Filter the Feature Flags or Settingss by key.
         /// </summary>
+        public readonly string? KeyFilterRegex;
         public readonly ImmutableArray<Outputs.GetSettingsSettingResult> Settings;
 
         [OutputConstructor]

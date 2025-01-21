@@ -7,8 +7,6 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getOrganizations Resource
- *
  * Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -22,10 +20,6 @@ import * as utilities from "./utilities";
  * });
  * export const organizationId = myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
  */
 export function getOrganizations(args?: GetOrganizationsArgs, opts?: pulumi.InvokeOptions): Promise<GetOrganizationsResult> {
     args = args || {};
@@ -50,18 +44,16 @@ export interface GetOrganizationsArgs {
  */
 export interface GetOrganizationsResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
-    readonly nameFilterRegex?: string;
     /**
-     * An organization list block defined as below.
+     * Filter the Organizations by name.
      */
+    readonly nameFilterRegex?: string;
     readonly organizations: outputs.GetOrganizationsOrganization[];
 }
 /**
- * ## # configcat.getOrganizations Resource
- *
  * Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -75,10 +67,6 @@ export interface GetOrganizationsResult {
  * });
  * export const organizationId = myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
  */
 export function getOrganizationsOutput(args?: GetOrganizationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrganizationsResult> {
     args = args || {};

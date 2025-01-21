@@ -8,11 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getSegments Resource
-//
 // Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
 //
 // ## Example Usage
@@ -23,21 +21,18 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
 //			mySegments, err := configcat.GetSegments(ctx, &configcat.GetSegmentsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Test"),
+//				ProductId:       productId,
+//				NameFilterRegex: pulumi.StringRef("Beta users"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -48,10 +43,6 @@ import (
 //	}
 //
 // ```
-//
-// ## Endpoints used
-//
-// - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
 func GetSegments(ctx *pulumi.Context, args *GetSegmentsArgs, opts ...pulumi.InvokeOption) (*GetSegmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSegmentsResult
@@ -72,12 +63,13 @@ type GetSegmentsArgs struct {
 
 // A collection of values returned by getSegments.
 type GetSegmentsResult struct {
-	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// Filter the Segments by name.
 	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	ProductId       string  `pulumi:"productId"`
-	// A segment list block defined as below.
-	Segments []GetSegmentsSegment `pulumi:"segments"`
+	// The ID of the Product.
+	ProductId string               `pulumi:"productId"`
+	Segments  []GetSegmentsSegment `pulumi:"segments"`
 }
 
 func GetSegmentsOutput(ctx *pulumi.Context, args GetSegmentsOutputArgs, opts ...pulumi.InvokeOption) GetSegmentsResultOutput {
@@ -116,20 +108,21 @@ func (o GetSegmentsResultOutput) ToGetSegmentsResultOutputWithContext(ctx contex
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
+// Internal ID of the data source. Do not use.
 func (o GetSegmentsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSegmentsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Filter the Segments by name.
 func (o GetSegmentsResultOutput) NameFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSegmentsResult) *string { return v.NameFilterRegex }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the Product.
 func (o GetSegmentsResultOutput) ProductId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSegmentsResult) string { return v.ProductId }).(pulumi.StringOutput)
 }
 
-// A segment list block defined as below.
 func (o GetSegmentsResultOutput) Segments() GetSegmentsSegmentArrayOutput {
 	return o.ApplyT(func(v GetSegmentsResult) []GetSegmentsSegment { return v.Segments }).(GetSegmentsSegmentArrayOutput)
 }

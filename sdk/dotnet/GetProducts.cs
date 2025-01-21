@@ -13,8 +13,6 @@ namespace Pulumiverse.Configcat
     public static class GetProducts
     {
         /// <summary>
-        /// ## # configcat.getProducts Resource
-        /// 
         /// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -38,17 +36,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
         /// </summary>
         public static Task<GetProductsResult> InvokeAsync(GetProductsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductsResult>("configcat:index/getProducts:getProducts", args ?? new GetProductsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getProducts Resource
-        /// 
         /// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -72,17 +64,11 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
         /// </summary>
         public static Output<GetProductsResult> Invoke(GetProductsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductsResult>("configcat:index/getProducts:getProducts", args ?? new GetProductsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// ## # configcat.getProducts Resource
-        /// 
         /// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
         /// 
         /// ## Example Usage
@@ -106,10 +92,6 @@ namespace Pulumiverse.Configcat
         ///     };
         /// });
         /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
         /// </summary>
         public static Output<GetProductsResult> Invoke(GetProductsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductsResult>("configcat:index/getProducts:getProducts", args ?? new GetProductsInvokeArgs(), options.WithDefaults());
@@ -149,13 +131,13 @@ namespace Pulumiverse.Configcat
     public sealed class GetProductsResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// Internal ID of the data source. Do not use.
         /// </summary>
         public readonly string Id;
-        public readonly string? NameFilterRegex;
         /// <summary>
-        /// A product list block defined as below.
+        /// Filter the Products by name.
         /// </summary>
+        public readonly string? NameFilterRegex;
         public readonly ImmutableArray<Outputs.GetProductsProductResult> Products;
 
         [OutputConstructor]

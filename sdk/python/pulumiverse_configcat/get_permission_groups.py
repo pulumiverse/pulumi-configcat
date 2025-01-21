@@ -45,26 +45,29 @@ class GetPermissionGroupsResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        Internal ID of the data source. Do not use.
         """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="nameFilterRegex")
     def name_filter_regex(self) -> Optional[str]:
+        """
+        Filter the Permission Groups by name.
+        """
         return pulumi.get(self, "name_filter_regex")
 
     @property
     @pulumi.getter(name="permissionGroups")
     def permission_groups(self) -> Sequence['outputs.GetPermissionGroupsPermissionGroupResult']:
-        """
-        A permission group list block defined as below.
-        """
         return pulumi.get(self, "permission_groups")
 
     @property
     @pulumi.getter(name="productId")
     def product_id(self) -> str:
+        """
+        The ID of the Product.
+        """
         return pulumi.get(self, "product_id")
 
 
@@ -84,8 +87,6 @@ def get_permission_groups(name_filter_regex: Optional[str] = None,
                           product_id: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetPermissionGroupsResult:
     """
-    ## # get_permission_groups Resource
-
     Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
 
     ## Example Usage
@@ -94,15 +95,12 @@ def get_permission_groups(name_filter_regex: Optional[str] = None,
     import pulumi
     import pulumi_configcat as configcat
 
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_permission_groups = configcat.get_permission_groups(product_id=my_products.products[0].product_id,
+    config = pulumi.Config()
+    product_id = config.require("productId")
+    my_permission_groups = configcat.get_permission_groups(product_id=product_id,
         name_filter_regex="Administrators")
     pulumi.export("permissionGroupId", my_permission_groups.permission_groups[0].permission_group_id)
     ```
-
-    ## Endpoints used
-
-    - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
 
 
     :param str name_filter_regex: Filter the Permission Groups by name.
@@ -123,8 +121,6 @@ def get_permission_groups_output(name_filter_regex: Optional[pulumi.Input[Option
                                  product_id: Optional[pulumi.Input[str]] = None,
                                  opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPermissionGroupsResult]:
     """
-    ## # get_permission_groups Resource
-
     Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
 
     ## Example Usage
@@ -133,15 +129,12 @@ def get_permission_groups_output(name_filter_regex: Optional[pulumi.Input[Option
     import pulumi
     import pulumi_configcat as configcat
 
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_permission_groups = configcat.get_permission_groups(product_id=my_products.products[0].product_id,
+    config = pulumi.Config()
+    product_id = config.require("productId")
+    my_permission_groups = configcat.get_permission_groups(product_id=product_id,
         name_filter_regex="Administrators")
     pulumi.export("permissionGroupId", my_permission_groups.permission_groups[0].permission_group_id)
     ```
-
-    ## Endpoints used
-
-    - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
 
 
     :param str name_filter_regex: Filter the Permission Groups by name.

@@ -19,7 +19,7 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly string? Comparator;
         /// <summary>
-        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         /// </summary>
         public readonly string? ComparisonAttribute;
         /// <summary>

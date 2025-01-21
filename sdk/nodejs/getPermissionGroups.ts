@@ -7,8 +7,6 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getPermissionGroups Resource
- *
  * Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
  *
  * ## Example Usage
@@ -17,19 +15,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myPermissionGroups = myProducts.then(myProducts => configcat.getPermissionGroups({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myPermissionGroups = configcat.getPermissionGroups({
+ *     productId: productId,
  *     nameFilterRegex: "Administrators",
- * }));
+ * });
  * export const permissionGroupId = myPermissionGroups.then(myPermissionGroups => myPermissionGroups.permissionGroups?.[0]?.permissionGroupId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
  */
 export function getPermissionGroups(args: GetPermissionGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetPermissionGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -58,19 +51,20 @@ export interface GetPermissionGroupsArgs {
  */
 export interface GetPermissionGroupsResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
-    readonly nameFilterRegex?: string;
     /**
-     * A permission group list block defined as below.
+     * Filter the Permission Groups by name.
      */
+    readonly nameFilterRegex?: string;
     readonly permissionGroups: outputs.GetPermissionGroupsPermissionGroup[];
+    /**
+     * The ID of the Product.
+     */
     readonly productId: string;
 }
 /**
- * ## # configcat.getPermissionGroups Resource
- *
  * Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
  *
  * ## Example Usage
@@ -79,19 +73,14 @@ export interface GetPermissionGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myPermissionGroups = myProducts.then(myProducts => configcat.getPermissionGroups({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myPermissionGroups = configcat.getPermissionGroups({
+ *     productId: productId,
  *     nameFilterRegex: "Administrators",
- * }));
+ * });
  * export const permissionGroupId = myPermissionGroups.then(myPermissionGroups => myPermissionGroups.permissionGroups?.[0]?.permissionGroupId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
  */
 export function getPermissionGroupsOutput(args: GetPermissionGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPermissionGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

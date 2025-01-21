@@ -8,11 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getPermissionGroups Resource
-//
 // Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
 //
 // ## Example Usage
@@ -23,20 +21,17 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
 //			myPermissionGroups, err := configcat.GetPermissionGroups(ctx, &configcat.GetPermissionGroupsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
+//				ProductId:       productId,
 //				NameFilterRegex: pulumi.StringRef("Administrators"),
 //			}, nil)
 //			if err != nil {
@@ -48,10 +43,6 @@ import (
 //	}
 //
 // ```
-//
-// ## Endpoints used
-//
-// - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
 func GetPermissionGroups(ctx *pulumi.Context, args *GetPermissionGroupsArgs, opts ...pulumi.InvokeOption) (*GetPermissionGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPermissionGroupsResult
@@ -72,12 +63,13 @@ type GetPermissionGroupsArgs struct {
 
 // A collection of values returned by getPermissionGroups.
 type GetPermissionGroupsResult struct {
-	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
-	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	// A permission group list block defined as below.
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// Filter the Permission Groups by name.
+	NameFilterRegex  *string                              `pulumi:"nameFilterRegex"`
 	PermissionGroups []GetPermissionGroupsPermissionGroup `pulumi:"permissionGroups"`
-	ProductId        string                               `pulumi:"productId"`
+	// The ID of the Product.
+	ProductId string `pulumi:"productId"`
 }
 
 func GetPermissionGroupsOutput(ctx *pulumi.Context, args GetPermissionGroupsOutputArgs, opts ...pulumi.InvokeOption) GetPermissionGroupsResultOutput {
@@ -116,20 +108,21 @@ func (o GetPermissionGroupsResultOutput) ToGetPermissionGroupsResultOutputWithCo
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
+// Internal ID of the data source. Do not use.
 func (o GetPermissionGroupsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPermissionGroupsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Filter the Permission Groups by name.
 func (o GetPermissionGroupsResultOutput) NameFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetPermissionGroupsResult) *string { return v.NameFilterRegex }).(pulumi.StringPtrOutput)
 }
 
-// A permission group list block defined as below.
 func (o GetPermissionGroupsResultOutput) PermissionGroups() GetPermissionGroupsPermissionGroupArrayOutput {
 	return o.ApplyT(func(v GetPermissionGroupsResult) []GetPermissionGroupsPermissionGroup { return v.PermissionGroups }).(GetPermissionGroupsPermissionGroupArrayOutput)
 }
 
+// The ID of the Product.
 func (o GetPermissionGroupsResultOutput) ProductId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPermissionGroupsResult) string { return v.ProductId }).(pulumi.StringOutput)
 }

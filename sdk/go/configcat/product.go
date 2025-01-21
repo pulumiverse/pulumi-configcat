@@ -9,11 +9,9 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # Product Resource
-//
 // Creates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
 //
 // ## Example Usage
@@ -24,20 +22,17 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myOrganizations, err := configcat.GetOrganizations(ctx, &configcat.GetOrganizationsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myProduct, err := configcat.NewProduct(ctx, "my_product", &configcat.ProductArgs{
-//				OrganizationId: pulumi.String(myOrganizations.Organizations[0].OrganizationId),
+//			cfg := config.New(ctx, "")
+//			organizationId := cfg.Require("organizationId")
+//			_, err := configcat.NewProduct(ctx, "my_config", &configcat.ProductArgs{
+//				OrganizationId: pulumi.String(organizationId),
 //				Name:           pulumi.String("My product"),
 //				Description:    pulumi.String("My product description"),
 //				Order:          pulumi.Int(0),
@@ -45,19 +40,12 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			ctx.Export("productId", myProduct.ID())
+//			ctx.Export("productId", myProduct.Id)
 //			return nil
 //		})
 //	}
 //
 // ```
-//
-// ## Endpoints used
-//
-// * [Get Product](https://api.configcat.com/docs/#tag/Products/operation/get-product)
-// * [Create Product](https://api.configcat.com/docs/#tag/Products/operation/create-product)
-// * [Update Product](https://api.configcat.com/docs/#tag/Products/operation/update-product)
-// * [Delete Product](https://api.configcat.com/docs/#tag/Products/operation/delete-product)
 //
 // ## Import
 //
@@ -66,15 +54,14 @@ import (
 // ```sh
 // $ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2
 // ```
-// Read more about importing.
 type Product struct {
 	pulumi.CustomResourceState
 
 	// The description of the Product.
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description pulumi.StringOutput `pulumi:"description"`
 	// The name of the Product.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntOutput `pulumi:"order"`
 	// The ID of the Organization.
 	OrganizationId pulumi.StringOutput `pulumi:"organizationId"`
@@ -120,7 +107,7 @@ type productState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Product.
 	Name *string `pulumi:"name"`
-	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
 	Order *int `pulumi:"order"`
 	// The ID of the Organization.
 	OrganizationId *string `pulumi:"organizationId"`
@@ -131,7 +118,7 @@ type ProductState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Product.
 	Name pulumi.StringPtrInput
-	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntPtrInput
 	// The ID of the Organization.
 	OrganizationId pulumi.StringPtrInput
@@ -146,7 +133,7 @@ type productArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Product.
 	Name *string `pulumi:"name"`
-	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
 	Order int `pulumi:"order"`
 	// The ID of the Organization.
 	OrganizationId string `pulumi:"organizationId"`
@@ -158,7 +145,7 @@ type ProductArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Product.
 	Name pulumi.StringPtrInput
-	// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+	// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntInput
 	// The ID of the Organization.
 	OrganizationId pulumi.StringInput
@@ -252,8 +239,8 @@ func (o ProductOutput) ToProductOutputWithContext(ctx context.Context) ProductOu
 }
 
 // The description of the Product.
-func (o ProductOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Product) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+func (o ProductOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *Product) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
 // The name of the Product.
@@ -261,7 +248,7 @@ func (o ProductOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Product) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
 func (o ProductOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v *Product) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }

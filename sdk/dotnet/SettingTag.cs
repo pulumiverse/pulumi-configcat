@@ -11,9 +11,7 @@ using Pulumi;
 namespace Pulumiverse.Configcat
 {
     /// <summary>
-    /// ## # configcat.SettingTag Resource
-    /// 
-    /// Adds/Removes **Tags** to/from **Feature Flags and Settings**.
+    /// Adds/Removes **Tags** to/from **Feature Flags or Settings**.
     /// 
     /// ## Example Usage
     /// 
@@ -21,51 +19,25 @@ namespace Pulumiverse.Configcat
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Configcat = Pulumi.Configcat;
     /// using Configcat = Pulumiverse.Configcat;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myProducts = Configcat.GetProducts.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "ConfigCat's product",
-    ///     });
-    /// 
-    ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-    ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-    ///         NameFilterRegex = "Main Config",
-    ///     });
-    /// 
-    ///     var myTags = Configcat.GetTags.Invoke(new()
-    ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-    ///         NameFilterRegex = "Tag",
-    ///     });
-    /// 
-    ///     var mySettings = Configcat.GetSettings.Invoke(new()
-    ///     {
-    ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-    ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
-    ///     });
-    /// 
+    ///     var config = new Config();
+    ///     var settingId = config.Require("settingId");
+    ///     var tagId = config.Require("tagId");
     ///     var mySettingTag = new Configcat.SettingTag("my_setting_tag", new()
     ///     {
-    ///         SettingId = mySettings.Apply(getSettingsResult =&gt; getSettingsResult.Settings[0]?.SettingId),
-    ///         TagId = myTags.Apply(getTagsResult =&gt; getTagsResult.Tags[0]?.TagId),
+    ///         SettingId = settingId,
+    ///         TagId = tagId,
     ///     });
     /// 
     /// });
     /// ```
     /// 
-    /// ## Endpoints used
-    /// 
-    /// * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-    /// * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
-    /// 
     /// ## Import
     /// 
-    /// Tags can be imported using a combined SettingId:TagId ID.
+    /// Setting Tags can be imported using a combined SettingId:TagId ID.
     /// 
     /// Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
     /// 
@@ -74,14 +46,12 @@ namespace Pulumiverse.Configcat
     /// ```sh
     /// $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
     /// ```
-    /// 
-    /// Read more about importing.
     /// </summary>
     [ConfigcatResourceType("configcat:index/settingTag:SettingTag")]
     public partial class SettingTag : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The ID of the Feature Flag/Setting.
+        /// The ID of the Feature Flag or Setting.
         /// </summary>
         [Output("settingId")]
         public Output<string> SettingId { get; private set; } = null!;
@@ -140,7 +110,7 @@ namespace Pulumiverse.Configcat
     public sealed class SettingTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The ID of the Feature Flag/Setting.
+        /// The ID of the Feature Flag or Setting.
         /// </summary>
         [Input("settingId", required: true)]
         public Input<string> SettingId { get; set; } = null!;
@@ -160,7 +130,7 @@ namespace Pulumiverse.Configcat
     public sealed class SettingTagState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The ID of the Feature Flag/Setting.
+        /// The ID of the Feature Flag or Setting.
         /// </summary>
         [Input("settingId")]
         public Input<string>? SettingId { get; set; }

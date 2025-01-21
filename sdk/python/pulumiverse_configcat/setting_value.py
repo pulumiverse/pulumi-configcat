@@ -31,14 +31,9 @@ class SettingValueArgs:
         """
         The set of arguments for constructing a SettingValue resource.
         :param pulumi.Input[str] environment_id: The ID of the Environment.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
-        :param pulumi.Input[str] value: The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
-        :param pulumi.Input[bool] init_only: Default: true. Read more below.  
-               
-               The Feature Flag/Setting's value
-        :param pulumi.Input[str] mandatory_notes: Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
-        :param pulumi.Input[Sequence[pulumi.Input['SettingValuePercentageItemArgs']]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        :param pulumi.Input[Sequence[pulumi.Input['SettingValueRolloutRuleArgs']]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
+        :param pulumi.Input[str] value: The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        :param pulumi.Input[str] mandatory_notes: If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
         """
         pulumi.set(__self__, "environment_id", environment_id)
         pulumi.set(__self__, "setting_id", setting_id)
@@ -68,7 +63,7 @@ class SettingValueArgs:
     @pulumi.getter(name="settingId")
     def setting_id(self) -> pulumi.Input[str]:
         """
-        The ID of the Feature Flag/Setting.
+        The ID of the Feature Flag or Setting.
         """
         return pulumi.get(self, "setting_id")
 
@@ -80,7 +75,7 @@ class SettingValueArgs:
     @pulumi.getter
     def value(self) -> pulumi.Input[str]:
         """
-        The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
         return pulumi.get(self, "value")
 
@@ -91,11 +86,6 @@ class SettingValueArgs:
     @property
     @pulumi.getter(name="initOnly")
     def init_only(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Default: true. Read more below.  
-
-        The Feature Flag/Setting's value
-        """
         return pulumi.get(self, "init_only")
 
     @init_only.setter
@@ -106,7 +96,7 @@ class SettingValueArgs:
     @pulumi.getter(name="mandatoryNotes")
     def mandatory_notes(self) -> Optional[pulumi.Input[str]]:
         """
-        Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+        If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
         """
         return pulumi.get(self, "mandatory_notes")
 
@@ -117,9 +107,6 @@ class SettingValueArgs:
     @property
     @pulumi.getter(name="percentageItems")
     def percentage_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValuePercentageItemArgs']]]]:
-        """
-        A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        """
         return pulumi.get(self, "percentage_items")
 
     @percentage_items.setter
@@ -129,9 +116,6 @@ class SettingValueArgs:
     @property
     @pulumi.getter(name="rolloutRules")
     def rollout_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueRolloutRuleArgs']]]]:
-        """
-        A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-        """
         return pulumi.get(self, "rollout_rules")
 
     @rollout_rules.setter
@@ -153,15 +137,10 @@ class _SettingValueState:
         """
         Input properties used for looking up and filtering SettingValue resources.
         :param pulumi.Input[str] environment_id: The ID of the Environment.
-        :param pulumi.Input[bool] init_only: Default: true. Read more below.  
-               
-               The Feature Flag/Setting's value
-        :param pulumi.Input[str] mandatory_notes: Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
-        :param pulumi.Input[Sequence[pulumi.Input['SettingValuePercentageItemArgs']]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        :param pulumi.Input[Sequence[pulumi.Input['SettingValueRolloutRuleArgs']]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
-        :param pulumi.Input[str] setting_type: The Setting's type.
-        :param pulumi.Input[str] value: The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        :param pulumi.Input[str] mandatory_notes: If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
+        :param pulumi.Input[str] setting_type: The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`.
+        :param pulumi.Input[str] value: The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
         if environment_id is not None:
             pulumi.set(__self__, "environment_id", environment_id)
@@ -195,11 +174,6 @@ class _SettingValueState:
     @property
     @pulumi.getter(name="initOnly")
     def init_only(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Default: true. Read more below.  
-
-        The Feature Flag/Setting's value
-        """
         return pulumi.get(self, "init_only")
 
     @init_only.setter
@@ -210,7 +184,7 @@ class _SettingValueState:
     @pulumi.getter(name="mandatoryNotes")
     def mandatory_notes(self) -> Optional[pulumi.Input[str]]:
         """
-        Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+        If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
         """
         return pulumi.get(self, "mandatory_notes")
 
@@ -221,9 +195,6 @@ class _SettingValueState:
     @property
     @pulumi.getter(name="percentageItems")
     def percentage_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValuePercentageItemArgs']]]]:
-        """
-        A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        """
         return pulumi.get(self, "percentage_items")
 
     @percentage_items.setter
@@ -233,9 +204,6 @@ class _SettingValueState:
     @property
     @pulumi.getter(name="rolloutRules")
     def rollout_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SettingValueRolloutRuleArgs']]]]:
-        """
-        A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-        """
         return pulumi.get(self, "rollout_rules")
 
     @rollout_rules.setter
@@ -246,7 +214,7 @@ class _SettingValueState:
     @pulumi.getter(name="settingId")
     def setting_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the Feature Flag/Setting.
+        The ID of the Feature Flag or Setting.
         """
         return pulumi.get(self, "setting_id")
 
@@ -258,7 +226,7 @@ class _SettingValueState:
     @pulumi.getter(name="settingType")
     def setting_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The Setting's type.
+        The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`.
         """
         return pulumi.get(self, "setting_type")
 
@@ -270,7 +238,7 @@ class _SettingValueState:
     @pulumi.getter
     def value(self) -> Optional[pulumi.Input[str]]:
         """
-        The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
         return pulumi.get(self, "value")
 
@@ -293,27 +261,20 @@ class SettingValue(pulumi.CustomResource):
                  value: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # SettingValue Resource
-
-        Initializes and updates **Feature Flag and Setting** values. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+        Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-            name_filter_regex="Main Config")
-        my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
-            name_filter_regex="Test")
-        my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
-            key_filter_regex="isAwesomeFeatureEnabled")
+        config = pulumi.Config()
+        environment_id = config.require("environmentId")
+        setting_id = config.require("settingId")
         my_setting_value = configcat.SettingValue("my_setting_value",
-            environment_id=my_environments.environments[0].environment_id,
-            setting_id=my_settings.settings[0].setting_id,
+            environment_id=environment_id,
+            setting_id=setting_id,
             mandatory_notes="mandatory notes",
             value="true",
             rollout_rules=[
@@ -342,36 +303,24 @@ class SettingValue(pulumi.CustomResource):
             ])
         ```
 
-        ## Endpoints used
-
-        * [Get Value](https://api.configcat.com/docs/#tag/Feature-Flag-and-Setting-values/operation/get-setting-value)
-        * [Replace Value](https://api.configcat.com/docs/#tag/Feature-Flag-and-Setting-values/operation/replace-setting-value)
-
         ## Import
 
-        Feature Flag/Setting values can be imported using a combined EnvironmentID:SettingId ID.
-
-        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+        Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
 
         Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+
+        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
 
         ```sh
         $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
         ```
 
-        Read more about importing.
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] environment_id: The ID of the Environment.
-        :param pulumi.Input[bool] init_only: Default: true. Read more below.  
-               
-               The Feature Flag/Setting's value
-        :param pulumi.Input[str] mandatory_notes: Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
-        :param pulumi.Input[str] value: The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        :param pulumi.Input[str] mandatory_notes: If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
+        :param pulumi.Input[str] value: The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
         ...
     @overload
@@ -380,27 +329,20 @@ class SettingValue(pulumi.CustomResource):
                  args: SettingValueArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # SettingValue Resource
-
-        Initializes and updates **Feature Flag and Setting** values. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+        Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-            name_filter_regex="Main Config")
-        my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
-            name_filter_regex="Test")
-        my_settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
-            key_filter_regex="isAwesomeFeatureEnabled")
+        config = pulumi.Config()
+        environment_id = config.require("environmentId")
+        setting_id = config.require("settingId")
         my_setting_value = configcat.SettingValue("my_setting_value",
-            environment_id=my_environments.environments[0].environment_id,
-            setting_id=my_settings.settings[0].setting_id,
+            environment_id=environment_id,
+            setting_id=setting_id,
             mandatory_notes="mandatory notes",
             value="true",
             rollout_rules=[
@@ -429,24 +371,17 @@ class SettingValue(pulumi.CustomResource):
             ])
         ```
 
-        ## Endpoints used
-
-        * [Get Value](https://api.configcat.com/docs/#tag/Feature-Flag-and-Setting-values/operation/get-setting-value)
-        * [Replace Value](https://api.configcat.com/docs/#tag/Feature-Flag-and-Setting-values/operation/replace-setting-value)
-
         ## Import
 
-        Feature Flag/Setting values can be imported using a combined EnvironmentID:SettingId ID.
-
-        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+        Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
 
         Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+
+        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
 
         ```sh
         $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
         ```
-
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param SettingValueArgs args: The arguments to use to populate this resource's properties.
@@ -519,15 +454,10 @@ class SettingValue(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] environment_id: The ID of the Environment.
-        :param pulumi.Input[bool] init_only: Default: true. Read more below.  
-               
-               The Feature Flag/Setting's value
-        :param pulumi.Input[str] mandatory_notes: Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValuePercentageItemArgs', 'SettingValuePercentageItemArgsDict']]]] percentage_items: A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SettingValueRolloutRuleArgs', 'SettingValueRolloutRuleArgsDict']]]] rollout_rules: A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-        :param pulumi.Input[str] setting_id: The ID of the Feature Flag/Setting.
-        :param pulumi.Input[str] setting_type: The Setting's type.
-        :param pulumi.Input[str] value: The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        :param pulumi.Input[str] mandatory_notes: If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+        :param pulumi.Input[str] setting_id: The ID of the Feature Flag or Setting.
+        :param pulumi.Input[str] setting_type: The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`.
+        :param pulumi.Input[str] value: The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -553,43 +483,32 @@ class SettingValue(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="initOnly")
-    def init_only(self) -> pulumi.Output[Optional[bool]]:
-        """
-        Default: true. Read more below.  
-
-        The Feature Flag/Setting's value
-        """
+    def init_only(self) -> pulumi.Output[bool]:
         return pulumi.get(self, "init_only")
 
     @property
     @pulumi.getter(name="mandatoryNotes")
     def mandatory_notes(self) -> pulumi.Output[Optional[str]]:
         """
-        Default: "". If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
+        If the Product's "Mandatory notes" preference is turned on for the Environment the Mandatory note must be passed.
         """
         return pulumi.get(self, "mandatory_notes")
 
     @property
     @pulumi.getter(name="percentageItems")
     def percentage_items(self) -> pulumi.Output[Optional[Sequence['outputs.SettingValuePercentageItem']]]:
-        """
-        A list to define [Percentage items](https://configcat.com/docs/advanced/targeting/#targeting-a-percentage-of-users). Read more below.
-        """
         return pulumi.get(self, "percentage_items")
 
     @property
     @pulumi.getter(name="rolloutRules")
     def rollout_rules(self) -> pulumi.Output[Optional[Sequence['outputs.SettingValueRolloutRule']]]:
-        """
-        A list to define [Rollout rules](https://configcat.com/docs/advanced/targeting/#anatomy-of-a-targeting-rule). Read more below.
-        """
         return pulumi.get(self, "rollout_rules")
 
     @property
     @pulumi.getter(name="settingId")
     def setting_id(self) -> pulumi.Output[str]:
         """
-        The ID of the Feature Flag/Setting.
+        The ID of the Feature Flag or Setting.
         """
         return pulumi.get(self, "setting_id")
 
@@ -597,7 +516,7 @@ class SettingValue(pulumi.CustomResource):
     @pulumi.getter(name="settingType")
     def setting_type(self) -> pulumi.Output[str]:
         """
-        The Setting's type.
+        The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`.
         """
         return pulumi.get(self, "setting_type")
 
@@ -605,7 +524,7 @@ class SettingValue(pulumi.CustomResource):
     @pulumi.getter
     def value(self) -> pulumi.Output[str]:
         """
-        The Setting's value. Type: `string`. It must be compatible with the `setting_type`.
+        The Feature Flag or Setting's value. Type: `string`. It must be compatible with the `setting_type`.
         """
         return pulumi.get(self, "value")
 

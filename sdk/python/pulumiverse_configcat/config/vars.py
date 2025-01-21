@@ -23,21 +23,26 @@ class _ExportableConfig(types.ModuleType):
     @property
     def base_path(self) -> Optional[str]:
         """
-        ConfigCat Public Management API Base Path (defaults to production).
+        ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+        can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
         """
         return __config__.get('basePath') or _utilities.get_env('CONFIGCAT_BASE_PATH')
 
     @property
     def basic_auth_password(self) -> Optional[str]:
         """
-        ConfigCat Public API credential - Basic Auth Password
+        Get your `basic_auth_password` at [ConfigCat Public API
+        credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
         """
         return __config__.get('basicAuthPassword') or _utilities.get_env('CONFIGCAT_BASIC_AUTH_PASSWORD')
 
     @property
     def basic_auth_username(self) -> Optional[str]:
         """
-        ConfigCat Public API credential - Basic Auth Username.
+        Get your `basic_auth_username` at [ConfigCat Public API
+        credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         """
         return __config__.get('basicAuthUsername') or _utilities.get_env('CONFIGCAT_BASIC_AUTH_USERNAME')
 

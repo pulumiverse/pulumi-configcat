@@ -9,11 +9,9 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # Configuration Resource
-//
 // Creates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
 //
 // ## Example Usage
@@ -24,23 +22,21 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
 //			myConfig, err := configcat.NewConfiguration(ctx, "my_config", &configcat.ConfigurationArgs{
-//				ProductId:   pulumi.String(myProducts.Products[0].ProductId),
-//				Name:        pulumi.String("My config"),
-//				Description: pulumi.String("My config description"),
-//				Order:       pulumi.Int(0),
+//				ProductId:         pulumi.String(productId),
+//				Name:              pulumi.String("My config"),
+//				Description:       pulumi.String("My config description"),
+//				Order:             pulumi.Int(0),
+//				EvaluationVersion: pulumi.String("v1"),
 //			})
 //			if err != nil {
 //				return err
@@ -52,13 +48,6 @@ import (
 //
 // ```
 //
-// ## Endpoints used
-//
-// * [Get Config](https://api.configcat.com/docs/#tag/Configs/operation/get-config)
-// * [Create Config](https://api.configcat.com/docs/#tag/Configs/operation/create-config)
-// * [Update Config](https://api.configcat.com/docs/#tag/Configs/operation/update-config)
-// * [Delete Config](https://api.configcat.com/docs/#tag/Configs/operation/delete-config)
-//
 // ## Import
 //
 // Configs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.
@@ -66,12 +55,13 @@ import (
 // ```sh
 // $ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
 // ```
-// Read more about importing.
 type Configuration struct {
 	pulumi.CustomResourceState
 
 	// The description of the Config.
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description pulumi.StringOutput `pulumi:"description"`
+	// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion pulumi.StringOutput `pulumi:"evaluationVersion"`
 	// The name of the Config.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
@@ -118,6 +108,8 @@ func GetConfiguration(ctx *pulumi.Context,
 type configurationState struct {
 	// The description of the Config.
 	Description *string `pulumi:"description"`
+	// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion *string `pulumi:"evaluationVersion"`
 	// The name of the Config.
 	Name *string `pulumi:"name"`
 	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
@@ -129,6 +121,8 @@ type configurationState struct {
 type ConfigurationState struct {
 	// The description of the Config.
 	Description pulumi.StringPtrInput
+	// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion pulumi.StringPtrInput
 	// The name of the Config.
 	Name pulumi.StringPtrInput
 	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
@@ -144,6 +138,8 @@ func (ConfigurationState) ElementType() reflect.Type {
 type configurationArgs struct {
 	// The description of the Config.
 	Description *string `pulumi:"description"`
+	// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion *string `pulumi:"evaluationVersion"`
 	// The name of the Config.
 	Name *string `pulumi:"name"`
 	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
@@ -156,6 +152,8 @@ type configurationArgs struct {
 type ConfigurationArgs struct {
 	// The description of the Config.
 	Description pulumi.StringPtrInput
+	// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion pulumi.StringPtrInput
 	// The name of the Config.
 	Name pulumi.StringPtrInput
 	// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
@@ -252,8 +250,13 @@ func (o ConfigurationOutput) ToConfigurationOutputWithContext(ctx context.Contex
 }
 
 // The description of the Config.
-func (o ConfigurationOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Configuration) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+func (o ConfigurationOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *Configuration) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+}
+
+// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+func (o ConfigurationOutput) EvaluationVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *Configuration) pulumi.StringOutput { return v.EvaluationVersion }).(pulumi.StringOutput)
 }
 
 // The name of the Config.

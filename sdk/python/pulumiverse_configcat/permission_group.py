@@ -31,6 +31,7 @@ class PermissionGroupArgs:
                  can_delete_segment: Optional[pulumi.Input[bool]] = None,
                  can_delete_setting: Optional[pulumi.Input[bool]] = None,
                  can_delete_tag: Optional[pulumi.Input[bool]] = None,
+                 can_disable2fa: Optional[pulumi.Input[bool]] = None,
                  can_manage_integrations: Optional[pulumi.Input[bool]] = None,
                  can_manage_members: Optional[pulumi.Input[bool]] = None,
                  can_manage_product_preferences: Optional[pulumi.Input[bool]] = None,
@@ -47,28 +48,31 @@ class PermissionGroupArgs:
         """
         The set of arguments for constructing a PermissionGroup resource.
         :param pulumi.Input[str] product_id: The ID of the Product.
-        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
-        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags. Default: false.
-        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs. Default: false.
-        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments. Default: false.
-        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags. Default: false.
-        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations. Default: false.
-        :param pulumi.Input[bool] can_manage_members: Group members can manage team members. Default: false.
-        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences. Default: false.
-        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks. Default: false.
-        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys. Default: false.
-        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature. Default: false.
-        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs. Default: false.
-        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics. Default: false.
-        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block defined as below.
+        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom
+        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs.
+        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments.
+        :param pulumi.Input[bool] can_createorupdate_segment: Group members can create/update Segments.
+        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings.
+        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags.
+        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs.
+        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments.
+        :param pulumi.Input[bool] can_delete_segment: Group members can delete Segments.
+        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings.
+        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags.
+        :param pulumi.Input[bool] can_disable2fa: Group members can disable two-factor authentication for other members.
+        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations.
+        :param pulumi.Input[bool] can_manage_members: Group members can manage team members.
+        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences.
+        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks.
+        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys.
+        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings.
+        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature.
+        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs.
+        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics.
+        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         :param pulumi.Input[str] name: The name of the Permission Group.
-        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         """
         pulumi.set(__self__, "product_id", product_id)
         if accesstype is not None:
@@ -93,6 +97,8 @@ class PermissionGroupArgs:
             pulumi.set(__self__, "can_delete_setting", can_delete_setting)
         if can_delete_tag is not None:
             pulumi.set(__self__, "can_delete_tag", can_delete_tag)
+        if can_disable2fa is not None:
+            pulumi.set(__self__, "can_disable2fa", can_disable2fa)
         if can_manage_integrations is not None:
             pulumi.set(__self__, "can_manage_integrations", can_manage_integrations)
         if can_manage_members is not None:
@@ -136,7 +142,7 @@ class PermissionGroupArgs:
     @pulumi.getter
     def accesstype(self) -> Optional[pulumi.Input[str]]:
         """
-        Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+        Represent the Feature Management permission. Possible values: readOnly, full, custom
         """
         return pulumi.get(self, "accesstype")
 
@@ -148,7 +154,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canCreateorupdateConfig")
     def can_createorupdate_config(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Configs. Default: false.
+        Group members can create/update Configs.
         """
         return pulumi.get(self, "can_createorupdate_config")
 
@@ -160,7 +166,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canCreateorupdateEnvironment")
     def can_createorupdate_environment(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Environments. Default: false.
+        Group members can create/update Environments.
         """
         return pulumi.get(self, "can_createorupdate_environment")
 
@@ -171,6 +177,9 @@ class PermissionGroupArgs:
     @property
     @pulumi.getter(name="canCreateorupdateSegment")
     def can_createorupdate_segment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Group members can create/update Segments.
+        """
         return pulumi.get(self, "can_createorupdate_segment")
 
     @can_createorupdate_segment.setter
@@ -181,7 +190,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canCreateorupdateSetting")
     def can_createorupdate_setting(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Feature Flags and Settings. Default: false.
+        Group members can create/update Feature Flags and Settings.
         """
         return pulumi.get(self, "can_createorupdate_setting")
 
@@ -193,7 +202,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canCreateorupdateTag")
     def can_createorupdate_tag(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Tags. Default: false.
+        Group members can create/update Tags.
         """
         return pulumi.get(self, "can_createorupdate_tag")
 
@@ -205,7 +214,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canDeleteConfig")
     def can_delete_config(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Configs. Default: false.
+        Group members can delete Configs.
         """
         return pulumi.get(self, "can_delete_config")
 
@@ -217,7 +226,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canDeleteEnvironment")
     def can_delete_environment(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Environments. Default: false.
+        Group members can delete Environments.
         """
         return pulumi.get(self, "can_delete_environment")
 
@@ -228,6 +237,9 @@ class PermissionGroupArgs:
     @property
     @pulumi.getter(name="canDeleteSegment")
     def can_delete_segment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Group members can delete Segments.
+        """
         return pulumi.get(self, "can_delete_segment")
 
     @can_delete_segment.setter
@@ -238,7 +250,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canDeleteSetting")
     def can_delete_setting(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Feature Flags and Settings. Default: false.
+        Group members can delete Feature Flags and Settings.
         """
         return pulumi.get(self, "can_delete_setting")
 
@@ -250,7 +262,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canDeleteTag")
     def can_delete_tag(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Tags. Default: false.
+        Group members can delete Tags.
         """
         return pulumi.get(self, "can_delete_tag")
 
@@ -259,10 +271,22 @@ class PermissionGroupArgs:
         pulumi.set(self, "can_delete_tag", value)
 
     @property
+    @pulumi.getter(name="canDisable2fa")
+    def can_disable2fa(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Group members can disable two-factor authentication for other members.
+        """
+        return pulumi.get(self, "can_disable2fa")
+
+    @can_disable2fa.setter
+    def can_disable2fa(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "can_disable2fa", value)
+
+    @property
     @pulumi.getter(name="canManageIntegrations")
     def can_manage_integrations(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can add and configure integrations. Default: false.
+        Group members can add and configure integrations.
         """
         return pulumi.get(self, "can_manage_integrations")
 
@@ -274,7 +298,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canManageMembers")
     def can_manage_members(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can manage team members. Default: false.
+        Group members can manage team members.
         """
         return pulumi.get(self, "can_manage_members")
 
@@ -286,7 +310,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canManageProductPreferences")
     def can_manage_product_preferences(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can update Product preferences. Default: false.
+        Group members can update Product preferences.
         """
         return pulumi.get(self, "can_manage_product_preferences")
 
@@ -298,7 +322,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canManageWebhook")
     def can_manage_webhook(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update/delete Webhooks. Default: false.
+        Group members can create/update/delete Webhooks.
         """
         return pulumi.get(self, "can_manage_webhook")
 
@@ -310,7 +334,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canRotateSdkkey")
     def can_rotate_sdkkey(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can rotate SDK keys. Default: false.
+        Group members can rotate SDK keys.
         """
         return pulumi.get(self, "can_rotate_sdkkey")
 
@@ -322,7 +346,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canTagSetting")
     def can_tag_setting(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+        Group members can attach/detach Tags to Feature Flags and Settings.
         """
         return pulumi.get(self, "can_tag_setting")
 
@@ -334,7 +358,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canUseExportimport")
     def can_use_exportimport(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can use the export/import feature. Default: false.
+        Group members can use the export/import feature.
         """
         return pulumi.get(self, "can_use_exportimport")
 
@@ -346,7 +370,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canViewProductAuditlog")
     def can_view_product_auditlog(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members has access to audit logs. Default: false.
+        Group members has access to audit logs.
         """
         return pulumi.get(self, "can_view_product_auditlog")
 
@@ -358,7 +382,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canViewProductStatistics")
     def can_view_product_statistics(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members has access to product statistics. Default: false.
+        Group members has access to product statistics.
         """
         return pulumi.get(self, "can_view_product_statistics")
 
@@ -370,7 +394,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="canViewSdkkey")
     def can_view_sdkkey(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members has access to SDK keys. Default: false.
+        Group members has access to SDK keys.
         """
         return pulumi.get(self, "can_view_sdkkey")
 
@@ -382,7 +406,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="environmentAccesses")
     def environment_accesses(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
-        The environment specific permissions map block defined as below.
+        The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         """
         return pulumi.get(self, "environment_accesses")
 
@@ -406,7 +430,7 @@ class PermissionGroupArgs:
     @pulumi.getter(name="newEnvironmentAccesstype")
     def new_environment_accesstype(self) -> Optional[pulumi.Input[str]]:
         """
-        Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         """
         return pulumi.get(self, "new_environment_accesstype")
 
@@ -429,6 +453,7 @@ class _PermissionGroupState:
                  can_delete_segment: Optional[pulumi.Input[bool]] = None,
                  can_delete_setting: Optional[pulumi.Input[bool]] = None,
                  can_delete_tag: Optional[pulumi.Input[bool]] = None,
+                 can_disable2fa: Optional[pulumi.Input[bool]] = None,
                  can_manage_integrations: Optional[pulumi.Input[bool]] = None,
                  can_manage_members: Optional[pulumi.Input[bool]] = None,
                  can_manage_product_preferences: Optional[pulumi.Input[bool]] = None,
@@ -445,28 +470,31 @@ class _PermissionGroupState:
                  product_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering PermissionGroup resources.
-        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
-        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags. Default: false.
-        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs. Default: false.
-        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments. Default: false.
-        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags. Default: false.
-        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations. Default: false.
-        :param pulumi.Input[bool] can_manage_members: Group members can manage team members. Default: false.
-        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences. Default: false.
-        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks. Default: false.
-        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys. Default: false.
-        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature. Default: false.
-        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs. Default: false.
-        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics. Default: false.
-        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block defined as below.
+        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom
+        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs.
+        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments.
+        :param pulumi.Input[bool] can_createorupdate_segment: Group members can create/update Segments.
+        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings.
+        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags.
+        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs.
+        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments.
+        :param pulumi.Input[bool] can_delete_segment: Group members can delete Segments.
+        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings.
+        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags.
+        :param pulumi.Input[bool] can_disable2fa: Group members can disable two-factor authentication for other members.
+        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations.
+        :param pulumi.Input[bool] can_manage_members: Group members can manage team members.
+        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences.
+        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks.
+        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys.
+        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings.
+        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature.
+        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs.
+        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics.
+        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         :param pulumi.Input[str] name: The name of the Permission Group.
-        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         if accesstype is not None:
@@ -491,6 +519,8 @@ class _PermissionGroupState:
             pulumi.set(__self__, "can_delete_setting", can_delete_setting)
         if can_delete_tag is not None:
             pulumi.set(__self__, "can_delete_tag", can_delete_tag)
+        if can_disable2fa is not None:
+            pulumi.set(__self__, "can_disable2fa", can_disable2fa)
         if can_manage_integrations is not None:
             pulumi.set(__self__, "can_manage_integrations", can_manage_integrations)
         if can_manage_members is not None:
@@ -524,7 +554,7 @@ class _PermissionGroupState:
     @pulumi.getter
     def accesstype(self) -> Optional[pulumi.Input[str]]:
         """
-        Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+        Represent the Feature Management permission. Possible values: readOnly, full, custom
         """
         return pulumi.get(self, "accesstype")
 
@@ -536,7 +566,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canCreateorupdateConfig")
     def can_createorupdate_config(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Configs. Default: false.
+        Group members can create/update Configs.
         """
         return pulumi.get(self, "can_createorupdate_config")
 
@@ -548,7 +578,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canCreateorupdateEnvironment")
     def can_createorupdate_environment(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Environments. Default: false.
+        Group members can create/update Environments.
         """
         return pulumi.get(self, "can_createorupdate_environment")
 
@@ -559,6 +589,9 @@ class _PermissionGroupState:
     @property
     @pulumi.getter(name="canCreateorupdateSegment")
     def can_createorupdate_segment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Group members can create/update Segments.
+        """
         return pulumi.get(self, "can_createorupdate_segment")
 
     @can_createorupdate_segment.setter
@@ -569,7 +602,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canCreateorupdateSetting")
     def can_createorupdate_setting(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Feature Flags and Settings. Default: false.
+        Group members can create/update Feature Flags and Settings.
         """
         return pulumi.get(self, "can_createorupdate_setting")
 
@@ -581,7 +614,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canCreateorupdateTag")
     def can_createorupdate_tag(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update Tags. Default: false.
+        Group members can create/update Tags.
         """
         return pulumi.get(self, "can_createorupdate_tag")
 
@@ -593,7 +626,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canDeleteConfig")
     def can_delete_config(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Configs. Default: false.
+        Group members can delete Configs.
         """
         return pulumi.get(self, "can_delete_config")
 
@@ -605,7 +638,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canDeleteEnvironment")
     def can_delete_environment(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Environments. Default: false.
+        Group members can delete Environments.
         """
         return pulumi.get(self, "can_delete_environment")
 
@@ -616,6 +649,9 @@ class _PermissionGroupState:
     @property
     @pulumi.getter(name="canDeleteSegment")
     def can_delete_segment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Group members can delete Segments.
+        """
         return pulumi.get(self, "can_delete_segment")
 
     @can_delete_segment.setter
@@ -626,7 +662,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canDeleteSetting")
     def can_delete_setting(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Feature Flags and Settings. Default: false.
+        Group members can delete Feature Flags and Settings.
         """
         return pulumi.get(self, "can_delete_setting")
 
@@ -638,7 +674,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canDeleteTag")
     def can_delete_tag(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can delete Tags. Default: false.
+        Group members can delete Tags.
         """
         return pulumi.get(self, "can_delete_tag")
 
@@ -647,10 +683,22 @@ class _PermissionGroupState:
         pulumi.set(self, "can_delete_tag", value)
 
     @property
+    @pulumi.getter(name="canDisable2fa")
+    def can_disable2fa(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Group members can disable two-factor authentication for other members.
+        """
+        return pulumi.get(self, "can_disable2fa")
+
+    @can_disable2fa.setter
+    def can_disable2fa(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "can_disable2fa", value)
+
+    @property
     @pulumi.getter(name="canManageIntegrations")
     def can_manage_integrations(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can add and configure integrations. Default: false.
+        Group members can add and configure integrations.
         """
         return pulumi.get(self, "can_manage_integrations")
 
@@ -662,7 +710,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canManageMembers")
     def can_manage_members(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can manage team members. Default: false.
+        Group members can manage team members.
         """
         return pulumi.get(self, "can_manage_members")
 
@@ -674,7 +722,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canManageProductPreferences")
     def can_manage_product_preferences(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can update Product preferences. Default: false.
+        Group members can update Product preferences.
         """
         return pulumi.get(self, "can_manage_product_preferences")
 
@@ -686,7 +734,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canManageWebhook")
     def can_manage_webhook(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can create/update/delete Webhooks. Default: false.
+        Group members can create/update/delete Webhooks.
         """
         return pulumi.get(self, "can_manage_webhook")
 
@@ -698,7 +746,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canRotateSdkkey")
     def can_rotate_sdkkey(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can rotate SDK keys. Default: false.
+        Group members can rotate SDK keys.
         """
         return pulumi.get(self, "can_rotate_sdkkey")
 
@@ -710,7 +758,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canTagSetting")
     def can_tag_setting(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+        Group members can attach/detach Tags to Feature Flags and Settings.
         """
         return pulumi.get(self, "can_tag_setting")
 
@@ -722,7 +770,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canUseExportimport")
     def can_use_exportimport(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members can use the export/import feature. Default: false.
+        Group members can use the export/import feature.
         """
         return pulumi.get(self, "can_use_exportimport")
 
@@ -734,7 +782,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canViewProductAuditlog")
     def can_view_product_auditlog(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members has access to audit logs. Default: false.
+        Group members has access to audit logs.
         """
         return pulumi.get(self, "can_view_product_auditlog")
 
@@ -746,7 +794,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canViewProductStatistics")
     def can_view_product_statistics(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members has access to product statistics. Default: false.
+        Group members has access to product statistics.
         """
         return pulumi.get(self, "can_view_product_statistics")
 
@@ -758,7 +806,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="canViewSdkkey")
     def can_view_sdkkey(self) -> Optional[pulumi.Input[bool]]:
         """
-        Group members has access to SDK keys. Default: false.
+        Group members has access to SDK keys.
         """
         return pulumi.get(self, "can_view_sdkkey")
 
@@ -770,7 +818,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="environmentAccesses")
     def environment_accesses(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
-        The environment specific permissions map block defined as below.
+        The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         """
         return pulumi.get(self, "environment_accesses")
 
@@ -794,7 +842,7 @@ class _PermissionGroupState:
     @pulumi.getter(name="newEnvironmentAccesstype")
     def new_environment_accesstype(self) -> Optional[pulumi.Input[str]]:
         """
-        Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         """
         return pulumi.get(self, "new_environment_accesstype")
 
@@ -831,6 +879,7 @@ class PermissionGroup(pulumi.CustomResource):
                  can_delete_segment: Optional[pulumi.Input[bool]] = None,
                  can_delete_setting: Optional[pulumi.Input[bool]] = None,
                  can_delete_tag: Optional[pulumi.Input[bool]] = None,
+                 can_disable2fa: Optional[pulumi.Input[bool]] = None,
                  can_manage_integrations: Optional[pulumi.Input[bool]] = None,
                  can_manage_members: Optional[pulumi.Input[bool]] = None,
                  can_manage_product_preferences: Optional[pulumi.Input[bool]] = None,
@@ -847,22 +896,20 @@ class PermissionGroup(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # PermissionGroup Resource
-
         Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
 
         ## Example Usage
 
-        ### S
-
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_permission_group = configcat.PermissionGroup("my_permission_group",
-            product_id=my_products.products[0].product_id,
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        test_environment_id = config.require("testEnvironmentId")
+        productuction_environment_id = config.require("productuctionEnvironmentId")
+        admin_permission_group = configcat.PermissionGroup("admin_permission_group",
+            product_id=product_id,
             name="Administrators",
             accesstype="full",
             can_manage_members=True,
@@ -885,34 +932,17 @@ class PermissionGroup(pulumi.CustomResource):
             can_delete_segment=True,
             can_view_product_auditlog=True,
             can_view_product_statistics=True)
-        pulumi.export("permissionGroupId", my_permission_group.id)
-        ```
-
-        ```python
-        import pulumi
-        import pulumi_configcat as configcat
-        import pulumiverse_configcat as configcat
-
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_test_environments = configcat.get_environments(name_filter_regex="Test")
-        my_production_environments = configcat.get_environments(name_filter_regex="Production")
-        my_permission_group = configcat.PermissionGroup("my_permission_group",
-            product_id=my_products.products[0].product_id,
+        custom_permission_group = configcat.PermissionGroup("custom_permission_group",
+            product_id=product_id,
             name="Read only except Test environment",
             accesstype="custom",
             environment_accesses={
-                my_test_environments.environments[0].environment_id: "full",
-                my_test_environments.environments[1].environment_id: "readOnly",
+                test_environment_id: "full",
+                productuction_environment_id: "readOnly",
             })
-        pulumi.export("permissionGroupId", my_permission_group.id)
+        pulumi.export("adminPermissionGroupId", admin_permission_group.id)
+        pulumi.export("customPermissionGroupId", custom_permission_group.id)
         ```
-
-        ## Endpoints used
-
-        * [Get Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-group)
-        * [Create Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/create-permission-group)
-        * [Update Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/update-permission-group)
-        * [Delete Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/delete-permission-group)
 
         ## Import
 
@@ -921,32 +951,34 @@ class PermissionGroup(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
         ```
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
-        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags. Default: false.
-        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs. Default: false.
-        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments. Default: false.
-        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags. Default: false.
-        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations. Default: false.
-        :param pulumi.Input[bool] can_manage_members: Group members can manage team members. Default: false.
-        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences. Default: false.
-        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks. Default: false.
-        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys. Default: false.
-        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature. Default: false.
-        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs. Default: false.
-        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics. Default: false.
-        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block defined as below.
+        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom
+        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs.
+        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments.
+        :param pulumi.Input[bool] can_createorupdate_segment: Group members can create/update Segments.
+        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings.
+        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags.
+        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs.
+        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments.
+        :param pulumi.Input[bool] can_delete_segment: Group members can delete Segments.
+        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings.
+        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags.
+        :param pulumi.Input[bool] can_disable2fa: Group members can disable two-factor authentication for other members.
+        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations.
+        :param pulumi.Input[bool] can_manage_members: Group members can manage team members.
+        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences.
+        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks.
+        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys.
+        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings.
+        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature.
+        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs.
+        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics.
+        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         :param pulumi.Input[str] name: The name of the Permission Group.
-        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         ...
@@ -956,22 +988,20 @@ class PermissionGroup(pulumi.CustomResource):
                  args: PermissionGroupArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # PermissionGroup Resource
-
         Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
 
         ## Example Usage
 
-        ### S
-
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_permission_group = configcat.PermissionGroup("my_permission_group",
-            product_id=my_products.products[0].product_id,
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        test_environment_id = config.require("testEnvironmentId")
+        productuction_environment_id = config.require("productuctionEnvironmentId")
+        admin_permission_group = configcat.PermissionGroup("admin_permission_group",
+            product_id=product_id,
             name="Administrators",
             accesstype="full",
             can_manage_members=True,
@@ -994,34 +1024,17 @@ class PermissionGroup(pulumi.CustomResource):
             can_delete_segment=True,
             can_view_product_auditlog=True,
             can_view_product_statistics=True)
-        pulumi.export("permissionGroupId", my_permission_group.id)
-        ```
-
-        ```python
-        import pulumi
-        import pulumi_configcat as configcat
-        import pulumiverse_configcat as configcat
-
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_test_environments = configcat.get_environments(name_filter_regex="Test")
-        my_production_environments = configcat.get_environments(name_filter_regex="Production")
-        my_permission_group = configcat.PermissionGroup("my_permission_group",
-            product_id=my_products.products[0].product_id,
+        custom_permission_group = configcat.PermissionGroup("custom_permission_group",
+            product_id=product_id,
             name="Read only except Test environment",
             accesstype="custom",
             environment_accesses={
-                my_test_environments.environments[0].environment_id: "full",
-                my_test_environments.environments[1].environment_id: "readOnly",
+                test_environment_id: "full",
+                productuction_environment_id: "readOnly",
             })
-        pulumi.export("permissionGroupId", my_permission_group.id)
+        pulumi.export("adminPermissionGroupId", admin_permission_group.id)
+        pulumi.export("customPermissionGroupId", custom_permission_group.id)
         ```
-
-        ## Endpoints used
-
-        * [Get Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-group)
-        * [Create Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/create-permission-group)
-        * [Update Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/update-permission-group)
-        * [Delete Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/delete-permission-group)
 
         ## Import
 
@@ -1030,7 +1043,6 @@ class PermissionGroup(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
         ```
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param PermissionGroupArgs args: The arguments to use to populate this resource's properties.
@@ -1058,6 +1070,7 @@ class PermissionGroup(pulumi.CustomResource):
                  can_delete_segment: Optional[pulumi.Input[bool]] = None,
                  can_delete_setting: Optional[pulumi.Input[bool]] = None,
                  can_delete_tag: Optional[pulumi.Input[bool]] = None,
+                 can_disable2fa: Optional[pulumi.Input[bool]] = None,
                  can_manage_integrations: Optional[pulumi.Input[bool]] = None,
                  can_manage_members: Optional[pulumi.Input[bool]] = None,
                  can_manage_product_preferences: Optional[pulumi.Input[bool]] = None,
@@ -1092,6 +1105,7 @@ class PermissionGroup(pulumi.CustomResource):
             __props__.__dict__["can_delete_segment"] = can_delete_segment
             __props__.__dict__["can_delete_setting"] = can_delete_setting
             __props__.__dict__["can_delete_tag"] = can_delete_tag
+            __props__.__dict__["can_disable2fa"] = can_disable2fa
             __props__.__dict__["can_manage_integrations"] = can_manage_integrations
             __props__.__dict__["can_manage_members"] = can_manage_members
             __props__.__dict__["can_manage_product_preferences"] = can_manage_product_preferences
@@ -1129,6 +1143,7 @@ class PermissionGroup(pulumi.CustomResource):
             can_delete_segment: Optional[pulumi.Input[bool]] = None,
             can_delete_setting: Optional[pulumi.Input[bool]] = None,
             can_delete_tag: Optional[pulumi.Input[bool]] = None,
+            can_disable2fa: Optional[pulumi.Input[bool]] = None,
             can_manage_integrations: Optional[pulumi.Input[bool]] = None,
             can_manage_members: Optional[pulumi.Input[bool]] = None,
             can_manage_product_preferences: Optional[pulumi.Input[bool]] = None,
@@ -1150,28 +1165,31 @@ class PermissionGroup(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
-        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags. Default: false.
-        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs. Default: false.
-        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments. Default: false.
-        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags. Default: false.
-        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations. Default: false.
-        :param pulumi.Input[bool] can_manage_members: Group members can manage team members. Default: false.
-        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences. Default: false.
-        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks. Default: false.
-        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys. Default: false.
-        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
-        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature. Default: false.
-        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs. Default: false.
-        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics. Default: false.
-        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block defined as below.
+        :param pulumi.Input[str] accesstype: Represent the Feature Management permission. Possible values: readOnly, full, custom
+        :param pulumi.Input[bool] can_createorupdate_config: Group members can create/update Configs.
+        :param pulumi.Input[bool] can_createorupdate_environment: Group members can create/update Environments.
+        :param pulumi.Input[bool] can_createorupdate_segment: Group members can create/update Segments.
+        :param pulumi.Input[bool] can_createorupdate_setting: Group members can create/update Feature Flags and Settings.
+        :param pulumi.Input[bool] can_createorupdate_tag: Group members can create/update Tags.
+        :param pulumi.Input[bool] can_delete_config: Group members can delete Configs.
+        :param pulumi.Input[bool] can_delete_environment: Group members can delete Environments.
+        :param pulumi.Input[bool] can_delete_segment: Group members can delete Segments.
+        :param pulumi.Input[bool] can_delete_setting: Group members can delete Feature Flags and Settings.
+        :param pulumi.Input[bool] can_delete_tag: Group members can delete Tags.
+        :param pulumi.Input[bool] can_disable2fa: Group members can disable two-factor authentication for other members.
+        :param pulumi.Input[bool] can_manage_integrations: Group members can add and configure integrations.
+        :param pulumi.Input[bool] can_manage_members: Group members can manage team members.
+        :param pulumi.Input[bool] can_manage_product_preferences: Group members can update Product preferences.
+        :param pulumi.Input[bool] can_manage_webhook: Group members can create/update/delete Webhooks.
+        :param pulumi.Input[bool] can_rotate_sdkkey: Group members can rotate SDK keys.
+        :param pulumi.Input[bool] can_tag_setting: Group members can attach/detach Tags to Feature Flags and Settings.
+        :param pulumi.Input[bool] can_use_exportimport: Group members can use the export/import feature.
+        :param pulumi.Input[bool] can_view_product_auditlog: Group members has access to audit logs.
+        :param pulumi.Input[bool] can_view_product_statistics: Group members has access to product statistics.
+        :param pulumi.Input[bool] can_view_sdkkey: Group members has access to SDK keys.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] environment_accesses: The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         :param pulumi.Input[str] name: The name of the Permission Group.
-        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        :param pulumi.Input[str] new_environment_accesstype: Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1189,6 +1207,7 @@ class PermissionGroup(pulumi.CustomResource):
         __props__.__dict__["can_delete_segment"] = can_delete_segment
         __props__.__dict__["can_delete_setting"] = can_delete_setting
         __props__.__dict__["can_delete_tag"] = can_delete_tag
+        __props__.__dict__["can_disable2fa"] = can_disable2fa
         __props__.__dict__["can_manage_integrations"] = can_manage_integrations
         __props__.__dict__["can_manage_members"] = can_manage_members
         __props__.__dict__["can_manage_product_preferences"] = can_manage_product_preferences
@@ -1207,171 +1226,185 @@ class PermissionGroup(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def accesstype(self) -> pulumi.Output[Optional[str]]:
+    def accesstype(self) -> pulumi.Output[str]:
         """
-        Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+        Represent the Feature Management permission. Possible values: readOnly, full, custom
         """
         return pulumi.get(self, "accesstype")
 
     @property
     @pulumi.getter(name="canCreateorupdateConfig")
-    def can_createorupdate_config(self) -> pulumi.Output[Optional[bool]]:
+    def can_createorupdate_config(self) -> pulumi.Output[bool]:
         """
-        Group members can create/update Configs. Default: false.
+        Group members can create/update Configs.
         """
         return pulumi.get(self, "can_createorupdate_config")
 
     @property
     @pulumi.getter(name="canCreateorupdateEnvironment")
-    def can_createorupdate_environment(self) -> pulumi.Output[Optional[bool]]:
+    def can_createorupdate_environment(self) -> pulumi.Output[bool]:
         """
-        Group members can create/update Environments. Default: false.
+        Group members can create/update Environments.
         """
         return pulumi.get(self, "can_createorupdate_environment")
 
     @property
     @pulumi.getter(name="canCreateorupdateSegment")
-    def can_createorupdate_segment(self) -> pulumi.Output[Optional[bool]]:
+    def can_createorupdate_segment(self) -> pulumi.Output[bool]:
+        """
+        Group members can create/update Segments.
+        """
         return pulumi.get(self, "can_createorupdate_segment")
 
     @property
     @pulumi.getter(name="canCreateorupdateSetting")
-    def can_createorupdate_setting(self) -> pulumi.Output[Optional[bool]]:
+    def can_createorupdate_setting(self) -> pulumi.Output[bool]:
         """
-        Group members can create/update Feature Flags and Settings. Default: false.
+        Group members can create/update Feature Flags and Settings.
         """
         return pulumi.get(self, "can_createorupdate_setting")
 
     @property
     @pulumi.getter(name="canCreateorupdateTag")
-    def can_createorupdate_tag(self) -> pulumi.Output[Optional[bool]]:
+    def can_createorupdate_tag(self) -> pulumi.Output[bool]:
         """
-        Group members can create/update Tags. Default: false.
+        Group members can create/update Tags.
         """
         return pulumi.get(self, "can_createorupdate_tag")
 
     @property
     @pulumi.getter(name="canDeleteConfig")
-    def can_delete_config(self) -> pulumi.Output[Optional[bool]]:
+    def can_delete_config(self) -> pulumi.Output[bool]:
         """
-        Group members can delete Configs. Default: false.
+        Group members can delete Configs.
         """
         return pulumi.get(self, "can_delete_config")
 
     @property
     @pulumi.getter(name="canDeleteEnvironment")
-    def can_delete_environment(self) -> pulumi.Output[Optional[bool]]:
+    def can_delete_environment(self) -> pulumi.Output[bool]:
         """
-        Group members can delete Environments. Default: false.
+        Group members can delete Environments.
         """
         return pulumi.get(self, "can_delete_environment")
 
     @property
     @pulumi.getter(name="canDeleteSegment")
-    def can_delete_segment(self) -> pulumi.Output[Optional[bool]]:
+    def can_delete_segment(self) -> pulumi.Output[bool]:
+        """
+        Group members can delete Segments.
+        """
         return pulumi.get(self, "can_delete_segment")
 
     @property
     @pulumi.getter(name="canDeleteSetting")
-    def can_delete_setting(self) -> pulumi.Output[Optional[bool]]:
+    def can_delete_setting(self) -> pulumi.Output[bool]:
         """
-        Group members can delete Feature Flags and Settings. Default: false.
+        Group members can delete Feature Flags and Settings.
         """
         return pulumi.get(self, "can_delete_setting")
 
     @property
     @pulumi.getter(name="canDeleteTag")
-    def can_delete_tag(self) -> pulumi.Output[Optional[bool]]:
+    def can_delete_tag(self) -> pulumi.Output[bool]:
         """
-        Group members can delete Tags. Default: false.
+        Group members can delete Tags.
         """
         return pulumi.get(self, "can_delete_tag")
 
     @property
-    @pulumi.getter(name="canManageIntegrations")
-    def can_manage_integrations(self) -> pulumi.Output[Optional[bool]]:
+    @pulumi.getter(name="canDisable2fa")
+    def can_disable2fa(self) -> pulumi.Output[bool]:
         """
-        Group members can add and configure integrations. Default: false.
+        Group members can disable two-factor authentication for other members.
+        """
+        return pulumi.get(self, "can_disable2fa")
+
+    @property
+    @pulumi.getter(name="canManageIntegrations")
+    def can_manage_integrations(self) -> pulumi.Output[bool]:
+        """
+        Group members can add and configure integrations.
         """
         return pulumi.get(self, "can_manage_integrations")
 
     @property
     @pulumi.getter(name="canManageMembers")
-    def can_manage_members(self) -> pulumi.Output[Optional[bool]]:
+    def can_manage_members(self) -> pulumi.Output[bool]:
         """
-        Group members can manage team members. Default: false.
+        Group members can manage team members.
         """
         return pulumi.get(self, "can_manage_members")
 
     @property
     @pulumi.getter(name="canManageProductPreferences")
-    def can_manage_product_preferences(self) -> pulumi.Output[Optional[bool]]:
+    def can_manage_product_preferences(self) -> pulumi.Output[bool]:
         """
-        Group members can update Product preferences. Default: false.
+        Group members can update Product preferences.
         """
         return pulumi.get(self, "can_manage_product_preferences")
 
     @property
     @pulumi.getter(name="canManageWebhook")
-    def can_manage_webhook(self) -> pulumi.Output[Optional[bool]]:
+    def can_manage_webhook(self) -> pulumi.Output[bool]:
         """
-        Group members can create/update/delete Webhooks. Default: false.
+        Group members can create/update/delete Webhooks.
         """
         return pulumi.get(self, "can_manage_webhook")
 
     @property
     @pulumi.getter(name="canRotateSdkkey")
-    def can_rotate_sdkkey(self) -> pulumi.Output[Optional[bool]]:
+    def can_rotate_sdkkey(self) -> pulumi.Output[bool]:
         """
-        Group members can rotate SDK keys. Default: false.
+        Group members can rotate SDK keys.
         """
         return pulumi.get(self, "can_rotate_sdkkey")
 
     @property
     @pulumi.getter(name="canTagSetting")
-    def can_tag_setting(self) -> pulumi.Output[Optional[bool]]:
+    def can_tag_setting(self) -> pulumi.Output[bool]:
         """
-        Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+        Group members can attach/detach Tags to Feature Flags and Settings.
         """
         return pulumi.get(self, "can_tag_setting")
 
     @property
     @pulumi.getter(name="canUseExportimport")
-    def can_use_exportimport(self) -> pulumi.Output[Optional[bool]]:
+    def can_use_exportimport(self) -> pulumi.Output[bool]:
         """
-        Group members can use the export/import feature. Default: false.
+        Group members can use the export/import feature.
         """
         return pulumi.get(self, "can_use_exportimport")
 
     @property
     @pulumi.getter(name="canViewProductAuditlog")
-    def can_view_product_auditlog(self) -> pulumi.Output[Optional[bool]]:
+    def can_view_product_auditlog(self) -> pulumi.Output[bool]:
         """
-        Group members has access to audit logs. Default: false.
+        Group members has access to audit logs.
         """
         return pulumi.get(self, "can_view_product_auditlog")
 
     @property
     @pulumi.getter(name="canViewProductStatistics")
-    def can_view_product_statistics(self) -> pulumi.Output[Optional[bool]]:
+    def can_view_product_statistics(self) -> pulumi.Output[bool]:
         """
-        Group members has access to product statistics. Default: false.
+        Group members has access to product statistics.
         """
         return pulumi.get(self, "can_view_product_statistics")
 
     @property
     @pulumi.getter(name="canViewSdkkey")
-    def can_view_sdkkey(self) -> pulumi.Output[Optional[bool]]:
+    def can_view_sdkkey(self) -> pulumi.Output[bool]:
         """
-        Group members has access to SDK keys. Default: false.
+        Group members has access to SDK keys.
         """
         return pulumi.get(self, "can_view_sdkkey")
 
     @property
     @pulumi.getter(name="environmentAccesses")
-    def environment_accesses(self) -> pulumi.Output[Optional[Mapping[str, str]]]:
+    def environment_accesses(self) -> pulumi.Output[Mapping[str, str]]:
         """
-        The environment specific permissions map block defined as below.
+        The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         """
         return pulumi.get(self, "environment_accesses")
 
@@ -1385,9 +1418,9 @@ class PermissionGroup(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="newEnvironmentAccesstype")
-    def new_environment_accesstype(self) -> pulumi.Output[Optional[str]]:
+    def new_environment_accesstype(self) -> pulumi.Output[str]:
         """
-        Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+        Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         """
         return pulumi.get(self, "new_environment_accesstype")
 

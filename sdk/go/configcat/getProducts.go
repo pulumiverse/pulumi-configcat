@@ -8,11 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getProducts Resource
-//
 // Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
 //
 // ## Example Usage
@@ -23,7 +21,7 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
 //
 // )
 //
@@ -41,10 +39,6 @@ import (
 //	}
 //
 // ```
-//
-// ## Endpoints used
-//
-// - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
 func GetProducts(ctx *pulumi.Context, args *GetProductsArgs, opts ...pulumi.InvokeOption) (*GetProductsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProductsResult
@@ -63,11 +57,11 @@ type GetProductsArgs struct {
 
 // A collection of values returned by getProducts.
 type GetProductsResult struct {
-	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
-	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	// A product list block defined as below.
-	Products []GetProductsProduct `pulumi:"products"`
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// Filter the Products by name.
+	NameFilterRegex *string              `pulumi:"nameFilterRegex"`
+	Products        []GetProductsProduct `pulumi:"products"`
 }
 
 func GetProductsOutput(ctx *pulumi.Context, args GetProductsOutputArgs, opts ...pulumi.InvokeOption) GetProductsResultOutput {
@@ -104,16 +98,16 @@ func (o GetProductsResultOutput) ToGetProductsResultOutputWithContext(ctx contex
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
+// Internal ID of the data source. Do not use.
 func (o GetProductsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProductsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Filter the Products by name.
 func (o GetProductsResultOutput) NameFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProductsResult) *string { return v.NameFilterRegex }).(pulumi.StringPtrOutput)
 }
 
-// A product list block defined as below.
 func (o GetProductsResultOutput) Products() GetProductsProductArrayOutput {
 	return o.ApplyT(func(v GetProductsResult) []GetProductsProduct { return v.Products }).(GetProductsProductArrayOutput)
 }

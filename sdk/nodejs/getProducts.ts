@@ -7,8 +7,6 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getProducts Resource
- *
  * Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -22,10 +20,6 @@ import * as utilities from "./utilities";
  * });
  * export const productId = myProducts.then(myProducts => myProducts.products?.[0]?.productId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
  */
 export function getProducts(args?: GetProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetProductsResult> {
     args = args || {};
@@ -50,18 +44,16 @@ export interface GetProductsArgs {
  */
 export interface GetProductsResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
-    readonly nameFilterRegex?: string;
     /**
-     * A product list block defined as below.
+     * Filter the Products by name.
      */
+    readonly nameFilterRegex?: string;
     readonly products: outputs.GetProductsProduct[];
 }
 /**
- * ## # configcat.getProducts Resource
- *
  * Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
@@ -75,10 +67,6 @@ export interface GetProductsResult {
  * });
  * export const productId = myProducts.then(myProducts => myProducts.products?.[0]?.productId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
  */
 export function getProductsOutput(args?: GetProductsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProductsResult> {
     args = args || {};

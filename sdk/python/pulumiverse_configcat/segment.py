@@ -27,9 +27,9 @@ class SegmentArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Segment resource.
-        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
-        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
-        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
+        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
+        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[str] description: The description of the Segment.
         :param pulumi.Input[str] name: The name of the Segment.
@@ -47,7 +47,7 @@ class SegmentArgs:
     @pulumi.getter
     def comparator(self) -> pulumi.Input[str]:
         """
-        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
         """
         return pulumi.get(self, "comparator")
 
@@ -59,7 +59,7 @@ class SegmentArgs:
     @pulumi.getter(name="comparisonAttribute")
     def comparison_attribute(self) -> pulumi.Input[str]:
         """
-        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
         """
         return pulumi.get(self, "comparison_attribute")
 
@@ -71,7 +71,7 @@ class SegmentArgs:
     @pulumi.getter(name="comparisonValue")
     def comparison_value(self) -> pulumi.Input[str]:
         """
-        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         """
         return pulumi.get(self, "comparison_value")
 
@@ -127,9 +127,9 @@ class _SegmentState:
                  product_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Segment resources.
-        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
-        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
-        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
+        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
+        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         :param pulumi.Input[str] description: The description of the Segment.
         :param pulumi.Input[str] name: The name of the Segment.
         :param pulumi.Input[str] product_id: The ID of the Product.
@@ -151,7 +151,7 @@ class _SegmentState:
     @pulumi.getter
     def comparator(self) -> Optional[pulumi.Input[str]]:
         """
-        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
         """
         return pulumi.get(self, "comparator")
 
@@ -163,7 +163,7 @@ class _SegmentState:
     @pulumi.getter(name="comparisonAttribute")
     def comparison_attribute(self) -> Optional[pulumi.Input[str]]:
         """
-        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
         """
         return pulumi.get(self, "comparison_attribute")
 
@@ -175,7 +175,7 @@ class _SegmentState:
     @pulumi.getter(name="comparisonValue")
     def comparison_value(self) -> Optional[pulumi.Input[str]]:
         """
-        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         """
         return pulumi.get(self, "comparison_value")
 
@@ -233,20 +233,18 @@ class Segment(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # Segment Resource
-
         Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
+        config = pulumi.Config()
+        product_id = config.require("productId")
         my_segment = configcat.Segment("my_segment",
-            product_id=my_products.products[0].product_id,
+            product_id=product_id,
             name="Beta users",
             description="Beta users' description",
             comparison_attribute="email",
@@ -255,13 +253,6 @@ class Segment(pulumi.CustomResource):
         pulumi.export("segmentId", my_segment.id)
         ```
 
-        ## Endpoints used
-
-        * [Get Segment](https://api.configcat.com/docs/#tag/Segments/operation/get-segment)
-        * [Create Segment](https://api.configcat.com/docs/#tag/Segments/operation/create-segment)
-        * [Update Segment](https://api.configcat.com/docs/#tag/Segments/operation/update-segment)
-        * [Delete Segment](https://api.configcat.com/docs/#tag/Segments/operation/delete-segment)
-
         ## Import
 
         Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
@@ -269,13 +260,12 @@ class Segment(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
         ```
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
-        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
-        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
+        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
+        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         :param pulumi.Input[str] description: The description of the Segment.
         :param pulumi.Input[str] name: The name of the Segment.
         :param pulumi.Input[str] product_id: The ID of the Product.
@@ -287,20 +277,18 @@ class Segment(pulumi.CustomResource):
                  args: SegmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Segment Resource
-
         Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
 
         ## Example Usage
 
         ```python
         import pulumi
-        import pulumi_configcat as configcat
         import pulumiverse_configcat as configcat
 
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
+        config = pulumi.Config()
+        product_id = config.require("productId")
         my_segment = configcat.Segment("my_segment",
-            product_id=my_products.products[0].product_id,
+            product_id=product_id,
             name="Beta users",
             description="Beta users' description",
             comparison_attribute="email",
@@ -309,13 +297,6 @@ class Segment(pulumi.CustomResource):
         pulumi.export("segmentId", my_segment.id)
         ```
 
-        ## Endpoints used
-
-        * [Get Segment](https://api.configcat.com/docs/#tag/Segments/operation/get-segment)
-        * [Create Segment](https://api.configcat.com/docs/#tag/Segments/operation/create-segment)
-        * [Update Segment](https://api.configcat.com/docs/#tag/Segments/operation/update-segment)
-        * [Delete Segment](https://api.configcat.com/docs/#tag/Segments/operation/delete-segment)
-
         ## Import
 
         Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
@@ -323,7 +304,6 @@ class Segment(pulumi.CustomResource):
         ```sh
         $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
         ```
-        Read more about importing.
 
         :param str resource_name: The name of the resource.
         :param SegmentArgs args: The arguments to use to populate this resource's properties.
@@ -392,9 +372,9 @@ class Segment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
-        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
-        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
+        :param pulumi.Input[str] comparison_attribute: The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
+        :param pulumi.Input[str] comparison_value: The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         :param pulumi.Input[str] description: The description of the Segment.
         :param pulumi.Input[str] name: The name of the Segment.
         :param pulumi.Input[str] product_id: The ID of the Product.
@@ -415,7 +395,7 @@ class Segment(pulumi.CustomResource):
     @pulumi.getter
     def comparator(self) -> pulumi.Output[str]:
         """
-        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+        The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
         """
         return pulumi.get(self, "comparator")
 
@@ -423,7 +403,7 @@ class Segment(pulumi.CustomResource):
     @pulumi.getter(name="comparisonAttribute")
     def comparison_attribute(self) -> pulumi.Output[str]:
         """
-        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
         """
         return pulumi.get(self, "comparison_attribute")
 
@@ -431,13 +411,13 @@ class Segment(pulumi.CustomResource):
     @pulumi.getter(name="comparisonValue")
     def comparison_value(self) -> pulumi.Output[str]:
         """
-        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+        The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
         """
         return pulumi.get(self, "comparison_value")
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[Optional[str]]:
+    def description(self) -> pulumi.Output[str]:
         """
         The description of the Segment.
         """

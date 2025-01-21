@@ -1,11 +1,10 @@
-module github.com/pulumiverse/pulumi-configcat/sdk/v3
+module github.com/pulumiverse/pulumi-configcat/sdk/v5
 
 go 1.21
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/pulumi/pulumi/sdk/v3 v3.145.0
-	github.com/pulumiverse/pulumi-configcat/sdk/v2 v2.0.0
 )
 
 require (

@@ -7,28 +7,22 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.getTags Resource
+ * Use this data source to access information about existing **Tags**. [What is a Tag in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
- * Use this data source to access information about existing **Tags**.
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myTags = myProducts.then(myProducts => configcat.getTags({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myTags = configcat.getTags({
+ *     productId: productId,
  *     nameFilterRegex: "Test",
- * }));
+ * });
  * export const tagId = myTags.then(myTags => myTags.tags?.[0]?.tagId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
  */
 export function getTags(args: GetTagsArgs, opts?: pulumi.InvokeOptions): Promise<GetTagsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -57,39 +51,36 @@ export interface GetTagsArgs {
  */
 export interface GetTagsResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * Internal ID of the data source. Do not use.
      */
     readonly id: string;
-    readonly nameFilterRegex?: string;
-    readonly productId: string;
     /**
-     * A tag list block defined as below.
+     * Filter the Tags by name.
      */
+    readonly nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
+    readonly productId: string;
     readonly tags: outputs.GetTagsTag[];
 }
 /**
- * ## # configcat.getTags Resource
+ * Use this data source to access information about existing **Tags**. [What is a Tag in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
- * Use this data source to access information about existing **Tags**.
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as configcat from "@pulumi/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myTags = myProducts.then(myProducts => configcat.getTags({
- *     productId: myProducts.products?.[0]?.productId,
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myTags = configcat.getTags({
+ *     productId: productId,
  *     nameFilterRegex: "Test",
- * }));
+ * });
  * export const tagId = myTags.then(myTags => myTags.tags?.[0]?.tagId);
  * ```
- *
- * ## Endpoints used
- *
- * - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
  */
 export function getTagsOutput(args: GetTagsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTagsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

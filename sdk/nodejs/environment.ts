@@ -5,22 +5,18 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## # configcat.Environment Resource
- *
  * Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
  * import * as configcat from "@pulumiverse/configcat";
  *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
  * const myEnvironment = new configcat.Environment("my_environment", {
- *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
+ *     productId: productId,
  *     name: "Staging",
  *     description: "Staging description",
  *     color: "blue",
@@ -29,13 +25,6 @@ import * as utilities from "./utilities";
  * export const environmentId = myEnvironment.id;
  * ```
  *
- * ## Endpoints used
- *
- * * [Get Environment](https://api.configcat.com/docs/#tag/Environments/operation/get-environment)
- * * [Create Environment](https://api.configcat.com/docs/#tag/Environments/operation/create-environment)
- * * [Update Environment](https://api.configcat.com/docs/#tag/Environments/operation/update-environment)
- * * [Delete Environment](https://api.configcat.com/docs/#tag/Environments/operation/delete-environment)
- *
  * ## Import
  *
  * Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
@@ -43,7 +32,6 @@ import * as utilities from "./utilities";
  * ```sh
  * $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
  * ```
- * Read more about importing.
  */
 export class Environment extends pulumi.CustomResource {
     /**
@@ -74,13 +62,13 @@ export class Environment extends pulumi.CustomResource {
     }
 
     /**
-     * The color (HTML color code) of the Environment.
+     * The color of the Environment.
      */
-    public readonly color!: pulumi.Output<string | undefined>;
+    public readonly color!: pulumi.Output<string>;
     /**
      * The description of the Environment.
      */
-    public readonly description!: pulumi.Output<string | undefined>;
+    public readonly description!: pulumi.Output<string>;
     /**
      * The name of the Environment.
      */
@@ -136,7 +124,7 @@ export class Environment extends pulumi.CustomResource {
  */
 export interface EnvironmentState {
     /**
-     * The color (HTML color code) of the Environment.
+     * The color of the Environment.
      */
     color?: pulumi.Input<string>;
     /**
@@ -162,7 +150,7 @@ export interface EnvironmentState {
  */
 export interface EnvironmentArgs {
     /**
-     * The color (HTML color code) of the Environment.
+     * The color of the Environment.
      */
     color?: pulumi.Input<string>;
     /**
