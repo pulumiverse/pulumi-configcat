@@ -21,13 +21,14 @@ import (
 	// The linter requires unnamed imports to have a doc comment
 	_ "embed"
 
+	configcat "github.com/configcat/terraform-provider-configcat/v5/providerlink"
+
 	pf "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 
-	configcat "github.com/configcat/terraform-provider-configcat/v5/providerlink"
 	"github.com/pulumiverse/pulumi-configcat/provider/v5/pkg/version"
 )
 
