@@ -26,8 +26,7 @@ class EnvironmentArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Environment resource.
-        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-               displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[str] color: The color of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
@@ -46,8 +45,7 @@ class EnvironmentArgs:
     @pulumi.getter
     def order(self) -> pulumi.Input[int]:
         """
-        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-        displayed in alphabetical order.
+        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -117,8 +115,7 @@ class _EnvironmentState:
         :param pulumi.Input[str] color: The color of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
-        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-               displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         if color is not None:
@@ -172,8 +169,7 @@ class _EnvironmentState:
     @pulumi.getter
     def order(self) -> Optional[pulumi.Input[int]]:
         """
-        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-        displayed in alphabetical order.
+        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -206,14 +202,39 @@ class Environment(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Environment resource with the given unique name, props, and options.
+        Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_environment = configcat.Environment("my_environment",
+            product_id=product_id,
+            name="Staging",
+            description="Staging description",
+            color="blue",
+            order=0)
+        pulumi.export("environmentId", my_environment.id)
+        ```
+
+        ## Import
+
+        Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
+
+        ```sh
+        $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] color: The color of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
-        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-               displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         ...
@@ -223,7 +244,33 @@ class Environment(pulumi.CustomResource):
                  args: EnvironmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Environment resource with the given unique name, props, and options.
+        Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_environment = configcat.Environment("my_environment",
+            product_id=product_id,
+            name="Staging",
+            description="Staging description",
+            color="blue",
+            order=0)
+        pulumi.export("environmentId", my_environment.id)
+        ```
+
+        ## Import
+
+        Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
+
+        ```sh
+        $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param EnvironmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -287,8 +334,7 @@ class Environment(pulumi.CustomResource):
         :param pulumi.Input[str] color: The color of the Environment.
         :param pulumi.Input[str] description: The description of the Environment.
         :param pulumi.Input[str] name: The name of the Environment.
-        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-               displayed in alphabetical order.
+        :param pulumi.Input[int] order: The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -330,8 +376,7 @@ class Environment(pulumi.CustomResource):
     @pulumi.getter
     def order(self) -> pulumi.Output[int]:
         """
-        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-        displayed in alphabetical order.
+        The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 

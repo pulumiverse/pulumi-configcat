@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myConfig = new configcat.Configuration("my_config", {
+ *     productId: productId,
+ *     name: "My config",
+ *     description: "My config description",
+ *     order: 0,
+ *     evaluationVersion: "v1",
+ * });
+ * export const configId = myConfig.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Configs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+ * ```
+ */
 export class Configuration extends pulumi.CustomResource {
     /**
      * Get an existing Configuration resource's state with the given name, ID, and optional extra
@@ -37,8 +66,7 @@ export class Configuration extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string>;
     /**
-     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-     * features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
      */
     public readonly evaluationVersion!: pulumi.Output<string>;
     /**
@@ -46,8 +74,7 @@ export class Configuration extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-     * alphabetical order.
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
@@ -101,8 +128,7 @@ export interface ConfigurationState {
      */
     description?: pulumi.Input<string>;
     /**
-     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-     * features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
      */
     evaluationVersion?: pulumi.Input<string>;
     /**
@@ -110,8 +136,7 @@ export interface ConfigurationState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-     * alphabetical order.
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
@@ -129,8 +154,7 @@ export interface ConfigurationArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-     * features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
      */
     evaluationVersion?: pulumi.Input<string>;
     /**
@@ -138,8 +162,7 @@ export interface ConfigurationArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-     * alphabetical order.
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
      */
     order: pulumi.Input<number>;
     /**

@@ -11,6 +11,38 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			configId := cfg.Require("configId")
+//			settings, err := configcat.GetSettings(ctx, &configcat.GetSettingsArgs{
+//				ConfigId:       configId,
+//				KeyFilterRegex: pulumi.StringRef("isAwesomeFeatureEnabled"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("settingId", settings.Settings[0].SettingId)
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetSettings(ctx *pulumi.Context, args *GetSettingsArgs, opts ...pulumi.InvokeOption) (*GetSettingsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSettingsResult
@@ -23,14 +55,19 @@ func GetSettings(ctx *pulumi.Context, args *GetSettingsArgs, opts ...pulumi.Invo
 
 // A collection of arguments for invoking getSettings.
 type GetSettingsArgs struct {
-	ConfigId       string  `pulumi:"configId"`
+	// The ID of the Config.
+	ConfigId string `pulumi:"configId"`
+	// Filter the Feature Flags or Settingss by key.
 	KeyFilterRegex *string `pulumi:"keyFilterRegex"`
 }
 
 // A collection of values returned by getSettings.
 type GetSettingsResult struct {
-	ConfigId       string               `pulumi:"configId"`
-	Id             string               `pulumi:"id"`
+	// The ID of the Config.
+	ConfigId string `pulumi:"configId"`
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// Filter the Feature Flags or Settingss by key.
 	KeyFilterRegex *string              `pulumi:"keyFilterRegex"`
 	Settings       []GetSettingsSetting `pulumi:"settings"`
 }
@@ -46,7 +83,9 @@ func GetSettingsOutput(ctx *pulumi.Context, args GetSettingsOutputArgs, opts ...
 
 // A collection of arguments for invoking getSettings.
 type GetSettingsOutputArgs struct {
-	ConfigId       pulumi.StringInput    `pulumi:"configId"`
+	// The ID of the Config.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
+	// Filter the Feature Flags or Settingss by key.
 	KeyFilterRegex pulumi.StringPtrInput `pulumi:"keyFilterRegex"`
 }
 
@@ -69,14 +108,17 @@ func (o GetSettingsResultOutput) ToGetSettingsResultOutputWithContext(ctx contex
 	return o
 }
 
+// The ID of the Config.
 func (o GetSettingsResultOutput) ConfigId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsResult) string { return v.ConfigId }).(pulumi.StringOutput)
 }
 
+// Internal ID of the data source. Do not use.
 func (o GetSettingsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Filter the Feature Flags or Settingss by key.
 func (o GetSettingsResultOutput) KeyFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSettingsResult) *string { return v.KeyFilterRegex }).(pulumi.StringPtrOutput)
 }

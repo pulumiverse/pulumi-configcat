@@ -137,7 +137,31 @@ class Tag(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Tag resource with the given unique name, props, and options.
+        Creates and manages a **Tag**.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_tag = configcat.Tag("my_tag",
+            product_id=product_id,
+            name="Created by Terraform",
+            color="panther")
+        pulumi.export("tagId", my_tag.id)
+        ```
+
+        ## Import
+
+        Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+
+        ```sh
+        $ pulumi import configcat:index/tag:Tag example 1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] color: The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
@@ -151,7 +175,31 @@ class Tag(pulumi.CustomResource):
                  args: TagArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Tag resource with the given unique name, props, and options.
+        Creates and manages a **Tag**.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_tag = configcat.Tag("my_tag",
+            product_id=product_id,
+            name="Created by Terraform",
+            color="panther")
+        pulumi.export("tagId", my_tag.id)
+        ```
+
+        ## Import
+
+        Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+
+        ```sh
+        $ pulumi import configcat:index/tag:Tag example 1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param TagArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

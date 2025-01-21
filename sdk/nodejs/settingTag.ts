@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Adds/Removes **Tags** to/from **Feature Flags or Settings**.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const settingId = config.require("settingId");
+ * const tagId = config.require("tagId");
+ * const mySettingTag = new configcat.SettingTag("my_setting_tag", {
+ *     settingId: settingId,
+ *     tagId: tagId,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Setting Tags can be imported using a combined SettingId:TagId ID.
+ *
+ * Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+ *
+ * Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+ *
+ * ```sh
+ * $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
+ * ```
+ */
 export class SettingTag extends pulumi.CustomResource {
     /**
      * Get an existing SettingTag resource's state with the given name, ID, and optional extra

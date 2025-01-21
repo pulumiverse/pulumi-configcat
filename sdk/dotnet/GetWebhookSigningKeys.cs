@@ -12,12 +12,96 @@ namespace Pulumiverse.Configcat
 {
     public static class GetWebhookSigningKeys
     {
+        /// <summary>
+        /// Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var webhookId = config.RequireDouble("webhookId");
+        ///     var test = Configcat.GetWebhookSigningKeys.Invoke(new()
+        ///     {
+        ///         WebhookId = webhookId,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["key1"] = test.Apply(getWebhookSigningKeysResult =&gt; getWebhookSigningKeysResult.Key1),
+        ///         ["key2"] = test.Apply(getWebhookSigningKeysResult =&gt; getWebhookSigningKeysResult.Key2),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Task<GetWebhookSigningKeysResult> InvokeAsync(GetWebhookSigningKeysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWebhookSigningKeysResult>("configcat:index/getWebhookSigningKeys:getWebhookSigningKeys", args ?? new GetWebhookSigningKeysArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var webhookId = config.RequireDouble("webhookId");
+        ///     var test = Configcat.GetWebhookSigningKeys.Invoke(new()
+        ///     {
+        ///         WebhookId = webhookId,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["key1"] = test.Apply(getWebhookSigningKeysResult =&gt; getWebhookSigningKeysResult.Key1),
+        ///         ["key2"] = test.Apply(getWebhookSigningKeysResult =&gt; getWebhookSigningKeysResult.Key2),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetWebhookSigningKeysResult> Invoke(GetWebhookSigningKeysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebhookSigningKeysResult>("configcat:index/getWebhookSigningKeys:getWebhookSigningKeys", args ?? new GetWebhookSigningKeysInvokeArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var webhookId = config.RequireDouble("webhookId");
+        ///     var test = Configcat.GetWebhookSigningKeys.Invoke(new()
+        ///     {
+        ///         WebhookId = webhookId,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["key1"] = test.Apply(getWebhookSigningKeysResult =&gt; getWebhookSigningKeysResult.Key1),
+        ///         ["key2"] = test.Apply(getWebhookSigningKeysResult =&gt; getWebhookSigningKeysResult.Key2),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetWebhookSigningKeysResult> Invoke(GetWebhookSigningKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWebhookSigningKeysResult>("configcat:index/getWebhookSigningKeys:getWebhookSigningKeys", args ?? new GetWebhookSigningKeysInvokeArgs(), options.WithDefaults());
     }
@@ -25,6 +109,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetWebhookSigningKeysArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The ID of the Webhook.
+        /// </summary>
         [Input("webhookId", required: true)]
         public int WebhookId { get; set; }
 
@@ -36,6 +123,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetWebhookSigningKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The ID of the Webhook.
+        /// </summary>
         [Input("webhookId", required: true)]
         public Input<int> WebhookId { get; set; } = null!;
 
@@ -49,9 +139,21 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetWebhookSigningKeysResult
     {
+        /// <summary>
+        /// Internal ID of the data source. Do not use.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The first signing key.
+        /// </summary>
         public readonly string Key1;
+        /// <summary>
+        /// The second signing key.
+        /// </summary>
         public readonly string Key2;
+        /// <summary>
+        /// The ID of the Webhook.
+        /// </summary>
         public readonly int WebhookId;
 
         [OutputConstructor]

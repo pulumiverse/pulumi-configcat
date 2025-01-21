@@ -12,6 +12,49 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
+//			myEnvironment, err := configcat.NewEnvironment(ctx, "my_environment", &configcat.EnvironmentArgs{
+//				ProductId:   pulumi.String(productId),
+//				Name:        pulumi.String("Staging"),
+//				Description: pulumi.String("Staging description"),
+//				Color:       pulumi.String("blue"),
+//				Order:       pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("environmentId", myEnvironment.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
+//
+// ```sh
+// $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+// ```
 type Environment struct {
 	pulumi.CustomResourceState
 
@@ -21,8 +64,7 @@ type Environment struct {
 	Description pulumi.StringOutput `pulumi:"description"`
 	// The name of the Environment.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-	// displayed in alphabetical order.
+	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntOutput `pulumi:"order"`
 	// The ID of the Product.
 	ProductId pulumi.StringOutput `pulumi:"productId"`
@@ -70,8 +112,7 @@ type environmentState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Environment.
 	Name *string `pulumi:"name"`
-	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-	// displayed in alphabetical order.
+	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
 	Order *int `pulumi:"order"`
 	// The ID of the Product.
 	ProductId *string `pulumi:"productId"`
@@ -84,8 +125,7 @@ type EnvironmentState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Environment.
 	Name pulumi.StringPtrInput
-	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-	// displayed in alphabetical order.
+	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntPtrInput
 	// The ID of the Product.
 	ProductId pulumi.StringPtrInput
@@ -102,8 +142,7 @@ type environmentArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Environment.
 	Name *string `pulumi:"name"`
-	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-	// displayed in alphabetical order.
+	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
 	Order int `pulumi:"order"`
 	// The ID of the Product.
 	ProductId string `pulumi:"productId"`
@@ -117,8 +156,7 @@ type EnvironmentArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Environment.
 	Name pulumi.StringPtrInput
-	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-	// displayed in alphabetical order.
+	// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntInput
 	// The ID of the Product.
 	ProductId pulumi.StringInput
@@ -226,8 +264,7 @@ func (o EnvironmentOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Environment) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-// displayed in alphabetical order.
+// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
 func (o EnvironmentOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v *Environment) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }

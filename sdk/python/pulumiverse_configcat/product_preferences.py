@@ -28,12 +28,10 @@ class ProductPreferencesArgs:
         """
         The set of arguments for constructing a ProductPreferences resource.
         :param pulumi.Input[str] product_id: The ID of the Product.
-        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values:
-               `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         :param pulumi.Input[bool] mandatory_setting_hint: Indicates whether Feature flags and Settings must have a hint. Default: false.
         :param pulumi.Input[bool] reason_required: Indicates that a mandatory note is required for saving and publishing. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-               note is required for saving and publishing.
+        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         :param pulumi.Input[bool] show_variation_id: Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
         """
         pulumi.set(__self__, "product_id", product_id)
@@ -64,8 +62,7 @@ class ProductPreferencesArgs:
     @pulumi.getter(name="keyGenerationMode")
     def key_generation_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Determines the Feature Flag key generation mode. Available values:
-        `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         """
         return pulumi.get(self, "key_generation_mode")
 
@@ -101,8 +98,7 @@ class ProductPreferencesArgs:
     @pulumi.getter(name="reasonRequiredEnvironments")
     def reason_required_environments(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[bool]]]]:
         """
-        The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-        note is required for saving and publishing.
+        The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         """
         return pulumi.get(self, "reason_required_environments")
 
@@ -134,13 +130,11 @@ class _ProductPreferencesState:
                  show_variation_id: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering ProductPreferences resources.
-        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values:
-               `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         :param pulumi.Input[bool] mandatory_setting_hint: Indicates whether Feature flags and Settings must have a hint. Default: false.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[bool] reason_required: Indicates that a mandatory note is required for saving and publishing. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-               note is required for saving and publishing.
+        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         :param pulumi.Input[bool] show_variation_id: Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
         """
         if key_generation_mode is not None:
@@ -160,8 +154,7 @@ class _ProductPreferencesState:
     @pulumi.getter(name="keyGenerationMode")
     def key_generation_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Determines the Feature Flag key generation mode. Available values:
-        `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         """
         return pulumi.get(self, "key_generation_mode")
 
@@ -209,8 +202,7 @@ class _ProductPreferencesState:
     @pulumi.getter(name="reasonRequiredEnvironments")
     def reason_required_environments(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[bool]]]]:
         """
-        The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-        note is required for saving and publishing.
+        The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         """
         return pulumi.get(self, "reason_required_environments")
 
@@ -244,16 +236,59 @@ class ProductPreferences(pulumi.CustomResource):
                  show_variation_id: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a ProductPreferences resource with the given unique name, props, and options.
+        Manages the **Product Preferences**.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        organization_id = config.require("organizationId")
+        product = configcat.Product("product",
+            organization_id=organization_id,
+            name="My product",
+            order=0)
+        test = configcat.Environment("test",
+            product_id=product.id,
+            name="Test",
+            order=0)
+        production = configcat.Environment("production",
+            product_id=product.id,
+            name="Production",
+            order=1)
+        preferences = configcat.ProductPreferences("preferences",
+            product_id=product.id,
+            key_generation_mode="kebabCase",
+            mandatory_setting_hint=True,
+            show_variation_id=False,
+            reason_required=False,
+            reason_required_environments=pulumi.Output.all(
+                testId=test.id,
+                productionId=production.id
+        ).apply(lambda resolved_outputs: {
+                resolved_outputs['testId']: False,
+                resolved_outputs['productionId']: True,
+            })
+        )
+        ```
+
+        ## Import
+
+        Product preferences can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+
+        ```sh
+        $ pulumi import configcat:index/productPreferences:ProductPreferences example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values:
-               `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         :param pulumi.Input[bool] mandatory_setting_hint: Indicates whether Feature flags and Settings must have a hint. Default: false.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[bool] reason_required: Indicates that a mandatory note is required for saving and publishing. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-               note is required for saving and publishing.
+        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         :param pulumi.Input[bool] show_variation_id: Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
         """
         ...
@@ -263,7 +298,52 @@ class ProductPreferences(pulumi.CustomResource):
                  args: ProductPreferencesArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ProductPreferences resource with the given unique name, props, and options.
+        Manages the **Product Preferences**.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        organization_id = config.require("organizationId")
+        product = configcat.Product("product",
+            organization_id=organization_id,
+            name="My product",
+            order=0)
+        test = configcat.Environment("test",
+            product_id=product.id,
+            name="Test",
+            order=0)
+        production = configcat.Environment("production",
+            product_id=product.id,
+            name="Production",
+            order=1)
+        preferences = configcat.ProductPreferences("preferences",
+            product_id=product.id,
+            key_generation_mode="kebabCase",
+            mandatory_setting_hint=True,
+            show_variation_id=False,
+            reason_required=False,
+            reason_required_environments=pulumi.Output.all(
+                testId=test.id,
+                productionId=production.id
+        ).apply(lambda resolved_outputs: {
+                resolved_outputs['testId']: False,
+                resolved_outputs['productionId']: True,
+            })
+        )
+        ```
+
+        ## Import
+
+        Product preferences can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+
+        ```sh
+        $ pulumi import configcat:index/productPreferences:ProductPreferences example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param ProductPreferencesArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -325,13 +405,11 @@ class ProductPreferences(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values:
-               `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        :param pulumi.Input[str] key_generation_mode: Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         :param pulumi.Input[bool] mandatory_setting_hint: Indicates whether Feature flags and Settings must have a hint. Default: false.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[bool] reason_required: Indicates that a mandatory note is required for saving and publishing. Default: false.
-        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-               note is required for saving and publishing.
+        :param pulumi.Input[Mapping[str, pulumi.Input[bool]]] reason_required_environments: The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         :param pulumi.Input[bool] show_variation_id: Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -350,8 +428,7 @@ class ProductPreferences(pulumi.CustomResource):
     @pulumi.getter(name="keyGenerationMode")
     def key_generation_mode(self) -> pulumi.Output[str]:
         """
-        Determines the Feature Flag key generation mode. Available values:
-        `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         """
         return pulumi.get(self, "key_generation_mode")
 
@@ -383,8 +460,7 @@ class ProductPreferences(pulumi.CustomResource):
     @pulumi.getter(name="reasonRequiredEnvironments")
     def reason_required_environments(self) -> pulumi.Output[Mapping[str, bool]]:
         """
-        The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-        note is required for saving and publishing.
+        The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         """
         return pulumi.get(self, "reason_required_environments")
 

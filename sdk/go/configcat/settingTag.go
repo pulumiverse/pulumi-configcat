@@ -12,6 +12,50 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Adds/Removes **Tags** to/from **Feature Flags or Settings**.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			settingId := cfg.Require("settingId")
+//			tagId := cfg.Require("tagId")
+//			_, err := configcat.NewSettingTag(ctx, "my_setting_tag", &configcat.SettingTagArgs{
+//				SettingId: pulumi.String(settingId),
+//				TagId:     pulumi.String(tagId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Setting Tags can be imported using a combined SettingId:TagId ID.
+//
+// Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+//
+// Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+//
+// ```sh
+// $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
+// ```
 type SettingTag struct {
 	pulumi.CustomResourceState
 

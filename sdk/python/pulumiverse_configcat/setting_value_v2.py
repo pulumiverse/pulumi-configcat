@@ -277,7 +277,20 @@ class SettingValueV2(pulumi.CustomResource):
                  value: Optional[pulumi.Input[Union['SettingValueV2ValueArgs', 'SettingValueV2ValueArgsDict']]] = None,
                  __props__=None):
         """
-        Create a SettingValueV2 resource with the given unique name, props, and options.
+        Initializes and updates **Feature Flag or Setting** values for V2 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+
+        ## Import
+
+        Feature Flag/Setting values (V2) can be imported using a combined EnvironmentID:SettingId ID.
+
+        Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+
+        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+
+        ```sh
+        $ pulumi import configcat:index/settingValueV2:SettingValueV2 example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] environment_id: The ID of the Environment.
@@ -294,7 +307,20 @@ class SettingValueV2(pulumi.CustomResource):
                  args: SettingValueV2Args,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SettingValueV2 resource with the given unique name, props, and options.
+        Initializes and updates **Feature Flag or Setting** values for V2 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+
+        ## Import
+
+        Feature Flag/Setting values (V2) can be imported using a combined EnvironmentID:SettingId ID.
+
+        Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+
+        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+
+        ```sh
+        $ pulumi import configcat:index/settingValueV2:SettingValueV2 example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param SettingValueV2Args args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

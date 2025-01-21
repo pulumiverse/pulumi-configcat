@@ -233,7 +233,34 @@ class Segment(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Segment resource with the given unique name, props, and options.
+        Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_segment = configcat.Segment("my_segment",
+            product_id=product_id,
+            name="Beta users",
+            description="Beta users' description",
+            comparison_attribute="email",
+            comparator="sensitiveIsOneOf",
+            comparison_value="betauser1@example.com,betauser2@example.com")
+        pulumi.export("segmentId", my_segment.id)
+        ```
+
+        ## Import
+
+        Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
+
+        ```sh
+        $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] comparator: The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
@@ -250,7 +277,34 @@ class Segment(pulumi.CustomResource):
                  args: SegmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Segment resource with the given unique name, props, and options.
+        Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_segment = configcat.Segment("my_segment",
+            product_id=product_id,
+            name="Beta users",
+            description="Beta users' description",
+            comparison_attribute="email",
+            comparator="sensitiveIsOneOf",
+            comparison_value="betauser1@example.com,betauser2@example.com")
+        pulumi.export("segmentId", my_segment.id)
+        ```
+
+        ## Import
+
+        Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
+
+        ```sh
+        $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param SegmentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

@@ -12,6 +12,47 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages a **Tag**.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
+//			myTag, err := configcat.NewTag(ctx, "my_tag", &configcat.TagArgs{
+//				ProductId: pulumi.String(productId),
+//				Name:      pulumi.String("Created by Terraform"),
+//				Color:     pulumi.String("panther"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("tagId", myTag.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+//
+// ```sh
+// $ pulumi import configcat:index/tag:Tag example 1234
+// ```
 type Tag struct {
 	pulumi.CustomResourceState
 

@@ -6,6 +6,24 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const mySegments = configcat.getSegments({
+ *     productId: productId,
+ *     nameFilterRegex: "Beta users",
+ * });
+ * export const segmentId = mySegments.then(mySegments => mySegments.segments?.[0]?.segmentId);
+ * ```
+ */
 export function getSegments(args: GetSegmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetSegmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getSegments:getSegments", {
@@ -18,7 +36,13 @@ export function getSegments(args: GetSegmentsArgs, opts?: pulumi.InvokeOptions):
  * A collection of arguments for invoking getSegments.
  */
 export interface GetSegmentsArgs {
+    /**
+     * Filter the Segments by name.
+     */
     nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
     productId: string;
 }
 
@@ -26,11 +50,38 @@ export interface GetSegmentsArgs {
  * A collection of values returned by getSegments.
  */
 export interface GetSegmentsResult {
+    /**
+     * Internal ID of the data source. Do not use.
+     */
     readonly id: string;
+    /**
+     * Filter the Segments by name.
+     */
     readonly nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
     readonly productId: string;
     readonly segments: outputs.GetSegmentsSegment[];
 }
+/**
+ * Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const mySegments = configcat.getSegments({
+ *     productId: productId,
+ *     nameFilterRegex: "Beta users",
+ * });
+ * export const segmentId = mySegments.then(mySegments => mySegments.segments?.[0]?.segmentId);
+ * ```
+ */
 export function getSegmentsOutput(args: GetSegmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSegmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("configcat:index/getSegments:getSegments", {
@@ -43,6 +94,12 @@ export function getSegmentsOutput(args: GetSegmentsOutputArgs, opts?: pulumi.Inv
  * A collection of arguments for invoking getSegments.
  */
 export interface GetSegmentsOutputArgs {
+    /**
+     * Filter the Segments by name.
+     */
     nameFilterRegex?: pulumi.Input<string>;
+    /**
+     * The ID of the Product.
+     */
     productId: pulumi.Input<string>;
 }

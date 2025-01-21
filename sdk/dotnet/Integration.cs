@@ -10,6 +10,17 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages an **Integration**. [Read more about Integrations in ConfigCat](https://configcat.com/docs/integrations/overview/)
+    /// 
+    /// ## Import
+    /// 
+    /// Integrations can be imported using the IntegrationId. Get the IntegrationId using the [List Integrations API](https://api.configcat.com/docs/index.html#tag/Integrations/operation/get-integrations) for example.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/integration:Integration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/integration:Integration")]
     public partial class Integration : global::Pulumi.CustomResource
     {
@@ -20,15 +31,13 @@ namespace Pulumiverse.Configcat
         public Output<ImmutableArray<string>> Configs { get; private set; } = null!;
 
         /// <summary>
-        /// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-        /// connected.
+        /// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         /// </summary>
         [Output("environments")]
         public Output<ImmutableArray<string>> Environments { get; private set; } = null!;
 
         /// <summary>
-        /// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-        /// `pubNub`.
+        /// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         /// </summary>
         [Output("integrationType")]
         public Output<string> IntegrationType { get; private set; } = null!;
@@ -40,8 +49,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-        /// integration type at the Example usage section.
+        /// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         /// </summary>
         [Output("parameters")]
         public Output<ImmutableDictionary<string, string>> Parameters { get; private set; } = null!;
@@ -115,8 +123,7 @@ namespace Pulumiverse.Configcat
         private InputList<string>? _environments;
 
         /// <summary>
-        /// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-        /// connected.
+        /// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         /// </summary>
         public InputList<string> Environments
         {
@@ -125,8 +132,7 @@ namespace Pulumiverse.Configcat
         }
 
         /// <summary>
-        /// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-        /// `pubNub`.
+        /// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         /// </summary>
         [Input("integrationType", required: true)]
         public Input<string> IntegrationType { get; set; } = null!;
@@ -141,8 +147,7 @@ namespace Pulumiverse.Configcat
         private InputMap<string>? _parameters;
 
         /// <summary>
-        /// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-        /// integration type at the Example usage section.
+        /// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         /// </summary>
         public InputMap<string> Parameters
         {
@@ -180,8 +185,7 @@ namespace Pulumiverse.Configcat
         private InputList<string>? _environments;
 
         /// <summary>
-        /// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-        /// connected.
+        /// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         /// </summary>
         public InputList<string> Environments
         {
@@ -190,8 +194,7 @@ namespace Pulumiverse.Configcat
         }
 
         /// <summary>
-        /// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-        /// `pubNub`.
+        /// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         /// </summary>
         [Input("integrationType")]
         public Input<string>? IntegrationType { get; set; }
@@ -206,8 +209,7 @@ namespace Pulumiverse.Configcat
         private InputMap<string>? _parameters;
 
         /// <summary>
-        /// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-        /// integration type at the Example usage section.
+        /// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         /// </summary>
         public InputMap<string> Parameters
         {

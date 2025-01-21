@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const organizationId = config.require("organizationId");
+ * const myConfig = new configcat.Product("my_config", {
+ *     organizationId: organizationId,
+ *     name: "My product",
+ *     description: "My product description",
+ *     order: 0,
+ * });
+ * export const productId = myProduct.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Products can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+ * ```
+ */
 export class Product extends pulumi.CustomResource {
     /**
      * Get an existing Product resource's state with the given name, ID, and optional extra
@@ -41,8 +69,7 @@ export class Product extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
-     * in alphabetical order.
+     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
@@ -98,8 +125,7 @@ export interface ProductState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
-     * in alphabetical order.
+     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
@@ -121,8 +147,7 @@ export interface ProductArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
-     * in alphabetical order.
+     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
      */
     order: pulumi.Input<number>;
     /**

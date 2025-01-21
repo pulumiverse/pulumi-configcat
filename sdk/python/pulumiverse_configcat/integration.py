@@ -27,15 +27,12 @@ class IntegrationArgs:
                  parameters: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Integration resource.
-        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-               `pubNub`.
+        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] configs: List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-               connected.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         :param pulumi.Input[str] name: The name of the Integration.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-               integration type at the Example usage section.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         """
         pulumi.set(__self__, "integration_type", integration_type)
         pulumi.set(__self__, "product_id", product_id)
@@ -52,8 +49,7 @@ class IntegrationArgs:
     @pulumi.getter(name="integrationType")
     def integration_type(self) -> pulumi.Input[str]:
         """
-        The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-        `pubNub`.
+        The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         """
         return pulumi.get(self, "integration_type")
 
@@ -89,8 +85,7 @@ class IntegrationArgs:
     @pulumi.getter
     def environments(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-        connected.
+        List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         """
         return pulumi.get(self, "environments")
 
@@ -114,8 +109,7 @@ class IntegrationArgs:
     @pulumi.getter
     def parameters(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
-        Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-        integration type at the Example usage section.
+        Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         """
         return pulumi.get(self, "parameters")
 
@@ -136,13 +130,10 @@ class _IntegrationState:
         """
         Input properties used for looking up and filtering Integration resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] configs: List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-               connected.
-        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-               `pubNub`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
+        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         :param pulumi.Input[str] name: The name of the Integration.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-               integration type at the Example usage section.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         if configs is not None:
@@ -174,8 +165,7 @@ class _IntegrationState:
     @pulumi.getter
     def environments(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-        connected.
+        List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         """
         return pulumi.get(self, "environments")
 
@@ -187,8 +177,7 @@ class _IntegrationState:
     @pulumi.getter(name="integrationType")
     def integration_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-        `pubNub`.
+        The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         """
         return pulumi.get(self, "integration_type")
 
@@ -212,8 +201,7 @@ class _IntegrationState:
     @pulumi.getter
     def parameters(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
-        Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-        integration type at the Example usage section.
+        Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         """
         return pulumi.get(self, "parameters")
 
@@ -247,17 +235,23 @@ class Integration(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Integration resource with the given unique name, props, and options.
+        Creates and manages an **Integration**. [Read more about Integrations in ConfigCat](https://configcat.com/docs/integrations/overview/)
+
+        ## Import
+
+        Integrations can be imported using the IntegrationId. Get the IntegrationId using the [List Integrations API](https://api.configcat.com/docs/index.html#tag/Integrations/operation/get-integrations) for example.
+
+        ```sh
+        $ pulumi import configcat:index/integration:Integration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] configs: List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-               connected.
-        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-               `pubNub`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
+        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         :param pulumi.Input[str] name: The name of the Integration.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-               integration type at the Example usage section.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         ...
@@ -267,7 +261,16 @@ class Integration(pulumi.CustomResource):
                  args: IntegrationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Integration resource with the given unique name, props, and options.
+        Creates and manages an **Integration**. [Read more about Integrations in ConfigCat](https://configcat.com/docs/integrations/overview/)
+
+        ## Import
+
+        Integrations can be imported using the IntegrationId. Get the IntegrationId using the [List Integrations API](https://api.configcat.com/docs/index.html#tag/Integrations/operation/get-integrations) for example.
+
+        ```sh
+        $ pulumi import configcat:index/integration:Integration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param IntegrationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -332,13 +335,10 @@ class Integration(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] configs: List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-               connected.
-        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-               `pubNub`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] environments: List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
+        :param pulumi.Input[str] integration_type: The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         :param pulumi.Input[str] name: The name of the Integration.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-               integration type at the Example usage section.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] parameters: Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -365,8 +365,7 @@ class Integration(pulumi.CustomResource):
     @pulumi.getter
     def environments(self) -> pulumi.Output[Sequence[str]]:
         """
-        List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-        connected.
+        List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
         """
         return pulumi.get(self, "environments")
 
@@ -374,8 +373,7 @@ class Integration(pulumi.CustomResource):
     @pulumi.getter(name="integrationType")
     def integration_type(self) -> pulumi.Output[str]:
         """
-        The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-        `pubNub`.
+        The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
         """
         return pulumi.get(self, "integration_type")
 
@@ -391,8 +389,7 @@ class Integration(pulumi.CustomResource):
     @pulumi.getter
     def parameters(self) -> pulumi.Output[Mapping[str, str]]:
         """
-        Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-        integration type at the Example usage section.
+        Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
         """
         return pulumi.get(self, "parameters")
 

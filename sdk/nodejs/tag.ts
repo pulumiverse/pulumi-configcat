@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages a **Tag**.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myTag = new configcat.Tag("my_tag", {
+ *     productId: productId,
+ *     name: "Created by Terraform",
+ *     color: "panther",
+ * });
+ * export const tagId = myTag.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+ *
+ * ```sh
+ * $ pulumi import configcat:index/tag:Tag example 1234
+ * ```
+ */
 export class Tag extends pulumi.CustomResource {
     /**
      * Get an existing Tag resource's state with the given name, ID, and optional extra

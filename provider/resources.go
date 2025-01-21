@@ -88,8 +88,9 @@ func Provider() tfbridge.ProviderInfo {
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/pulumiverse/pulumi-configcat",
 		// The GitHub Org for the provider - defaults to `terraform-providers`
-		GitHubOrg:    "configcat",
-		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
+		GitHubOrg:               "configcat",
+		TFProviderModuleVersion: "v5",
+		MetadataInfo:            tfbridge.NewProviderMetadata(metadata),
 		Config: map[string]*tfbridge.SchemaInfo{
 			"basic_auth_username": {
 				Type: "string",

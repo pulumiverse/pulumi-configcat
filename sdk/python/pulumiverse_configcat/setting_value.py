@@ -261,7 +261,60 @@ class SettingValue(pulumi.CustomResource):
                  value: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a SettingValue resource with the given unique name, props, and options.
+        Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        environment_id = config.require("environmentId")
+        setting_id = config.require("settingId")
+        my_setting_value = configcat.SettingValue("my_setting_value",
+            environment_id=environment_id,
+            setting_id=setting_id,
+            mandatory_notes="mandatory notes",
+            value="true",
+            rollout_rules=[
+                {
+                    "comparison_attribute": "Email",
+                    "comparator": "contains",
+                    "comparison_value": "@mycompany.com",
+                    "value": "true",
+                },
+                {
+                    "comparison_attribute": "custom",
+                    "comparator": "isOneOf",
+                    "comparison_value": "red",
+                    "value": "false",
+                },
+            ],
+            percentage_items=[
+                {
+                    "percentage": "20",
+                    "value": "true",
+                },
+                {
+                    "percentage": "80",
+                    "value": "false",
+                },
+            ])
+        ```
+
+        ## Import
+
+        Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
+
+        Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+
+        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+
+        ```sh
+        $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] environment_id: The ID of the Environment.
@@ -276,7 +329,60 @@ class SettingValue(pulumi.CustomResource):
                  args: SettingValueArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a SettingValue resource with the given unique name, props, and options.
+        Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        environment_id = config.require("environmentId")
+        setting_id = config.require("settingId")
+        my_setting_value = configcat.SettingValue("my_setting_value",
+            environment_id=environment_id,
+            setting_id=setting_id,
+            mandatory_notes="mandatory notes",
+            value="true",
+            rollout_rules=[
+                {
+                    "comparison_attribute": "Email",
+                    "comparator": "contains",
+                    "comparison_value": "@mycompany.com",
+                    "value": "true",
+                },
+                {
+                    "comparison_attribute": "custom",
+                    "comparator": "isOneOf",
+                    "comparison_value": "red",
+                    "value": "false",
+                },
+            ],
+            percentage_items=[
+                {
+                    "percentage": "20",
+                    "value": "true",
+                },
+                {
+                    "percentage": "80",
+                    "value": "false",
+                },
+            ])
+        ```
+
+        ## Import
+
+        Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
+
+        Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+
+        Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+
+        ```sh
+        $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param SettingValueArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

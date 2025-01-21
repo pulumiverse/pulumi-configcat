@@ -11,6 +11,34 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
+//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("productId", myProducts.Products[0].ProductId)
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetProducts(ctx *pulumi.Context, args *GetProductsArgs, opts ...pulumi.InvokeOption) (*GetProductsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProductsResult
@@ -23,12 +51,15 @@ func GetProducts(ctx *pulumi.Context, args *GetProductsArgs, opts ...pulumi.Invo
 
 // A collection of arguments for invoking getProducts.
 type GetProductsArgs struct {
+	// Filter the Products by name.
 	NameFilterRegex *string `pulumi:"nameFilterRegex"`
 }
 
 // A collection of values returned by getProducts.
 type GetProductsResult struct {
-	Id              string               `pulumi:"id"`
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// Filter the Products by name.
 	NameFilterRegex *string              `pulumi:"nameFilterRegex"`
 	Products        []GetProductsProduct `pulumi:"products"`
 }
@@ -44,6 +75,7 @@ func GetProductsOutput(ctx *pulumi.Context, args GetProductsOutputArgs, opts ...
 
 // A collection of arguments for invoking getProducts.
 type GetProductsOutputArgs struct {
+	// Filter the Products by name.
 	NameFilterRegex pulumi.StringPtrInput `pulumi:"nameFilterRegex"`
 }
 
@@ -66,10 +98,12 @@ func (o GetProductsResultOutput) ToGetProductsResultOutputWithContext(ctx contex
 	return o
 }
 
+// Internal ID of the data source. Do not use.
 func (o GetProductsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProductsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Filter the Products by name.
 func (o GetProductsResultOutput) NameFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProductsResult) *string { return v.NameFilterRegex }).(pulumi.StringPtrOutput)
 }

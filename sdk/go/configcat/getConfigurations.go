@@ -11,6 +11,38 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
+//			myConfigs, err := configcat.GetConfigurations(ctx, &configcat.GetConfigurationsArgs{
+//				ProductId:       productId,
+//				NameFilterRegex: pulumi.StringRef("Main Config"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("configId", myConfigs.Configs[0].ConfigId)
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetConfigurations(ctx *pulumi.Context, args *GetConfigurationsArgs, opts ...pulumi.InvokeOption) (*GetConfigurationsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetConfigurationsResult
@@ -23,16 +55,21 @@ func GetConfigurations(ctx *pulumi.Context, args *GetConfigurationsArgs, opts ..
 
 // A collection of arguments for invoking getConfigurations.
 type GetConfigurationsArgs struct {
+	// Filter the Configs by name.
 	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	ProductId       string  `pulumi:"productId"`
+	// The ID of the Product.
+	ProductId string `pulumi:"productId"`
 }
 
 // A collection of values returned by getConfigurations.
 type GetConfigurationsResult struct {
-	Configs         []GetConfigurationsConfig `pulumi:"configs"`
-	Id              string                    `pulumi:"id"`
-	NameFilterRegex *string                   `pulumi:"nameFilterRegex"`
-	ProductId       string                    `pulumi:"productId"`
+	Configs []GetConfigurationsConfig `pulumi:"configs"`
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// Filter the Configs by name.
+	NameFilterRegex *string `pulumi:"nameFilterRegex"`
+	// The ID of the Product.
+	ProductId string `pulumi:"productId"`
 }
 
 func GetConfigurationsOutput(ctx *pulumi.Context, args GetConfigurationsOutputArgs, opts ...pulumi.InvokeOption) GetConfigurationsResultOutput {
@@ -46,8 +83,10 @@ func GetConfigurationsOutput(ctx *pulumi.Context, args GetConfigurationsOutputAr
 
 // A collection of arguments for invoking getConfigurations.
 type GetConfigurationsOutputArgs struct {
+	// Filter the Configs by name.
 	NameFilterRegex pulumi.StringPtrInput `pulumi:"nameFilterRegex"`
-	ProductId       pulumi.StringInput    `pulumi:"productId"`
+	// The ID of the Product.
+	ProductId pulumi.StringInput `pulumi:"productId"`
 }
 
 func (GetConfigurationsOutputArgs) ElementType() reflect.Type {
@@ -73,14 +112,17 @@ func (o GetConfigurationsResultOutput) Configs() GetConfigurationsConfigArrayOut
 	return o.ApplyT(func(v GetConfigurationsResult) []GetConfigurationsConfig { return v.Configs }).(GetConfigurationsConfigArrayOutput)
 }
 
+// Internal ID of the data source. Do not use.
 func (o GetConfigurationsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigurationsResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Filter the Configs by name.
 func (o GetConfigurationsResultOutput) NameFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetConfigurationsResult) *string { return v.NameFilterRegex }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the Product.
 func (o GetConfigurationsResultOutput) ProductId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigurationsResult) string { return v.ProductId }).(pulumi.StringOutput)
 }

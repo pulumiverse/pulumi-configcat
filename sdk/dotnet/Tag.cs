@@ -10,6 +10,43 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages a **Tag**.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var productId = config.Require("productId");
+    ///     var myTag = new Configcat.Tag("my_tag", new()
+    ///     {
+    ///         ProductId = productId,
+    ///         Name = "Created by Terraform",
+    ///         Color = "panther",
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["tagId"] = myTag.Id,
+    ///     };
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/tag:Tag example 1234
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/tag:Tag")]
     public partial class Tag : global::Pulumi.CustomResource
     {

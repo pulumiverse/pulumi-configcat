@@ -4,6 +4,17 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages an **Integration**. [Read more about Integrations in ConfigCat](https://configcat.com/docs/integrations/overview/)
+ *
+ * ## Import
+ *
+ * Integrations can be imported using the IntegrationId. Get the IntegrationId using the [List Integrations API](https://api.configcat.com/docs/index.html#tag/Integrations/operation/get-integrations) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/integration:Integration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+ * ```
+ */
 export class Integration extends pulumi.CustomResource {
     /**
      * Get an existing Integration resource's state with the given name, ID, and optional extra
@@ -37,13 +48,11 @@ export class Integration extends pulumi.CustomResource {
      */
     public readonly configs!: pulumi.Output<string[]>;
     /**
-     * List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-     * connected.
+     * List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
      */
     public readonly environments!: pulumi.Output<string[]>;
     /**
-     * The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-     * `pubNub`.
+     * The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
      */
     public readonly integrationType!: pulumi.Output<string>;
     /**
@@ -51,8 +60,7 @@ export class Integration extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-     * integration type at the Example usage section.
+     * Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
      */
     public readonly parameters!: pulumi.Output<{[key: string]: string}>;
     /**
@@ -108,13 +116,11 @@ export interface IntegrationState {
      */
     configs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-     * connected.
+     * List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
      */
     environments?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-     * `pubNub`.
+     * The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
      */
     integrationType?: pulumi.Input<string>;
     /**
@@ -122,8 +128,7 @@ export interface IntegrationState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-     * integration type at the Example usage section.
+     * Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
      */
     parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -141,13 +146,11 @@ export interface IntegrationArgs {
      */
     configs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-     * connected.
+     * List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
      */
     environments?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-     * `pubNub`.
+     * The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
      */
     integrationType: pulumi.Input<string>;
     /**
@@ -155,8 +158,7 @@ export interface IntegrationArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-     * integration type at the Example usage section.
+     * Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
      */
     parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**

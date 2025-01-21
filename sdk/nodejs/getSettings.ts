@@ -6,6 +6,24 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const settings = configcat.getSettings({
+ *     configId: configId,
+ *     keyFilterRegex: "isAwesomeFeatureEnabled",
+ * });
+ * export const settingId = settings.then(settings => settings.settings?.[0]?.settingId);
+ * ```
+ */
 export function getSettings(args: GetSettingsArgs, opts?: pulumi.InvokeOptions): Promise<GetSettingsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getSettings:getSettings", {
@@ -18,7 +36,13 @@ export function getSettings(args: GetSettingsArgs, opts?: pulumi.InvokeOptions):
  * A collection of arguments for invoking getSettings.
  */
 export interface GetSettingsArgs {
+    /**
+     * The ID of the Config.
+     */
     configId: string;
+    /**
+     * Filter the Feature Flags or Settingss by key.
+     */
     keyFilterRegex?: string;
 }
 
@@ -26,11 +50,38 @@ export interface GetSettingsArgs {
  * A collection of values returned by getSettings.
  */
 export interface GetSettingsResult {
+    /**
+     * The ID of the Config.
+     */
     readonly configId: string;
+    /**
+     * Internal ID of the data source. Do not use.
+     */
     readonly id: string;
+    /**
+     * Filter the Feature Flags or Settingss by key.
+     */
     readonly keyFilterRegex?: string;
     readonly settings: outputs.GetSettingsSetting[];
 }
+/**
+ * Use this data source to access information about existing **Feature Flags or Settings**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const settings = configcat.getSettings({
+ *     configId: configId,
+ *     keyFilterRegex: "isAwesomeFeatureEnabled",
+ * });
+ * export const settingId = settings.then(settings => settings.settings?.[0]?.settingId);
+ * ```
+ */
 export function getSettingsOutput(args: GetSettingsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSettingsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("configcat:index/getSettings:getSettings", {
@@ -43,6 +94,12 @@ export function getSettingsOutput(args: GetSettingsOutputArgs, opts?: pulumi.Inv
  * A collection of arguments for invoking getSettings.
  */
 export interface GetSettingsOutputArgs {
+    /**
+     * The ID of the Config.
+     */
     configId: pulumi.Input<string>;
+    /**
+     * Filter the Feature Flags or Settingss by key.
+     */
     keyFilterRegex?: pulumi.Input<string>;
 }

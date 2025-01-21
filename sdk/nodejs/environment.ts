@@ -4,6 +4,35 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myEnvironment = new configcat.Environment("my_environment", {
+ *     productId: productId,
+ *     name: "Staging",
+ *     description: "Staging description",
+ *     color: "blue",
+ *     order: 0,
+ * });
+ * export const environmentId = myEnvironment.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+ * ```
+ */
 export class Environment extends pulumi.CustomResource {
     /**
      * Get an existing Environment resource's state with the given name, ID, and optional extra
@@ -45,8 +74,7 @@ export class Environment extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-     * displayed in alphabetical order.
+     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
@@ -108,8 +136,7 @@ export interface EnvironmentState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-     * displayed in alphabetical order.
+     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
@@ -135,8 +162,7 @@ export interface EnvironmentArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
-     * displayed in alphabetical order.
+     * The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
      */
     order: pulumi.Input<number>;
     /**

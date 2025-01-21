@@ -6,6 +6,21 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const myProducts = configcat.getProducts({
+ *     nameFilterRegex: "ConfigCat's product",
+ * });
+ * export const productId = myProducts.then(myProducts => myProducts.products?.[0]?.productId);
+ * ```
+ */
 export function getProducts(args?: GetProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetProductsResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -18,6 +33,9 @@ export function getProducts(args?: GetProductsArgs, opts?: pulumi.InvokeOptions)
  * A collection of arguments for invoking getProducts.
  */
 export interface GetProductsArgs {
+    /**
+     * Filter the Products by name.
+     */
     nameFilterRegex?: string;
 }
 
@@ -25,10 +43,31 @@ export interface GetProductsArgs {
  * A collection of values returned by getProducts.
  */
 export interface GetProductsResult {
+    /**
+     * Internal ID of the data source. Do not use.
+     */
     readonly id: string;
+    /**
+     * Filter the Products by name.
+     */
     readonly nameFilterRegex?: string;
     readonly products: outputs.GetProductsProduct[];
 }
+/**
+ * Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const myProducts = configcat.getProducts({
+ *     nameFilterRegex: "ConfigCat's product",
+ * });
+ * export const productId = myProducts.then(myProducts => myProducts.products?.[0]?.productId);
+ * ```
+ */
 export function getProductsOutput(args?: GetProductsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProductsResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -41,5 +80,8 @@ export function getProductsOutput(args?: GetProductsOutputArgs, opts?: pulumi.In
  * A collection of arguments for invoking getProducts.
  */
 export interface GetProductsOutputArgs {
+    /**
+     * Filter the Products by name.
+     */
     nameFilterRegex?: pulumi.Input<string>;
 }

@@ -12,21 +12,27 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages an **Integration**. [Read more about Integrations in ConfigCat](https://configcat.com/docs/integrations/overview/)
+//
+// ## Import
+//
+// Integrations can be imported using the IntegrationId. Get the IntegrationId using the [List Integrations API](https://api.configcat.com/docs/index.html#tag/Integrations/operation/get-integrations) for example.
+//
+// ```sh
+// $ pulumi import configcat:index/integration:Integration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+// ```
 type Integration struct {
 	pulumi.CustomResourceState
 
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
 	Configs pulumi.StringArrayOutput `pulumi:"configs"`
-	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-	// connected.
+	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
 	Environments pulumi.StringArrayOutput `pulumi:"environments"`
-	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-	// `pubNub`.
+	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
 	IntegrationType pulumi.StringOutput `pulumi:"integrationType"`
 	// The name of the Integration.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-	// integration type at the Example usage section.
+	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
 	Parameters pulumi.StringMapOutput `pulumi:"parameters"`
 	// The ID of the Product.
 	ProductId pulumi.StringOutput `pulumi:"productId"`
@@ -70,16 +76,13 @@ func GetIntegration(ctx *pulumi.Context,
 type integrationState struct {
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
 	Configs []string `pulumi:"configs"`
-	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-	// connected.
+	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
 	Environments []string `pulumi:"environments"`
-	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-	// `pubNub`.
+	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
 	IntegrationType *string `pulumi:"integrationType"`
 	// The name of the Integration.
 	Name *string `pulumi:"name"`
-	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-	// integration type at the Example usage section.
+	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
 	Parameters map[string]string `pulumi:"parameters"`
 	// The ID of the Product.
 	ProductId *string `pulumi:"productId"`
@@ -88,16 +91,13 @@ type integrationState struct {
 type IntegrationState struct {
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
 	Configs pulumi.StringArrayInput
-	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-	// connected.
+	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
 	Environments pulumi.StringArrayInput
-	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-	// `pubNub`.
+	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
 	IntegrationType pulumi.StringPtrInput
 	// The name of the Integration.
 	Name pulumi.StringPtrInput
-	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-	// integration type at the Example usage section.
+	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
 	Parameters pulumi.StringMapInput
 	// The ID of the Product.
 	ProductId pulumi.StringPtrInput
@@ -110,16 +110,13 @@ func (IntegrationState) ElementType() reflect.Type {
 type integrationArgs struct {
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
 	Configs []string `pulumi:"configs"`
-	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-	// connected.
+	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
 	Environments []string `pulumi:"environments"`
-	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-	// `pubNub`.
+	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
 	IntegrationType string `pulumi:"integrationType"`
 	// The name of the Integration.
 	Name *string `pulumi:"name"`
-	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-	// integration type at the Example usage section.
+	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
 	Parameters map[string]string `pulumi:"parameters"`
 	// The ID of the Product.
 	ProductId string `pulumi:"productId"`
@@ -129,16 +126,13 @@ type integrationArgs struct {
 type IntegrationArgs struct {
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
 	Configs pulumi.StringArrayInput
-	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-	// connected.
+	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
 	Environments pulumi.StringArrayInput
-	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-	// `pubNub`.
+	// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
 	IntegrationType pulumi.StringInput
 	// The name of the Integration.
 	Name pulumi.StringPtrInput
-	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-	// integration type at the Example usage section.
+	// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
 	Parameters pulumi.StringMapInput
 	// The ID of the Product.
 	ProductId pulumi.StringInput
@@ -236,14 +230,12 @@ func (o IntegrationOutput) Configs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Integration) pulumi.StringArrayOutput { return v.Configs }).(pulumi.StringArrayOutput)
 }
 
-// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are
-// connected.
+// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
 func (o IntegrationOutput) Environments() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Integration) pulumi.StringArrayOutput { return v.Environments }).(pulumi.StringArrayOutput)
 }
 
-// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`,
-// `pubNub`.
+// The integration type of the Integration. Possible values: `dataDog`, `slack`, `amplitude`, `mixPanel`, `segment`, `pubNub`.
 func (o IntegrationOutput) IntegrationType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Integration) pulumi.StringOutput { return v.IntegrationType }).(pulumi.StringOutput)
 }
@@ -253,8 +245,7 @@ func (o IntegrationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Integration) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per
-// integration type at the Example usage section.
+// Parameters of the integration. The Parameters dictionary differs for each IntegrationType. See available options per integration type at the Example usage section.
 func (o IntegrationOutput) Parameters() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Integration) pulumi.StringMapOutput { return v.Parameters }).(pulumi.StringMapOutput)
 }

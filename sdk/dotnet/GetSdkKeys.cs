@@ -12,12 +12,102 @@ namespace Pulumiverse.Configcat
 {
     public static class GetSdkKeys
     {
+        /// <summary>
+        /// Use this data source to access information about existing **SDK Keys**.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var configId = config.Require("configId");
+        ///     var environmentId = config.Require("environmentId");
+        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
+        ///     {
+        ///         ConfigId = configId,
+        ///         EnvironmentId = environmentId,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
+        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Task<GetSdkKeysResult> InvokeAsync(GetSdkKeysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about existing **SDK Keys**.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var configId = config.Require("configId");
+        ///     var environmentId = config.Require("environmentId");
+        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
+        ///     {
+        ///         ConfigId = configId,
+        ///         EnvironmentId = environmentId,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
+        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetSdkKeysResult> Invoke(GetSdkKeysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysInvokeArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about existing **SDK Keys**.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var configId = config.Require("configId");
+        ///     var environmentId = config.Require("environmentId");
+        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
+        ///     {
+        ///         ConfigId = configId,
+        ///         EnvironmentId = environmentId,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
+        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetSdkKeysResult> Invoke(GetSdkKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysInvokeArgs(), options.WithDefaults());
     }
@@ -25,9 +115,15 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetSdkKeysArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The ID of the Config.
+        /// </summary>
         [Input("configId", required: true)]
         public string ConfigId { get; set; } = null!;
 
+        /// <summary>
+        /// The ID of the Environment.
+        /// </summary>
         [Input("environmentId", required: true)]
         public string EnvironmentId { get; set; } = null!;
 
@@ -39,9 +135,15 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetSdkKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The ID of the Config.
+        /// </summary>
         [Input("configId", required: true)]
         public Input<string> ConfigId { get; set; } = null!;
 
+        /// <summary>
+        /// The ID of the Environment.
+        /// </summary>
         [Input("environmentId", required: true)]
         public Input<string> EnvironmentId { get; set; } = null!;
 
@@ -55,10 +157,25 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetSdkKeysResult
     {
+        /// <summary>
+        /// The ID of the Config.
+        /// </summary>
         public readonly string ConfigId;
+        /// <summary>
+        /// The ID of the Environment.
+        /// </summary>
         public readonly string EnvironmentId;
+        /// <summary>
+        /// Internal ID of the data source. Do not use.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The primary SDK Key associated with your **Config** and **Environment**.
+        /// </summary>
         public readonly string Primary;
+        /// <summary>
+        /// The secondary SDK Key associated with your **Config** and **Environment**.
+        /// </summary>
         public readonly string Secondary;
 
         [OutputConstructor]

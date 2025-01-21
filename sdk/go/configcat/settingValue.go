@@ -12,6 +12,76 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			environmentId := cfg.Require("environmentId")
+//			settingId := cfg.Require("settingId")
+//			_, err := configcat.NewSettingValue(ctx, "my_setting_value", &configcat.SettingValueArgs{
+//				EnvironmentId:  pulumi.String(environmentId),
+//				SettingId:      pulumi.String(settingId),
+//				MandatoryNotes: pulumi.String("mandatory notes"),
+//				Value:          pulumi.String("true"),
+//				RolloutRules: configcat.SettingValueRolloutRuleArray{
+//					&configcat.SettingValueRolloutRuleArgs{
+//						ComparisonAttribute: pulumi.String("Email"),
+//						Comparator:          pulumi.String("contains"),
+//						ComparisonValue:     pulumi.String("@mycompany.com"),
+//						Value:               pulumi.String("true"),
+//					},
+//					&configcat.SettingValueRolloutRuleArgs{
+//						ComparisonAttribute: pulumi.String("custom"),
+//						Comparator:          pulumi.String("isOneOf"),
+//						ComparisonValue:     pulumi.String("red"),
+//						Value:               pulumi.String("false"),
+//					},
+//				},
+//				PercentageItems: configcat.SettingValuePercentageItemArray{
+//					&configcat.SettingValuePercentageItemArgs{
+//						Percentage: pulumi.String("20"),
+//						Value:      pulumi.String("true"),
+//					},
+//					&configcat.SettingValuePercentageItemArgs{
+//						Percentage: pulumi.String("80"),
+//						Value:      pulumi.String("false"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
+//
+// Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+//
+// Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+//
+// ```sh
+// $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+// ```
 type SettingValue struct {
 	pulumi.CustomResourceState
 

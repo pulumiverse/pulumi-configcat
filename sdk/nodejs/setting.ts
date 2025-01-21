@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages a **Feature Flag or Setting**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const configId = config.require("configId");
+ * const mySetting = new configcat.Setting("my_setting", {
+ *     configId: configId,
+ *     key: "isAwesomeFeatureEnabled",
+ *     name: "My awesome feature flag",
+ *     hint: "This is the hint for my awesome feature flag",
+ *     settingType: "boolean",
+ *     order: 0,
+ * });
+ * export const settingId = mySetting.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+ *
+ * ```sh
+ * $ pulumi import configcat:index/setting:Setting example 1234
+ * ```
+ */
 export class Setting extends pulumi.CustomResource {
     /**
      * Get an existing Setting resource's state with the given name, ID, and optional extra
@@ -49,8 +79,7 @@ export class Setting extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-     * same order, they are displayed in alphabetical order.
+     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
@@ -121,8 +150,7 @@ export interface SettingState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-     * same order, they are displayed in alphabetical order.
+     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
@@ -152,8 +180,7 @@ export interface SettingArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-     * same order, they are displayed in alphabetical order.
+     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
      */
     order: pulumi.Input<number>;
     /**

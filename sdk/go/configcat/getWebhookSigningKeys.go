@@ -11,6 +11,38 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			webhookId := cfg.RequireFloat64("webhookId")
+//			test, err := configcat.GetWebhookSigningKeys(ctx, &configcat.GetWebhookSigningKeysArgs{
+//				WebhookId: webhookId,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("key1", test.Key1)
+//			ctx.Export("key2", test.Key2)
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetWebhookSigningKeys(ctx *pulumi.Context, args *GetWebhookSigningKeysArgs, opts ...pulumi.InvokeOption) (*GetWebhookSigningKeysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWebhookSigningKeysResult
@@ -23,15 +55,20 @@ func GetWebhookSigningKeys(ctx *pulumi.Context, args *GetWebhookSigningKeysArgs,
 
 // A collection of arguments for invoking getWebhookSigningKeys.
 type GetWebhookSigningKeysArgs struct {
+	// The ID of the Webhook.
 	WebhookId int `pulumi:"webhookId"`
 }
 
 // A collection of values returned by getWebhookSigningKeys.
 type GetWebhookSigningKeysResult struct {
-	Id        string `pulumi:"id"`
-	Key1      string `pulumi:"key1"`
-	Key2      string `pulumi:"key2"`
-	WebhookId int    `pulumi:"webhookId"`
+	// Internal ID of the data source. Do not use.
+	Id string `pulumi:"id"`
+	// The first signing key.
+	Key1 string `pulumi:"key1"`
+	// The second signing key.
+	Key2 string `pulumi:"key2"`
+	// The ID of the Webhook.
+	WebhookId int `pulumi:"webhookId"`
 }
 
 func GetWebhookSigningKeysOutput(ctx *pulumi.Context, args GetWebhookSigningKeysOutputArgs, opts ...pulumi.InvokeOption) GetWebhookSigningKeysResultOutput {
@@ -45,6 +82,7 @@ func GetWebhookSigningKeysOutput(ctx *pulumi.Context, args GetWebhookSigningKeys
 
 // A collection of arguments for invoking getWebhookSigningKeys.
 type GetWebhookSigningKeysOutputArgs struct {
+	// The ID of the Webhook.
 	WebhookId pulumi.IntInput `pulumi:"webhookId"`
 }
 
@@ -67,18 +105,22 @@ func (o GetWebhookSigningKeysResultOutput) ToGetWebhookSigningKeysResultOutputWi
 	return o
 }
 
+// Internal ID of the data source. Do not use.
 func (o GetWebhookSigningKeysResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWebhookSigningKeysResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// The first signing key.
 func (o GetWebhookSigningKeysResultOutput) Key1() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWebhookSigningKeysResult) string { return v.Key1 }).(pulumi.StringOutput)
 }
 
+// The second signing key.
 func (o GetWebhookSigningKeysResultOutput) Key2() pulumi.StringOutput {
 	return o.ApplyT(func(v GetWebhookSigningKeysResult) string { return v.Key2 }).(pulumi.StringOutput)
 }
 
+// The ID of the Webhook.
 func (o GetWebhookSigningKeysResultOutput) WebhookId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetWebhookSigningKeysResult) int { return v.WebhookId }).(pulumi.IntOutput)
 }

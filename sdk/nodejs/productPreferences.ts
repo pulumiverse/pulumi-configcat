@@ -4,6 +4,53 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages the **Product Preferences**.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const organizationId = config.require("organizationId");
+ * const product = new configcat.Product("product", {
+ *     organizationId: organizationId,
+ *     name: "My product",
+ *     order: 0,
+ * });
+ * const test = new configcat.Environment("test", {
+ *     productId: product.id,
+ *     name: "Test",
+ *     order: 0,
+ * });
+ * const production = new configcat.Environment("production", {
+ *     productId: product.id,
+ *     name: "Production",
+ *     order: 1,
+ * });
+ * const preferences = new configcat.ProductPreferences("preferences", {
+ *     productId: product.id,
+ *     keyGenerationMode: "kebabCase",
+ *     mandatorySettingHint: true,
+ *     showVariationId: false,
+ *     reasonRequired: false,
+ *     reasonRequiredEnvironments: pulumi.all([test.id, production.id]).apply(([testId, productionId]) => {
+ *         [testId]: false,
+ *         [productionId]: true,
+ *     }),
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Product preferences can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/productPreferences:ProductPreferences example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+ * ```
+ */
 export class ProductPreferences extends pulumi.CustomResource {
     /**
      * Get an existing ProductPreferences resource's state with the given name, ID, and optional extra
@@ -33,8 +80,7 @@ export class ProductPreferences extends pulumi.CustomResource {
     }
 
     /**
-     * Determines the Feature Flag key generation mode. Available values:
-     * `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+     * Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
      */
     public readonly keyGenerationMode!: pulumi.Output<string>;
     /**
@@ -50,8 +96,7 @@ export class ProductPreferences extends pulumi.CustomResource {
      */
     public readonly reasonRequired!: pulumi.Output<boolean>;
     /**
-     * The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-     * note is required for saving and publishing.
+     * The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
      */
     public readonly reasonRequiredEnvironments!: pulumi.Output<{[key: string]: boolean}>;
     /**
@@ -100,8 +145,7 @@ export class ProductPreferences extends pulumi.CustomResource {
  */
 export interface ProductPreferencesState {
     /**
-     * Determines the Feature Flag key generation mode. Available values:
-     * `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+     * Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
      */
     keyGenerationMode?: pulumi.Input<string>;
     /**
@@ -117,8 +161,7 @@ export interface ProductPreferencesState {
      */
     reasonRequired?: pulumi.Input<boolean>;
     /**
-     * The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-     * note is required for saving and publishing.
+     * The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
      */
     reasonRequiredEnvironments?: pulumi.Input<{[key: string]: pulumi.Input<boolean>}>;
     /**
@@ -132,8 +175,7 @@ export interface ProductPreferencesState {
  */
 export interface ProductPreferencesArgs {
     /**
-     * Determines the Feature Flag key generation mode. Available values:
-     * `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+     * Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
      */
     keyGenerationMode?: pulumi.Input<string>;
     /**
@@ -149,8 +191,7 @@ export interface ProductPreferencesArgs {
      */
     reasonRequired?: pulumi.Input<boolean>;
     /**
-     * The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-     * note is required for saving and publishing.
+     * The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
      */
     reasonRequiredEnvironments?: pulumi.Input<{[key: string]: pulumi.Input<boolean>}>;
     /**

@@ -4,6 +4,24 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const webhookId = config.requireNumber("webhookId");
+ * const test = configcat.getWebhookSigningKeys({
+ *     webhookId: webhookId,
+ * });
+ * export const key1 = test.then(test => test.key1);
+ * export const key2 = test.then(test => test.key2);
+ * ```
+ */
 export function getWebhookSigningKeys(args: GetWebhookSigningKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetWebhookSigningKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getWebhookSigningKeys:getWebhookSigningKeys", {
@@ -15,6 +33,9 @@ export function getWebhookSigningKeys(args: GetWebhookSigningKeysArgs, opts?: pu
  * A collection of arguments for invoking getWebhookSigningKeys.
  */
 export interface GetWebhookSigningKeysArgs {
+    /**
+     * The ID of the Webhook.
+     */
     webhookId: number;
 }
 
@@ -22,11 +43,41 @@ export interface GetWebhookSigningKeysArgs {
  * A collection of values returned by getWebhookSigningKeys.
  */
 export interface GetWebhookSigningKeysResult {
+    /**
+     * Internal ID of the data source. Do not use.
+     */
     readonly id: string;
+    /**
+     * The first signing key.
+     */
     readonly key1: string;
+    /**
+     * The second signing key.
+     */
     readonly key2: string;
+    /**
+     * The ID of the Webhook.
+     */
     readonly webhookId: number;
 }
+/**
+ * Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const webhookId = config.requireNumber("webhookId");
+ * const test = configcat.getWebhookSigningKeys({
+ *     webhookId: webhookId,
+ * });
+ * export const key1 = test.then(test => test.key1);
+ * export const key2 = test.then(test => test.key2);
+ * ```
+ */
 export function getWebhookSigningKeysOutput(args: GetWebhookSigningKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWebhookSigningKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("configcat:index/getWebhookSigningKeys:getWebhookSigningKeys", {
@@ -38,5 +89,8 @@ export function getWebhookSigningKeysOutput(args: GetWebhookSigningKeysOutputArg
  * A collection of arguments for invoking getWebhookSigningKeys.
  */
 export interface GetWebhookSigningKeysOutputArgs {
+    /**
+     * The ID of the Webhook.
+     */
     webhookId: pulumi.Input<number>;
 }

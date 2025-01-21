@@ -12,6 +12,50 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages a **Feature Flag or Setting**. [What is a Feature Flag or Setting in ConfigCat?](https://configcat.com/docs/main-concepts)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			configId := cfg.Require("configId")
+//			mySetting, err := configcat.NewSetting(ctx, "my_setting", &configcat.SettingArgs{
+//				ConfigId:    pulumi.String(configId),
+//				Key:         pulumi.String("isAwesomeFeatureEnabled"),
+//				Name:        pulumi.String("My awesome feature flag"),
+//				Hint:        pulumi.String("This is the hint for my awesome feature flag"),
+//				SettingType: pulumi.String("boolean"),
+//				Order:       pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("settingId", mySetting.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+//
+// ```sh
+// $ pulumi import configcat:index/setting:Setting example 1234
+// ```
 type Setting struct {
 	pulumi.CustomResourceState
 
@@ -23,8 +67,7 @@ type Setting struct {
 	Key pulumi.StringOutput `pulumi:"key"`
 	// The name of the Feature Flag or Setting.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-	// same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntOutput `pulumi:"order"`
 	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType pulumi.StringOutput `pulumi:"settingType"`
@@ -77,8 +120,7 @@ type settingState struct {
 	Key *string `pulumi:"key"`
 	// The name of the Feature Flag or Setting.
 	Name *string `pulumi:"name"`
-	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-	// same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
 	Order *int `pulumi:"order"`
 	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType *string `pulumi:"settingType"`
@@ -93,8 +135,7 @@ type SettingState struct {
 	Key pulumi.StringPtrInput
 	// The name of the Feature Flag or Setting.
 	Name pulumi.StringPtrInput
-	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-	// same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntPtrInput
 	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType pulumi.StringPtrInput
@@ -113,8 +154,7 @@ type settingArgs struct {
 	Key string `pulumi:"key"`
 	// The name of the Feature Flag or Setting.
 	Name *string `pulumi:"name"`
-	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-	// same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
 	Order int `pulumi:"order"`
 	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType *string `pulumi:"settingType"`
@@ -130,8 +170,7 @@ type SettingArgs struct {
 	Key pulumi.StringInput
 	// The name of the Feature Flag or Setting.
 	Name pulumi.StringPtrInput
-	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-	// same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
 	Order pulumi.IntInput
 	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType pulumi.StringPtrInput
@@ -244,8 +283,7 @@ func (o SettingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
-// same order, they are displayed in alphabetical order.
+// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the same order, they are displayed in alphabetical order.
 func (o SettingOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v *Setting) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }

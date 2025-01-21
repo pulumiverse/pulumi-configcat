@@ -41,11 +41,17 @@ class GetOrganizationsResult:
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        Internal ID of the data source. Do not use.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="nameFilterRegex")
     def name_filter_regex(self) -> Optional[str]:
+        """
+        Filter the Organizations by name.
+        """
         return pulumi.get(self, "name_filter_regex")
 
     @property
@@ -68,7 +74,20 @@ class AwaitableGetOrganizationsResult(GetOrganizationsResult):
 def get_organizations(name_filter_regex: Optional[str] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetOrganizationsResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_configcat as configcat
+
+    my_organizations = configcat.get_organizations(name_filter_regex="ConfigCat")
+    pulumi.export("organizationId", my_organizations.organizations[0].organization_id)
+    ```
+
+
+    :param str name_filter_regex: Filter the Organizations by name.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -82,7 +101,20 @@ def get_organizations(name_filter_regex: Optional[str] = None,
 def get_organizations_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
                              opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetOrganizationsResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_configcat as configcat
+
+    my_organizations = configcat.get_organizations(name_filter_regex="ConfigCat")
+    pulumi.export("organizationId", my_organizations.organizations[0].organization_id)
+    ```
+
+
+    :param str name_filter_regex: Filter the Organizations by name.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex

@@ -35,8 +35,7 @@ class WebhookArgs:
         :param pulumi.Input[str] url: The URL of the Webhook.
         :param pulumi.Input[str] content: The HTTP body content.
         :param pulumi.Input[str] http_method: The HTTP method. Available values: `get`|`post`. Default: `get`
-        :param pulumi.Input[Sequence[pulumi.Input['WebhookWebhookHeaderArgs']]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-               audit logs and on the webhook test UI.
+        :param pulumi.Input[Sequence[pulumi.Input['WebhookWebhookHeaderArgs']]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         pulumi.set(__self__, "config_id", config_id)
         pulumi.set(__self__, "environment_id", environment_id)
@@ -123,8 +122,7 @@ class WebhookArgs:
     @pulumi.getter(name="webhookHeaders")
     def webhook_headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['WebhookWebhookHeaderArgs']]]]:
         """
-        List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-        audit logs and on the webhook test UI.
+        List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         return pulumi.get(self, "webhook_headers")
 
@@ -150,8 +148,7 @@ class _WebhookState:
         :param pulumi.Input[str] environment_id: The ID of the Environment.
         :param pulumi.Input[str] http_method: The HTTP method. Available values: `get`|`post`. Default: `get`
         :param pulumi.Input[str] url: The URL of the Webhook.
-        :param pulumi.Input[Sequence[pulumi.Input['WebhookWebhookHeaderArgs']]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-               audit logs and on the webhook test UI.
+        :param pulumi.Input[Sequence[pulumi.Input['WebhookWebhookHeaderArgs']]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         if config_id is not None:
             pulumi.set(__self__, "config_id", config_id)
@@ -241,8 +238,7 @@ class _WebhookState:
     @pulumi.getter(name="webhookHeaders")
     def webhook_headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['WebhookWebhookHeaderArgs']]]]:
         """
-        List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-        audit logs and on the webhook test UI.
+        List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         return pulumi.get(self, "webhook_headers")
 
@@ -265,7 +261,20 @@ class Webhook(pulumi.CustomResource):
                  webhook_headers: Optional[pulumi.Input[Sequence[pulumi.Input[Union['WebhookWebhookHeaderArgs', 'WebhookWebhookHeaderArgsDict']]]]] = None,
                  __props__=None):
         """
-        Create a Webhook resource with the given unique name, props, and options.
+        Creates and manages a **Webhook**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+
+        ## Import
+
+        Webhooks can be imported using the WebhookId. Get the WebhookId using the [List Webhooks API](https://api.configcat.com/docs/index.html#tag/Webhooks/operation/get-webhooks) for example.
+
+        It is important to note that webhooks containing secure webhook headers cannot be imported via `pulumi import`.
+
+        If you want to manage your webhooks that already contain secure webhook headers, you should create brand new configcat_webhook resources in Terraform without importing them. After they are created successfully and managed by Terraform, you can safely delete the old, non Terraform managed webhook from the ConfigCat Dashboard.
+
+        ```sh
+        $ pulumi import configcat:index/webhook:Webhook example 1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_id: The ID of the Config.
@@ -273,8 +282,7 @@ class Webhook(pulumi.CustomResource):
         :param pulumi.Input[str] environment_id: The ID of the Environment.
         :param pulumi.Input[str] http_method: The HTTP method. Available values: `get`|`post`. Default: `get`
         :param pulumi.Input[str] url: The URL of the Webhook.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['WebhookWebhookHeaderArgs', 'WebhookWebhookHeaderArgsDict']]]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-               audit logs and on the webhook test UI.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['WebhookWebhookHeaderArgs', 'WebhookWebhookHeaderArgsDict']]]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         ...
     @overload
@@ -283,7 +291,20 @@ class Webhook(pulumi.CustomResource):
                  args: WebhookArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Webhook resource with the given unique name, props, and options.
+        Creates and manages a **Webhook**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+
+        ## Import
+
+        Webhooks can be imported using the WebhookId. Get the WebhookId using the [List Webhooks API](https://api.configcat.com/docs/index.html#tag/Webhooks/operation/get-webhooks) for example.
+
+        It is important to note that webhooks containing secure webhook headers cannot be imported via `pulumi import`.
+
+        If you want to manage your webhooks that already contain secure webhook headers, you should create brand new configcat_webhook resources in Terraform without importing them. After they are created successfully and managed by Terraform, you can safely delete the old, non Terraform managed webhook from the ConfigCat Dashboard.
+
+        ```sh
+        $ pulumi import configcat:index/webhook:Webhook example 1234
+        ```
+
         :param str resource_name: The name of the resource.
         :param WebhookArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -357,8 +378,7 @@ class Webhook(pulumi.CustomResource):
         :param pulumi.Input[str] environment_id: The ID of the Environment.
         :param pulumi.Input[str] http_method: The HTTP method. Available values: `get`|`post`. Default: `get`
         :param pulumi.Input[str] url: The URL of the Webhook.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['WebhookWebhookHeaderArgs', 'WebhookWebhookHeaderArgsDict']]]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-               audit logs and on the webhook test UI.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['WebhookWebhookHeaderArgs', 'WebhookWebhookHeaderArgsDict']]]] webhook_headers: List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -422,8 +442,7 @@ class Webhook(pulumi.CustomResource):
     @pulumi.getter(name="webhookHeaders")
     def webhook_headers(self) -> pulumi.Output[Optional[Sequence['outputs.WebhookWebhookHeader']]]:
         """
-        List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-        audit logs and on the webhook test UI.
+        List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         """
         return pulumi.get(self, "webhook_headers")
 

@@ -6,6 +6,21 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Initializes and updates **Feature Flag or Setting** values for V2 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+ *
+ * ## Import
+ *
+ * Feature Flag/Setting values (V2) can be imported using a combined EnvironmentID:SettingId ID.
+ *
+ * Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+ *
+ * Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+ *
+ * ```sh
+ * $ pulumi import configcat:index/settingValueV2:SettingValueV2 example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+ * ```
+ */
 export class SettingValueV2 extends pulumi.CustomResource {
     /**
      * Get an existing SettingValueV2 resource's state with the given name, ID, and optional extra

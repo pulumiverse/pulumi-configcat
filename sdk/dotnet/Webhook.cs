@@ -10,6 +10,21 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages a **Webhook**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+    /// 
+    /// ## Import
+    /// 
+    /// Webhooks can be imported using the WebhookId. Get the WebhookId using the [List Webhooks API](https://api.configcat.com/docs/index.html#tag/Webhooks/operation/get-webhooks) for example.
+    /// 
+    /// It is important to note that webhooks containing secure webhook headers cannot be imported via `pulumi import`.
+    /// 
+    /// If you want to manage your webhooks that already contain secure webhook headers, you should create brand new configcat_webhook resources in Terraform without importing them. After they are created successfully and managed by Terraform, you can safely delete the old, non Terraform managed webhook from the ConfigCat Dashboard.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/webhook:Webhook example 1234
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/webhook:Webhook")]
     public partial class Webhook : global::Pulumi.CustomResource
     {
@@ -47,8 +62,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Url { get; private set; } = null!;
 
         /// <summary>
-        /// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-        /// audit logs and on the webhook test UI.
+        /// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         /// </summary>
         [Output("webhookHeaders")]
         public Output<ImmutableArray<Outputs.WebhookWebhookHeader>> WebhookHeaders { get; private set; } = null!;
@@ -142,8 +156,7 @@ namespace Pulumiverse.Configcat
         private InputList<Inputs.WebhookWebhookHeaderArgs>? _webhookHeaders;
 
         /// <summary>
-        /// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-        /// audit logs and on the webhook test UI.
+        /// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         /// </summary>
         public InputList<Inputs.WebhookWebhookHeaderArgs> WebhookHeaders
         {
@@ -201,8 +214,7 @@ namespace Pulumiverse.Configcat
         private InputList<Inputs.WebhookWebhookHeaderGetArgs>? _webhookHeaders;
 
         /// <summary>
-        /// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-        /// audit logs and on the webhook test UI.
+        /// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
         /// </summary>
         public InputList<Inputs.WebhookWebhookHeaderGetArgs> WebhookHeaders
         {

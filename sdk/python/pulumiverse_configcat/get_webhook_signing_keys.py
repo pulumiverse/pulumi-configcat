@@ -43,21 +43,33 @@ class GetWebhookSigningKeysResult:
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        Internal ID of the data source. Do not use.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def key1(self) -> str:
+        """
+        The first signing key.
+        """
         return pulumi.get(self, "key1")
 
     @property
     @pulumi.getter
     def key2(self) -> str:
+        """
+        The second signing key.
+        """
         return pulumi.get(self, "key2")
 
     @property
     @pulumi.getter(name="webhookId")
     def webhook_id(self) -> int:
+        """
+        The ID of the Webhook.
+        """
         return pulumi.get(self, "webhook_id")
 
 
@@ -76,7 +88,23 @@ class AwaitableGetWebhookSigningKeysResult(GetWebhookSigningKeysResult):
 def get_webhook_signing_keys(webhook_id: Optional[int] = None,
                              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetWebhookSigningKeysResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_configcat as configcat
+
+    config = pulumi.Config()
+    webhook_id = config.require_float("webhookId")
+    test = configcat.get_webhook_signing_keys(webhook_id=webhook_id)
+    pulumi.export("key1", test.key1)
+    pulumi.export("key2", test.key2)
+    ```
+
+
+    :param int webhook_id: The ID of the Webhook.
     """
     __args__ = dict()
     __args__['webhookId'] = webhook_id
@@ -91,7 +119,23 @@ def get_webhook_signing_keys(webhook_id: Optional[int] = None,
 def get_webhook_signing_keys_output(webhook_id: Optional[pulumi.Input[int]] = None,
                                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetWebhookSigningKeysResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to access information about **Webhook Signing Keys**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_configcat as configcat
+
+    config = pulumi.Config()
+    webhook_id = config.require_float("webhookId")
+    test = configcat.get_webhook_signing_keys(webhook_id=webhook_id)
+    pulumi.export("key1", test.key1)
+    pulumi.export("key2", test.key2)
+    ```
+
+
+    :param int webhook_id: The ID of the Webhook.
     """
     __args__ = dict()
     __args__['webhookId'] = webhook_id

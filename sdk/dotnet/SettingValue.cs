@@ -10,6 +10,75 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var environmentId = config.Require("environmentId");
+    ///     var settingId = config.Require("settingId");
+    ///     var mySettingValue = new Configcat.SettingValue("my_setting_value", new()
+    ///     {
+    ///         EnvironmentId = environmentId,
+    ///         SettingId = settingId,
+    ///         MandatoryNotes = "mandatory notes",
+    ///         Value = "true",
+    ///         RolloutRules = new[]
+    ///         {
+    ///             new Configcat.Inputs.SettingValueRolloutRuleArgs
+    ///             {
+    ///                 ComparisonAttribute = "Email",
+    ///                 Comparator = "contains",
+    ///                 ComparisonValue = "@mycompany.com",
+    ///                 Value = "true",
+    ///             },
+    ///             new Configcat.Inputs.SettingValueRolloutRuleArgs
+    ///             {
+    ///                 ComparisonAttribute = "custom",
+    ///                 Comparator = "isOneOf",
+    ///                 ComparisonValue = "red",
+    ///                 Value = "false",
+    ///             },
+    ///         },
+    ///         PercentageItems = new[]
+    ///         {
+    ///             new Configcat.Inputs.SettingValuePercentageItemArgs
+    ///             {
+    ///                 Percentage = "20",
+    ///                 Value = "true",
+    ///             },
+    ///             new Configcat.Inputs.SettingValuePercentageItemArgs
+    ///             {
+    ///                 Percentage = "80",
+    ///                 Value = "false",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
+    /// 
+    /// Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+    /// 
+    /// Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/settingValue:SettingValue")]
     public partial class SettingValue : global::Pulumi.CustomResource
     {

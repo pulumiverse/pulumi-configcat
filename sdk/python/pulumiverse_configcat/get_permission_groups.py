@@ -44,11 +44,17 @@ class GetPermissionGroupsResult:
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        Internal ID of the data source. Do not use.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="nameFilterRegex")
     def name_filter_regex(self) -> Optional[str]:
+        """
+        Filter the Permission Groups by name.
+        """
         return pulumi.get(self, "name_filter_regex")
 
     @property
@@ -59,6 +65,9 @@ class GetPermissionGroupsResult:
     @property
     @pulumi.getter(name="productId")
     def product_id(self) -> str:
+        """
+        The ID of the Product.
+        """
         return pulumi.get(self, "product_id")
 
 
@@ -78,7 +87,24 @@ def get_permission_groups(name_filter_regex: Optional[str] = None,
                           product_id: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetPermissionGroupsResult:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_configcat as configcat
+
+    config = pulumi.Config()
+    product_id = config.require("productId")
+    my_permission_groups = configcat.get_permission_groups(product_id=product_id,
+        name_filter_regex="Administrators")
+    pulumi.export("permissionGroupId", my_permission_groups.permission_groups[0].permission_group_id)
+    ```
+
+
+    :param str name_filter_regex: Filter the Permission Groups by name.
+    :param str product_id: The ID of the Product.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -95,7 +121,24 @@ def get_permission_groups_output(name_filter_regex: Optional[pulumi.Input[Option
                                  product_id: Optional[pulumi.Input[str]] = None,
                                  opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPermissionGroupsResult]:
     """
-    Use this data source to access information about an existing resource.
+    Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_configcat as configcat
+
+    config = pulumi.Config()
+    product_id = config.require("productId")
+    my_permission_groups = configcat.get_permission_groups(product_id=product_id,
+        name_filter_regex="Administrators")
+    pulumi.export("permissionGroupId", my_permission_groups.permission_groups[0].permission_group_id)
+    ```
+
+
+    :param str name_filter_regex: Filter the Permission Groups by name.
+    :param str product_id: The ID of the Product.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex

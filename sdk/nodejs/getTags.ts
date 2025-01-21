@@ -6,6 +6,24 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Use this data source to access information about existing **Tags**. [What is a Tag in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myTags = configcat.getTags({
+ *     productId: productId,
+ *     nameFilterRegex: "Test",
+ * });
+ * export const tagId = myTags.then(myTags => myTags.tags?.[0]?.tagId);
+ * ```
+ */
 export function getTags(args: GetTagsArgs, opts?: pulumi.InvokeOptions): Promise<GetTagsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getTags:getTags", {
@@ -18,7 +36,13 @@ export function getTags(args: GetTagsArgs, opts?: pulumi.InvokeOptions): Promise
  * A collection of arguments for invoking getTags.
  */
 export interface GetTagsArgs {
+    /**
+     * Filter the Tags by name.
+     */
     nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
     productId: string;
 }
 
@@ -26,11 +50,38 @@ export interface GetTagsArgs {
  * A collection of values returned by getTags.
  */
 export interface GetTagsResult {
+    /**
+     * Internal ID of the data source. Do not use.
+     */
     readonly id: string;
+    /**
+     * Filter the Tags by name.
+     */
     readonly nameFilterRegex?: string;
+    /**
+     * The ID of the Product.
+     */
     readonly productId: string;
     readonly tags: outputs.GetTagsTag[];
 }
+/**
+ * Use this data source to access information about existing **Tags**. [What is a Tag in ConfigCat?](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumi/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const myTags = configcat.getTags({
+ *     productId: productId,
+ *     nameFilterRegex: "Test",
+ * });
+ * export const tagId = myTags.then(myTags => myTags.tags?.[0]?.tagId);
+ * ```
+ */
 export function getTagsOutput(args: GetTagsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTagsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("configcat:index/getTags:getTags", {
@@ -43,6 +94,12 @@ export function getTagsOutput(args: GetTagsOutputArgs, opts?: pulumi.InvokeOutpu
  * A collection of arguments for invoking getTags.
  */
 export interface GetTagsOutputArgs {
+    /**
+     * Filter the Tags by name.
+     */
     nameFilterRegex?: pulumi.Input<string>;
+    /**
+     * The ID of the Product.
+     */
     productId: pulumi.Input<string>;
 }

@@ -10,6 +10,46 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var productId = config.Require("productId");
+    ///     var mySegment = new Configcat.Segment("my_segment", new()
+    ///     {
+    ///         ProductId = productId,
+    ///         Name = "Beta users",
+    ///         Description = "Beta users' description",
+    ///         ComparisonAttribute = "email",
+    ///         Comparator = "sensitiveIsOneOf",
+    ///         ComparisonValue = "betauser1@example.com,betauser2@example.com",
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["segmentId"] = mySegment.Id,
+    ///     };
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/segment:Segment")]
     public partial class Segment : global::Pulumi.CustomResource
     {

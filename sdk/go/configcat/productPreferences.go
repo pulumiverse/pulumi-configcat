@@ -12,11 +12,82 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Manages the **Product Preferences**.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// cfg := config.New(ctx, "")
+// organizationId := cfg.Require("organizationId")
+// product, err := configcat.NewProduct(ctx, "product", &configcat.ProductArgs{
+// OrganizationId: pulumi.String(organizationId),
+// Name: pulumi.String("My product"),
+// Order: pulumi.Int(0),
+// })
+// if err != nil {
+// return err
+// }
+// test, err := configcat.NewEnvironment(ctx, "test", &configcat.EnvironmentArgs{
+// ProductId: product.ID(),
+// Name: pulumi.String("Test"),
+// Order: pulumi.Int(0),
+// })
+// if err != nil {
+// return err
+// }
+// production, err := configcat.NewEnvironment(ctx, "production", &configcat.EnvironmentArgs{
+// ProductId: product.ID(),
+// Name: pulumi.String("Production"),
+// Order: pulumi.Int(1),
+// })
+// if err != nil {
+// return err
+// }
+// _, err = configcat.NewProductPreferences(ctx, "preferences", &configcat.ProductPreferencesArgs{
+// ProductId: product.ID(),
+// KeyGenerationMode: pulumi.String("kebabCase"),
+// MandatorySettingHint: pulumi.Bool(true),
+// ShowVariationId: pulumi.Bool(false),
+// ReasonRequired: pulumi.Bool(false),
+// ReasonRequiredEnvironments: pulumi.BoolMap(pulumi.All(test.ID(),production.ID()).ApplyT(func(_args []interface{}) (map[string]bool, error) {
+// testId := _args[0].(string)
+// productionId := _args[1].(string)
+// return map[string]bool{
+// testId: false,
+// productionId: true,
+// }, nil
+// }).(pulumi.Map[string]boolOutput)),
+// })
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+//
+// ## Import
+//
+// Product preferences can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+//
+// ```sh
+// $ pulumi import configcat:index/productPreferences:ProductPreferences example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+// ```
 type ProductPreferences struct {
 	pulumi.CustomResourceState
 
-	// Determines the Feature Flag key generation mode. Available values:
-	// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+	// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
 	KeyGenerationMode pulumi.StringOutput `pulumi:"keyGenerationMode"`
 	// Indicates whether Feature flags and Settings must have a hint. Default: false.
 	MandatorySettingHint pulumi.BoolOutput `pulumi:"mandatorySettingHint"`
@@ -24,8 +95,7 @@ type ProductPreferences struct {
 	ProductId pulumi.StringOutput `pulumi:"productId"`
 	// Indicates that a mandatory note is required for saving and publishing. Default: false.
 	ReasonRequired pulumi.BoolOutput `pulumi:"reasonRequired"`
-	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-	// note is required for saving and publishing.
+	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
 	ReasonRequiredEnvironments pulumi.BoolMapOutput `pulumi:"reasonRequiredEnvironments"`
 	// Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
 	ShowVariationId pulumi.BoolOutput `pulumi:"showVariationId"`
@@ -64,8 +134,7 @@ func GetProductPreferences(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProductPreferences resources.
 type productPreferencesState struct {
-	// Determines the Feature Flag key generation mode. Available values:
-	// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+	// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
 	KeyGenerationMode *string `pulumi:"keyGenerationMode"`
 	// Indicates whether Feature flags and Settings must have a hint. Default: false.
 	MandatorySettingHint *bool `pulumi:"mandatorySettingHint"`
@@ -73,16 +142,14 @@ type productPreferencesState struct {
 	ProductId *string `pulumi:"productId"`
 	// Indicates that a mandatory note is required for saving and publishing. Default: false.
 	ReasonRequired *bool `pulumi:"reasonRequired"`
-	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-	// note is required for saving and publishing.
+	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
 	ReasonRequiredEnvironments map[string]bool `pulumi:"reasonRequiredEnvironments"`
 	// Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
 	ShowVariationId *bool `pulumi:"showVariationId"`
 }
 
 type ProductPreferencesState struct {
-	// Determines the Feature Flag key generation mode. Available values:
-	// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+	// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
 	KeyGenerationMode pulumi.StringPtrInput
 	// Indicates whether Feature flags and Settings must have a hint. Default: false.
 	MandatorySettingHint pulumi.BoolPtrInput
@@ -90,8 +157,7 @@ type ProductPreferencesState struct {
 	ProductId pulumi.StringPtrInput
 	// Indicates that a mandatory note is required for saving and publishing. Default: false.
 	ReasonRequired pulumi.BoolPtrInput
-	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-	// note is required for saving and publishing.
+	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
 	ReasonRequiredEnvironments pulumi.BoolMapInput
 	// Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
 	ShowVariationId pulumi.BoolPtrInput
@@ -102,8 +168,7 @@ func (ProductPreferencesState) ElementType() reflect.Type {
 }
 
 type productPreferencesArgs struct {
-	// Determines the Feature Flag key generation mode. Available values:
-	// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+	// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
 	KeyGenerationMode *string `pulumi:"keyGenerationMode"`
 	// Indicates whether Feature flags and Settings must have a hint. Default: false.
 	MandatorySettingHint *bool `pulumi:"mandatorySettingHint"`
@@ -111,8 +176,7 @@ type productPreferencesArgs struct {
 	ProductId string `pulumi:"productId"`
 	// Indicates that a mandatory note is required for saving and publishing. Default: false.
 	ReasonRequired *bool `pulumi:"reasonRequired"`
-	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-	// note is required for saving and publishing.
+	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
 	ReasonRequiredEnvironments map[string]bool `pulumi:"reasonRequiredEnvironments"`
 	// Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
 	ShowVariationId *bool `pulumi:"showVariationId"`
@@ -120,8 +184,7 @@ type productPreferencesArgs struct {
 
 // The set of arguments for constructing a ProductPreferences resource.
 type ProductPreferencesArgs struct {
-	// Determines the Feature Flag key generation mode. Available values:
-	// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+	// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
 	KeyGenerationMode pulumi.StringPtrInput
 	// Indicates whether Feature flags and Settings must have a hint. Default: false.
 	MandatorySettingHint pulumi.BoolPtrInput
@@ -129,8 +192,7 @@ type ProductPreferencesArgs struct {
 	ProductId pulumi.StringInput
 	// Indicates that a mandatory note is required for saving and publishing. Default: false.
 	ReasonRequired pulumi.BoolPtrInput
-	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-	// note is required for saving and publishing.
+	// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
 	ReasonRequiredEnvironments pulumi.BoolMapInput
 	// Indicates whether variation IDs must be shown on the ConfigCat Dashboard. Default: false.
 	ShowVariationId pulumi.BoolPtrInput
@@ -223,8 +285,7 @@ func (o ProductPreferencesOutput) ToProductPreferencesOutputWithContext(ctx cont
 	return o
 }
 
-// Determines the Feature Flag key generation mode. Available values:
-// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
 func (o ProductPreferencesOutput) KeyGenerationMode() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProductPreferences) pulumi.StringOutput { return v.KeyGenerationMode }).(pulumi.StringOutput)
 }
@@ -244,8 +305,7 @@ func (o ProductPreferencesOutput) ReasonRequired() pulumi.BoolOutput {
 	return o.ApplyT(func(v *ProductPreferences) pulumi.BoolOutput { return v.ReasonRequired }).(pulumi.BoolOutput)
 }
 
-// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-// note is required for saving and publishing.
+// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
 func (o ProductPreferencesOutput) ReasonRequiredEnvironments() pulumi.BoolMapOutput {
 	return o.ApplyT(func(v *ProductPreferences) pulumi.BoolMapOutput { return v.ReasonRequiredEnvironments }).(pulumi.BoolMapOutput)
 }

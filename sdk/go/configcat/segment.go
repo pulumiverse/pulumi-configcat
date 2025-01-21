@@ -12,6 +12,50 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
+//			mySegment, err := configcat.NewSegment(ctx, "my_segment", &configcat.SegmentArgs{
+//				ProductId:           pulumi.String(productId),
+//				Name:                pulumi.String("Beta users"),
+//				Description:         pulumi.String("Beta users' description"),
+//				ComparisonAttribute: pulumi.String("email"),
+//				Comparator:          pulumi.String("sensitiveIsOneOf"),
+//				ComparisonValue:     pulumi.String("betauser1@example.com,betauser2@example.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("segmentId", mySegment.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
+//
+// ```sh
+// $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+// ```
 type Segment struct {
 	pulumi.CustomResourceState
 

@@ -12,12 +12,87 @@ namespace Pulumiverse.Configcat
 {
     public static class GetProducts
     {
+        /// <summary>
+        /// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["productId"] = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Task<GetProductsResult> InvokeAsync(GetProductsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductsResult>("configcat:index/getProducts:getProducts", args ?? new GetProductsArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["productId"] = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetProductsResult> Invoke(GetProductsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductsResult>("configcat:index/getProducts:getProducts", args ?? new GetProductsInvokeArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var myProducts = Configcat.GetProducts.Invoke(new()
+        ///     {
+        ///         NameFilterRegex = "ConfigCat's product",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["productId"] = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetProductsResult> Invoke(GetProductsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductsResult>("configcat:index/getProducts:getProducts", args ?? new GetProductsInvokeArgs(), options.WithDefaults());
     }
@@ -25,6 +100,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetProductsArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Filter the Products by name.
+        /// </summary>
         [Input("nameFilterRegex")]
         public string? NameFilterRegex { get; set; }
 
@@ -36,6 +114,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetProductsInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Filter the Products by name.
+        /// </summary>
         [Input("nameFilterRegex")]
         public Input<string>? NameFilterRegex { get; set; }
 
@@ -49,7 +130,13 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetProductsResult
     {
+        /// <summary>
+        /// Internal ID of the data source. Do not use.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Filter the Products by name.
+        /// </summary>
         public readonly string? NameFilterRegex;
         public readonly ImmutableArray<Outputs.GetProductsProductResult> Products;
 

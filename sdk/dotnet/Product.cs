@@ -10,6 +10,44 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var organizationId = config.Require("organizationId");
+    ///     var myConfig = new Configcat.Product("my_config", new()
+    ///     {
+    ///         OrganizationId = organizationId,
+    ///         Name = "My product",
+    ///         Description = "My product description",
+    ///         Order = 0,
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["productId"] = myProduct.Id,
+    ///     };
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Products can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/product:Product")]
     public partial class Product : global::Pulumi.CustomResource
     {
@@ -26,8 +64,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
-        /// in alphabetical order.
+        /// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         /// </summary>
         [Output("order")]
         public Output<int> Order { get; private set; } = null!;
@@ -98,8 +135,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
-        /// in alphabetical order.
+        /// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         /// </summary>
         [Input("order", required: true)]
         public Input<int> Order { get; set; } = null!;
@@ -131,8 +167,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
-        /// in alphabetical order.
+        /// The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
         /// </summary>
         [Input("order")]
         public Input<int>? Order { get; set; }

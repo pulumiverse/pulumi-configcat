@@ -6,6 +6,62 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Initializes and updates **Feature Flag or Setting** values for V1 configs. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const environmentId = config.require("environmentId");
+ * const settingId = config.require("settingId");
+ * const mySettingValue = new configcat.SettingValue("my_setting_value", {
+ *     environmentId: environmentId,
+ *     settingId: settingId,
+ *     mandatoryNotes: "mandatory notes",
+ *     value: "true",
+ *     rolloutRules: [
+ *         {
+ *             comparisonAttribute: "Email",
+ *             comparator: "contains",
+ *             comparisonValue: "@mycompany.com",
+ *             value: "true",
+ *         },
+ *         {
+ *             comparisonAttribute: "custom",
+ *             comparator: "isOneOf",
+ *             comparisonValue: "red",
+ *             value: "false",
+ *         },
+ *     ],
+ *     percentageItems: [
+ *         {
+ *             percentage: "20",
+ *             value: "true",
+ *         },
+ *         {
+ *             percentage: "80",
+ *             value: "false",
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Feature Flag/Setting values (V1) can be imported using a combined EnvironmentID:SettingId ID.
+ *
+ * Get the EnvironmentId using e.g. the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments).
+ *
+ * Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+ *
+ * ```sh
+ * $ pulumi import configcat:index/settingValue:SettingValue example 08d86d63-2726-47cd-8bfc-59608ecb91e2:1234
+ * ```
+ */
 export class SettingValue extends pulumi.CustomResource {
     /**
      * Get an existing SettingValue resource's state with the given name, ID, and optional extra

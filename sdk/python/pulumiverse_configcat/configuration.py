@@ -26,12 +26,10 @@ class ConfigurationArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Configuration resource.
-        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-               alphabetical order.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         :param pulumi.Input[str] description: The description of the Config.
-        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-               features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         :param pulumi.Input[str] name: The name of the Config.
         """
         pulumi.set(__self__, "order", order)
@@ -47,8 +45,7 @@ class ConfigurationArgs:
     @pulumi.getter
     def order(self) -> pulumi.Input[int]:
         """
-        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-        alphabetical order.
+        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -84,8 +81,7 @@ class ConfigurationArgs:
     @pulumi.getter(name="evaluationVersion")
     def evaluation_version(self) -> Optional[pulumi.Input[str]]:
         """
-        The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-        features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         """
         return pulumi.get(self, "evaluation_version")
 
@@ -117,11 +113,9 @@ class _ConfigurationState:
         """
         Input properties used for looking up and filtering Configuration resources.
         :param pulumi.Input[str] description: The description of the Config.
-        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-               features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         :param pulumi.Input[str] name: The name of the Config.
-        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-               alphabetical order.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         if description is not None:
@@ -151,8 +145,7 @@ class _ConfigurationState:
     @pulumi.getter(name="evaluationVersion")
     def evaluation_version(self) -> Optional[pulumi.Input[str]]:
         """
-        The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-        features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         """
         return pulumi.get(self, "evaluation_version")
 
@@ -176,8 +169,7 @@ class _ConfigurationState:
     @pulumi.getter
     def order(self) -> Optional[pulumi.Input[int]]:
         """
-        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-        alphabetical order.
+        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -210,15 +202,39 @@ class Configuration(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Configuration resource with the given unique name, props, and options.
+        Creates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_config = configcat.Configuration("my_config",
+            product_id=product_id,
+            name="My config",
+            description="My config description",
+            order=0,
+            evaluation_version="v1")
+        pulumi.export("configId", my_config.id)
+        ```
+
+        ## Import
+
+        Configs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.
+
+        ```sh
+        $ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Config.
-        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-               features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         :param pulumi.Input[str] name: The name of the Config.
-        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-               alphabetical order.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         ...
@@ -228,7 +244,33 @@ class Configuration(pulumi.CustomResource):
                  args: ConfigurationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Configuration resource with the given unique name, props, and options.
+        Creates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_configcat as configcat
+
+        config = pulumi.Config()
+        product_id = config.require("productId")
+        my_config = configcat.Configuration("my_config",
+            product_id=product_id,
+            name="My config",
+            description="My config description",
+            order=0,
+            evaluation_version="v1")
+        pulumi.export("configId", my_config.id)
+        ```
+
+        ## Import
+
+        Configs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.
+
+        ```sh
+        $ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+        ```
+
         :param str resource_name: The name of the resource.
         :param ConfigurationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -290,11 +332,9 @@ class Configuration(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Config.
-        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-               features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        :param pulumi.Input[str] evaluation_version: The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         :param pulumi.Input[str] name: The name of the Config.
-        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-               alphabetical order.
+        :param pulumi.Input[int] order: The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -320,8 +360,7 @@ class Configuration(pulumi.CustomResource):
     @pulumi.getter(name="evaluationVersion")
     def evaluation_version(self) -> pulumi.Output[str]:
         """
-        The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-        features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         """
         return pulumi.get(self, "evaluation_version")
 
@@ -337,8 +376,7 @@ class Configuration(pulumi.CustomResource):
     @pulumi.getter
     def order(self) -> pulumi.Output[int]:
         """
-        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-        alphabetical order.
+        The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 

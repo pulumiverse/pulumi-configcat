@@ -12,6 +12,82 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			productId := cfg.Require("productId")
+//			testEnvironmentId := cfg.Require("testEnvironmentId")
+//			productuctionEnvironmentId := cfg.Require("productuctionEnvironmentId")
+//			adminPermissionGroup, err := configcat.NewPermissionGroup(ctx, "admin_permission_group", &configcat.PermissionGroupArgs{
+//				ProductId:                    pulumi.String(productId),
+//				Name:                         pulumi.String("Administrators"),
+//				Accesstype:                   pulumi.String("full"),
+//				CanManageMembers:             pulumi.Bool(true),
+//				CanCreateorupdateConfig:      pulumi.Bool(true),
+//				CanDeleteConfig:              pulumi.Bool(true),
+//				CanCreateorupdateEnvironment: pulumi.Bool(true),
+//				CanDeleteEnvironment:         pulumi.Bool(true),
+//				CanCreateorupdateSetting:     pulumi.Bool(true),
+//				CanTagSetting:                pulumi.Bool(true),
+//				CanDeleteSetting:             pulumi.Bool(true),
+//				CanCreateorupdateTag:         pulumi.Bool(true),
+//				CanDeleteTag:                 pulumi.Bool(true),
+//				CanManageWebhook:             pulumi.Bool(true),
+//				CanUseExportimport:           pulumi.Bool(true),
+//				CanManageProductPreferences:  pulumi.Bool(true),
+//				CanManageIntegrations:        pulumi.Bool(true),
+//				CanViewSdkkey:                pulumi.Bool(true),
+//				CanRotateSdkkey:              pulumi.Bool(true),
+//				CanCreateorupdateSegment:     pulumi.Bool(true),
+//				CanDeleteSegment:             pulumi.Bool(true),
+//				CanViewProductAuditlog:       pulumi.Bool(true),
+//				CanViewProductStatistics:     pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			customPermissionGroup, err := configcat.NewPermissionGroup(ctx, "custom_permission_group", &configcat.PermissionGroupArgs{
+//				ProductId:  pulumi.String(productId),
+//				Name:       pulumi.String("Read only except Test environment"),
+//				Accesstype: pulumi.String("custom"),
+//				EnvironmentAccesses: pulumi.StringMap{
+//					testEnvironmentId:          pulumi.String("full"),
+//					productuctionEnvironmentId: pulumi.String("readOnly"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("adminPermissionGroupId", adminPermissionGroup.ID())
+//			ctx.Export("customPermissionGroupId", customPermissionGroup.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Permission Groups can be imported using the PermissionGroupId. Get the PermissionGroupId using the [List Permission Groups API](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-groups) for example.
+//
+// ```sh
+// $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
+// ```
 type PermissionGroup struct {
 	pulumi.CustomResourceState
 
@@ -59,13 +135,11 @@ type PermissionGroup struct {
 	CanViewProductStatistics pulumi.BoolOutput `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey pulumi.BoolOutput `pulumi:"canViewSdkkey"`
-	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-	// specific Feature Management permission. Possible values: full, readOnly
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses pulumi.StringMapOutput `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-	// none
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype pulumi.StringOutput `pulumi:"newEnvironmentAccesstype"`
 	// The ID of the Product.
 	ProductId pulumi.StringOutput `pulumi:"productId"`
@@ -148,13 +222,11 @@ type permissionGroupState struct {
 	CanViewProductStatistics *bool `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey *bool `pulumi:"canViewSdkkey"`
-	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-	// specific Feature Management permission. Possible values: full, readOnly
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses map[string]string `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name *string `pulumi:"name"`
-	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-	// none
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype *string `pulumi:"newEnvironmentAccesstype"`
 	// The ID of the Product.
 	ProductId *string `pulumi:"productId"`
@@ -205,13 +277,11 @@ type PermissionGroupState struct {
 	CanViewProductStatistics pulumi.BoolPtrInput
 	// Group members has access to SDK keys.
 	CanViewSdkkey pulumi.BoolPtrInput
-	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-	// specific Feature Management permission. Possible values: full, readOnly
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses pulumi.StringMapInput
 	// The name of the Permission Group.
 	Name pulumi.StringPtrInput
-	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-	// none
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype pulumi.StringPtrInput
 	// The ID of the Product.
 	ProductId pulumi.StringPtrInput
@@ -266,13 +336,11 @@ type permissionGroupArgs struct {
 	CanViewProductStatistics *bool `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey *bool `pulumi:"canViewSdkkey"`
-	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-	// specific Feature Management permission. Possible values: full, readOnly
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses map[string]string `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name *string `pulumi:"name"`
-	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-	// none
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype *string `pulumi:"newEnvironmentAccesstype"`
 	// The ID of the Product.
 	ProductId string `pulumi:"productId"`
@@ -324,13 +392,11 @@ type PermissionGroupArgs struct {
 	CanViewProductStatistics pulumi.BoolPtrInput
 	// Group members has access to SDK keys.
 	CanViewSdkkey pulumi.BoolPtrInput
-	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-	// specific Feature Management permission. Possible values: full, readOnly
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses pulumi.StringMapInput
 	// The name of the Permission Group.
 	Name pulumi.StringPtrInput
-	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-	// none
+	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype pulumi.StringPtrInput
 	// The ID of the Product.
 	ProductId pulumi.StringInput
@@ -533,8 +599,7 @@ func (o PermissionGroupOutput) CanViewSdkkey() pulumi.BoolOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.BoolOutput { return v.CanViewSdkkey }).(pulumi.BoolOutput)
 }
 
-// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-// specific Feature Management permission. Possible values: full, readOnly
+// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 func (o PermissionGroupOutput) EnvironmentAccesses() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.StringMapOutput { return v.EnvironmentAccesses }).(pulumi.StringMapOutput)
 }
@@ -544,8 +609,7 @@ func (o PermissionGroupOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-// none
+// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 func (o PermissionGroupOutput) NewEnvironmentAccesstype() pulumi.StringOutput {
 	return o.ApplyT(func(v *PermissionGroup) pulumi.StringOutput { return v.NewEnvironmentAccesstype }).(pulumi.StringOutput)
 }

@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const mySegment = new configcat.Segment("my_segment", {
+ *     productId: productId,
+ *     name: "Beta users",
+ *     description: "Beta users' description",
+ *     comparisonAttribute: "email",
+ *     comparator: "sensitiveIsOneOf",
+ *     comparisonValue: "betauser1@example.com,betauser2@example.com",
+ * });
+ * export const segmentId = mySegment.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+ * ```
+ */
 export class Segment extends pulumi.CustomResource {
     /**
      * Get an existing Segment resource's state with the given name, ID, and optional extra

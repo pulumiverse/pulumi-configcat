@@ -10,6 +10,43 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Adds/Removes **Tags** to/from **Feature Flags or Settings**.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var settingId = config.Require("settingId");
+    ///     var tagId = config.Require("tagId");
+    ///     var mySettingTag = new Configcat.SettingTag("my_setting_tag", new()
+    ///     {
+    ///         SettingId = settingId,
+    ///         TagId = tagId,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Setting Tags can be imported using a combined SettingId:TagId ID.
+    /// 
+    /// Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
+    /// 
+    /// Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/settingTag:SettingTag example 1234:5678
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/settingTag:SettingTag")]
     public partial class SettingTag : global::Pulumi.CustomResource
     {

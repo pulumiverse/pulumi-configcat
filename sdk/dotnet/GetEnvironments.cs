@@ -12,12 +12,96 @@ namespace Pulumiverse.Configcat
 {
     public static class GetEnvironments
     {
+        /// <summary>
+        /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
+        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
+        ///     {
+        ///         ProductId = productId,
+        ///         NameFilterRegex = "Test",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["environmentId"] = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Task<GetEnvironmentsResult> InvokeAsync(GetEnvironmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
+        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
+        ///     {
+        ///         ProductId = productId,
+        ///         NameFilterRegex = "Test",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["environmentId"] = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
 
+        /// <summary>
+        /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Configcat = Pulumi.Configcat;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var productId = config.Require("productId");
+        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
+        ///     {
+        ///         ProductId = productId,
+        ///         NameFilterRegex = "Test",
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["environmentId"] = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
+        ///     };
+        /// });
+        /// ```
+        /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
     }
@@ -25,9 +109,15 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetEnvironmentsArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Filter the Environments by name.
+        /// </summary>
         [Input("nameFilterRegex")]
         public string? NameFilterRegex { get; set; }
 
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
         [Input("productId", required: true)]
         public string ProductId { get; set; } = null!;
 
@@ -39,9 +129,15 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetEnvironmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Filter the Environments by name.
+        /// </summary>
         [Input("nameFilterRegex")]
         public Input<string>? NameFilterRegex { get; set; }
 
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
         [Input("productId", required: true)]
         public Input<string> ProductId { get; set; } = null!;
 
@@ -56,8 +152,17 @@ namespace Pulumiverse.Configcat
     public sealed class GetEnvironmentsResult
     {
         public readonly ImmutableArray<Outputs.GetEnvironmentsEnvironmentResult> Environments;
+        /// <summary>
+        /// Internal ID of the data source. Do not use.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// Filter the Environments by name.
+        /// </summary>
         public readonly string? NameFilterRegex;
+        /// <summary>
+        /// The ID of the Product.
+        /// </summary>
         public readonly string ProductId;
 
         [OutputConstructor]

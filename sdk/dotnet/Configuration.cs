@@ -10,6 +10,45 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var productId = config.Require("productId");
+    ///     var myConfig = new Configcat.Configuration("my_config", new()
+    ///     {
+    ///         ProductId = productId,
+    ///         Name = "My config",
+    ///         Description = "My config description",
+    ///         Order = 0,
+    ///         EvaluationVersion = "v1",
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["configId"] = myConfig.Id,
+    ///     };
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Configs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/configuration:Configuration")]
     public partial class Configuration : global::Pulumi.CustomResource
     {
@@ -20,8 +59,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-        /// features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        /// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         /// </summary>
         [Output("evaluationVersion")]
         public Output<string> EvaluationVersion { get; private set; } = null!;
@@ -33,8 +71,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-        /// alphabetical order.
+        /// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         /// </summary>
         [Output("order")]
         public Output<int> Order { get; private set; } = null!;
@@ -99,8 +136,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-        /// features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        /// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         /// </summary>
         [Input("evaluationVersion")]
         public Input<string>? EvaluationVersion { get; set; }
@@ -112,8 +148,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-        /// alphabetical order.
+        /// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         /// </summary>
         [Input("order", required: true)]
         public Input<int> Order { get; set; } = null!;
@@ -139,8 +174,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
-        /// features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+        /// The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new features of [Config V2](https://configcat.com/docs/advanced/config-v2).
         /// </summary>
         [Input("evaluationVersion")]
         public Input<string>? EvaluationVersion { get; set; }
@@ -152,8 +186,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
-        /// alphabetical order.
+        /// The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
         /// </summary>
         [Input("order")]
         public Input<int>? Order { get; set; }

@@ -10,6 +10,78 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var productId = config.Require("productId");
+    ///     var testEnvironmentId = config.Require("testEnvironmentId");
+    ///     var productuctionEnvironmentId = config.Require("productuctionEnvironmentId");
+    ///     var adminPermissionGroup = new Configcat.PermissionGroup("admin_permission_group", new()
+    ///     {
+    ///         ProductId = productId,
+    ///         Name = "Administrators",
+    ///         Accesstype = "full",
+    ///         CanManageMembers = true,
+    ///         CanCreateorupdateConfig = true,
+    ///         CanDeleteConfig = true,
+    ///         CanCreateorupdateEnvironment = true,
+    ///         CanDeleteEnvironment = true,
+    ///         CanCreateorupdateSetting = true,
+    ///         CanTagSetting = true,
+    ///         CanDeleteSetting = true,
+    ///         CanCreateorupdateTag = true,
+    ///         CanDeleteTag = true,
+    ///         CanManageWebhook = true,
+    ///         CanUseExportimport = true,
+    ///         CanManageProductPreferences = true,
+    ///         CanManageIntegrations = true,
+    ///         CanViewSdkkey = true,
+    ///         CanRotateSdkkey = true,
+    ///         CanCreateorupdateSegment = true,
+    ///         CanDeleteSegment = true,
+    ///         CanViewProductAuditlog = true,
+    ///         CanViewProductStatistics = true,
+    ///     });
+    /// 
+    ///     var customPermissionGroup = new Configcat.PermissionGroup("custom_permission_group", new()
+    ///     {
+    ///         ProductId = productId,
+    ///         Name = "Read only except Test environment",
+    ///         Accesstype = "custom",
+    ///         EnvironmentAccesses = 
+    ///         {
+    ///             { testEnvironmentId, "full" },
+    ///             { productuctionEnvironmentId, "readOnly" },
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["adminPermissionGroupId"] = adminPermissionGroup.Id,
+    ///         ["customPermissionGroupId"] = customPermissionGroup.Id,
+    ///     };
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Permission Groups can be imported using the PermissionGroupId. Get the PermissionGroupId using the [List Permission Groups API](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-groups) for example.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/permissionGroup:PermissionGroup")]
     public partial class PermissionGroup : global::Pulumi.CustomResource
     {
@@ -146,8 +218,7 @@ namespace Pulumiverse.Configcat
         public Output<bool> CanViewSdkkey { get; private set; } = null!;
 
         /// <summary>
-        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-        /// specific Feature Management permission. Possible values: full, readOnly
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
         [Output("environmentAccesses")]
         public Output<ImmutableDictionary<string, string>> EnvironmentAccesses { get; private set; } = null!;
@@ -159,8 +230,7 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-        /// none
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         /// </summary>
         [Output("newEnvironmentAccesstype")]
         public Output<string> NewEnvironmentAccesstype { get; private set; } = null!;
@@ -354,8 +424,7 @@ namespace Pulumiverse.Configcat
         private InputMap<string>? _environmentAccesses;
 
         /// <summary>
-        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-        /// specific Feature Management permission. Possible values: full, readOnly
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
         public InputMap<string> EnvironmentAccesses
         {
@@ -370,8 +439,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-        /// none
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         /// </summary>
         [Input("newEnvironmentAccesstype")]
         public Input<string>? NewEnvironmentAccesstype { get; set; }
@@ -526,8 +594,7 @@ namespace Pulumiverse.Configcat
         private InputMap<string>? _environmentAccesses;
 
         /// <summary>
-        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-        /// specific Feature Management permission. Possible values: full, readOnly
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
         public InputMap<string> EnvironmentAccesses
         {
@@ -542,8 +609,7 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-        /// none
+        /// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
         /// </summary>
         [Input("newEnvironmentAccesstype")]
         public Input<string>? NewEnvironmentAccesstype { get; set; }

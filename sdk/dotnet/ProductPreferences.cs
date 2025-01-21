@@ -10,12 +10,77 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
+    /// <summary>
+    /// Manages the **Product Preferences**.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Configcat = Pulumiverse.Configcat;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var organizationId = config.Require("organizationId");
+    ///     var product = new Configcat.Product("product", new()
+    ///     {
+    ///         OrganizationId = organizationId,
+    ///         Name = "My product",
+    ///         Order = 0,
+    ///     });
+    /// 
+    ///     var test = new Configcat.Environment("test", new()
+    ///     {
+    ///         ProductId = product.Id,
+    ///         Name = "Test",
+    ///         Order = 0,
+    ///     });
+    /// 
+    ///     var production = new Configcat.Environment("production", new()
+    ///     {
+    ///         ProductId = product.Id,
+    ///         Name = "Production",
+    ///         Order = 1,
+    ///     });
+    /// 
+    ///     var preferences = new Configcat.ProductPreferences("preferences", new()
+    ///     {
+    ///         ProductId = product.Id,
+    ///         KeyGenerationMode = "kebabCase",
+    ///         MandatorySettingHint = true,
+    ///         ShowVariationId = false,
+    ///         ReasonRequired = false,
+    ///         ReasonRequiredEnvironments = Output.Tuple(test.Id, production.Id).Apply(values =&gt;
+    ///         {
+    ///             var testId = values.Item1;
+    ///             var productionId = values.Item2;
+    ///             return 
+    ///             {
+    ///                 { testId, false },
+    ///                 { productionId, true },
+    ///             };
+    ///         }),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Product preferences can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
+    /// 
+    /// ```sh
+    /// $ pulumi import configcat:index/productPreferences:ProductPreferences example 08d86d63-2726-47cd-8bfc-59608ecb91e2
+    /// ```
+    /// </summary>
     [ConfigcatResourceType("configcat:index/productPreferences:ProductPreferences")]
     public partial class ProductPreferences : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Determines the Feature Flag key generation mode. Available values:
-        /// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        /// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         /// </summary>
         [Output("keyGenerationMode")]
         public Output<string> KeyGenerationMode { get; private set; } = null!;
@@ -39,8 +104,7 @@ namespace Pulumiverse.Configcat
         public Output<bool> ReasonRequired { get; private set; } = null!;
 
         /// <summary>
-        /// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-        /// note is required for saving and publishing.
+        /// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         /// </summary>
         [Output("reasonRequiredEnvironments")]
         public Output<ImmutableDictionary<string, bool>> ReasonRequiredEnvironments { get; private set; } = null!;
@@ -99,8 +163,7 @@ namespace Pulumiverse.Configcat
     public sealed class ProductPreferencesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Determines the Feature Flag key generation mode. Available values:
-        /// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        /// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         /// </summary>
         [Input("keyGenerationMode")]
         public Input<string>? KeyGenerationMode { get; set; }
@@ -127,8 +190,7 @@ namespace Pulumiverse.Configcat
         private InputMap<bool>? _reasonRequiredEnvironments;
 
         /// <summary>
-        /// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-        /// note is required for saving and publishing.
+        /// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         /// </summary>
         public InputMap<bool> ReasonRequiredEnvironments
         {
@@ -151,8 +213,7 @@ namespace Pulumiverse.Configcat
     public sealed class ProductPreferencesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Determines the Feature Flag key generation mode. Available values:
-        /// `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
+        /// Determines the Feature Flag key generation mode. Available values: `camelCase`|`upperCase`|`lowerCase`|`pascalCase`|`kebabCase`. Default: `camelCase`.
         /// </summary>
         [Input("keyGenerationMode")]
         public Input<string>? KeyGenerationMode { get; set; }
@@ -179,8 +240,7 @@ namespace Pulumiverse.Configcat
         private InputMap<bool>? _reasonRequiredEnvironments;
 
         /// <summary>
-        /// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory
-        /// note is required for saving and publishing.
+        /// The environment specific mandatory note map block. Keys are the Environment IDs and the values indicate that a mandatory note is required for saving and publishing.
         /// </summary>
         public InputMap<bool> ReasonRequiredEnvironments
         {

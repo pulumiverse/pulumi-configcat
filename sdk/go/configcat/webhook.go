@@ -12,6 +12,19 @@ import (
 	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
+// Creates and manages a **Webhook**. [What is a Webhook in ConfigCat?](https://configcat.com/docs/advanced/notifications-webhooks/)
+//
+// ## Import
+//
+// Webhooks can be imported using the WebhookId. Get the WebhookId using the [List Webhooks API](https://api.configcat.com/docs/index.html#tag/Webhooks/operation/get-webhooks) for example.
+//
+// It is important to note that webhooks containing secure webhook headers cannot be imported via `pulumi import`.
+//
+// If you want to manage your webhooks that already contain secure webhook headers, you should create brand new configcat_webhook resources in Terraform without importing them. After they are created successfully and managed by Terraform, you can safely delete the old, non Terraform managed webhook from the ConfigCat Dashboard.
+//
+// ```sh
+// $ pulumi import configcat:index/webhook:Webhook example 1234
+// ```
 type Webhook struct {
 	pulumi.CustomResourceState
 
@@ -26,8 +39,7 @@ type Webhook struct {
 	SecureWebhookHeaders WebhookSecureWebhookHeaderArrayOutput `pulumi:"secureWebhookHeaders"`
 	// The URL of the Webhook.
 	Url pulumi.StringOutput `pulumi:"url"`
-	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-	// audit logs and on the webhook test UI.
+	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
 	WebhookHeaders WebhookWebhookHeaderArrayOutput `pulumi:"webhookHeaders"`
 }
 
@@ -81,8 +93,7 @@ type webhookState struct {
 	SecureWebhookHeaders []WebhookSecureWebhookHeader `pulumi:"secureWebhookHeaders"`
 	// The URL of the Webhook.
 	Url *string `pulumi:"url"`
-	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-	// audit logs and on the webhook test UI.
+	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
 	WebhookHeaders []WebhookWebhookHeader `pulumi:"webhookHeaders"`
 }
 
@@ -98,8 +109,7 @@ type WebhookState struct {
 	SecureWebhookHeaders WebhookSecureWebhookHeaderArrayInput
 	// The URL of the Webhook.
 	Url pulumi.StringPtrInput
-	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-	// audit logs and on the webhook test UI.
+	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
 	WebhookHeaders WebhookWebhookHeaderArrayInput
 }
 
@@ -119,8 +129,7 @@ type webhookArgs struct {
 	SecureWebhookHeaders []WebhookSecureWebhookHeader `pulumi:"secureWebhookHeaders"`
 	// The URL of the Webhook.
 	Url string `pulumi:"url"`
-	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-	// audit logs and on the webhook test UI.
+	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
 	WebhookHeaders []WebhookWebhookHeader `pulumi:"webhookHeaders"`
 }
 
@@ -137,8 +146,7 @@ type WebhookArgs struct {
 	SecureWebhookHeaders WebhookSecureWebhookHeaderArrayInput
 	// The URL of the Webhook.
 	Url pulumi.StringInput
-	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-	// audit logs and on the webhook test UI.
+	// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
 	WebhookHeaders WebhookWebhookHeaderArrayInput
 }
 
@@ -258,8 +266,7 @@ func (o WebhookOutput) Url() pulumi.StringOutput {
 	return o.ApplyT(func(v *Webhook) pulumi.StringOutput { return v.Url }).(pulumi.StringOutput)
 }
 
-// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in
-// audit logs and on the webhook test UI.
+// List of plain text HTTP headers. The value of a plain text header is always visible for everyone. It also appears in audit logs and on the webhook test UI.
 func (o WebhookOutput) WebhookHeaders() WebhookWebhookHeaderArrayOutput {
 	return o.ApplyT(func(v *Webhook) WebhookWebhookHeaderArrayOutput { return v.WebhookHeaders }).(WebhookWebhookHeaderArrayOutput)
 }

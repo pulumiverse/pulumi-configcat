@@ -4,6 +4,65 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as configcat from "@pulumiverse/configcat";
+ *
+ * const config = new pulumi.Config();
+ * const productId = config.require("productId");
+ * const testEnvironmentId = config.require("testEnvironmentId");
+ * const productuctionEnvironmentId = config.require("productuctionEnvironmentId");
+ * const adminPermissionGroup = new configcat.PermissionGroup("admin_permission_group", {
+ *     productId: productId,
+ *     name: "Administrators",
+ *     accesstype: "full",
+ *     canManageMembers: true,
+ *     canCreateorupdateConfig: true,
+ *     canDeleteConfig: true,
+ *     canCreateorupdateEnvironment: true,
+ *     canDeleteEnvironment: true,
+ *     canCreateorupdateSetting: true,
+ *     canTagSetting: true,
+ *     canDeleteSetting: true,
+ *     canCreateorupdateTag: true,
+ *     canDeleteTag: true,
+ *     canManageWebhook: true,
+ *     canUseExportimport: true,
+ *     canManageProductPreferences: true,
+ *     canManageIntegrations: true,
+ *     canViewSdkkey: true,
+ *     canRotateSdkkey: true,
+ *     canCreateorupdateSegment: true,
+ *     canDeleteSegment: true,
+ *     canViewProductAuditlog: true,
+ *     canViewProductStatistics: true,
+ * });
+ * const customPermissionGroup = new configcat.PermissionGroup("custom_permission_group", {
+ *     productId: productId,
+ *     name: "Read only except Test environment",
+ *     accesstype: "custom",
+ *     environmentAccesses: {
+ *         [testEnvironmentId]: "full",
+ *         [productuctionEnvironmentId]: "readOnly",
+ *     },
+ * });
+ * export const adminPermissionGroupId = adminPermissionGroup.id;
+ * export const customPermissionGroupId = customPermissionGroup.id;
+ * ```
+ *
+ * ## Import
+ *
+ * Permission Groups can be imported using the PermissionGroupId. Get the PermissionGroupId using the [List Permission Groups API](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-groups) for example.
+ *
+ * ```sh
+ * $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
+ * ```
+ */
 export class PermissionGroup extends pulumi.CustomResource {
     /**
      * Get an existing PermissionGroup resource's state with the given name, ID, and optional extra
@@ -121,8 +180,7 @@ export class PermissionGroup extends pulumi.CustomResource {
      */
     public readonly canViewSdkkey!: pulumi.Output<boolean>;
     /**
-     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-     * specific Feature Management permission. Possible values: full, readOnly
+     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
      */
     public readonly environmentAccesses!: pulumi.Output<{[key: string]: string}>;
     /**
@@ -130,8 +188,7 @@ export class PermissionGroup extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-     * none
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
      */
     public readonly newEnvironmentAccesstype!: pulumi.Output<string>;
     /**
@@ -308,8 +365,7 @@ export interface PermissionGroupState {
      */
     canViewSdkkey?: pulumi.Input<boolean>;
     /**
-     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-     * specific Feature Management permission. Possible values: full, readOnly
+     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
      */
     environmentAccesses?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -317,8 +373,7 @@ export interface PermissionGroupState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-     * none
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
      */
     newEnvironmentAccesstype?: pulumi.Input<string>;
     /**
@@ -420,8 +475,7 @@ export interface PermissionGroupArgs {
      */
     canViewSdkkey?: pulumi.Input<boolean>;
     /**
-     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
-     * specific Feature Management permission. Possible values: full, readOnly
+     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
      */
     environmentAccesses?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -429,8 +483,7 @@ export interface PermissionGroupArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
-     * none
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
      */
     newEnvironmentAccesstype?: pulumi.Input<string>;
     /**
