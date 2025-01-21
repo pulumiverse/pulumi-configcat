@@ -3,8 +3,8 @@ name: release
 on:
   push:
     tags:
-    - v*.*.*
-    - "!v*.*.*-**"
+      - v*.*.*
+      - "!v*.*.*-**"
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,16 +36,12 @@ jobs:
     uses: ./.github/workflows/build_provider.yml
     needs: prerequisites
     secrets: inherit
-    with:
-      version: ${{ needs.prerequisites.outputs.version }}
 
   build_sdk:
     name: build_sdk
     needs: prerequisites
     uses: ./.github/workflows/build_sdk.yml
     secrets: inherit
-    with:
-      version: ${{ needs.prerequisites.outputs.version }}
 
   lint:
     name: lint
@@ -69,7 +65,6 @@ jobs:
     uses: ./.github/workflows/publish.yml
     secrets: inherit
     with:
-      version: ${{ needs.prerequisites.outputs.version }}
       isPrerelease: false
 
   test:
@@ -82,5 +77,3 @@ jobs:
       contents: read
       id-token: write
     secrets: inherit
-    with:
-      version: ${{ needs.prerequisites.outputs.version }}
