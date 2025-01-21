@@ -44,17 +44,11 @@ class GetConfigurationsResult:
     @property
     @pulumi.getter
     def configs(self) -> Sequence['outputs.GetConfigurationsConfigResult']:
-        """
-        A config list block defined as below.
-        """
         return pulumi.get(self, "configs")
 
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -84,29 +78,7 @@ def get_configurations(name_filter_regex: Optional[str] = None,
                        product_id: Optional[str] = None,
                        opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConfigurationsResult:
     """
-    ## # get_configurations Resource
-
-    Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-        name_filter_regex="Main Config")
-    pulumi.export("configId", my_configs.configs[0].config_id)
-    ```
-
-    ## Endpoints used
-
-    [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
-
-
-    :param str name_filter_regex: Filter the Configs by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -123,29 +95,7 @@ def get_configurations_output(name_filter_regex: Optional[pulumi.Input[Optional[
                               product_id: Optional[pulumi.Input[str]] = None,
                               opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConfigurationsResult]:
     """
-    ## # get_configurations Resource
-
-    Use this data source to access information about existing **Configs**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-        name_filter_regex="Main Config")
-    pulumi.export("configId", my_configs.configs[0].config_id)
-    ```
-
-    ## Endpoints used
-
-    [List Configs](https://api.configcat.com/docs/#tag/Configs/operation/get-configs)
-
-
-    :param str name_filter_regex: Filter the Configs by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex

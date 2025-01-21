@@ -41,9 +41,6 @@ class GetProductsResult:
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -54,9 +51,6 @@ class GetProductsResult:
     @property
     @pulumi.getter
     def products(self) -> Sequence['outputs.GetProductsProductResult']:
-        """
-        A product list block defined as below.
-        """
         return pulumi.get(self, "products")
 
 
@@ -74,26 +68,7 @@ class AwaitableGetProductsResult(GetProductsResult):
 def get_products(name_filter_regex: Optional[str] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetProductsResult:
     """
-    ## # get_products Resource
-
-    Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    pulumi.export("productId", my_products.products[0].product_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
-
-
-    :param str name_filter_regex: Filter the Products by name.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -107,26 +82,7 @@ def get_products(name_filter_regex: Optional[str] = None,
 def get_products_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetProductsResult]:
     """
-    ## # get_products Resource
-
-    Use this data source to access information about existing **Products**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    pulumi.export("productId", my_products.products[0].product_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Products](https://api.configcat.com/docs/#tag/Products/operation/get-products)
-
-
-    :param str name_filter_regex: Filter the Products by name.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex

@@ -10,66 +10,6 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
-    /// <summary>
-    /// ## # configcat.Setting Resource
-    /// 
-    /// Creates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Configcat = Pulumi.Configcat;
-    /// using Configcat = Pulumiverse.Configcat;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var myProducts = Configcat.GetProducts.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "ConfigCat's product",
-    ///     });
-    /// 
-    ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-    ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-    ///         NameFilterRegex = "Main Config",
-    ///     });
-    /// 
-    ///     var mySetting = new Configcat.Setting("my_setting", new()
-    ///     {
-    ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-    ///         Key = "isAwesomeFeatureEnabled",
-    ///         Name = "My awesome feature flag",
-    ///         Hint = "This is the hint for my awesome feature flag",
-    ///         SettingType = "boolean",
-    ///         Order = 0,
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["settingId"] = mySetting.Id,
-    ///     };
-    /// });
-    /// ```
-    /// 
-    /// ## Endpoints used
-    /// 
-    /// * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-    /// * [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)
-    /// * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
-    /// * [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)
-    /// 
-    /// ## Import
-    /// 
-    /// Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
-    /// 
-    /// ```sh
-    /// $ pulumi import configcat:index/setting:Setting example 1234
-    /// ```
-    /// Read more about importing.
-    /// </summary>
     [ConfigcatResourceType("configcat:index/setting:Setting")]
     public partial class Setting : global::Pulumi.CustomResource
     {
@@ -80,35 +20,35 @@ namespace Pulumiverse.Configcat
         public Output<string> ConfigId { get; private set; } = null!;
 
         /// <summary>
-        /// The hint of the Setting.
+        /// The hint of the Feature Flag or Setting.
         /// </summary>
         [Output("hint")]
-        public Output<string?> Hint { get; private set; } = null!;
+        public Output<string> Hint { get; private set; } = null!;
 
         /// <summary>
-        /// The key of the Feature Flag/Setting.
+        /// The key of the Feature Flag or Setting.
         /// </summary>
         [Output("key")]
         public Output<string> Key { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Setting.
+        /// The name of the Feature Flag or Setting.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        /// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+        /// same order, they are displayed in alphabetical order.
         /// </summary>
         [Output("order")]
         public Output<int> Order { get; private set; } = null!;
 
         /// <summary>
-        /// Default: `boolean`. The Setting's type.  
-        /// Available values: `boolean`|`string`|`int`|`double`.
+        /// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         /// </summary>
         [Output("settingType")]
-        public Output<string?> SettingType { get; private set; } = null!;
+        public Output<string> SettingType { get; private set; } = null!;
 
 
         /// <summary>
@@ -164,32 +104,32 @@ namespace Pulumiverse.Configcat
         public Input<string> ConfigId { get; set; } = null!;
 
         /// <summary>
-        /// The hint of the Setting.
+        /// The hint of the Feature Flag or Setting.
         /// </summary>
         [Input("hint")]
         public Input<string>? Hint { get; set; }
 
         /// <summary>
-        /// The key of the Feature Flag/Setting.
+        /// The key of the Feature Flag or Setting.
         /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
         /// <summary>
-        /// The name of the Setting.
+        /// The name of the Feature Flag or Setting.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        /// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+        /// same order, they are displayed in alphabetical order.
         /// </summary>
         [Input("order", required: true)]
         public Input<int> Order { get; set; } = null!;
 
         /// <summary>
-        /// Default: `boolean`. The Setting's type.  
-        /// Available values: `boolean`|`string`|`int`|`double`.
+        /// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         /// </summary>
         [Input("settingType")]
         public Input<string>? SettingType { get; set; }
@@ -209,32 +149,32 @@ namespace Pulumiverse.Configcat
         public Input<string>? ConfigId { get; set; }
 
         /// <summary>
-        /// The hint of the Setting.
+        /// The hint of the Feature Flag or Setting.
         /// </summary>
         [Input("hint")]
         public Input<string>? Hint { get; set; }
 
         /// <summary>
-        /// The key of the Feature Flag/Setting.
+        /// The key of the Feature Flag or Setting.
         /// </summary>
         [Input("key")]
         public Input<string>? Key { get; set; }
 
         /// <summary>
-        /// The name of the Setting.
+        /// The name of the Feature Flag or Setting.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        /// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+        /// same order, they are displayed in alphabetical order.
         /// </summary>
         [Input("order")]
         public Input<int>? Order { get; set; }
 
         /// <summary>
-        /// Default: `boolean`. The Setting's type.  
-        /// Available values: `boolean`|`string`|`int`|`double`.
+        /// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         /// </summary>
         [Input("settingType")]
         public Input<string>? SettingType { get; set; }

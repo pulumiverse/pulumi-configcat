@@ -10,73 +10,20 @@ using Pulumi;
 
 namespace Pulumiverse.Configcat
 {
-    /// <summary>
-    /// ## # configcat.Environment Resource
-    /// 
-    /// Creates and manages an **Environment**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Configcat = Pulumi.Configcat;
-    /// using Configcat = Pulumiverse.Configcat;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var myProducts = Configcat.GetProducts.Invoke(new()
-    ///     {
-    ///         NameFilterRegex = "ConfigCat's product",
-    ///     });
-    /// 
-    ///     var myEnvironment = new Configcat.Environment("my_environment", new()
-    ///     {
-    ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-    ///         Name = "Staging",
-    ///         Description = "Staging description",
-    ///         Color = "blue",
-    ///         Order = 0,
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["environmentId"] = myEnvironment.Id,
-    ///     };
-    /// });
-    /// ```
-    /// 
-    /// ## Endpoints used
-    /// 
-    /// * [Get Environment](https://api.configcat.com/docs/#tag/Environments/operation/get-environment)
-    /// * [Create Environment](https://api.configcat.com/docs/#tag/Environments/operation/create-environment)
-    /// * [Update Environment](https://api.configcat.com/docs/#tag/Environments/operation/update-environment)
-    /// * [Delete Environment](https://api.configcat.com/docs/#tag/Environments/operation/delete-environment)
-    /// 
-    /// ## Import
-    /// 
-    /// Environments can be imported using the EnvironmentId. Get the EnvironmentId using the [List Environments API](https://api.configcat.com/docs/#tag/Environments/operation/get-environments) for example.
-    /// 
-    /// ```sh
-    /// $ pulumi import configcat:index/environment:Environment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
-    /// ```
-    /// Read more about importing.
-    /// </summary>
     [ConfigcatResourceType("configcat:index/environment:Environment")]
     public partial class Environment : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The color (HTML color code) of the Environment.
+        /// The color of the Environment.
         /// </summary>
         [Output("color")]
-        public Output<string?> Color { get; private set; } = null!;
+        public Output<string> Color { get; private set; } = null!;
 
         /// <summary>
         /// The description of the Environment.
         /// </summary>
         [Output("description")]
-        public Output<string?> Description { get; private set; } = null!;
+        public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Environment.
@@ -85,7 +32,8 @@ namespace Pulumiverse.Configcat
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
+        /// displayed in alphabetical order.
         /// </summary>
         [Output("order")]
         public Output<int> Order { get; private set; } = null!;
@@ -144,7 +92,7 @@ namespace Pulumiverse.Configcat
     public sealed class EnvironmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The color (HTML color code) of the Environment.
+        /// The color of the Environment.
         /// </summary>
         [Input("color")]
         public Input<string>? Color { get; set; }
@@ -162,7 +110,8 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
+        /// displayed in alphabetical order.
         /// </summary>
         [Input("order", required: true)]
         public Input<int> Order { get; set; } = null!;
@@ -182,7 +131,7 @@ namespace Pulumiverse.Configcat
     public sealed class EnvironmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The color (HTML color code) of the Environment.
+        /// The color of the Environment.
         /// </summary>
         [Input("color")]
         public Input<string>? Color { get; set; }
@@ -200,7 +149,8 @@ namespace Pulumiverse.Configcat
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are displayed in alphabetical order.
+        /// The order of the Environment within a Product (zero-based). If multiple Environments has the same order, they are
+        /// displayed in alphabetical order.
         /// </summary>
         [Input("order")]
         public Input<int>? Order { get; set; }

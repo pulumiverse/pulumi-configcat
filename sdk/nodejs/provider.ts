@@ -26,15 +26,20 @@ export class Provider extends pulumi.ProviderResource {
     }
 
     /**
-     * ConfigCat Public Management API Base Path (defaults to production).
+     * ConfigCat Public Management API's `basePath`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+     * can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
      */
     public readonly basePath!: pulumi.Output<string | undefined>;
     /**
-     * ConfigCat Public API credential - Basic Auth Password
+     * Get your `basicAuthPassword` at [ConfigCat Public API
+     * credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+     * `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
      */
     public readonly basicAuthPassword!: pulumi.Output<string | undefined>;
     /**
-     * ConfigCat Public API credential - Basic Auth Username.
+     * Get your `basicAuthUsername` at [ConfigCat Public API
+     * credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+     * `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
      */
     public readonly basicAuthUsername!: pulumi.Output<string | undefined>;
 
@@ -65,15 +70,20 @@ export class Provider extends pulumi.ProviderResource {
  */
 export interface ProviderArgs {
     /**
-     * ConfigCat Public Management API Base Path (defaults to production).
+     * ConfigCat Public Management API's `basePath`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+     * can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
      */
     basePath?: pulumi.Input<string>;
     /**
-     * ConfigCat Public API credential - Basic Auth Password
+     * Get your `basicAuthPassword` at [ConfigCat Public API
+     * credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+     * `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
      */
     basicAuthPassword?: pulumi.Input<string>;
     /**
-     * ConfigCat Public API credential - Basic Auth Username.
+     * Get your `basicAuthUsername` at [ConfigCat Public API
+     * credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+     * `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
      */
     basicAuthUsername?: pulumi.Input<string>;
 }

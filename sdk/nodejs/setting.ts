@@ -4,52 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.Setting Resource
- *
- * Creates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- * import * as configcat from "@pulumiverse/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfigs = myProducts.then(myProducts => configcat.getConfigurations({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Main Config",
- * }));
- * const mySetting = new configcat.Setting("my_setting", {
- *     configId: myConfigs.then(myConfigs => myConfigs.configs?.[0]?.configId),
- *     key: "isAwesomeFeatureEnabled",
- *     name: "My awesome feature flag",
- *     hint: "This is the hint for my awesome feature flag",
- *     settingType: "boolean",
- *     order: 0,
- * });
- * export const settingId = mySetting.id;
- * ```
- *
- * ## Endpoints used
- *
- * * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
- * * [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)
- * * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
- * * [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)
- *
- * ## Import
- *
- * Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
- *
- * ```sh
- * $ pulumi import configcat:index/setting:Setting example 1234
- * ```
- * Read more about importing.
- */
 export class Setting extends pulumi.CustomResource {
     /**
      * Get an existing Setting resource's state with the given name, ID, and optional extra
@@ -83,26 +37,26 @@ export class Setting extends pulumi.CustomResource {
      */
     public readonly configId!: pulumi.Output<string>;
     /**
-     * The hint of the Setting.
+     * The hint of the Feature Flag or Setting.
      */
-    public readonly hint!: pulumi.Output<string | undefined>;
+    public readonly hint!: pulumi.Output<string>;
     /**
-     * The key of the Feature Flag/Setting.
+     * The key of the Feature Flag or Setting.
      */
     public readonly key!: pulumi.Output<string>;
     /**
-     * The name of the Setting.
+     * The name of the Feature Flag or Setting.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+     * same order, they are displayed in alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
-     * Default: `boolean`. The Setting's type.  
-     * Available values: `boolean`|`string`|`int`|`double`.
+     * The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
      */
-    public readonly settingType!: pulumi.Output<string | undefined>;
+    public readonly settingType!: pulumi.Output<string>;
 
     /**
      * Create a Setting resource with the given unique name, arguments, and options.
@@ -155,24 +109,24 @@ export interface SettingState {
      */
     configId?: pulumi.Input<string>;
     /**
-     * The hint of the Setting.
+     * The hint of the Feature Flag or Setting.
      */
     hint?: pulumi.Input<string>;
     /**
-     * The key of the Feature Flag/Setting.
+     * The key of the Feature Flag or Setting.
      */
     key?: pulumi.Input<string>;
     /**
-     * The name of the Setting.
+     * The name of the Feature Flag or Setting.
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+     * same order, they are displayed in alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
-     * Default: `boolean`. The Setting's type.  
-     * Available values: `boolean`|`string`|`int`|`double`.
+     * The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
      */
     settingType?: pulumi.Input<string>;
 }
@@ -186,24 +140,24 @@ export interface SettingArgs {
      */
     configId: pulumi.Input<string>;
     /**
-     * The hint of the Setting.
+     * The hint of the Feature Flag or Setting.
      */
     hint?: pulumi.Input<string>;
     /**
-     * The key of the Feature Flag/Setting.
+     * The key of the Feature Flag or Setting.
      */
     key: pulumi.Input<string>;
     /**
-     * The name of the Setting.
+     * The name of the Feature Flag or Setting.
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+     * The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+     * same order, they are displayed in alphabetical order.
      */
     order: pulumi.Input<number>;
     /**
-     * Default: `boolean`. The Setting's type.  
-     * Available values: `boolean`|`string`|`int`|`double`.
+     * The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
      */
     settingType?: pulumi.Input<string>;
 }

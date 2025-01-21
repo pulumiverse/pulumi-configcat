@@ -26,6 +26,9 @@ namespace Pulumiverse.Configcat.Outputs
         /// Group members can create/update Environments.
         /// </summary>
         public readonly bool CanCreateorupdateEnvironment;
+        /// <summary>
+        /// Group members can create/update Segments.
+        /// </summary>
         public readonly bool CanCreateorupdateSegment;
         /// <summary>
         /// Group members can create/update Feature Flags and Settings.
@@ -43,6 +46,9 @@ namespace Pulumiverse.Configcat.Outputs
         /// Group members can delete Environments.
         /// </summary>
         public readonly bool CanDeleteEnvironment;
+        /// <summary>
+        /// Group members can delete Segments.
+        /// </summary>
         public readonly bool CanDeleteSegment;
         /// <summary>
         /// Group members can delete Feature Flags and Settings.
@@ -52,6 +58,10 @@ namespace Pulumiverse.Configcat.Outputs
         /// Group members can delete Tags.
         /// </summary>
         public readonly bool CanDeleteTag;
+        /// <summary>
+        /// Group members can disable two-factor authentication for other members.
+        /// </summary>
+        public readonly bool CanDisable2fa;
         /// <summary>
         /// Group members can add and configure integrations.
         /// </summary>
@@ -93,9 +103,9 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly bool CanViewSdkkey;
         /// <summary>
-        /// The environment specific permissions map block defined as below.
+        /// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
         /// </summary>
-        public readonly ImmutableDictionary<string, string>? EnvironmentAccesses;
+        public readonly ImmutableDictionary<string, string> EnvironmentAccesses;
         /// <summary>
         /// The name of the Permission Group.
         /// </summary>
@@ -105,7 +115,7 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly string NewEnvironmentAccesstype;
         /// <summary>
-        /// The unique Permission Groups ID.
+        /// The unique Permission Group ID.
         /// </summary>
         public readonly int PermissionGroupId;
 
@@ -133,6 +143,8 @@ namespace Pulumiverse.Configcat.Outputs
 
             bool canDeleteTag,
 
+            bool canDisable2fa,
+
             bool canManageIntegrations,
 
             bool canManageMembers,
@@ -153,7 +165,7 @@ namespace Pulumiverse.Configcat.Outputs
 
             bool canViewSdkkey,
 
-            ImmutableDictionary<string, string>? environmentAccesses,
+            ImmutableDictionary<string, string> environmentAccesses,
 
             string name,
 
@@ -172,6 +184,7 @@ namespace Pulumiverse.Configcat.Outputs
             CanDeleteSegment = canDeleteSegment;
             CanDeleteSetting = canDeleteSetting;
             CanDeleteTag = canDeleteTag;
+            CanDisable2fa = canDisable2fa;
             CanManageIntegrations = canManageIntegrations;
             CanManageMembers = canManageMembers;
             CanManageProductPreferences = canManageProductPreferences;

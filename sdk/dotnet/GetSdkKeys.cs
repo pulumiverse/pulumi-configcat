@@ -12,159 +12,12 @@ namespace Pulumiverse.Configcat
 {
     public static class GetSdkKeys
     {
-        /// <summary>
-        /// ## # configcat.getSdkKeys Resource
-        /// 
-        /// Use this data source to access information about **SDK Keys**.
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
-        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
-        ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-        ///         EnvironmentId = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
-        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
-        /// </summary>
         public static Task<GetSdkKeysResult> InvokeAsync(GetSdkKeysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getSdkKeys Resource
-        /// 
-        /// Use this data source to access information about **SDK Keys**.
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
-        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
-        ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-        ///         EnvironmentId = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
-        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
-        /// </summary>
         public static Output<GetSdkKeysResult> Invoke(GetSdkKeysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysInvokeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getSdkKeys Resource
-        /// 
-        /// Use this data source to access information about **SDK Keys**.
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
-        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     var mySdkkey = Configcat.GetSdkKeys.Invoke(new()
-        ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-        ///         EnvironmentId = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["primarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Primary),
-        ///         ["secondarySdkkey"] = mySdkkey.Apply(getSdkKeysResult =&gt; getSdkKeysResult.Secondary),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [Get SDK Key](https://api.configcat.com/docs/#tag/SDK-Keys/operation/get-sdk-keys)
-        /// </summary>
         public static Output<GetSdkKeysResult> Invoke(GetSdkKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSdkKeysResult>("configcat:index/getSdkKeys:getSdkKeys", args ?? new GetSdkKeysInvokeArgs(), options.WithDefaults());
     }
@@ -172,15 +25,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetSdkKeysArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The ID of the Config.
-        /// </summary>
         [Input("configId", required: true)]
         public string ConfigId { get; set; } = null!;
 
-        /// <summary>
-        /// The ID of the Environment.
-        /// </summary>
         [Input("environmentId", required: true)]
         public string EnvironmentId { get; set; } = null!;
 
@@ -192,15 +39,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetSdkKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The ID of the Config.
-        /// </summary>
         [Input("configId", required: true)]
         public Input<string> ConfigId { get; set; } = null!;
 
-        /// <summary>
-        /// The ID of the Environment.
-        /// </summary>
         [Input("environmentId", required: true)]
         public Input<string> EnvironmentId { get; set; } = null!;
 
@@ -216,17 +57,8 @@ namespace Pulumiverse.Configcat
     {
         public readonly string ConfigId;
         public readonly string EnvironmentId;
-        /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
-        /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// The primary SDK Key associated with your **Config** and **Environment**.
-        /// </summary>
         public readonly string Primary;
-        /// <summary>
-        /// The secondary SDK Key associated with your **Config** and **Environment**.
-        /// </summary>
         public readonly string Secondary;
 
         [OutputConstructor]

@@ -16,14 +16,19 @@ from .get_sdk_keys import *
 from .get_segments import *
 from .get_settings import *
 from .get_tags import *
+from .get_webhook_signing_keys import *
+from .integration import *
 from .permission_group import *
 from .product import *
+from .product_preferences import *
 from .provider import *
 from .segment import *
 from .setting import *
 from .setting_tag import *
 from .setting_value import *
+from .setting_value_v2 import *
 from .tag import *
+from .webhook import *
 from ._inputs import *
 from . import outputs
 
@@ -55,6 +60,14 @@ _utilities.register(
  },
  {
   "pkg": "configcat",
+  "mod": "index/integration",
+  "fqn": "pulumiverse_configcat",
+  "classes": {
+   "configcat:index/integration:Integration": "Integration"
+  }
+ },
+ {
+  "pkg": "configcat",
   "mod": "index/permissionGroup",
   "fqn": "pulumiverse_configcat",
   "classes": {
@@ -67,6 +80,14 @@ _utilities.register(
   "fqn": "pulumiverse_configcat",
   "classes": {
    "configcat:index/product:Product": "Product"
+  }
+ },
+ {
+  "pkg": "configcat",
+  "mod": "index/productPreferences",
+  "fqn": "pulumiverse_configcat",
+  "classes": {
+   "configcat:index/productPreferences:ProductPreferences": "ProductPreferences"
   }
  },
  {
@@ -103,10 +124,26 @@ _utilities.register(
  },
  {
   "pkg": "configcat",
+  "mod": "index/settingValueV2",
+  "fqn": "pulumiverse_configcat",
+  "classes": {
+   "configcat:index/settingValueV2:SettingValueV2": "SettingValueV2"
+  }
+ },
+ {
+  "pkg": "configcat",
   "mod": "index/tag",
   "fqn": "pulumiverse_configcat",
   "classes": {
    "configcat:index/tag:Tag": "Tag"
+  }
+ },
+ {
+  "pkg": "configcat",
+  "mod": "index/webhook",
+  "fqn": "pulumiverse_configcat",
+  "classes": {
+   "configcat:index/webhook:Webhook": "Webhook"
   }
  }
 ]

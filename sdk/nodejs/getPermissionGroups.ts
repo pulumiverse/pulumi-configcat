@@ -6,31 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.getPermissionGroups Resource
- *
- * Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myPermissionGroups = myProducts.then(myProducts => configcat.getPermissionGroups({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Administrators",
- * }));
- * export const permissionGroupId = myPermissionGroups.then(myPermissionGroups => myPermissionGroups.permissionGroups?.[0]?.permissionGroupId);
- * ```
- *
- * ## Endpoints used
- *
- * - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
- */
 export function getPermissionGroups(args: GetPermissionGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetPermissionGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("configcat:index/getPermissionGroups:getPermissionGroups", {
@@ -43,13 +18,7 @@ export function getPermissionGroups(args: GetPermissionGroupsArgs, opts?: pulumi
  * A collection of arguments for invoking getPermissionGroups.
  */
 export interface GetPermissionGroupsArgs {
-    /**
-     * Filter the Permission Groups by name.
-     */
     nameFilterRegex?: string;
-    /**
-     * The ID of the Product.
-     */
     productId: string;
 }
 
@@ -57,42 +26,11 @@ export interface GetPermissionGroupsArgs {
  * A collection of values returned by getPermissionGroups.
  */
 export interface GetPermissionGroupsResult {
-    /**
-     * The provider-assigned unique ID for this managed resource.
-     */
     readonly id: string;
     readonly nameFilterRegex?: string;
-    /**
-     * A permission group list block defined as below.
-     */
     readonly permissionGroups: outputs.GetPermissionGroupsPermissionGroup[];
     readonly productId: string;
 }
-/**
- * ## # configcat.getPermissionGroups Resource
- *
- * Use this data source to access information about existing **Permission Groups**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myPermissionGroups = myProducts.then(myProducts => configcat.getPermissionGroups({
- *     productId: myProducts.products?.[0]?.productId,
- *     nameFilterRegex: "Administrators",
- * }));
- * export const permissionGroupId = myPermissionGroups.then(myPermissionGroups => myPermissionGroups.permissionGroups?.[0]?.permissionGroupId);
- * ```
- *
- * ## Endpoints used
- *
- * - [List Permission Groups](https://api.configcat.com/docs/index.html#tag/Permission-Groups/operation/get-permission-groups)
- */
 export function getPermissionGroupsOutput(args: GetPermissionGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPermissionGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("configcat:index/getPermissionGroups:getPermissionGroups", {
@@ -105,12 +43,6 @@ export function getPermissionGroupsOutput(args: GetPermissionGroupsOutputArgs, o
  * A collection of arguments for invoking getPermissionGroups.
  */
 export interface GetPermissionGroupsOutputArgs {
-    /**
-     * Filter the Permission Groups by name.
-     */
     nameFilterRegex?: pulumi.Input<string>;
-    /**
-     * The ID of the Product.
-     */
     productId: pulumi.Input<string>;
 }

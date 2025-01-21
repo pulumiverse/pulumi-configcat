@@ -8,43 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getOrganizations Resource
-//
-// Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myOrganizations, err := configcat.GetOrganizations(ctx, &configcat.GetOrganizationsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("organizationId", myOrganizations.Organizations[0].OrganizationId)
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Endpoints used
-//
-// - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
 func GetOrganizations(ctx *pulumi.Context, args *GetOrganizationsArgs, opts ...pulumi.InvokeOption) (*GetOrganizationsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrganizationsResult
@@ -57,17 +23,14 @@ func GetOrganizations(ctx *pulumi.Context, args *GetOrganizationsArgs, opts ...p
 
 // A collection of arguments for invoking getOrganizations.
 type GetOrganizationsArgs struct {
-	// Filter the Organizations by name.
 	NameFilterRegex *string `pulumi:"nameFilterRegex"`
 }
 
 // A collection of values returned by getOrganizations.
 type GetOrganizationsResult struct {
-	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
-	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	// An organization list block defined as below.
-	Organizations []GetOrganizationsOrganization `pulumi:"organizations"`
+	Id              string                         `pulumi:"id"`
+	NameFilterRegex *string                        `pulumi:"nameFilterRegex"`
+	Organizations   []GetOrganizationsOrganization `pulumi:"organizations"`
 }
 
 func GetOrganizationsOutput(ctx *pulumi.Context, args GetOrganizationsOutputArgs, opts ...pulumi.InvokeOption) GetOrganizationsResultOutput {
@@ -81,7 +44,6 @@ func GetOrganizationsOutput(ctx *pulumi.Context, args GetOrganizationsOutputArgs
 
 // A collection of arguments for invoking getOrganizations.
 type GetOrganizationsOutputArgs struct {
-	// Filter the Organizations by name.
 	NameFilterRegex pulumi.StringPtrInput `pulumi:"nameFilterRegex"`
 }
 
@@ -104,7 +66,6 @@ func (o GetOrganizationsResultOutput) ToGetOrganizationsResultOutputWithContext(
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
 func (o GetOrganizationsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetOrganizationsResult) string { return v.Id }).(pulumi.StringOutput)
 }
@@ -113,7 +74,6 @@ func (o GetOrganizationsResultOutput) NameFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetOrganizationsResult) *string { return v.NameFilterRegex }).(pulumi.StringPtrOutput)
 }
 
-// An organization list block defined as below.
 func (o GetOrganizationsResultOutput) Organizations() GetOrganizationsOrganizationArrayOutput {
 	return o.ApplyT(func(v GetOrganizationsResult) []GetOrganizationsOrganization { return v.Organizations }).(GetOrganizationsOrganizationArrayOutput)
 }

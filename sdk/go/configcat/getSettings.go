@@ -8,57 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getSettings Resource
-//
-// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myConfigs, err := configcat.GetConfigurations(ctx, &configcat.GetConfigurationsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Main Config"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			settings, err := configcat.GetSettings(ctx, &configcat.GetSettingsArgs{
-//				ConfigId:       myConfigs.Configs[0].ConfigId,
-//				KeyFilterRegex: pulumi.StringRef("isAwesomeFeatureEnabled"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("settingId", settings.Settings[0].SettingId)
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Endpoints used
-//
-// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
 func GetSettings(ctx *pulumi.Context, args *GetSettingsArgs, opts ...pulumi.InvokeOption) (*GetSettingsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSettingsResult
@@ -71,20 +23,16 @@ func GetSettings(ctx *pulumi.Context, args *GetSettingsArgs, opts ...pulumi.Invo
 
 // A collection of arguments for invoking getSettings.
 type GetSettingsArgs struct {
-	// The ID of the Config.
-	ConfigId string `pulumi:"configId"`
-	// Filter the Settings by key.
+	ConfigId       string  `pulumi:"configId"`
 	KeyFilterRegex *string `pulumi:"keyFilterRegex"`
 }
 
 // A collection of values returned by getSettings.
 type GetSettingsResult struct {
-	ConfigId string `pulumi:"configId"`
-	// The provider-assigned unique ID for this managed resource.
-	Id             string  `pulumi:"id"`
-	KeyFilterRegex *string `pulumi:"keyFilterRegex"`
-	// A setting list block defined as below.
-	Settings []GetSettingsSetting `pulumi:"settings"`
+	ConfigId       string               `pulumi:"configId"`
+	Id             string               `pulumi:"id"`
+	KeyFilterRegex *string              `pulumi:"keyFilterRegex"`
+	Settings       []GetSettingsSetting `pulumi:"settings"`
 }
 
 func GetSettingsOutput(ctx *pulumi.Context, args GetSettingsOutputArgs, opts ...pulumi.InvokeOption) GetSettingsResultOutput {
@@ -98,9 +46,7 @@ func GetSettingsOutput(ctx *pulumi.Context, args GetSettingsOutputArgs, opts ...
 
 // A collection of arguments for invoking getSettings.
 type GetSettingsOutputArgs struct {
-	// The ID of the Config.
-	ConfigId pulumi.StringInput `pulumi:"configId"`
-	// Filter the Settings by key.
+	ConfigId       pulumi.StringInput    `pulumi:"configId"`
 	KeyFilterRegex pulumi.StringPtrInput `pulumi:"keyFilterRegex"`
 }
 
@@ -127,7 +73,6 @@ func (o GetSettingsResultOutput) ConfigId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsResult) string { return v.ConfigId }).(pulumi.StringOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
 func (o GetSettingsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsResult) string { return v.Id }).(pulumi.StringOutput)
 }
@@ -136,7 +81,6 @@ func (o GetSettingsResultOutput) KeyFilterRegex() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSettingsResult) *string { return v.KeyFilterRegex }).(pulumi.StringPtrOutput)
 }
 
-// A setting list block defined as below.
 func (o GetSettingsResultOutput) Settings() GetSettingsSettingArrayOutput {
 	return o.ApplyT(func(v GetSettingsResult) []GetSettingsSetting { return v.Settings }).(GetSettingsSettingArrayOutput)
 }

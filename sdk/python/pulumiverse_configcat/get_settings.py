@@ -49,9 +49,6 @@ class GetSettingsResult:
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -62,9 +59,6 @@ class GetSettingsResult:
     @property
     @pulumi.getter
     def settings(self) -> Sequence['outputs.GetSettingsSettingResult']:
-        """
-        A setting list block defined as below.
-        """
         return pulumi.get(self, "settings")
 
 
@@ -84,31 +78,7 @@ def get_settings(config_id: Optional[str] = None,
                  key_filter_regex: Optional[str] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSettingsResult:
     """
-    ## # get_settings Resource
-
-    Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-        name_filter_regex="Main Config")
-    settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
-        key_filter_regex="isAwesomeFeatureEnabled")
-    pulumi.export("settingId", settings.settings[0].setting_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
-
-
-    :param str config_id: The ID of the Config.
-    :param str key_filter_regex: Filter the Settings by key.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['configId'] = config_id
@@ -125,31 +95,7 @@ def get_settings_output(config_id: Optional[pulumi.Input[str]] = None,
                         key_filter_regex: Optional[pulumi.Input[Optional[str]]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSettingsResult]:
     """
-    ## # get_settings Resource
-
-    Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-        name_filter_regex="Main Config")
-    settings = configcat.get_settings(config_id=my_configs.configs[0].config_id,
-        key_filter_regex="isAwesomeFeatureEnabled")
-    pulumi.export("settingId", settings.settings[0].setting_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
-
-
-    :param str config_id: The ID of the Config.
-    :param str key_filter_regex: Filter the Settings by key.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['configId'] = config_id

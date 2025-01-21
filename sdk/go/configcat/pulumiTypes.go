@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
 var _ = internal.GetEnvOrDefault
@@ -122,7 +122,7 @@ func (o SettingValuePercentageItemArrayOutput) Index(i pulumi.IntInput) SettingV
 type SettingValueRolloutRule struct {
 	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
 	Comparator *string `pulumi:"comparator"`
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
 	ComparisonAttribute *string `pulumi:"comparisonAttribute"`
 	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
 	ComparisonValue *string `pulumi:"comparisonValue"`
@@ -148,7 +148,7 @@ type SettingValueRolloutRuleInput interface {
 type SettingValueRolloutRuleArgs struct {
 	// The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
 	Comparator pulumi.StringPtrInput `pulumi:"comparator"`
-	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+	// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
 	ComparisonAttribute pulumi.StringPtrInput `pulumi:"comparisonAttribute"`
 	// The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
 	ComparisonValue pulumi.StringPtrInput `pulumi:"comparisonValue"`
@@ -216,7 +216,7 @@ func (o SettingValueRolloutRuleOutput) Comparator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SettingValueRolloutRule) *string { return v.Comparator }).(pulumi.StringPtrOutput)
 }
 
-// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
 func (o SettingValueRolloutRuleOutput) ComparisonAttribute() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SettingValueRolloutRule) *string { return v.ComparisonAttribute }).(pulumi.StringPtrOutput)
 }
@@ -261,11 +261,2041 @@ func (o SettingValueRolloutRuleArrayOutput) Index(i pulumi.IntInput) SettingValu
 	}).(SettingValueRolloutRuleOutput)
 }
 
+type SettingValueV2TargetingRule struct {
+	// The conditions that are combined with the AND logical operator.
+	Conditions []SettingValueV2TargetingRuleCondition `pulumi:"conditions"`
+	// The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+	PercentageOptions []SettingValueV2TargetingRulePercentageOption `pulumi:"percentageOptions"`
+	// Represents the value of a Feature Flag or Setting.
+	Value *SettingValueV2TargetingRuleValue `pulumi:"value"`
+}
+
+// SettingValueV2TargetingRuleInput is an input type that accepts SettingValueV2TargetingRuleArgs and SettingValueV2TargetingRuleOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleInput` via:
+//
+//	SettingValueV2TargetingRuleArgs{...}
+type SettingValueV2TargetingRuleInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleOutput() SettingValueV2TargetingRuleOutput
+	ToSettingValueV2TargetingRuleOutputWithContext(context.Context) SettingValueV2TargetingRuleOutput
+}
+
+type SettingValueV2TargetingRuleArgs struct {
+	// The conditions that are combined with the AND logical operator.
+	Conditions SettingValueV2TargetingRuleConditionArrayInput `pulumi:"conditions"`
+	// The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+	PercentageOptions SettingValueV2TargetingRulePercentageOptionArrayInput `pulumi:"percentageOptions"`
+	// Represents the value of a Feature Flag or Setting.
+	Value SettingValueV2TargetingRuleValuePtrInput `pulumi:"value"`
+}
+
+func (SettingValueV2TargetingRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRule)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleArgs) ToSettingValueV2TargetingRuleOutput() SettingValueV2TargetingRuleOutput {
+	return i.ToSettingValueV2TargetingRuleOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleArgs) ToSettingValueV2TargetingRuleOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleOutput)
+}
+
+// SettingValueV2TargetingRuleArrayInput is an input type that accepts SettingValueV2TargetingRuleArray and SettingValueV2TargetingRuleArrayOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleArrayInput` via:
+//
+//	SettingValueV2TargetingRuleArray{ SettingValueV2TargetingRuleArgs{...} }
+type SettingValueV2TargetingRuleArrayInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleArrayOutput() SettingValueV2TargetingRuleArrayOutput
+	ToSettingValueV2TargetingRuleArrayOutputWithContext(context.Context) SettingValueV2TargetingRuleArrayOutput
+}
+
+type SettingValueV2TargetingRuleArray []SettingValueV2TargetingRuleInput
+
+func (SettingValueV2TargetingRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRule)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleArray) ToSettingValueV2TargetingRuleArrayOutput() SettingValueV2TargetingRuleArrayOutput {
+	return i.ToSettingValueV2TargetingRuleArrayOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleArray) ToSettingValueV2TargetingRuleArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleArrayOutput)
+}
+
+type SettingValueV2TargetingRuleOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRule)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleOutput) ToSettingValueV2TargetingRuleOutput() SettingValueV2TargetingRuleOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleOutput) ToSettingValueV2TargetingRuleOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleOutput {
+	return o
+}
+
+// The conditions that are combined with the AND logical operator.
+func (o SettingValueV2TargetingRuleOutput) Conditions() SettingValueV2TargetingRuleConditionArrayOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRule) []SettingValueV2TargetingRuleCondition { return v.Conditions }).(SettingValueV2TargetingRuleConditionArrayOutput)
+}
+
+// The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
+func (o SettingValueV2TargetingRuleOutput) PercentageOptions() SettingValueV2TargetingRulePercentageOptionArrayOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRule) []SettingValueV2TargetingRulePercentageOption {
+		return v.PercentageOptions
+	}).(SettingValueV2TargetingRulePercentageOptionArrayOutput)
+}
+
+// Represents the value of a Feature Flag or Setting.
+func (o SettingValueV2TargetingRuleOutput) Value() SettingValueV2TargetingRuleValuePtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRule) *SettingValueV2TargetingRuleValue { return v.Value }).(SettingValueV2TargetingRuleValuePtrOutput)
+}
+
+type SettingValueV2TargetingRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRule)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleArrayOutput) ToSettingValueV2TargetingRuleArrayOutput() SettingValueV2TargetingRuleArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleArrayOutput) ToSettingValueV2TargetingRuleArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleArrayOutput) Index(i pulumi.IntInput) SettingValueV2TargetingRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SettingValueV2TargetingRule {
+		return vs[0].([]SettingValueV2TargetingRule)[vs[1].(int)]
+	}).(SettingValueV2TargetingRuleOutput)
+}
+
+type SettingValueV2TargetingRuleCondition struct {
+	// Describes a condition that is based on a prerequisite flag.
+	PrerequisiteFlagCondition *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition `pulumi:"prerequisiteFlagCondition"`
+	// Describes a condition that is based on a segment.
+	SegmentCondition *SettingValueV2TargetingRuleConditionSegmentCondition `pulumi:"segmentCondition"`
+	// Describes a condition that is based on user attributes.
+	UserCondition *SettingValueV2TargetingRuleConditionUserCondition `pulumi:"userCondition"`
+}
+
+// SettingValueV2TargetingRuleConditionInput is an input type that accepts SettingValueV2TargetingRuleConditionArgs and SettingValueV2TargetingRuleConditionOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionInput` via:
+//
+//	SettingValueV2TargetingRuleConditionArgs{...}
+type SettingValueV2TargetingRuleConditionInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionOutput() SettingValueV2TargetingRuleConditionOutput
+	ToSettingValueV2TargetingRuleConditionOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionOutput
+}
+
+type SettingValueV2TargetingRuleConditionArgs struct {
+	// Describes a condition that is based on a prerequisite flag.
+	PrerequisiteFlagCondition SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrInput `pulumi:"prerequisiteFlagCondition"`
+	// Describes a condition that is based on a segment.
+	SegmentCondition SettingValueV2TargetingRuleConditionSegmentConditionPtrInput `pulumi:"segmentCondition"`
+	// Describes a condition that is based on user attributes.
+	UserCondition SettingValueV2TargetingRuleConditionUserConditionPtrInput `pulumi:"userCondition"`
+}
+
+func (SettingValueV2TargetingRuleConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleCondition)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionArgs) ToSettingValueV2TargetingRuleConditionOutput() SettingValueV2TargetingRuleConditionOutput {
+	return i.ToSettingValueV2TargetingRuleConditionOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionArgs) ToSettingValueV2TargetingRuleConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionOutput)
+}
+
+// SettingValueV2TargetingRuleConditionArrayInput is an input type that accepts SettingValueV2TargetingRuleConditionArray and SettingValueV2TargetingRuleConditionArrayOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionArrayInput` via:
+//
+//	SettingValueV2TargetingRuleConditionArray{ SettingValueV2TargetingRuleConditionArgs{...} }
+type SettingValueV2TargetingRuleConditionArrayInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionArrayOutput() SettingValueV2TargetingRuleConditionArrayOutput
+	ToSettingValueV2TargetingRuleConditionArrayOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionArrayOutput
+}
+
+type SettingValueV2TargetingRuleConditionArray []SettingValueV2TargetingRuleConditionInput
+
+func (SettingValueV2TargetingRuleConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRuleCondition)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionArray) ToSettingValueV2TargetingRuleConditionArrayOutput() SettingValueV2TargetingRuleConditionArrayOutput {
+	return i.ToSettingValueV2TargetingRuleConditionArrayOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionArray) ToSettingValueV2TargetingRuleConditionArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionArrayOutput)
+}
+
+type SettingValueV2TargetingRuleConditionOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionOutput) ToSettingValueV2TargetingRuleConditionOutput() SettingValueV2TargetingRuleConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionOutput) ToSettingValueV2TargetingRuleConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionOutput {
+	return o
+}
+
+// Describes a condition that is based on a prerequisite flag.
+func (o SettingValueV2TargetingRuleConditionOutput) PrerequisiteFlagCondition() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleCondition) *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition {
+		return v.PrerequisiteFlagCondition
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput)
+}
+
+// Describes a condition that is based on a segment.
+func (o SettingValueV2TargetingRuleConditionOutput) SegmentCondition() SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleCondition) *SettingValueV2TargetingRuleConditionSegmentCondition {
+		return v.SegmentCondition
+	}).(SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput)
+}
+
+// Describes a condition that is based on user attributes.
+func (o SettingValueV2TargetingRuleConditionOutput) UserCondition() SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleCondition) *SettingValueV2TargetingRuleConditionUserCondition {
+		return v.UserCondition
+	}).(SettingValueV2TargetingRuleConditionUserConditionPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRuleCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionArrayOutput) ToSettingValueV2TargetingRuleConditionArrayOutput() SettingValueV2TargetingRuleConditionArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionArrayOutput) ToSettingValueV2TargetingRuleConditionArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionArrayOutput) Index(i pulumi.IntInput) SettingValueV2TargetingRuleConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SettingValueV2TargetingRuleCondition {
+		return vs[0].([]SettingValueV2TargetingRuleCondition)[vs[1].(int)]
+	}).(SettingValueV2TargetingRuleConditionOutput)
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition struct {
+	// Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+	Comparator string `pulumi:"comparator"`
+	// Represents the value of a Feature Flag or Setting.
+	ComparisonValue SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue `pulumi:"comparisonValue"`
+	// The prerequisite flag's identifier.
+	PrerequisiteSettingId string `pulumi:"prerequisiteSettingId"`
+}
+
+// SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionInput is an input type that accepts SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs and SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionInput` via:
+//
+//	SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs{...}
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs struct {
+	// Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+	Comparator pulumi.StringInput `pulumi:"comparator"`
+	// Represents the value of a Feature Flag or Setting.
+	ComparisonValue SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueInput `pulumi:"comparisonValue"`
+	// The prerequisite flag's identifier.
+	PrerequisiteSettingId pulumi.StringInput `pulumi:"prerequisiteSettingId"`
+}
+
+func (SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput {
+	return i.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput)
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput).ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(ctx)
+}
+
+// SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrInput is an input type that accepts SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs, SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtr and SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrInput` via:
+//
+//	        SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput
+}
+
+type settingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrType SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs
+
+func SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtr(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrInput {
+	return (*settingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrType)(v)
+}
+
+func (*settingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition)(nil)).Elem()
+}
+
+func (i *settingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrType) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrType) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return o.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition {
+		return &v
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput)
+}
+
+// Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) Comparator() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) string { return v.Comparator }).(pulumi.StringOutput)
+}
+
+// Represents the value of a Feature Flag or Setting.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) ComparisonValue() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue {
+		return v.ComparisonValue
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput)
+}
+
+// The prerequisite flag's identifier.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput) PrerequisiteSettingId() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) string {
+		return v.PrerequisiteSettingId
+	}).(pulumi.StringOutput)
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) Elem() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition
+		return ret
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput)
+}
+
+// Prerequisite flag comparison operator used during the evaluation process. Possible values: `equals`,`doesNotEqual`
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) Comparator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Comparator
+	}).(pulumi.StringPtrOutput)
+}
+
+// Represents the value of a Feature Flag or Setting.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) ComparisonValue() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonValue
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput)
+}
+
+// The prerequisite flag's identifier.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput) PrerequisiteSettingId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrerequisiteSettingId
+	}).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue struct {
+	// The boolean representation of the value.
+	BoolValue *bool `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue *float64 `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue *int `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue *string `pulumi:"stringValue"`
+}
+
+// SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueInput is an input type that accepts SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs and SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueInput` via:
+//
+//	SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs{...}
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs struct {
+	// The boolean representation of the value.
+	BoolValue pulumi.BoolPtrInput `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue pulumi.Float64PtrInput `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue pulumi.IntPtrInput `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue pulumi.StringPtrInput `pulumi:"stringValue"`
+}
+
+func (SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput {
+	return i.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput)
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput).ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(ctx)
+}
+
+// SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrInput is an input type that accepts SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs, SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtr and SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrInput` via:
+//
+//	        SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput
+	ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput
+}
+
+type settingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrType SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs
+
+func SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtr(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrInput {
+	return (*settingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrType)(v)
+}
+
+func (*settingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue)(nil)).Elem()
+}
+
+func (i *settingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrType) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrType) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return o.ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue {
+		return &v
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput)
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *bool {
+		return v.BoolValue
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *float64 {
+		return v.DoubleValue
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *int {
+		return v.IntValue
+	}).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *string {
+		return v.StringValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) ToSettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) Elem() SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue
+		return ret
+	}).(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput)
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.BoolValue
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.DoubleValue
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *int {
+		if v == nil {
+			return nil
+		}
+		return v.IntValue
+	}).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StringValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionSegmentCondition struct {
+	// The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+	Comparator string `pulumi:"comparator"`
+	// The segment's identifier.
+	SegmentId string `pulumi:"segmentId"`
+}
+
+// SettingValueV2TargetingRuleConditionSegmentConditionInput is an input type that accepts SettingValueV2TargetingRuleConditionSegmentConditionArgs and SettingValueV2TargetingRuleConditionSegmentConditionOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionSegmentConditionInput` via:
+//
+//	SettingValueV2TargetingRuleConditionSegmentConditionArgs{...}
+type SettingValueV2TargetingRuleConditionSegmentConditionInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionSegmentConditionOutput() SettingValueV2TargetingRuleConditionSegmentConditionOutput
+	ToSettingValueV2TargetingRuleConditionSegmentConditionOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionSegmentConditionOutput
+}
+
+type SettingValueV2TargetingRuleConditionSegmentConditionArgs struct {
+	// The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+	Comparator pulumi.StringInput `pulumi:"comparator"`
+	// The segment's identifier.
+	SegmentId pulumi.StringInput `pulumi:"segmentId"`
+}
+
+func (SettingValueV2TargetingRuleConditionSegmentConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionSegmentCondition)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionSegmentConditionArgs) ToSettingValueV2TargetingRuleConditionSegmentConditionOutput() SettingValueV2TargetingRuleConditionSegmentConditionOutput {
+	return i.ToSettingValueV2TargetingRuleConditionSegmentConditionOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionSegmentConditionArgs) ToSettingValueV2TargetingRuleConditionSegmentConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionSegmentConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionSegmentConditionOutput)
+}
+
+func (i SettingValueV2TargetingRuleConditionSegmentConditionArgs) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutput() SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionSegmentConditionArgs) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionSegmentConditionOutput).ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(ctx)
+}
+
+// SettingValueV2TargetingRuleConditionSegmentConditionPtrInput is an input type that accepts SettingValueV2TargetingRuleConditionSegmentConditionArgs, SettingValueV2TargetingRuleConditionSegmentConditionPtr and SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionSegmentConditionPtrInput` via:
+//
+//	        SettingValueV2TargetingRuleConditionSegmentConditionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2TargetingRuleConditionSegmentConditionPtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutput() SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput
+	ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput
+}
+
+type settingValueV2TargetingRuleConditionSegmentConditionPtrType SettingValueV2TargetingRuleConditionSegmentConditionArgs
+
+func SettingValueV2TargetingRuleConditionSegmentConditionPtr(v *SettingValueV2TargetingRuleConditionSegmentConditionArgs) SettingValueV2TargetingRuleConditionSegmentConditionPtrInput {
+	return (*settingValueV2TargetingRuleConditionSegmentConditionPtrType)(v)
+}
+
+func (*settingValueV2TargetingRuleConditionSegmentConditionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionSegmentCondition)(nil)).Elem()
+}
+
+func (i *settingValueV2TargetingRuleConditionSegmentConditionPtrType) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutput() SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2TargetingRuleConditionSegmentConditionPtrType) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionSegmentConditionOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionSegmentConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionSegmentCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionOutput) ToSettingValueV2TargetingRuleConditionSegmentConditionOutput() SettingValueV2TargetingRuleConditionSegmentConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionOutput) ToSettingValueV2TargetingRuleConditionSegmentConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionSegmentConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionOutput) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutput() SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return o.ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionOutput) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2TargetingRuleConditionSegmentCondition) *SettingValueV2TargetingRuleConditionSegmentCondition {
+		return &v
+	}).(SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput)
+}
+
+// The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+func (o SettingValueV2TargetingRuleConditionSegmentConditionOutput) Comparator() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionSegmentCondition) string { return v.Comparator }).(pulumi.StringOutput)
+}
+
+// The segment's identifier.
+func (o SettingValueV2TargetingRuleConditionSegmentConditionOutput) SegmentId() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionSegmentCondition) string { return v.SegmentId }).(pulumi.StringOutput)
+}
+
+type SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionSegmentCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutput() SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput) ToSettingValueV2TargetingRuleConditionSegmentConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput) Elem() SettingValueV2TargetingRuleConditionSegmentConditionOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionSegmentCondition) SettingValueV2TargetingRuleConditionSegmentCondition {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2TargetingRuleConditionSegmentCondition
+		return ret
+	}).(SettingValueV2TargetingRuleConditionSegmentConditionOutput)
+}
+
+// The segment comparison operator used during the evaluation process. Possible values: `isIn`,`isNotIn`
+func (o SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput) Comparator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionSegmentCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Comparator
+	}).(pulumi.StringPtrOutput)
+}
+
+// The segment's identifier.
+func (o SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput) SegmentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionSegmentCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SegmentId
+	}).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserCondition struct {
+	// The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+	Comparator string `pulumi:"comparator"`
+	// The User Object attribute that the condition is based on.
+	ComparisonAttribute string `pulumi:"comparisonAttribute"`
+	// The value that the user object's attribute is compared to.
+	ComparisonValue SettingValueV2TargetingRuleConditionUserConditionComparisonValue `pulumi:"comparisonValue"`
+}
+
+// SettingValueV2TargetingRuleConditionUserConditionInput is an input type that accepts SettingValueV2TargetingRuleConditionUserConditionArgs and SettingValueV2TargetingRuleConditionUserConditionOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionUserConditionInput` via:
+//
+//	SettingValueV2TargetingRuleConditionUserConditionArgs{...}
+type SettingValueV2TargetingRuleConditionUserConditionInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionUserConditionOutput() SettingValueV2TargetingRuleConditionUserConditionOutput
+	ToSettingValueV2TargetingRuleConditionUserConditionOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionUserConditionOutput
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionArgs struct {
+	// The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+	Comparator pulumi.StringInput `pulumi:"comparator"`
+	// The User Object attribute that the condition is based on.
+	ComparisonAttribute pulumi.StringInput `pulumi:"comparisonAttribute"`
+	// The value that the user object's attribute is compared to.
+	ComparisonValue SettingValueV2TargetingRuleConditionUserConditionComparisonValueInput `pulumi:"comparisonValue"`
+}
+
+func (SettingValueV2TargetingRuleConditionUserConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserCondition)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionArgs) ToSettingValueV2TargetingRuleConditionUserConditionOutput() SettingValueV2TargetingRuleConditionUserConditionOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionArgs) ToSettingValueV2TargetingRuleConditionUserConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionOutput)
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionArgs) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutput() SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionArgs) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionOutput).ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(ctx)
+}
+
+// SettingValueV2TargetingRuleConditionUserConditionPtrInput is an input type that accepts SettingValueV2TargetingRuleConditionUserConditionArgs, SettingValueV2TargetingRuleConditionUserConditionPtr and SettingValueV2TargetingRuleConditionUserConditionPtrOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionUserConditionPtrInput` via:
+//
+//	        SettingValueV2TargetingRuleConditionUserConditionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2TargetingRuleConditionUserConditionPtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionUserConditionPtrOutput() SettingValueV2TargetingRuleConditionUserConditionPtrOutput
+	ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionUserConditionPtrOutput
+}
+
+type settingValueV2TargetingRuleConditionUserConditionPtrType SettingValueV2TargetingRuleConditionUserConditionArgs
+
+func SettingValueV2TargetingRuleConditionUserConditionPtr(v *SettingValueV2TargetingRuleConditionUserConditionArgs) SettingValueV2TargetingRuleConditionUserConditionPtrInput {
+	return (*settingValueV2TargetingRuleConditionUserConditionPtrType)(v)
+}
+
+func (*settingValueV2TargetingRuleConditionUserConditionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionUserCondition)(nil)).Elem()
+}
+
+func (i *settingValueV2TargetingRuleConditionUserConditionPtrType) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutput() SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2TargetingRuleConditionUserConditionPtrType) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionUserConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) ToSettingValueV2TargetingRuleConditionUserConditionOutput() SettingValueV2TargetingRuleConditionUserConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) ToSettingValueV2TargetingRuleConditionUserConditionOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutput() SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return o.ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2TargetingRuleConditionUserCondition) *SettingValueV2TargetingRuleConditionUserCondition {
+		return &v
+	}).(SettingValueV2TargetingRuleConditionUserConditionPtrOutput)
+}
+
+// The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) Comparator() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserCondition) string { return v.Comparator }).(pulumi.StringOutput)
+}
+
+// The User Object attribute that the condition is based on.
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) ComparisonAttribute() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserCondition) string { return v.ComparisonAttribute }).(pulumi.StringOutput)
+}
+
+// The value that the user object's attribute is compared to.
+func (o SettingValueV2TargetingRuleConditionUserConditionOutput) ComparisonValue() SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserCondition) SettingValueV2TargetingRuleConditionUserConditionComparisonValue {
+		return v.ComparisonValue
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionPtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionUserConditionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionUserCondition)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionPtrOutput) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutput() SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionPtrOutput) ToSettingValueV2TargetingRuleConditionUserConditionPtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionPtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionPtrOutput) Elem() SettingValueV2TargetingRuleConditionUserConditionOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserCondition) SettingValueV2TargetingRuleConditionUserCondition {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2TargetingRuleConditionUserCondition
+		return ret
+	}).(SettingValueV2TargetingRuleConditionUserConditionOutput)
+}
+
+// The comparison operator which defines the relation between the comparison attribute and the comparison value. For possible values check the [documentation](https://api.configcat.com/docs/index.html#tag/Feature-Flag-and-Setting-values-V2/operation/replace-setting-value-v2).
+func (o SettingValueV2TargetingRuleConditionUserConditionPtrOutput) Comparator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Comparator
+	}).(pulumi.StringPtrOutput)
+}
+
+// The User Object attribute that the condition is based on.
+func (o SettingValueV2TargetingRuleConditionUserConditionPtrOutput) ComparisonAttribute() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonAttribute
+	}).(pulumi.StringPtrOutput)
+}
+
+// The value that the user object's attribute is compared to.
+func (o SettingValueV2TargetingRuleConditionUserConditionPtrOutput) ComparisonValue() SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserCondition) *SettingValueV2TargetingRuleConditionUserConditionComparisonValue {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonValue
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValue struct {
+	// The number representation of the comparison value.
+	DoubleValue *float64 `pulumi:"doubleValue"`
+	// The list representation of the comparison value.
+	ListValues []SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue `pulumi:"listValues"`
+	// The string representation of the comparison value.
+	StringValue *string `pulumi:"stringValue"`
+}
+
+// SettingValueV2TargetingRuleConditionUserConditionComparisonValueInput is an input type that accepts SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs and SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionUserConditionComparisonValueInput` via:
+//
+//	SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs{...}
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs struct {
+	// The number representation of the comparison value.
+	DoubleValue pulumi.Float64PtrInput `pulumi:"doubleValue"`
+	// The list representation of the comparison value.
+	ListValues SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayInput `pulumi:"listValues"`
+	// The string representation of the comparison value.
+	StringValue pulumi.StringPtrInput `pulumi:"stringValue"`
+}
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValue)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput)
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput).ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(ctx)
+}
+
+// SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrInput is an input type that accepts SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs, SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtr and SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrInput` via:
+//
+//	        SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput
+}
+
+type settingValueV2TargetingRuleConditionUserConditionComparisonValuePtrType SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs
+
+func SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtr(v *SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs) SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrInput {
+	return (*settingValueV2TargetingRuleConditionUserConditionComparisonValuePtrType)(v)
+}
+
+func (*settingValueV2TargetingRuleConditionUserConditionComparisonValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionUserConditionComparisonValue)(nil)).Elem()
+}
+
+func (i *settingValueV2TargetingRuleConditionUserConditionComparisonValuePtrType) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2TargetingRuleConditionUserConditionComparisonValuePtrType) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return o.ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2TargetingRuleConditionUserConditionComparisonValue) *SettingValueV2TargetingRuleConditionUserConditionComparisonValue {
+		return &v
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput)
+}
+
+// The number representation of the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserConditionComparisonValue) *float64 {
+		return v.DoubleValue
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The list representation of the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) ListValues() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserConditionComparisonValue) []SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue {
+		return v.ListValues
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput)
+}
+
+// The string representation of the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserConditionComparisonValue) *string { return v.StringValue }).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleConditionUserConditionComparisonValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) Elem() SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserConditionComparisonValue) SettingValueV2TargetingRuleConditionUserConditionComparisonValue {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2TargetingRuleConditionUserConditionComparisonValue
+		return ret
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput)
+}
+
+// The number representation of the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserConditionComparisonValue) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.DoubleValue
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The list representation of the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) ListValues() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserConditionComparisonValue) []SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue {
+		if v == nil {
+			return nil
+		}
+		return v.ListValues
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput)
+}
+
+// The string representation of the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleConditionUserConditionComparisonValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StringValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue struct {
+	// An optional hint for the comparison value.
+	Hint *string `pulumi:"hint"`
+	// The actual comparison value.
+	Value string `pulumi:"value"`
+}
+
+// SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueInput is an input type that accepts SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs and SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueInput` via:
+//
+//	SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs{...}
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs struct {
+	// An optional hint for the comparison value.
+	Hint pulumi.StringPtrInput `pulumi:"hint"`
+	// The actual comparison value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput)
+}
+
+// SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayInput is an input type that accepts SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray and SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayInput` via:
+//
+//	SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray{ SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs{...} }
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput
+	ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutputWithContext(context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray []SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueInput
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput {
+	return i.ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput {
+	return o
+}
+
+// An optional hint for the comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput) Hint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue) *string {
+		return v.Hint
+	}).(pulumi.StringPtrOutput)
+}
+
+// The actual comparison value.
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue) string {
+		return v.Value
+	}).(pulumi.StringOutput)
+}
+
+type SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput() SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput) ToSettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput) Index(i pulumi.IntInput) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue {
+		return vs[0].([]SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValue)[vs[1].(int)]
+	}).(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput)
+}
+
+type SettingValueV2TargetingRulePercentageOption struct {
+	// A number between 0 and 100 that represents a randomly allocated fraction of the users.
+	Percentage int `pulumi:"percentage"`
+	// Represents the value of a Feature Flag or Setting.
+	Value SettingValueV2TargetingRulePercentageOptionValue `pulumi:"value"`
+}
+
+// SettingValueV2TargetingRulePercentageOptionInput is an input type that accepts SettingValueV2TargetingRulePercentageOptionArgs and SettingValueV2TargetingRulePercentageOptionOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRulePercentageOptionInput` via:
+//
+//	SettingValueV2TargetingRulePercentageOptionArgs{...}
+type SettingValueV2TargetingRulePercentageOptionInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRulePercentageOptionOutput() SettingValueV2TargetingRulePercentageOptionOutput
+	ToSettingValueV2TargetingRulePercentageOptionOutputWithContext(context.Context) SettingValueV2TargetingRulePercentageOptionOutput
+}
+
+type SettingValueV2TargetingRulePercentageOptionArgs struct {
+	// A number between 0 and 100 that represents a randomly allocated fraction of the users.
+	Percentage pulumi.IntInput `pulumi:"percentage"`
+	// Represents the value of a Feature Flag or Setting.
+	Value SettingValueV2TargetingRulePercentageOptionValueInput `pulumi:"value"`
+}
+
+func (SettingValueV2TargetingRulePercentageOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRulePercentageOption)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRulePercentageOptionArgs) ToSettingValueV2TargetingRulePercentageOptionOutput() SettingValueV2TargetingRulePercentageOptionOutput {
+	return i.ToSettingValueV2TargetingRulePercentageOptionOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRulePercentageOptionArgs) ToSettingValueV2TargetingRulePercentageOptionOutputWithContext(ctx context.Context) SettingValueV2TargetingRulePercentageOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRulePercentageOptionOutput)
+}
+
+// SettingValueV2TargetingRulePercentageOptionArrayInput is an input type that accepts SettingValueV2TargetingRulePercentageOptionArray and SettingValueV2TargetingRulePercentageOptionArrayOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRulePercentageOptionArrayInput` via:
+//
+//	SettingValueV2TargetingRulePercentageOptionArray{ SettingValueV2TargetingRulePercentageOptionArgs{...} }
+type SettingValueV2TargetingRulePercentageOptionArrayInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRulePercentageOptionArrayOutput() SettingValueV2TargetingRulePercentageOptionArrayOutput
+	ToSettingValueV2TargetingRulePercentageOptionArrayOutputWithContext(context.Context) SettingValueV2TargetingRulePercentageOptionArrayOutput
+}
+
+type SettingValueV2TargetingRulePercentageOptionArray []SettingValueV2TargetingRulePercentageOptionInput
+
+func (SettingValueV2TargetingRulePercentageOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRulePercentageOption)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRulePercentageOptionArray) ToSettingValueV2TargetingRulePercentageOptionArrayOutput() SettingValueV2TargetingRulePercentageOptionArrayOutput {
+	return i.ToSettingValueV2TargetingRulePercentageOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRulePercentageOptionArray) ToSettingValueV2TargetingRulePercentageOptionArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRulePercentageOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRulePercentageOptionArrayOutput)
+}
+
+type SettingValueV2TargetingRulePercentageOptionOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRulePercentageOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRulePercentageOption)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionOutput) ToSettingValueV2TargetingRulePercentageOptionOutput() SettingValueV2TargetingRulePercentageOptionOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionOutput) ToSettingValueV2TargetingRulePercentageOptionOutputWithContext(ctx context.Context) SettingValueV2TargetingRulePercentageOptionOutput {
+	return o
+}
+
+// A number between 0 and 100 that represents a randomly allocated fraction of the users.
+func (o SettingValueV2TargetingRulePercentageOptionOutput) Percentage() pulumi.IntOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRulePercentageOption) int { return v.Percentage }).(pulumi.IntOutput)
+}
+
+// Represents the value of a Feature Flag or Setting.
+func (o SettingValueV2TargetingRulePercentageOptionOutput) Value() SettingValueV2TargetingRulePercentageOptionValueOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRulePercentageOption) SettingValueV2TargetingRulePercentageOptionValue {
+		return v.Value
+	}).(SettingValueV2TargetingRulePercentageOptionValueOutput)
+}
+
+type SettingValueV2TargetingRulePercentageOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRulePercentageOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SettingValueV2TargetingRulePercentageOption)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionArrayOutput) ToSettingValueV2TargetingRulePercentageOptionArrayOutput() SettingValueV2TargetingRulePercentageOptionArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionArrayOutput) ToSettingValueV2TargetingRulePercentageOptionArrayOutputWithContext(ctx context.Context) SettingValueV2TargetingRulePercentageOptionArrayOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionArrayOutput) Index(i pulumi.IntInput) SettingValueV2TargetingRulePercentageOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SettingValueV2TargetingRulePercentageOption {
+		return vs[0].([]SettingValueV2TargetingRulePercentageOption)[vs[1].(int)]
+	}).(SettingValueV2TargetingRulePercentageOptionOutput)
+}
+
+type SettingValueV2TargetingRulePercentageOptionValue struct {
+	// The boolean representation of the value.
+	BoolValue *bool `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue *float64 `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue *int `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue *string `pulumi:"stringValue"`
+}
+
+// SettingValueV2TargetingRulePercentageOptionValueInput is an input type that accepts SettingValueV2TargetingRulePercentageOptionValueArgs and SettingValueV2TargetingRulePercentageOptionValueOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRulePercentageOptionValueInput` via:
+//
+//	SettingValueV2TargetingRulePercentageOptionValueArgs{...}
+type SettingValueV2TargetingRulePercentageOptionValueInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRulePercentageOptionValueOutput() SettingValueV2TargetingRulePercentageOptionValueOutput
+	ToSettingValueV2TargetingRulePercentageOptionValueOutputWithContext(context.Context) SettingValueV2TargetingRulePercentageOptionValueOutput
+}
+
+type SettingValueV2TargetingRulePercentageOptionValueArgs struct {
+	// The boolean representation of the value.
+	BoolValue pulumi.BoolPtrInput `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue pulumi.Float64PtrInput `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue pulumi.IntPtrInput `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue pulumi.StringPtrInput `pulumi:"stringValue"`
+}
+
+func (SettingValueV2TargetingRulePercentageOptionValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRulePercentageOptionValue)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRulePercentageOptionValueArgs) ToSettingValueV2TargetingRulePercentageOptionValueOutput() SettingValueV2TargetingRulePercentageOptionValueOutput {
+	return i.ToSettingValueV2TargetingRulePercentageOptionValueOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRulePercentageOptionValueArgs) ToSettingValueV2TargetingRulePercentageOptionValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRulePercentageOptionValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRulePercentageOptionValueOutput)
+}
+
+type SettingValueV2TargetingRulePercentageOptionValueOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRulePercentageOptionValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRulePercentageOptionValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionValueOutput) ToSettingValueV2TargetingRulePercentageOptionValueOutput() SettingValueV2TargetingRulePercentageOptionValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRulePercentageOptionValueOutput) ToSettingValueV2TargetingRulePercentageOptionValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRulePercentageOptionValueOutput {
+	return o
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2TargetingRulePercentageOptionValueOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRulePercentageOptionValue) *bool { return v.BoolValue }).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2TargetingRulePercentageOptionValueOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRulePercentageOptionValue) *float64 { return v.DoubleValue }).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2TargetingRulePercentageOptionValueOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRulePercentageOptionValue) *int { return v.IntValue }).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2TargetingRulePercentageOptionValueOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRulePercentageOptionValue) *string { return v.StringValue }).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleValue struct {
+	// The boolean representation of the value.
+	BoolValue *bool `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue *float64 `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue *int `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue *string `pulumi:"stringValue"`
+}
+
+// SettingValueV2TargetingRuleValueInput is an input type that accepts SettingValueV2TargetingRuleValueArgs and SettingValueV2TargetingRuleValueOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleValueInput` via:
+//
+//	SettingValueV2TargetingRuleValueArgs{...}
+type SettingValueV2TargetingRuleValueInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleValueOutput() SettingValueV2TargetingRuleValueOutput
+	ToSettingValueV2TargetingRuleValueOutputWithContext(context.Context) SettingValueV2TargetingRuleValueOutput
+}
+
+type SettingValueV2TargetingRuleValueArgs struct {
+	// The boolean representation of the value.
+	BoolValue pulumi.BoolPtrInput `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue pulumi.Float64PtrInput `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue pulumi.IntPtrInput `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue pulumi.StringPtrInput `pulumi:"stringValue"`
+}
+
+func (SettingValueV2TargetingRuleValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleValue)(nil)).Elem()
+}
+
+func (i SettingValueV2TargetingRuleValueArgs) ToSettingValueV2TargetingRuleValueOutput() SettingValueV2TargetingRuleValueOutput {
+	return i.ToSettingValueV2TargetingRuleValueOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleValueArgs) ToSettingValueV2TargetingRuleValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleValueOutput)
+}
+
+func (i SettingValueV2TargetingRuleValueArgs) ToSettingValueV2TargetingRuleValuePtrOutput() SettingValueV2TargetingRuleValuePtrOutput {
+	return i.ToSettingValueV2TargetingRuleValuePtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2TargetingRuleValueArgs) ToSettingValueV2TargetingRuleValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleValueOutput).ToSettingValueV2TargetingRuleValuePtrOutputWithContext(ctx)
+}
+
+// SettingValueV2TargetingRuleValuePtrInput is an input type that accepts SettingValueV2TargetingRuleValueArgs, SettingValueV2TargetingRuleValuePtr and SettingValueV2TargetingRuleValuePtrOutput values.
+// You can construct a concrete instance of `SettingValueV2TargetingRuleValuePtrInput` via:
+//
+//	        SettingValueV2TargetingRuleValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2TargetingRuleValuePtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2TargetingRuleValuePtrOutput() SettingValueV2TargetingRuleValuePtrOutput
+	ToSettingValueV2TargetingRuleValuePtrOutputWithContext(context.Context) SettingValueV2TargetingRuleValuePtrOutput
+}
+
+type settingValueV2TargetingRuleValuePtrType SettingValueV2TargetingRuleValueArgs
+
+func SettingValueV2TargetingRuleValuePtr(v *SettingValueV2TargetingRuleValueArgs) SettingValueV2TargetingRuleValuePtrInput {
+	return (*settingValueV2TargetingRuleValuePtrType)(v)
+}
+
+func (*settingValueV2TargetingRuleValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleValue)(nil)).Elem()
+}
+
+func (i *settingValueV2TargetingRuleValuePtrType) ToSettingValueV2TargetingRuleValuePtrOutput() SettingValueV2TargetingRuleValuePtrOutput {
+	return i.ToSettingValueV2TargetingRuleValuePtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2TargetingRuleValuePtrType) ToSettingValueV2TargetingRuleValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2TargetingRuleValuePtrOutput)
+}
+
+type SettingValueV2TargetingRuleValueOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2TargetingRuleValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleValueOutput) ToSettingValueV2TargetingRuleValueOutput() SettingValueV2TargetingRuleValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleValueOutput) ToSettingValueV2TargetingRuleValueOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleValueOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleValueOutput) ToSettingValueV2TargetingRuleValuePtrOutput() SettingValueV2TargetingRuleValuePtrOutput {
+	return o.ToSettingValueV2TargetingRuleValuePtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2TargetingRuleValueOutput) ToSettingValueV2TargetingRuleValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2TargetingRuleValue) *SettingValueV2TargetingRuleValue {
+		return &v
+	}).(SettingValueV2TargetingRuleValuePtrOutput)
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2TargetingRuleValueOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleValue) *bool { return v.BoolValue }).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2TargetingRuleValueOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleValue) *float64 { return v.DoubleValue }).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2TargetingRuleValueOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleValue) *int { return v.IntValue }).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2TargetingRuleValueOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SettingValueV2TargetingRuleValue) *string { return v.StringValue }).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2TargetingRuleValuePtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2TargetingRuleValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2TargetingRuleValue)(nil)).Elem()
+}
+
+func (o SettingValueV2TargetingRuleValuePtrOutput) ToSettingValueV2TargetingRuleValuePtrOutput() SettingValueV2TargetingRuleValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleValuePtrOutput) ToSettingValueV2TargetingRuleValuePtrOutputWithContext(ctx context.Context) SettingValueV2TargetingRuleValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2TargetingRuleValuePtrOutput) Elem() SettingValueV2TargetingRuleValueOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleValue) SettingValueV2TargetingRuleValue {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2TargetingRuleValue
+		return ret
+	}).(SettingValueV2TargetingRuleValueOutput)
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2TargetingRuleValuePtrOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.BoolValue
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2TargetingRuleValuePtrOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleValue) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.DoubleValue
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2TargetingRuleValuePtrOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleValue) *int {
+		if v == nil {
+			return nil
+		}
+		return v.IntValue
+	}).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2TargetingRuleValuePtrOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2TargetingRuleValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StringValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2Value struct {
+	// The boolean representation of the value.
+	BoolValue *bool `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue *float64 `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue *int `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue *string `pulumi:"stringValue"`
+}
+
+// SettingValueV2ValueInput is an input type that accepts SettingValueV2ValueArgs and SettingValueV2ValueOutput values.
+// You can construct a concrete instance of `SettingValueV2ValueInput` via:
+//
+//	SettingValueV2ValueArgs{...}
+type SettingValueV2ValueInput interface {
+	pulumi.Input
+
+	ToSettingValueV2ValueOutput() SettingValueV2ValueOutput
+	ToSettingValueV2ValueOutputWithContext(context.Context) SettingValueV2ValueOutput
+}
+
+type SettingValueV2ValueArgs struct {
+	// The boolean representation of the value.
+	BoolValue pulumi.BoolPtrInput `pulumi:"boolValue"`
+	// The decimal number representation of the value.
+	DoubleValue pulumi.Float64PtrInput `pulumi:"doubleValue"`
+	// The whole number representation of the value.
+	IntValue pulumi.IntPtrInput `pulumi:"intValue"`
+	// The string representation of the value.
+	StringValue pulumi.StringPtrInput `pulumi:"stringValue"`
+}
+
+func (SettingValueV2ValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2Value)(nil)).Elem()
+}
+
+func (i SettingValueV2ValueArgs) ToSettingValueV2ValueOutput() SettingValueV2ValueOutput {
+	return i.ToSettingValueV2ValueOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2ValueArgs) ToSettingValueV2ValueOutputWithContext(ctx context.Context) SettingValueV2ValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2ValueOutput)
+}
+
+func (i SettingValueV2ValueArgs) ToSettingValueV2ValuePtrOutput() SettingValueV2ValuePtrOutput {
+	return i.ToSettingValueV2ValuePtrOutputWithContext(context.Background())
+}
+
+func (i SettingValueV2ValueArgs) ToSettingValueV2ValuePtrOutputWithContext(ctx context.Context) SettingValueV2ValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2ValueOutput).ToSettingValueV2ValuePtrOutputWithContext(ctx)
+}
+
+// SettingValueV2ValuePtrInput is an input type that accepts SettingValueV2ValueArgs, SettingValueV2ValuePtr and SettingValueV2ValuePtrOutput values.
+// You can construct a concrete instance of `SettingValueV2ValuePtrInput` via:
+//
+//	        SettingValueV2ValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type SettingValueV2ValuePtrInput interface {
+	pulumi.Input
+
+	ToSettingValueV2ValuePtrOutput() SettingValueV2ValuePtrOutput
+	ToSettingValueV2ValuePtrOutputWithContext(context.Context) SettingValueV2ValuePtrOutput
+}
+
+type settingValueV2ValuePtrType SettingValueV2ValueArgs
+
+func SettingValueV2ValuePtr(v *SettingValueV2ValueArgs) SettingValueV2ValuePtrInput {
+	return (*settingValueV2ValuePtrType)(v)
+}
+
+func (*settingValueV2ValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2Value)(nil)).Elem()
+}
+
+func (i *settingValueV2ValuePtrType) ToSettingValueV2ValuePtrOutput() SettingValueV2ValuePtrOutput {
+	return i.ToSettingValueV2ValuePtrOutputWithContext(context.Background())
+}
+
+func (i *settingValueV2ValuePtrType) ToSettingValueV2ValuePtrOutputWithContext(ctx context.Context) SettingValueV2ValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SettingValueV2ValuePtrOutput)
+}
+
+type SettingValueV2ValueOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2ValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SettingValueV2Value)(nil)).Elem()
+}
+
+func (o SettingValueV2ValueOutput) ToSettingValueV2ValueOutput() SettingValueV2ValueOutput {
+	return o
+}
+
+func (o SettingValueV2ValueOutput) ToSettingValueV2ValueOutputWithContext(ctx context.Context) SettingValueV2ValueOutput {
+	return o
+}
+
+func (o SettingValueV2ValueOutput) ToSettingValueV2ValuePtrOutput() SettingValueV2ValuePtrOutput {
+	return o.ToSettingValueV2ValuePtrOutputWithContext(context.Background())
+}
+
+func (o SettingValueV2ValueOutput) ToSettingValueV2ValuePtrOutputWithContext(ctx context.Context) SettingValueV2ValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SettingValueV2Value) *SettingValueV2Value {
+		return &v
+	}).(SettingValueV2ValuePtrOutput)
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2ValueOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SettingValueV2Value) *bool { return v.BoolValue }).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2ValueOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v SettingValueV2Value) *float64 { return v.DoubleValue }).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2ValueOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SettingValueV2Value) *int { return v.IntValue }).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2ValueOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SettingValueV2Value) *string { return v.StringValue }).(pulumi.StringPtrOutput)
+}
+
+type SettingValueV2ValuePtrOutput struct{ *pulumi.OutputState }
+
+func (SettingValueV2ValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SettingValueV2Value)(nil)).Elem()
+}
+
+func (o SettingValueV2ValuePtrOutput) ToSettingValueV2ValuePtrOutput() SettingValueV2ValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2ValuePtrOutput) ToSettingValueV2ValuePtrOutputWithContext(ctx context.Context) SettingValueV2ValuePtrOutput {
+	return o
+}
+
+func (o SettingValueV2ValuePtrOutput) Elem() SettingValueV2ValueOutput {
+	return o.ApplyT(func(v *SettingValueV2Value) SettingValueV2Value {
+		if v != nil {
+			return *v
+		}
+		var ret SettingValueV2Value
+		return ret
+	}).(SettingValueV2ValueOutput)
+}
+
+// The boolean representation of the value.
+func (o SettingValueV2ValuePtrOutput) BoolValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2Value) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.BoolValue
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The decimal number representation of the value.
+func (o SettingValueV2ValuePtrOutput) DoubleValue() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *SettingValueV2Value) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.DoubleValue
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The whole number representation of the value.
+func (o SettingValueV2ValuePtrOutput) IntValue() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2Value) *int {
+		if v == nil {
+			return nil
+		}
+		return v.IntValue
+	}).(pulumi.IntPtrOutput)
+}
+
+// The string representation of the value.
+func (o SettingValueV2ValuePtrOutput) StringValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SettingValueV2Value) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StringValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebhookSecureWebhookHeader struct {
+	// The HTTP header key.
+	Key string `pulumi:"key"`
+	// The HTTP header value.
+	Value string `pulumi:"value"`
+}
+
+// WebhookSecureWebhookHeaderInput is an input type that accepts WebhookSecureWebhookHeaderArgs and WebhookSecureWebhookHeaderOutput values.
+// You can construct a concrete instance of `WebhookSecureWebhookHeaderInput` via:
+//
+//	WebhookSecureWebhookHeaderArgs{...}
+type WebhookSecureWebhookHeaderInput interface {
+	pulumi.Input
+
+	ToWebhookSecureWebhookHeaderOutput() WebhookSecureWebhookHeaderOutput
+	ToWebhookSecureWebhookHeaderOutputWithContext(context.Context) WebhookSecureWebhookHeaderOutput
+}
+
+type WebhookSecureWebhookHeaderArgs struct {
+	// The HTTP header key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The HTTP header value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (WebhookSecureWebhookHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookSecureWebhookHeader)(nil)).Elem()
+}
+
+func (i WebhookSecureWebhookHeaderArgs) ToWebhookSecureWebhookHeaderOutput() WebhookSecureWebhookHeaderOutput {
+	return i.ToWebhookSecureWebhookHeaderOutputWithContext(context.Background())
+}
+
+func (i WebhookSecureWebhookHeaderArgs) ToWebhookSecureWebhookHeaderOutputWithContext(ctx context.Context) WebhookSecureWebhookHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookSecureWebhookHeaderOutput)
+}
+
+// WebhookSecureWebhookHeaderArrayInput is an input type that accepts WebhookSecureWebhookHeaderArray and WebhookSecureWebhookHeaderArrayOutput values.
+// You can construct a concrete instance of `WebhookSecureWebhookHeaderArrayInput` via:
+//
+//	WebhookSecureWebhookHeaderArray{ WebhookSecureWebhookHeaderArgs{...} }
+type WebhookSecureWebhookHeaderArrayInput interface {
+	pulumi.Input
+
+	ToWebhookSecureWebhookHeaderArrayOutput() WebhookSecureWebhookHeaderArrayOutput
+	ToWebhookSecureWebhookHeaderArrayOutputWithContext(context.Context) WebhookSecureWebhookHeaderArrayOutput
+}
+
+type WebhookSecureWebhookHeaderArray []WebhookSecureWebhookHeaderInput
+
+func (WebhookSecureWebhookHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookSecureWebhookHeader)(nil)).Elem()
+}
+
+func (i WebhookSecureWebhookHeaderArray) ToWebhookSecureWebhookHeaderArrayOutput() WebhookSecureWebhookHeaderArrayOutput {
+	return i.ToWebhookSecureWebhookHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i WebhookSecureWebhookHeaderArray) ToWebhookSecureWebhookHeaderArrayOutputWithContext(ctx context.Context) WebhookSecureWebhookHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookSecureWebhookHeaderArrayOutput)
+}
+
+type WebhookSecureWebhookHeaderOutput struct{ *pulumi.OutputState }
+
+func (WebhookSecureWebhookHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookSecureWebhookHeader)(nil)).Elem()
+}
+
+func (o WebhookSecureWebhookHeaderOutput) ToWebhookSecureWebhookHeaderOutput() WebhookSecureWebhookHeaderOutput {
+	return o
+}
+
+func (o WebhookSecureWebhookHeaderOutput) ToWebhookSecureWebhookHeaderOutputWithContext(ctx context.Context) WebhookSecureWebhookHeaderOutput {
+	return o
+}
+
+// The HTTP header key.
+func (o WebhookSecureWebhookHeaderOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookSecureWebhookHeader) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The HTTP header value.
+func (o WebhookSecureWebhookHeaderOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookSecureWebhookHeader) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type WebhookSecureWebhookHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (WebhookSecureWebhookHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookSecureWebhookHeader)(nil)).Elem()
+}
+
+func (o WebhookSecureWebhookHeaderArrayOutput) ToWebhookSecureWebhookHeaderArrayOutput() WebhookSecureWebhookHeaderArrayOutput {
+	return o
+}
+
+func (o WebhookSecureWebhookHeaderArrayOutput) ToWebhookSecureWebhookHeaderArrayOutputWithContext(ctx context.Context) WebhookSecureWebhookHeaderArrayOutput {
+	return o
+}
+
+func (o WebhookSecureWebhookHeaderArrayOutput) Index(i pulumi.IntInput) WebhookSecureWebhookHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WebhookSecureWebhookHeader {
+		return vs[0].([]WebhookSecureWebhookHeader)[vs[1].(int)]
+	}).(WebhookSecureWebhookHeaderOutput)
+}
+
+type WebhookWebhookHeader struct {
+	// The HTTP header key.
+	Key string `pulumi:"key"`
+	// The HTTP header value.
+	Value string `pulumi:"value"`
+}
+
+// WebhookWebhookHeaderInput is an input type that accepts WebhookWebhookHeaderArgs and WebhookWebhookHeaderOutput values.
+// You can construct a concrete instance of `WebhookWebhookHeaderInput` via:
+//
+//	WebhookWebhookHeaderArgs{...}
+type WebhookWebhookHeaderInput interface {
+	pulumi.Input
+
+	ToWebhookWebhookHeaderOutput() WebhookWebhookHeaderOutput
+	ToWebhookWebhookHeaderOutputWithContext(context.Context) WebhookWebhookHeaderOutput
+}
+
+type WebhookWebhookHeaderArgs struct {
+	// The HTTP header key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The HTTP header value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (WebhookWebhookHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookWebhookHeader)(nil)).Elem()
+}
+
+func (i WebhookWebhookHeaderArgs) ToWebhookWebhookHeaderOutput() WebhookWebhookHeaderOutput {
+	return i.ToWebhookWebhookHeaderOutputWithContext(context.Background())
+}
+
+func (i WebhookWebhookHeaderArgs) ToWebhookWebhookHeaderOutputWithContext(ctx context.Context) WebhookWebhookHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookWebhookHeaderOutput)
+}
+
+// WebhookWebhookHeaderArrayInput is an input type that accepts WebhookWebhookHeaderArray and WebhookWebhookHeaderArrayOutput values.
+// You can construct a concrete instance of `WebhookWebhookHeaderArrayInput` via:
+//
+//	WebhookWebhookHeaderArray{ WebhookWebhookHeaderArgs{...} }
+type WebhookWebhookHeaderArrayInput interface {
+	pulumi.Input
+
+	ToWebhookWebhookHeaderArrayOutput() WebhookWebhookHeaderArrayOutput
+	ToWebhookWebhookHeaderArrayOutputWithContext(context.Context) WebhookWebhookHeaderArrayOutput
+}
+
+type WebhookWebhookHeaderArray []WebhookWebhookHeaderInput
+
+func (WebhookWebhookHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookWebhookHeader)(nil)).Elem()
+}
+
+func (i WebhookWebhookHeaderArray) ToWebhookWebhookHeaderArrayOutput() WebhookWebhookHeaderArrayOutput {
+	return i.ToWebhookWebhookHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i WebhookWebhookHeaderArray) ToWebhookWebhookHeaderArrayOutputWithContext(ctx context.Context) WebhookWebhookHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebhookWebhookHeaderArrayOutput)
+}
+
+type WebhookWebhookHeaderOutput struct{ *pulumi.OutputState }
+
+func (WebhookWebhookHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebhookWebhookHeader)(nil)).Elem()
+}
+
+func (o WebhookWebhookHeaderOutput) ToWebhookWebhookHeaderOutput() WebhookWebhookHeaderOutput {
+	return o
+}
+
+func (o WebhookWebhookHeaderOutput) ToWebhookWebhookHeaderOutputWithContext(ctx context.Context) WebhookWebhookHeaderOutput {
+	return o
+}
+
+// The HTTP header key.
+func (o WebhookWebhookHeaderOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookWebhookHeader) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The HTTP header value.
+func (o WebhookWebhookHeaderOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v WebhookWebhookHeader) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type WebhookWebhookHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (WebhookWebhookHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WebhookWebhookHeader)(nil)).Elem()
+}
+
+func (o WebhookWebhookHeaderArrayOutput) ToWebhookWebhookHeaderArrayOutput() WebhookWebhookHeaderArrayOutput {
+	return o
+}
+
+func (o WebhookWebhookHeaderArrayOutput) ToWebhookWebhookHeaderArrayOutputWithContext(ctx context.Context) WebhookWebhookHeaderArrayOutput {
+	return o
+}
+
+func (o WebhookWebhookHeaderArrayOutput) Index(i pulumi.IntInput) WebhookWebhookHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WebhookWebhookHeader {
+		return vs[0].([]WebhookWebhookHeader)[vs[1].(int)]
+	}).(WebhookWebhookHeaderOutput)
+}
+
 type GetConfigurationsConfig struct {
 	// The unique Config ID.
 	ConfigId string `pulumi:"configId"`
 	// The description of the Config.
 	Description string `pulumi:"description"`
+	// The evaluation version of the Config. Possible values: `v1`|`v2`
+	EvaluationVersion string `pulumi:"evaluationVersion"`
 	// The name of the Config.
 	Name string `pulumi:"name"`
 	// The order of the Config within a Product (zero-based).
@@ -288,6 +2318,8 @@ type GetConfigurationsConfigArgs struct {
 	ConfigId pulumi.StringInput `pulumi:"configId"`
 	// The description of the Config.
 	Description pulumi.StringInput `pulumi:"description"`
+	// The evaluation version of the Config. Possible values: `v1`|`v2`
+	EvaluationVersion pulumi.StringInput `pulumi:"evaluationVersion"`
 	// The name of the Config.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The order of the Config within a Product (zero-based).
@@ -353,6 +2385,11 @@ func (o GetConfigurationsConfigOutput) ConfigId() pulumi.StringOutput {
 // The description of the Config.
 func (o GetConfigurationsConfigOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConfigurationsConfig) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The evaluation version of the Config. Possible values: `v1`|`v2`
+func (o GetConfigurationsConfigOutput) EvaluationVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigurationsConfig) string { return v.EvaluationVersion }).(pulumi.StringOutput)
 }
 
 // The name of the Config.
@@ -631,7 +2668,8 @@ type GetPermissionGroupsPermissionGroup struct {
 	CanCreateorupdateConfig bool `pulumi:"canCreateorupdateConfig"`
 	// Group members can create/update Environments.
 	CanCreateorupdateEnvironment bool `pulumi:"canCreateorupdateEnvironment"`
-	CanCreateorupdateSegment     bool `pulumi:"canCreateorupdateSegment"`
+	// Group members can create/update Segments.
+	CanCreateorupdateSegment bool `pulumi:"canCreateorupdateSegment"`
 	// Group members can create/update Feature Flags and Settings.
 	CanCreateorupdateSetting bool `pulumi:"canCreateorupdateSetting"`
 	// Group members can create/update Tags.
@@ -640,11 +2678,14 @@ type GetPermissionGroupsPermissionGroup struct {
 	CanDeleteConfig bool `pulumi:"canDeleteConfig"`
 	// Group members can delete Environments.
 	CanDeleteEnvironment bool `pulumi:"canDeleteEnvironment"`
-	CanDeleteSegment     bool `pulumi:"canDeleteSegment"`
+	// Group members can delete Segments.
+	CanDeleteSegment bool `pulumi:"canDeleteSegment"`
 	// Group members can delete Feature Flags and Settings.
 	CanDeleteSetting bool `pulumi:"canDeleteSetting"`
 	// Group members can delete Tags.
 	CanDeleteTag bool `pulumi:"canDeleteTag"`
+	// Group members can disable two-factor authentication for other members.
+	CanDisable2fa bool `pulumi:"canDisable2fa"`
 	// Group members can add and configure integrations.
 	CanManageIntegrations bool `pulumi:"canManageIntegrations"`
 	// Group members can manage team members.
@@ -665,13 +2706,13 @@ type GetPermissionGroupsPermissionGroup struct {
 	CanViewProductStatistics bool `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey bool `pulumi:"canViewSdkkey"`
-	// The environment specific permissions map block defined as below.
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses map[string]string `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name string `pulumi:"name"`
 	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype string `pulumi:"newEnvironmentAccesstype"`
-	// The unique Permission Groups ID.
+	// The unique Permission Group ID.
 	PermissionGroupId int `pulumi:"permissionGroupId"`
 }
 
@@ -693,7 +2734,8 @@ type GetPermissionGroupsPermissionGroupArgs struct {
 	CanCreateorupdateConfig pulumi.BoolInput `pulumi:"canCreateorupdateConfig"`
 	// Group members can create/update Environments.
 	CanCreateorupdateEnvironment pulumi.BoolInput `pulumi:"canCreateorupdateEnvironment"`
-	CanCreateorupdateSegment     pulumi.BoolInput `pulumi:"canCreateorupdateSegment"`
+	// Group members can create/update Segments.
+	CanCreateorupdateSegment pulumi.BoolInput `pulumi:"canCreateorupdateSegment"`
 	// Group members can create/update Feature Flags and Settings.
 	CanCreateorupdateSetting pulumi.BoolInput `pulumi:"canCreateorupdateSetting"`
 	// Group members can create/update Tags.
@@ -702,11 +2744,14 @@ type GetPermissionGroupsPermissionGroupArgs struct {
 	CanDeleteConfig pulumi.BoolInput `pulumi:"canDeleteConfig"`
 	// Group members can delete Environments.
 	CanDeleteEnvironment pulumi.BoolInput `pulumi:"canDeleteEnvironment"`
-	CanDeleteSegment     pulumi.BoolInput `pulumi:"canDeleteSegment"`
+	// Group members can delete Segments.
+	CanDeleteSegment pulumi.BoolInput `pulumi:"canDeleteSegment"`
 	// Group members can delete Feature Flags and Settings.
 	CanDeleteSetting pulumi.BoolInput `pulumi:"canDeleteSetting"`
 	// Group members can delete Tags.
 	CanDeleteTag pulumi.BoolInput `pulumi:"canDeleteTag"`
+	// Group members can disable two-factor authentication for other members.
+	CanDisable2fa pulumi.BoolInput `pulumi:"canDisable2fa"`
 	// Group members can add and configure integrations.
 	CanManageIntegrations pulumi.BoolInput `pulumi:"canManageIntegrations"`
 	// Group members can manage team members.
@@ -727,13 +2772,13 @@ type GetPermissionGroupsPermissionGroupArgs struct {
 	CanViewProductStatistics pulumi.BoolInput `pulumi:"canViewProductStatistics"`
 	// Group members has access to SDK keys.
 	CanViewSdkkey pulumi.BoolInput `pulumi:"canViewSdkkey"`
-	// The environment specific permissions map block defined as below.
+	// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 	EnvironmentAccesses pulumi.StringMapInput `pulumi:"environmentAccesses"`
 	// The name of the Permission Group.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none
 	NewEnvironmentAccesstype pulumi.StringInput `pulumi:"newEnvironmentAccesstype"`
-	// The unique Permission Groups ID.
+	// The unique Permission Group ID.
 	PermissionGroupId pulumi.IntInput `pulumi:"permissionGroupId"`
 }
 
@@ -803,6 +2848,7 @@ func (o GetPermissionGroupsPermissionGroupOutput) CanCreateorupdateEnvironment()
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanCreateorupdateEnvironment }).(pulumi.BoolOutput)
 }
 
+// Group members can create/update Segments.
 func (o GetPermissionGroupsPermissionGroupOutput) CanCreateorupdateSegment() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanCreateorupdateSegment }).(pulumi.BoolOutput)
 }
@@ -827,6 +2873,7 @@ func (o GetPermissionGroupsPermissionGroupOutput) CanDeleteEnvironment() pulumi.
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanDeleteEnvironment }).(pulumi.BoolOutput)
 }
 
+// Group members can delete Segments.
 func (o GetPermissionGroupsPermissionGroupOutput) CanDeleteSegment() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanDeleteSegment }).(pulumi.BoolOutput)
 }
@@ -839,6 +2886,11 @@ func (o GetPermissionGroupsPermissionGroupOutput) CanDeleteSetting() pulumi.Bool
 // Group members can delete Tags.
 func (o GetPermissionGroupsPermissionGroupOutput) CanDeleteTag() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanDeleteTag }).(pulumi.BoolOutput)
+}
+
+// Group members can disable two-factor authentication for other members.
+func (o GetPermissionGroupsPermissionGroupOutput) CanDisable2fa() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanDisable2fa }).(pulumi.BoolOutput)
 }
 
 // Group members can add and configure integrations.
@@ -891,7 +2943,7 @@ func (o GetPermissionGroupsPermissionGroupOutput) CanViewSdkkey() pulumi.BoolOut
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) bool { return v.CanViewSdkkey }).(pulumi.BoolOutput)
 }
 
-// The environment specific permissions map block defined as below.
+// The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment specific Feature Management permission. Possible values: full, readOnly
 func (o GetPermissionGroupsPermissionGroupOutput) EnvironmentAccesses() pulumi.StringMapOutput {
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) map[string]string { return v.EnvironmentAccesses }).(pulumi.StringMapOutput)
 }
@@ -906,7 +2958,7 @@ func (o GetPermissionGroupsPermissionGroupOutput) NewEnvironmentAccesstype() pul
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) string { return v.NewEnvironmentAccesstype }).(pulumi.StringOutput)
 }
 
-// The unique Permission Groups ID.
+// The unique Permission Group ID.
 func (o GetPermissionGroupsPermissionGroupOutput) PermissionGroupId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetPermissionGroupsPermissionGroup) int { return v.PermissionGroupId }).(pulumi.IntOutput)
 }
@@ -936,7 +2988,7 @@ type GetProductsProduct struct {
 	Description string `pulumi:"description"`
 	// The name of the Product.
 	Name string `pulumi:"name"`
-	// The order of the Product within an Organization (zero-based).
+	// The order of the Product within a Product (zero-based).
 	Order int `pulumi:"order"`
 	// The unique Product ID.
 	ProductId string `pulumi:"productId"`
@@ -958,7 +3010,7 @@ type GetProductsProductArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
 	// The name of the Product.
 	Name pulumi.StringInput `pulumi:"name"`
-	// The order of the Product within an Organization (zero-based).
+	// The order of the Product within a Product (zero-based).
 	Order pulumi.IntInput `pulumi:"order"`
 	// The unique Product ID.
 	ProductId pulumi.StringInput `pulumi:"productId"`
@@ -1025,7 +3077,7 @@ func (o GetProductsProductOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProductsProduct) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// The order of the Product within an Organization (zero-based).
+// The order of the Product within a Product (zero-based).
 func (o GetProductsProductOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v GetProductsProduct) int { return v.Order }).(pulumi.IntOutput)
 }
@@ -1171,17 +3223,17 @@ func (o GetSegmentsSegmentArrayOutput) Index(i pulumi.IntInput) GetSegmentsSegme
 }
 
 type GetSettingsSetting struct {
-	// The hint of the Setting.
+	// The hint of the Feature Flag or Setting.
 	Hint string `pulumi:"hint"`
-	// The key of the Feature Flag/Setting.
+	// The key of the Feature Flag or Setting.
 	Key string `pulumi:"key"`
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name string `pulumi:"name"`
-	// The order of the Setting within a Config (zero-based).
+	// The order of the Feature Flag or Setting within a Config (zero-based).
 	Order int `pulumi:"order"`
-	// The unique Setting ID.
+	// The unique Feature Flag or Setting ID.
 	SettingId string `pulumi:"settingId"`
-	// The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
+	// The Feature Flag or Setting's type. Available values: `boolean`|`string`|`int`|`double`.
 	SettingType string `pulumi:"settingType"`
 }
 
@@ -1197,17 +3249,17 @@ type GetSettingsSettingInput interface {
 }
 
 type GetSettingsSettingArgs struct {
-	// The hint of the Setting.
+	// The hint of the Feature Flag or Setting.
 	Hint pulumi.StringInput `pulumi:"hint"`
-	// The key of the Feature Flag/Setting.
+	// The key of the Feature Flag or Setting.
 	Key pulumi.StringInput `pulumi:"key"`
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name pulumi.StringInput `pulumi:"name"`
-	// The order of the Setting within a Config (zero-based).
+	// The order of the Feature Flag or Setting within a Config (zero-based).
 	Order pulumi.IntInput `pulumi:"order"`
-	// The unique Setting ID.
+	// The unique Feature Flag or Setting ID.
 	SettingId pulumi.StringInput `pulumi:"settingId"`
-	// The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
+	// The Feature Flag or Setting's type. Available values: `boolean`|`string`|`int`|`double`.
 	SettingType pulumi.StringInput `pulumi:"settingType"`
 }
 
@@ -1262,32 +3314,32 @@ func (o GetSettingsSettingOutput) ToGetSettingsSettingOutputWithContext(ctx cont
 	return o
 }
 
-// The hint of the Setting.
+// The hint of the Feature Flag or Setting.
 func (o GetSettingsSettingOutput) Hint() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsSetting) string { return v.Hint }).(pulumi.StringOutput)
 }
 
-// The key of the Feature Flag/Setting.
+// The key of the Feature Flag or Setting.
 func (o GetSettingsSettingOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsSetting) string { return v.Key }).(pulumi.StringOutput)
 }
 
-// The name of the Setting.
+// The name of the Feature Flag or Setting.
 func (o GetSettingsSettingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsSetting) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// The order of the Setting within a Config (zero-based).
+// The order of the Feature Flag or Setting within a Config (zero-based).
 func (o GetSettingsSettingOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v GetSettingsSetting) int { return v.Order }).(pulumi.IntOutput)
 }
 
-// The unique Setting ID.
+// The unique Feature Flag or Setting ID.
 func (o GetSettingsSettingOutput) SettingId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsSetting) string { return v.SettingId }).(pulumi.StringOutput)
 }
 
-// The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
+// The Feature Flag or Setting's type. Available values: `boolean`|`string`|`int`|`double`.
 func (o GetSettingsSettingOutput) SettingType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSettingsSetting) string { return v.SettingType }).(pulumi.StringOutput)
 }
@@ -1432,6 +3484,33 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValuePercentageItemArrayInput)(nil)).Elem(), SettingValuePercentageItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueRolloutRuleInput)(nil)).Elem(), SettingValueRolloutRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueRolloutRuleArrayInput)(nil)).Elem(), SettingValueRolloutRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleInput)(nil)).Elem(), SettingValueV2TargetingRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleArrayInput)(nil)).Elem(), SettingValueV2TargetingRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionArrayInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionSegmentConditionInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionSegmentConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionSegmentConditionPtrInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionSegmentConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionUserConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionPtrInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionUserConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValueInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionUserConditionComparisonValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayInput)(nil)).Elem(), SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRulePercentageOptionInput)(nil)).Elem(), SettingValueV2TargetingRulePercentageOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRulePercentageOptionArrayInput)(nil)).Elem(), SettingValueV2TargetingRulePercentageOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRulePercentageOptionValueInput)(nil)).Elem(), SettingValueV2TargetingRulePercentageOptionValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleValueInput)(nil)).Elem(), SettingValueV2TargetingRuleValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2TargetingRuleValuePtrInput)(nil)).Elem(), SettingValueV2TargetingRuleValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2ValueInput)(nil)).Elem(), SettingValueV2ValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SettingValueV2ValuePtrInput)(nil)).Elem(), SettingValueV2ValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookSecureWebhookHeaderInput)(nil)).Elem(), WebhookSecureWebhookHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookSecureWebhookHeaderArrayInput)(nil)).Elem(), WebhookSecureWebhookHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookWebhookHeaderInput)(nil)).Elem(), WebhookWebhookHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebhookWebhookHeaderArrayInput)(nil)).Elem(), WebhookWebhookHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationsConfigInput)(nil)).Elem(), GetConfigurationsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigurationsConfigArrayInput)(nil)).Elem(), GetConfigurationsConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvironmentInput)(nil)).Elem(), GetEnvironmentsEnvironmentArgs{})
@@ -1452,6 +3531,33 @@ func init() {
 	pulumi.RegisterOutputType(SettingValuePercentageItemArrayOutput{})
 	pulumi.RegisterOutputType(SettingValueRolloutRuleOutput{})
 	pulumi.RegisterOutputType(SettingValueRolloutRuleArrayOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleArrayOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionArrayOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionPtrOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValueOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionPrerequisiteFlagConditionComparisonValuePtrOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionSegmentConditionOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionSegmentConditionPtrOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionUserConditionOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionUserConditionPtrOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionUserConditionComparisonValueOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionUserConditionComparisonValuePtrOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleConditionUserConditionComparisonValueListValueArrayOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRulePercentageOptionOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRulePercentageOptionArrayOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRulePercentageOptionValueOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleValueOutput{})
+	pulumi.RegisterOutputType(SettingValueV2TargetingRuleValuePtrOutput{})
+	pulumi.RegisterOutputType(SettingValueV2ValueOutput{})
+	pulumi.RegisterOutputType(SettingValueV2ValuePtrOutput{})
+	pulumi.RegisterOutputType(WebhookSecureWebhookHeaderOutput{})
+	pulumi.RegisterOutputType(WebhookSecureWebhookHeaderArrayOutput{})
+	pulumi.RegisterOutputType(WebhookWebhookHeaderOutput{})
+	pulumi.RegisterOutputType(WebhookWebhookHeaderArrayOutput{})
 	pulumi.RegisterOutputType(GetConfigurationsConfigOutput{})
 	pulumi.RegisterOutputType(GetConfigurationsConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetEnvironmentsEnvironmentOutput{})

@@ -20,7 +20,7 @@ namespace Pulumiverse.Configcat.Inputs
         public Input<string>? Comparator { get; set; }
 
         /// <summary>
-        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+        /// The [comparison attribute](https://configcat.com/docs/advanced/targeting/#comparison-attribute).
         /// </summary>
         [Input("comparisonAttribute")]
         public Input<string>? ComparisonAttribute { get; set; }

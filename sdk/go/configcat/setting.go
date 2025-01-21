@@ -9,89 +9,25 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # Setting Resource
-//
-// Creates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myConfigs, err := configcat.GetConfigurations(ctx, &configcat.GetConfigurationsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Main Config"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			mySetting, err := configcat.NewSetting(ctx, "my_setting", &configcat.SettingArgs{
-//				ConfigId:    pulumi.String(myConfigs.Configs[0].ConfigId),
-//				Key:         pulumi.String("isAwesomeFeatureEnabled"),
-//				Name:        pulumi.String("My awesome feature flag"),
-//				Hint:        pulumi.String("This is the hint for my awesome feature flag"),
-//				SettingType: pulumi.String("boolean"),
-//				Order:       pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("settingId", mySetting.ID())
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Endpoints used
-//
-// * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-// * [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)
-// * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
-// * [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)
-//
-// ## Import
-//
-// Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
-//
-// ```sh
-// $ pulumi import configcat:index/setting:Setting example 1234
-// ```
-// Read more about importing.
 type Setting struct {
 	pulumi.CustomResourceState
 
 	// The ID of the Config.
 	ConfigId pulumi.StringOutput `pulumi:"configId"`
-	// The hint of the Setting.
-	Hint pulumi.StringPtrOutput `pulumi:"hint"`
-	// The key of the Feature Flag/Setting.
+	// The hint of the Feature Flag or Setting.
+	Hint pulumi.StringOutput `pulumi:"hint"`
+	// The key of the Feature Flag or Setting.
 	Key pulumi.StringOutput `pulumi:"key"`
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+	// same order, they are displayed in alphabetical order.
 	Order pulumi.IntOutput `pulumi:"order"`
-	// Default: `boolean`. The Setting's type.\
-	// Available values: `boolean`|`string`|`int`|`double`.
-	SettingType pulumi.StringPtrOutput `pulumi:"settingType"`
+	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
+	SettingType pulumi.StringOutput `pulumi:"settingType"`
 }
 
 // NewSetting registers a new resource with the given unique name, arguments, and options.
@@ -135,32 +71,32 @@ func GetSetting(ctx *pulumi.Context,
 type settingState struct {
 	// The ID of the Config.
 	ConfigId *string `pulumi:"configId"`
-	// The hint of the Setting.
+	// The hint of the Feature Flag or Setting.
 	Hint *string `pulumi:"hint"`
-	// The key of the Feature Flag/Setting.
+	// The key of the Feature Flag or Setting.
 	Key *string `pulumi:"key"`
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name *string `pulumi:"name"`
-	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+	// same order, they are displayed in alphabetical order.
 	Order *int `pulumi:"order"`
-	// Default: `boolean`. The Setting's type.\
-	// Available values: `boolean`|`string`|`int`|`double`.
+	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType *string `pulumi:"settingType"`
 }
 
 type SettingState struct {
 	// The ID of the Config.
 	ConfigId pulumi.StringPtrInput
-	// The hint of the Setting.
+	// The hint of the Feature Flag or Setting.
 	Hint pulumi.StringPtrInput
-	// The key of the Feature Flag/Setting.
+	// The key of the Feature Flag or Setting.
 	Key pulumi.StringPtrInput
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name pulumi.StringPtrInput
-	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+	// same order, they are displayed in alphabetical order.
 	Order pulumi.IntPtrInput
-	// Default: `boolean`. The Setting's type.\
-	// Available values: `boolean`|`string`|`int`|`double`.
+	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType pulumi.StringPtrInput
 }
 
@@ -171,16 +107,16 @@ func (SettingState) ElementType() reflect.Type {
 type settingArgs struct {
 	// The ID of the Config.
 	ConfigId string `pulumi:"configId"`
-	// The hint of the Setting.
+	// The hint of the Feature Flag or Setting.
 	Hint *string `pulumi:"hint"`
-	// The key of the Feature Flag/Setting.
+	// The key of the Feature Flag or Setting.
 	Key string `pulumi:"key"`
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name *string `pulumi:"name"`
-	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+	// same order, they are displayed in alphabetical order.
 	Order int `pulumi:"order"`
-	// Default: `boolean`. The Setting's type.\
-	// Available values: `boolean`|`string`|`int`|`double`.
+	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType *string `pulumi:"settingType"`
 }
 
@@ -188,16 +124,16 @@ type settingArgs struct {
 type SettingArgs struct {
 	// The ID of the Config.
 	ConfigId pulumi.StringInput
-	// The hint of the Setting.
+	// The hint of the Feature Flag or Setting.
 	Hint pulumi.StringPtrInput
-	// The key of the Feature Flag/Setting.
+	// The key of the Feature Flag or Setting.
 	Key pulumi.StringInput
-	// The name of the Setting.
+	// The name of the Feature Flag or Setting.
 	Name pulumi.StringPtrInput
-	// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+	// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+	// same order, they are displayed in alphabetical order.
 	Order pulumi.IntInput
-	// Default: `boolean`. The Setting's type.\
-	// Available values: `boolean`|`string`|`int`|`double`.
+	// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
 	SettingType pulumi.StringPtrInput
 }
 
@@ -293,30 +229,30 @@ func (o SettingOutput) ConfigId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.ConfigId }).(pulumi.StringOutput)
 }
 
-// The hint of the Setting.
-func (o SettingOutput) Hint() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Setting) pulumi.StringPtrOutput { return v.Hint }).(pulumi.StringPtrOutput)
+// The hint of the Feature Flag or Setting.
+func (o SettingOutput) Hint() pulumi.StringOutput {
+	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.Hint }).(pulumi.StringOutput)
 }
 
-// The key of the Feature Flag/Setting.
+// The key of the Feature Flag or Setting.
 func (o SettingOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.Key }).(pulumi.StringOutput)
 }
 
-// The name of the Setting.
+// The name of the Feature Flag or Setting.
 func (o SettingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+// The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+// same order, they are displayed in alphabetical order.
 func (o SettingOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v *Setting) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }
 
-// Default: `boolean`. The Setting's type.\
-// Available values: `boolean`|`string`|`int`|`double`.
-func (o SettingOutput) SettingType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Setting) pulumi.StringPtrOutput { return v.SettingType }).(pulumi.StringPtrOutput)
+// The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
+func (o SettingOutput) SettingType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Setting) pulumi.StringOutput { return v.SettingType }).(pulumi.StringOutput)
 }
 
 type SettingArrayOutput struct{ *pulumi.OutputState }

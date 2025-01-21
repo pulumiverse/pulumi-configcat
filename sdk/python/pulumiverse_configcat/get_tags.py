@@ -44,9 +44,6 @@ class GetTagsResult:
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -62,9 +59,6 @@ class GetTagsResult:
     @property
     @pulumi.getter
     def tags(self) -> Sequence['outputs.GetTagsTagResult']:
-        """
-        A tag list block defined as below.
-        """
         return pulumi.get(self, "tags")
 
 
@@ -84,28 +78,7 @@ def get_tags(name_filter_regex: Optional[str] = None,
              product_id: Optional[str] = None,
              opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetTagsResult:
     """
-    ## # get_tags Resource
-
-    Use this data source to access information about existing **Tags**.
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_tags = configcat.get_tags(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    pulumi.export("tagId", my_tags.tags[0].tag_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
-
-
-    :param str name_filter_regex: Filter the Tags by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -122,28 +95,7 @@ def get_tags_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]] = N
                     product_id: Optional[pulumi.Input[str]] = None,
                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetTagsResult]:
     """
-    ## # get_tags Resource
-
-    Use this data source to access information about existing **Tags**.
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_tags = configcat.get_tags(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    pulumi.export("tagId", my_tags.tags[0].tag_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
-
-
-    :param str name_filter_regex: Filter the Tags by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex

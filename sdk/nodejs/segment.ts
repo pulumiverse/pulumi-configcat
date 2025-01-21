@@ -4,48 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.Segment Resource
- *
- * Creates and manages a **Segment**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- * import * as configcat from "@pulumiverse/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const mySegment = new configcat.Segment("my_segment", {
- *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
- *     name: "Beta users",
- *     description: "Beta users' description",
- *     comparisonAttribute: "email",
- *     comparator: "sensitiveIsOneOf",
- *     comparisonValue: "betauser1@example.com,betauser2@example.com",
- * });
- * export const segmentId = mySegment.id;
- * ```
- *
- * ## Endpoints used
- *
- * * [Get Segment](https://api.configcat.com/docs/#tag/Segments/operation/get-segment)
- * * [Create Segment](https://api.configcat.com/docs/#tag/Segments/operation/create-segment)
- * * [Update Segment](https://api.configcat.com/docs/#tag/Segments/operation/update-segment)
- * * [Delete Segment](https://api.configcat.com/docs/#tag/Segments/operation/delete-segment)
- *
- * ## Import
- *
- * Segments can be imported using the SegmentId. Get the SegmentId using the [List Segments API](https://api.configcat.com/docs/#tag/Segments/operation/get-segments) for example.
- *
- * ```sh
- * $ pulumi import configcat:index/segment:Segment example 08d86d63-2726-47cd-8bfc-59608ecb91e2
- * ```
- * Read more about importing.
- */
 export class Segment extends pulumi.CustomResource {
     /**
      * Get an existing Segment resource's state with the given name, ID, and optional extra
@@ -75,21 +33,21 @@ export class Segment extends pulumi.CustomResource {
     }
 
     /**
-     * The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+     * The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
      */
     public readonly comparator!: pulumi.Output<string>;
     /**
-     * The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+     * The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
      */
     public readonly comparisonAttribute!: pulumi.Output<string>;
     /**
-     * The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+     * The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
      */
     public readonly comparisonValue!: pulumi.Output<string>;
     /**
      * The description of the Segment.
      */
-    public readonly description!: pulumi.Output<string | undefined>;
+    public readonly description!: pulumi.Output<string>;
     /**
      * The name of the Segment.
      */
@@ -149,15 +107,15 @@ export class Segment extends pulumi.CustomResource {
  */
 export interface SegmentState {
     /**
-     * The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+     * The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
      */
     comparator?: pulumi.Input<string>;
     /**
-     * The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+     * The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
      */
     comparisonAttribute?: pulumi.Input<string>;
     /**
-     * The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+     * The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
      */
     comparisonValue?: pulumi.Input<string>;
     /**
@@ -179,15 +137,15 @@ export interface SegmentState {
  */
 export interface SegmentArgs {
     /**
-     * The [comparator](https://configcat.com/docs/advanced/targeting/#comparator).
+     * The [comparator](https://configcat.com/docs/advanced/targeting/#comparator) of the Segment.
      */
     comparator: pulumi.Input<string>;
     /**
-     * The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute).
+     * The [comparison attribute](https://configcat.com/docs/advanced/targeting/#attribute) of the Segment.
      */
     comparisonAttribute: pulumi.Input<string>;
     /**
-     * The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value).
+     * The [comparison value](https://configcat.com/docs/advanced/targeting/#comparison-value) of the Segment.
      */
     comparisonValue: pulumi.Input<string>;
     /**

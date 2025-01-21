@@ -28,12 +28,12 @@ class SettingArgs:
         """
         The set of arguments for constructing a Setting resource.
         :param pulumi.Input[str] config_id: The ID of the Config.
-        :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
-        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
-        :param pulumi.Input[str] hint: The hint of the Setting.
-        :param pulumi.Input[str] name: The name of the Setting.
-        :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
-               Available values: `boolean`|`string`|`int`|`double`.
+        :param pulumi.Input[str] key: The key of the Feature Flag or Setting.
+        :param pulumi.Input[int] order: The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+               same order, they are displayed in alphabetical order.
+        :param pulumi.Input[str] hint: The hint of the Feature Flag or Setting.
+        :param pulumi.Input[str] name: The name of the Feature Flag or Setting.
+        :param pulumi.Input[str] setting_type: The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         pulumi.set(__self__, "config_id", config_id)
         pulumi.set(__self__, "key", key)
@@ -61,7 +61,7 @@ class SettingArgs:
     @pulumi.getter
     def key(self) -> pulumi.Input[str]:
         """
-        The key of the Feature Flag/Setting.
+        The key of the Feature Flag or Setting.
         """
         return pulumi.get(self, "key")
 
@@ -73,7 +73,8 @@ class SettingArgs:
     @pulumi.getter
     def order(self) -> pulumi.Input[int]:
         """
-        The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+        same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -85,7 +86,7 @@ class SettingArgs:
     @pulumi.getter
     def hint(self) -> Optional[pulumi.Input[str]]:
         """
-        The hint of the Setting.
+        The hint of the Feature Flag or Setting.
         """
         return pulumi.get(self, "hint")
 
@@ -97,7 +98,7 @@ class SettingArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the Setting.
+        The name of the Feature Flag or Setting.
         """
         return pulumi.get(self, "name")
 
@@ -109,8 +110,7 @@ class SettingArgs:
     @pulumi.getter(name="settingType")
     def setting_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Default: `boolean`. The Setting's type.  
-        Available values: `boolean`|`string`|`int`|`double`.
+        The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         return pulumi.get(self, "setting_type")
 
@@ -131,12 +131,12 @@ class _SettingState:
         """
         Input properties used for looking up and filtering Setting resources.
         :param pulumi.Input[str] config_id: The ID of the Config.
-        :param pulumi.Input[str] hint: The hint of the Setting.
-        :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
-        :param pulumi.Input[str] name: The name of the Setting.
-        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
-        :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
-               Available values: `boolean`|`string`|`int`|`double`.
+        :param pulumi.Input[str] hint: The hint of the Feature Flag or Setting.
+        :param pulumi.Input[str] key: The key of the Feature Flag or Setting.
+        :param pulumi.Input[str] name: The name of the Feature Flag or Setting.
+        :param pulumi.Input[int] order: The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+               same order, they are displayed in alphabetical order.
+        :param pulumi.Input[str] setting_type: The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         if config_id is not None:
             pulumi.set(__self__, "config_id", config_id)
@@ -167,7 +167,7 @@ class _SettingState:
     @pulumi.getter
     def hint(self) -> Optional[pulumi.Input[str]]:
         """
-        The hint of the Setting.
+        The hint of the Feature Flag or Setting.
         """
         return pulumi.get(self, "hint")
 
@@ -179,7 +179,7 @@ class _SettingState:
     @pulumi.getter
     def key(self) -> Optional[pulumi.Input[str]]:
         """
-        The key of the Feature Flag/Setting.
+        The key of the Feature Flag or Setting.
         """
         return pulumi.get(self, "key")
 
@@ -191,7 +191,7 @@ class _SettingState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the Setting.
+        The name of the Feature Flag or Setting.
         """
         return pulumi.get(self, "name")
 
@@ -203,7 +203,8 @@ class _SettingState:
     @pulumi.getter
     def order(self) -> Optional[pulumi.Input[int]]:
         """
-        The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+        same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
@@ -215,8 +216,7 @@ class _SettingState:
     @pulumi.getter(name="settingType")
     def setting_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Default: `boolean`. The Setting's type.  
-        Available values: `boolean`|`string`|`int`|`double`.
+        The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         return pulumi.get(self, "setting_type")
 
@@ -238,55 +238,16 @@ class Setting(pulumi.CustomResource):
                  setting_type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # Setting Resource
-
-        Creates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_configcat as configcat
-        import pulumiverse_configcat as configcat
-
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-            name_filter_regex="Main Config")
-        my_setting = configcat.Setting("my_setting",
-            config_id=my_configs.configs[0].config_id,
-            key="isAwesomeFeatureEnabled",
-            name="My awesome feature flag",
-            hint="This is the hint for my awesome feature flag",
-            setting_type="boolean",
-            order=0)
-        pulumi.export("settingId", my_setting.id)
-        ```
-
-        ## Endpoints used
-
-        * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-        * [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)
-        * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
-        * [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)
-
-        ## Import
-
-        Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
-
-        ```sh
-        $ pulumi import configcat:index/setting:Setting example 1234
-        ```
-        Read more about importing.
-
+        Create a Setting resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_id: The ID of the Config.
-        :param pulumi.Input[str] hint: The hint of the Setting.
-        :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
-        :param pulumi.Input[str] name: The name of the Setting.
-        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
-        :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
-               Available values: `boolean`|`string`|`int`|`double`.
+        :param pulumi.Input[str] hint: The hint of the Feature Flag or Setting.
+        :param pulumi.Input[str] key: The key of the Feature Flag or Setting.
+        :param pulumi.Input[str] name: The name of the Feature Flag or Setting.
+        :param pulumi.Input[int] order: The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+               same order, they are displayed in alphabetical order.
+        :param pulumi.Input[str] setting_type: The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         ...
     @overload
@@ -295,46 +256,7 @@ class Setting(pulumi.CustomResource):
                  args: SettingArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Setting Resource
-
-        Creates and manages a **Feature Flag/Setting**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts)
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_configcat as configcat
-        import pulumiverse_configcat as configcat
-
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_configs = configcat.get_configurations(product_id=my_products.products[0].product_id,
-            name_filter_regex="Main Config")
-        my_setting = configcat.Setting("my_setting",
-            config_id=my_configs.configs[0].config_id,
-            key="isAwesomeFeatureEnabled",
-            name="My awesome feature flag",
-            hint="This is the hint for my awesome feature flag",
-            setting_type="boolean",
-            order=0)
-        pulumi.export("settingId", my_setting.id)
-        ```
-
-        ## Endpoints used
-
-        * [Get Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-setting)
-        * [Create Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/create-setting)
-        * [Update Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/update-setting)
-        * [Delete Flag](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/delete-setting)
-
-        ## Import
-
-        Feature Flags/Settings can be imported using the SettingId. Get the SettingId using e.g. the [List Flags API](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings).
-
-        ```sh
-        $ pulumi import configcat:index/setting:Setting example 1234
-        ```
-        Read more about importing.
-
+        Create a Setting resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param SettingArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -401,12 +323,12 @@ class Setting(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] config_id: The ID of the Config.
-        :param pulumi.Input[str] hint: The hint of the Setting.
-        :param pulumi.Input[str] key: The key of the Feature Flag/Setting.
-        :param pulumi.Input[str] name: The name of the Setting.
-        :param pulumi.Input[int] order: The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
-        :param pulumi.Input[str] setting_type: Default: `boolean`. The Setting's type.  
-               Available values: `boolean`|`string`|`int`|`double`.
+        :param pulumi.Input[str] hint: The hint of the Feature Flag or Setting.
+        :param pulumi.Input[str] key: The key of the Feature Flag or Setting.
+        :param pulumi.Input[str] name: The name of the Feature Flag or Setting.
+        :param pulumi.Input[int] order: The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+               same order, they are displayed in alphabetical order.
+        :param pulumi.Input[str] setting_type: The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -430,9 +352,9 @@ class Setting(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def hint(self) -> pulumi.Output[Optional[str]]:
+    def hint(self) -> pulumi.Output[str]:
         """
-        The hint of the Setting.
+        The hint of the Feature Flag or Setting.
         """
         return pulumi.get(self, "hint")
 
@@ -440,7 +362,7 @@ class Setting(pulumi.CustomResource):
     @pulumi.getter
     def key(self) -> pulumi.Output[str]:
         """
-        The key of the Feature Flag/Setting.
+        The key of the Feature Flag or Setting.
         """
         return pulumi.get(self, "key")
 
@@ -448,7 +370,7 @@ class Setting(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        The name of the Setting.
+        The name of the Feature Flag or Setting.
         """
         return pulumi.get(self, "name")
 
@@ -456,16 +378,16 @@ class Setting(pulumi.CustomResource):
     @pulumi.getter
     def order(self) -> pulumi.Output[int]:
         """
-        The order of the Setting within a Config (zero-based). If multiple Settings has the same order, they are displayed in alphabetical order.
+        The order of the Feature Flag or Setting within a Product (zero-based). If multiple Feature Flags or Settings has the
+        same order, they are displayed in alphabetical order.
         """
         return pulumi.get(self, "order")
 
     @property
     @pulumi.getter(name="settingType")
-    def setting_type(self) -> pulumi.Output[Optional[str]]:
+    def setting_type(self) -> pulumi.Output[str]:
         """
-        Default: `boolean`. The Setting's type.  
-        Available values: `boolean`|`string`|`int`|`double`.
+        The type of the Feature Flag or Setting. Available values: `boolean`|`string`|`int`|`double`. Default: `boolean`.
         """
         return pulumi.get(self, "setting_type")
 

@@ -1,6 +1,6 @@
 {
     "name": "@pulumiverse/configcat",
-    "version": "3.0.0-alpha.0+dev",
+    "version": "5.0.0-alpha.0+dev",
     "description": "A Pulumi package for creating and managing configcat cloud resources.",
     "keywords": [
         "pulumi",
@@ -24,7 +24,7 @@
     "pulumi": {
         "resource": true,
         "name": "configcat",
-        "version": "3.0.0-alpha.0+dev",
+        "version": "5.0.0-alpha.0+dev",
         "server": "api://github.com/pulumiverse"
     }
 }

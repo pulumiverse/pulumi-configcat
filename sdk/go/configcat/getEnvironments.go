@@ -8,50 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getEnvironments Resource
-//
-// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myEnvironments, err := configcat.GetEnvironments(ctx, &configcat.GetEnvironmentsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("environmentId", myEnvironments.Environments[0].EnvironmentId)
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Endpoints used
-//
-// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
 func GetEnvironments(ctx *pulumi.Context, args *GetEnvironmentsArgs, opts ...pulumi.InvokeOption) (*GetEnvironmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEnvironmentsResult
@@ -64,20 +23,16 @@ func GetEnvironments(ctx *pulumi.Context, args *GetEnvironmentsArgs, opts ...pul
 
 // A collection of arguments for invoking getEnvironments.
 type GetEnvironmentsArgs struct {
-	// Filter the Environments by name.
 	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	// The ID of the Product.
-	ProductId string `pulumi:"productId"`
+	ProductId       string  `pulumi:"productId"`
 }
 
 // A collection of values returned by getEnvironments.
 type GetEnvironmentsResult struct {
-	// An environment list block defined as below.
-	Environments []GetEnvironmentsEnvironment `pulumi:"environments"`
-	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
-	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	ProductId       string  `pulumi:"productId"`
+	Environments    []GetEnvironmentsEnvironment `pulumi:"environments"`
+	Id              string                       `pulumi:"id"`
+	NameFilterRegex *string                      `pulumi:"nameFilterRegex"`
+	ProductId       string                       `pulumi:"productId"`
 }
 
 func GetEnvironmentsOutput(ctx *pulumi.Context, args GetEnvironmentsOutputArgs, opts ...pulumi.InvokeOption) GetEnvironmentsResultOutput {
@@ -91,10 +46,8 @@ func GetEnvironmentsOutput(ctx *pulumi.Context, args GetEnvironmentsOutputArgs, 
 
 // A collection of arguments for invoking getEnvironments.
 type GetEnvironmentsOutputArgs struct {
-	// Filter the Environments by name.
 	NameFilterRegex pulumi.StringPtrInput `pulumi:"nameFilterRegex"`
-	// The ID of the Product.
-	ProductId pulumi.StringInput `pulumi:"productId"`
+	ProductId       pulumi.StringInput    `pulumi:"productId"`
 }
 
 func (GetEnvironmentsOutputArgs) ElementType() reflect.Type {
@@ -116,12 +69,10 @@ func (o GetEnvironmentsResultOutput) ToGetEnvironmentsResultOutputWithContext(ct
 	return o
 }
 
-// An environment list block defined as below.
 func (o GetEnvironmentsResultOutput) Environments() GetEnvironmentsEnvironmentArrayOutput {
 	return o.ApplyT(func(v GetEnvironmentsResult) []GetEnvironmentsEnvironment { return v.Environments }).(GetEnvironmentsEnvironmentArrayOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
 func (o GetEnvironmentsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEnvironmentsResult) string { return v.Id }).(pulumi.StringOutput)
 }

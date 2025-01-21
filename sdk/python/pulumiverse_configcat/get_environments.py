@@ -44,17 +44,11 @@ class GetEnvironmentsResult:
     @property
     @pulumi.getter
     def environments(self) -> Sequence['outputs.GetEnvironmentsEnvironmentResult']:
-        """
-        An environment list block defined as below.
-        """
         return pulumi.get(self, "environments")
 
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -84,29 +78,7 @@ def get_environments(name_filter_regex: Optional[str] = None,
                      product_id: Optional[str] = None,
                      opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetEnvironmentsResult:
     """
-    ## # get_environments Resource
-
-    Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    pulumi.export("environmentId", my_environments.environments[0].environment_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
-
-
-    :param str name_filter_regex: Filter the Environments by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -123,29 +95,7 @@ def get_environments_output(name_filter_regex: Optional[pulumi.Input[Optional[st
                             product_id: Optional[pulumi.Input[str]] = None,
                             opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetEnvironmentsResult]:
     """
-    ## # get_environments Resource
-
-    Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_environments = configcat.get_environments(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    pulumi.export("environmentId", my_environments.environments[0].environment_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
-
-
-    :param str name_filter_regex: Filter the Environments by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex

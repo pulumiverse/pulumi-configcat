@@ -9,67 +9,14 @@ import (
 
 	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # Tag Resource
-//
-// Creates and manages a **Tag**.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myTag, err := configcat.NewTag(ctx, "my_tag", &configcat.TagArgs{
-//				ProductId: pulumi.String(myProducts.Products[0].ProductId),
-//				Name:      pulumi.String("Created by Terraform"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("tagId", myTag.ID())
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Endpoints used
-//
-// * [Get Tag](https://api.configcat.com/docs/#tag/Tags/operation/get-tag)
-// * [Create Tag](https://api.configcat.com/docs/#tag/Tags/operation/create-tag)
-// * [Update Tag](https://api.configcat.com/docs/#tag/Tags/operation/update-tag)
-// * [Delete Tag](https://api.configcat.com/docs/#tag/Tags/operation/delete-tag)
-//
-// ## Import
-//
-// Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
-//
-// ```sh
-// $ pulumi import configcat:index/tag:Tag example 1234
-// ```
-// Read more about importing.
 type Tag struct {
 	pulumi.CustomResourceState
 
-	// Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
-	Color pulumi.StringPtrOutput `pulumi:"color"`
+	// The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
+	Color pulumi.StringOutput `pulumi:"color"`
 	// The name of the Tag.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The ID of the Product.
@@ -109,7 +56,7 @@ func GetTag(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Tag resources.
 type tagState struct {
-	// Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+	// The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
 	Color *string `pulumi:"color"`
 	// The name of the Tag.
 	Name *string `pulumi:"name"`
@@ -118,7 +65,7 @@ type tagState struct {
 }
 
 type TagState struct {
-	// Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+	// The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
 	Color pulumi.StringPtrInput
 	// The name of the Tag.
 	Name pulumi.StringPtrInput
@@ -131,7 +78,7 @@ func (TagState) ElementType() reflect.Type {
 }
 
 type tagArgs struct {
-	// Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+	// The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
 	Color *string `pulumi:"color"`
 	// The name of the Tag.
 	Name *string `pulumi:"name"`
@@ -141,7 +88,7 @@ type tagArgs struct {
 
 // The set of arguments for constructing a Tag resource.
 type TagArgs struct {
-	// Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+	// The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
 	Color pulumi.StringPtrInput
 	// The name of the Tag.
 	Name pulumi.StringPtrInput
@@ -236,9 +183,9 @@ func (o TagOutput) ToTagOutputWithContext(ctx context.Context) TagOutput {
 	return o
 }
 
-// Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
-func (o TagOutput) Color() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Tag) pulumi.StringPtrOutput { return v.Color }).(pulumi.StringPtrOutput)
+// The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
+func (o TagOutput) Color() pulumi.StringOutput {
+	return o.ApplyT(func(v *Tag) pulumi.StringOutput { return v.Color }).(pulumi.StringOutput)
 }
 
 // The name of the Tag.

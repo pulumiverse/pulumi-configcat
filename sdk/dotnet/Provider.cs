@@ -20,19 +20,24 @@ namespace Pulumiverse.Configcat
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
-        /// ConfigCat Public Management API Base Path (defaults to production).
+        /// ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+        /// can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
         /// </summary>
         [Output("basePath")]
         public Output<string?> BasePath { get; private set; } = null!;
 
         /// <summary>
-        /// ConfigCat Public API credential - Basic Auth Password
+        /// Get your `basic_auth_password` at [ConfigCat Public API
+        /// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        /// `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
         /// </summary>
         [Output("basicAuthPassword")]
         public Output<string?> BasicAuthPassword { get; private set; } = null!;
 
         /// <summary>
-        /// ConfigCat Public API credential - Basic Auth Username.
+        /// Get your `basic_auth_username` at [ConfigCat Public API
+        /// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        /// `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         /// </summary>
         [Output("basicAuthUsername")]
         public Output<string?> BasicAuthUsername { get; private set; } = null!;
@@ -71,7 +76,8 @@ namespace Pulumiverse.Configcat
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ConfigCat Public Management API Base Path (defaults to production).
+        /// ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+        /// can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
         /// </summary>
         [Input("basePath")]
         public Input<string>? BasePath { get; set; }
@@ -80,7 +86,9 @@ namespace Pulumiverse.Configcat
         private Input<string>? _basicAuthPassword;
 
         /// <summary>
-        /// ConfigCat Public API credential - Basic Auth Password
+        /// Get your `basic_auth_password` at [ConfigCat Public API
+        /// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        /// `CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
         /// </summary>
         public Input<string>? BasicAuthPassword
         {
@@ -93,7 +101,9 @@ namespace Pulumiverse.Configcat
         }
 
         /// <summary>
-        /// ConfigCat Public API credential - Basic Auth Username.
+        /// Get your `basic_auth_username` at [ConfigCat Public API
+        /// credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+        /// `CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
         /// </summary>
         [Input("basicAuthUsername")]
         public Input<string>? BasicAuthUsername { get; set; }

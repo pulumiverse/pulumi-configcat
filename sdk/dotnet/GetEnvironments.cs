@@ -12,123 +12,12 @@ namespace Pulumiverse.Configcat
 {
     public static class GetEnvironments
     {
-        /// <summary>
-        /// ## # configcat.getEnvironments Resource
-        /// 
-        /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["environmentId"] = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
-        /// </summary>
         public static Task<GetEnvironmentsResult> InvokeAsync(GetEnvironmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getEnvironments Resource
-        /// 
-        /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["environmentId"] = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
-        /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getEnvironments Resource
-        /// 
-        /// Use this data source to access information about existing **Environments**. [What is an Environment in ConfigCat?](https://configcat.com/docs/main-concepts)
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myEnvironments = Configcat.GetEnvironments.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["environmentId"] = myEnvironments.Apply(getEnvironmentsResult =&gt; getEnvironmentsResult.Environments[0]?.EnvironmentId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Environments](https://api.configcat.com/docs/#tag/Environments/operation/get-environments)
-        /// </summary>
         public static Output<GetEnvironmentsResult> Invoke(GetEnvironmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentsResult>("configcat:index/getEnvironments:getEnvironments", args ?? new GetEnvironmentsInvokeArgs(), options.WithDefaults());
     }
@@ -136,15 +25,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetEnvironmentsArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Filter the Environments by name.
-        /// </summary>
         [Input("nameFilterRegex")]
         public string? NameFilterRegex { get; set; }
 
-        /// <summary>
-        /// The ID of the Product.
-        /// </summary>
         [Input("productId", required: true)]
         public string ProductId { get; set; } = null!;
 
@@ -156,15 +39,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetEnvironmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Filter the Environments by name.
-        /// </summary>
         [Input("nameFilterRegex")]
         public Input<string>? NameFilterRegex { get; set; }
 
-        /// <summary>
-        /// The ID of the Product.
-        /// </summary>
         [Input("productId", required: true)]
         public Input<string> ProductId { get; set; } = null!;
 
@@ -178,13 +55,7 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetEnvironmentsResult
     {
-        /// <summary>
-        /// An environment list block defined as below.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetEnvironmentsEnvironmentResult> Environments;
-        /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
-        /// </summary>
         public readonly string Id;
         public readonly string? NameFilterRegex;
         public readonly string ProductId;

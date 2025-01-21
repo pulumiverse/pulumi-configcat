@@ -12,120 +12,12 @@ namespace Pulumiverse.Configcat
 {
     public static class GetTags
     {
-        /// <summary>
-        /// ## # configcat.getTags Resource
-        /// 
-        /// Use this data source to access information about existing **Tags**.
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myTags = Configcat.GetTags.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["tagId"] = myTags.Apply(getTagsResult =&gt; getTagsResult.Tags[0]?.TagId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
-        /// </summary>
         public static Task<GetTagsResult> InvokeAsync(GetTagsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTagsResult>("configcat:index/getTags:getTags", args ?? new GetTagsArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getTags Resource
-        /// 
-        /// Use this data source to access information about existing **Tags**.
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myTags = Configcat.GetTags.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["tagId"] = myTags.Apply(getTagsResult =&gt; getTagsResult.Tags[0]?.TagId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
-        /// </summary>
         public static Output<GetTagsResult> Invoke(GetTagsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTagsResult>("configcat:index/getTags:getTags", args ?? new GetTagsInvokeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getTags Resource
-        /// 
-        /// Use this data source to access information about existing **Tags**.
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myTags = Configcat.GetTags.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Test",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["tagId"] = myTags.Apply(getTagsResult =&gt; getTagsResult.Tags[0]?.TagId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
-        /// </summary>
         public static Output<GetTagsResult> Invoke(GetTagsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTagsResult>("configcat:index/getTags:getTags", args ?? new GetTagsInvokeArgs(), options.WithDefaults());
     }
@@ -133,15 +25,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetTagsArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Filter the Tags by name.
-        /// </summary>
         [Input("nameFilterRegex")]
         public string? NameFilterRegex { get; set; }
 
-        /// <summary>
-        /// The ID of the Product.
-        /// </summary>
         [Input("productId", required: true)]
         public string ProductId { get; set; } = null!;
 
@@ -153,15 +39,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetTagsInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Filter the Tags by name.
-        /// </summary>
         [Input("nameFilterRegex")]
         public Input<string>? NameFilterRegex { get; set; }
 
-        /// <summary>
-        /// The ID of the Product.
-        /// </summary>
         [Input("productId", required: true)]
         public Input<string> ProductId { get; set; } = null!;
 
@@ -175,15 +55,9 @@ namespace Pulumiverse.Configcat
     [OutputType]
     public sealed class GetTagsResult
     {
-        /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
-        /// </summary>
         public readonly string Id;
         public readonly string? NameFilterRegex;
         public readonly string ProductId;
-        /// <summary>
-        /// A tag list block defined as below.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetTagsTagResult> Tags;
 
         [OutputConstructor]

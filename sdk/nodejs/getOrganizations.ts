@@ -6,27 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.getOrganizations Resource
- *
- * Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- *
- * const myOrganizations = configcat.getOrganizations({
- *     nameFilterRegex: "ConfigCat",
- * });
- * export const organizationId = myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId);
- * ```
- *
- * ## Endpoints used
- *
- * - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
- */
 export function getOrganizations(args?: GetOrganizationsArgs, opts?: pulumi.InvokeOptions): Promise<GetOrganizationsResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -39,9 +18,6 @@ export function getOrganizations(args?: GetOrganizationsArgs, opts?: pulumi.Invo
  * A collection of arguments for invoking getOrganizations.
  */
 export interface GetOrganizationsArgs {
-    /**
-     * Filter the Organizations by name.
-     */
     nameFilterRegex?: string;
 }
 
@@ -49,37 +25,10 @@ export interface GetOrganizationsArgs {
  * A collection of values returned by getOrganizations.
  */
 export interface GetOrganizationsResult {
-    /**
-     * The provider-assigned unique ID for this managed resource.
-     */
     readonly id: string;
     readonly nameFilterRegex?: string;
-    /**
-     * An organization list block defined as below.
-     */
     readonly organizations: outputs.GetOrganizationsOrganization[];
 }
-/**
- * ## # configcat.getOrganizations Resource
- *
- * Use this data source to access information about existing **Organizations**. [What is an Organization in ConfigCat?](https://configcat.com/docs/main-concepts)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- *
- * const myOrganizations = configcat.getOrganizations({
- *     nameFilterRegex: "ConfigCat",
- * });
- * export const organizationId = myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId);
- * ```
- *
- * ## Endpoints used
- *
- * - [List Organizations](https://api.configcat.com/docs/#tag/Organizations/operation/get-organizations)
- */
 export function getOrganizationsOutput(args?: GetOrganizationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrganizationsResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,8 +41,5 @@ export function getOrganizationsOutput(args?: GetOrganizationsOutputArgs, opts?:
  * A collection of arguments for invoking getOrganizations.
  */
 export interface GetOrganizationsOutputArgs {
-    /**
-     * Filter the Organizations by name.
-     */
     nameFilterRegex?: pulumi.Input<string>;
 }

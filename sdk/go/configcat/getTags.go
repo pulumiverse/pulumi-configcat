@@ -8,49 +8,9 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat/internal"
+	"github.com/pulumiverse/pulumi-configcat/sdk/v5/go/configcat/internal"
 )
 
-// ## # getTags Resource
-//
-// Use this data source to access information about existing **Tags**.
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-configcat/sdk/v3/go/configcat"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myProducts, err := configcat.GetProducts(ctx, &configcat.GetProductsArgs{
-//				NameFilterRegex: pulumi.StringRef("ConfigCat's product"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			myTags, err := configcat.GetTags(ctx, &configcat.GetTagsArgs{
-//				ProductId:       myProducts.Products[0].ProductId,
-//				NameFilterRegex: pulumi.StringRef("Test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("tagId", myTags.Tags[0].TagId)
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Endpoints used
-//
-// - [List Tags](https://api.configcat.com/docs/#tag/Tags/operation/get-tags)
 func GetTags(ctx *pulumi.Context, args *GetTagsArgs, opts ...pulumi.InvokeOption) (*GetTagsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTagsResult
@@ -63,20 +23,16 @@ func GetTags(ctx *pulumi.Context, args *GetTagsArgs, opts ...pulumi.InvokeOption
 
 // A collection of arguments for invoking getTags.
 type GetTagsArgs struct {
-	// Filter the Tags by name.
 	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	// The ID of the Product.
-	ProductId string `pulumi:"productId"`
+	ProductId       string  `pulumi:"productId"`
 }
 
 // A collection of values returned by getTags.
 type GetTagsResult struct {
-	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
-	NameFilterRegex *string `pulumi:"nameFilterRegex"`
-	ProductId       string  `pulumi:"productId"`
-	// A tag list block defined as below.
-	Tags []GetTagsTag `pulumi:"tags"`
+	Id              string       `pulumi:"id"`
+	NameFilterRegex *string      `pulumi:"nameFilterRegex"`
+	ProductId       string       `pulumi:"productId"`
+	Tags            []GetTagsTag `pulumi:"tags"`
 }
 
 func GetTagsOutput(ctx *pulumi.Context, args GetTagsOutputArgs, opts ...pulumi.InvokeOption) GetTagsResultOutput {
@@ -90,10 +46,8 @@ func GetTagsOutput(ctx *pulumi.Context, args GetTagsOutputArgs, opts ...pulumi.I
 
 // A collection of arguments for invoking getTags.
 type GetTagsOutputArgs struct {
-	// Filter the Tags by name.
 	NameFilterRegex pulumi.StringPtrInput `pulumi:"nameFilterRegex"`
-	// The ID of the Product.
-	ProductId pulumi.StringInput `pulumi:"productId"`
+	ProductId       pulumi.StringInput    `pulumi:"productId"`
 }
 
 func (GetTagsOutputArgs) ElementType() reflect.Type {
@@ -115,7 +69,6 @@ func (o GetTagsResultOutput) ToGetTagsResultOutputWithContext(ctx context.Contex
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
 func (o GetTagsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTagsResult) string { return v.Id }).(pulumi.StringOutput)
 }
@@ -128,7 +81,6 @@ func (o GetTagsResultOutput) ProductId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTagsResult) string { return v.ProductId }).(pulumi.StringOutput)
 }
 
-// A tag list block defined as below.
 func (o GetTagsResultOutput) Tags() GetTagsTagArrayOutput {
 	return o.ApplyT(func(v GetTagsResult) []GetTagsTag { return v.Tags }).(GetTagsTagArrayOutput)
 }

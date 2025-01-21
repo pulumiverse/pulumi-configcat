@@ -23,6 +23,10 @@ namespace Pulumiverse.Configcat.Outputs
         /// </summary>
         public readonly string Description;
         /// <summary>
+        /// The evaluation version of the Config. Possible values: `v1`|`v2`
+        /// </summary>
+        public readonly string EvaluationVersion;
+        /// <summary>
         /// The name of the Config.
         /// </summary>
         public readonly string Name;
@@ -37,12 +41,15 @@ namespace Pulumiverse.Configcat.Outputs
 
             string description,
 
+            string evaluationVersion,
+
             string name,
 
             int order)
         {
             ConfigId = configId;
             Description = description;
+            EvaluationVersion = evaluationVersion;
             Name = name;
             Order = order;
         }

@@ -4,93 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.PermissionGroup Resource
- *
- * Creates and manages a **Permission Group**. [What is a Permission Group in ConfigCat?](https://configcat.com/docs/advanced/team-management/team-management-basics/#permissions--permission-groups-product-level)
- *
- * ## Example Usage
- *
- * ### S
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- * import * as configcat from "@pulumiverse/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myPermissionGroup = new configcat.PermissionGroup("my_permission_group", {
- *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
- *     name: "Administrators",
- *     accesstype: "full",
- *     canManageMembers: true,
- *     canCreateorupdateConfig: true,
- *     canDeleteConfig: true,
- *     canCreateorupdateEnvironment: true,
- *     canDeleteEnvironment: true,
- *     canCreateorupdateSetting: true,
- *     canTagSetting: true,
- *     canDeleteSetting: true,
- *     canCreateorupdateTag: true,
- *     canDeleteTag: true,
- *     canManageWebhook: true,
- *     canUseExportimport: true,
- *     canManageProductPreferences: true,
- *     canManageIntegrations: true,
- *     canViewSdkkey: true,
- *     canRotateSdkkey: true,
- *     canCreateorupdateSegment: true,
- *     canDeleteSegment: true,
- *     canViewProductAuditlog: true,
- *     canViewProductStatistics: true,
- * });
- * export const permissionGroupId = myPermissionGroup.id;
- * ```
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- * import * as configcat from "@pulumiverse/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myTestEnvironments = configcat.getEnvironments({
- *     nameFilterRegex: "Test",
- * });
- * const myProductionEnvironments = configcat.getEnvironments({
- *     nameFilterRegex: "Production",
- * });
- * const myPermissionGroup = new configcat.PermissionGroup("my_permission_group", {
- *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
- *     name: "Read only except Test environment",
- *     accesstype: "custom",
- *     environmentAccesses: Promise.all([myTestEnvironments, myTestEnvironments]).then(([myTestEnvironments, myTestEnvironments1]) => {
- *         [myTestEnvironments.environments?.[0]?.environmentId]: "full",
- *         [myTestEnvironments1.environments?.[1]?.environmentId]: "readOnly",
- *     }),
- * });
- * export const permissionGroupId = myPermissionGroup.id;
- * ```
- *
- * ## Endpoints used
- *
- * * [Get Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-group)
- * * [Create Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/create-permission-group)
- * * [Update Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/update-permission-group)
- * * [Delete Permission Group](https://api.configcat.com/docs/#tag/Permission-Groups/operation/delete-permission-group)
- *
- * ## Import
- *
- * Permission Groups can be imported using the PermissionGroupId. Get the PermissionGroupId using the [List Permission Groups API](https://api.configcat.com/docs/#tag/Permission-Groups/operation/get-permission-groups) for example.
- *
- * ```sh
- * $ pulumi import configcat:index/permissionGroup:PermissionGroup example 123
- * ```
- * Read more about importing.
- */
 export class PermissionGroup extends pulumi.CustomResource {
     /**
      * Get an existing PermissionGroup resource's state with the given name, ID, and optional extra
@@ -120,95 +33,107 @@ export class PermissionGroup extends pulumi.CustomResource {
     }
 
     /**
-     * Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+     * Represent the Feature Management permission. Possible values: readOnly, full, custom
      */
-    public readonly accesstype!: pulumi.Output<string | undefined>;
+    public readonly accesstype!: pulumi.Output<string>;
     /**
-     * Group members can create/update Configs. Default: false.
+     * Group members can create/update Configs.
      */
-    public readonly canCreateorupdateConfig!: pulumi.Output<boolean | undefined>;
+    public readonly canCreateorupdateConfig!: pulumi.Output<boolean>;
     /**
-     * Group members can create/update Environments. Default: false.
+     * Group members can create/update Environments.
      */
-    public readonly canCreateorupdateEnvironment!: pulumi.Output<boolean | undefined>;
-    public readonly canCreateorupdateSegment!: pulumi.Output<boolean | undefined>;
+    public readonly canCreateorupdateEnvironment!: pulumi.Output<boolean>;
     /**
-     * Group members can create/update Feature Flags and Settings. Default: false.
+     * Group members can create/update Segments.
      */
-    public readonly canCreateorupdateSetting!: pulumi.Output<boolean | undefined>;
+    public readonly canCreateorupdateSegment!: pulumi.Output<boolean>;
     /**
-     * Group members can create/update Tags. Default: false.
+     * Group members can create/update Feature Flags and Settings.
      */
-    public readonly canCreateorupdateTag!: pulumi.Output<boolean | undefined>;
+    public readonly canCreateorupdateSetting!: pulumi.Output<boolean>;
     /**
-     * Group members can delete Configs. Default: false.
+     * Group members can create/update Tags.
      */
-    public readonly canDeleteConfig!: pulumi.Output<boolean | undefined>;
+    public readonly canCreateorupdateTag!: pulumi.Output<boolean>;
     /**
-     * Group members can delete Environments. Default: false.
+     * Group members can delete Configs.
      */
-    public readonly canDeleteEnvironment!: pulumi.Output<boolean | undefined>;
-    public readonly canDeleteSegment!: pulumi.Output<boolean | undefined>;
+    public readonly canDeleteConfig!: pulumi.Output<boolean>;
     /**
-     * Group members can delete Feature Flags and Settings. Default: false.
+     * Group members can delete Environments.
      */
-    public readonly canDeleteSetting!: pulumi.Output<boolean | undefined>;
+    public readonly canDeleteEnvironment!: pulumi.Output<boolean>;
     /**
-     * Group members can delete Tags. Default: false.
+     * Group members can delete Segments.
      */
-    public readonly canDeleteTag!: pulumi.Output<boolean | undefined>;
+    public readonly canDeleteSegment!: pulumi.Output<boolean>;
     /**
-     * Group members can add and configure integrations. Default: false.
+     * Group members can delete Feature Flags and Settings.
      */
-    public readonly canManageIntegrations!: pulumi.Output<boolean | undefined>;
+    public readonly canDeleteSetting!: pulumi.Output<boolean>;
     /**
-     * Group members can manage team members. Default: false.
+     * Group members can delete Tags.
      */
-    public readonly canManageMembers!: pulumi.Output<boolean | undefined>;
+    public readonly canDeleteTag!: pulumi.Output<boolean>;
     /**
-     * Group members can update Product preferences. Default: false.
+     * Group members can disable two-factor authentication for other members.
      */
-    public readonly canManageProductPreferences!: pulumi.Output<boolean | undefined>;
+    public readonly canDisable2fa!: pulumi.Output<boolean>;
     /**
-     * Group members can create/update/delete Webhooks. Default: false.
+     * Group members can add and configure integrations.
      */
-    public readonly canManageWebhook!: pulumi.Output<boolean | undefined>;
+    public readonly canManageIntegrations!: pulumi.Output<boolean>;
     /**
-     * Group members can rotate SDK keys. Default: false.
+     * Group members can manage team members.
      */
-    public readonly canRotateSdkkey!: pulumi.Output<boolean | undefined>;
+    public readonly canManageMembers!: pulumi.Output<boolean>;
     /**
-     * Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+     * Group members can update Product preferences.
      */
-    public readonly canTagSetting!: pulumi.Output<boolean | undefined>;
+    public readonly canManageProductPreferences!: pulumi.Output<boolean>;
     /**
-     * Group members can use the export/import feature. Default: false.
+     * Group members can create/update/delete Webhooks.
      */
-    public readonly canUseExportimport!: pulumi.Output<boolean | undefined>;
+    public readonly canManageWebhook!: pulumi.Output<boolean>;
     /**
-     * Group members has access to audit logs. Default: false.
+     * Group members can rotate SDK keys.
      */
-    public readonly canViewProductAuditlog!: pulumi.Output<boolean | undefined>;
+    public readonly canRotateSdkkey!: pulumi.Output<boolean>;
     /**
-     * Group members has access to product statistics. Default: false.
+     * Group members can attach/detach Tags to Feature Flags and Settings.
      */
-    public readonly canViewProductStatistics!: pulumi.Output<boolean | undefined>;
+    public readonly canTagSetting!: pulumi.Output<boolean>;
     /**
-     * Group members has access to SDK keys. Default: false.
+     * Group members can use the export/import feature.
      */
-    public readonly canViewSdkkey!: pulumi.Output<boolean | undefined>;
+    public readonly canUseExportimport!: pulumi.Output<boolean>;
     /**
-     * The environment specific permissions map block defined as below.
+     * Group members has access to audit logs.
      */
-    public readonly environmentAccesses!: pulumi.Output<{[key: string]: string} | undefined>;
+    public readonly canViewProductAuditlog!: pulumi.Output<boolean>;
+    /**
+     * Group members has access to product statistics.
+     */
+    public readonly canViewProductStatistics!: pulumi.Output<boolean>;
+    /**
+     * Group members has access to SDK keys.
+     */
+    public readonly canViewSdkkey!: pulumi.Output<boolean>;
+    /**
+     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
+     * specific Feature Management permission. Possible values: full, readOnly
+     */
+    public readonly environmentAccesses!: pulumi.Output<{[key: string]: string}>;
     /**
      * The name of the Permission Group.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
+     * none
      */
-    public readonly newEnvironmentAccesstype!: pulumi.Output<string | undefined>;
+    public readonly newEnvironmentAccesstype!: pulumi.Output<string>;
     /**
      * The ID of the Product.
      */
@@ -238,6 +163,7 @@ export class PermissionGroup extends pulumi.CustomResource {
             resourceInputs["canDeleteSegment"] = state ? state.canDeleteSegment : undefined;
             resourceInputs["canDeleteSetting"] = state ? state.canDeleteSetting : undefined;
             resourceInputs["canDeleteTag"] = state ? state.canDeleteTag : undefined;
+            resourceInputs["canDisable2fa"] = state ? state.canDisable2fa : undefined;
             resourceInputs["canManageIntegrations"] = state ? state.canManageIntegrations : undefined;
             resourceInputs["canManageMembers"] = state ? state.canManageMembers : undefined;
             resourceInputs["canManageProductPreferences"] = state ? state.canManageProductPreferences : undefined;
@@ -268,6 +194,7 @@ export class PermissionGroup extends pulumi.CustomResource {
             resourceInputs["canDeleteSegment"] = args ? args.canDeleteSegment : undefined;
             resourceInputs["canDeleteSetting"] = args ? args.canDeleteSetting : undefined;
             resourceInputs["canDeleteTag"] = args ? args.canDeleteTag : undefined;
+            resourceInputs["canDisable2fa"] = args ? args.canDisable2fa : undefined;
             resourceInputs["canManageIntegrations"] = args ? args.canManageIntegrations : undefined;
             resourceInputs["canManageMembers"] = args ? args.canManageMembers : undefined;
             resourceInputs["canManageProductPreferences"] = args ? args.canManageProductPreferences : undefined;
@@ -293,85 +220,96 @@ export class PermissionGroup extends pulumi.CustomResource {
  */
 export interface PermissionGroupState {
     /**
-     * Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+     * Represent the Feature Management permission. Possible values: readOnly, full, custom
      */
     accesstype?: pulumi.Input<string>;
     /**
-     * Group members can create/update Configs. Default: false.
+     * Group members can create/update Configs.
      */
     canCreateorupdateConfig?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update Environments. Default: false.
+     * Group members can create/update Environments.
      */
     canCreateorupdateEnvironment?: pulumi.Input<boolean>;
+    /**
+     * Group members can create/update Segments.
+     */
     canCreateorupdateSegment?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update Feature Flags and Settings. Default: false.
+     * Group members can create/update Feature Flags and Settings.
      */
     canCreateorupdateSetting?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update Tags. Default: false.
+     * Group members can create/update Tags.
      */
     canCreateorupdateTag?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Configs. Default: false.
+     * Group members can delete Configs.
      */
     canDeleteConfig?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Environments. Default: false.
+     * Group members can delete Environments.
      */
     canDeleteEnvironment?: pulumi.Input<boolean>;
+    /**
+     * Group members can delete Segments.
+     */
     canDeleteSegment?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Feature Flags and Settings. Default: false.
+     * Group members can delete Feature Flags and Settings.
      */
     canDeleteSetting?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Tags. Default: false.
+     * Group members can delete Tags.
      */
     canDeleteTag?: pulumi.Input<boolean>;
     /**
-     * Group members can add and configure integrations. Default: false.
+     * Group members can disable two-factor authentication for other members.
+     */
+    canDisable2fa?: pulumi.Input<boolean>;
+    /**
+     * Group members can add and configure integrations.
      */
     canManageIntegrations?: pulumi.Input<boolean>;
     /**
-     * Group members can manage team members. Default: false.
+     * Group members can manage team members.
      */
     canManageMembers?: pulumi.Input<boolean>;
     /**
-     * Group members can update Product preferences. Default: false.
+     * Group members can update Product preferences.
      */
     canManageProductPreferences?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update/delete Webhooks. Default: false.
+     * Group members can create/update/delete Webhooks.
      */
     canManageWebhook?: pulumi.Input<boolean>;
     /**
-     * Group members can rotate SDK keys. Default: false.
+     * Group members can rotate SDK keys.
      */
     canRotateSdkkey?: pulumi.Input<boolean>;
     /**
-     * Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+     * Group members can attach/detach Tags to Feature Flags and Settings.
      */
     canTagSetting?: pulumi.Input<boolean>;
     /**
-     * Group members can use the export/import feature. Default: false.
+     * Group members can use the export/import feature.
      */
     canUseExportimport?: pulumi.Input<boolean>;
     /**
-     * Group members has access to audit logs. Default: false.
+     * Group members has access to audit logs.
      */
     canViewProductAuditlog?: pulumi.Input<boolean>;
     /**
-     * Group members has access to product statistics. Default: false.
+     * Group members has access to product statistics.
      */
     canViewProductStatistics?: pulumi.Input<boolean>;
     /**
-     * Group members has access to SDK keys. Default: false.
+     * Group members has access to SDK keys.
      */
     canViewSdkkey?: pulumi.Input<boolean>;
     /**
-     * The environment specific permissions map block defined as below.
+     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
+     * specific Feature Management permission. Possible values: full, readOnly
      */
     environmentAccesses?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -379,7 +317,8 @@ export interface PermissionGroupState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
+     * none
      */
     newEnvironmentAccesstype?: pulumi.Input<string>;
     /**
@@ -393,85 +332,96 @@ export interface PermissionGroupState {
  */
 export interface PermissionGroupArgs {
     /**
-     * Represent the Feature Management permission. Possible values: readOnly, full, custom. Default: custom
+     * Represent the Feature Management permission. Possible values: readOnly, full, custom
      */
     accesstype?: pulumi.Input<string>;
     /**
-     * Group members can create/update Configs. Default: false.
+     * Group members can create/update Configs.
      */
     canCreateorupdateConfig?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update Environments. Default: false.
+     * Group members can create/update Environments.
      */
     canCreateorupdateEnvironment?: pulumi.Input<boolean>;
+    /**
+     * Group members can create/update Segments.
+     */
     canCreateorupdateSegment?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update Feature Flags and Settings. Default: false.
+     * Group members can create/update Feature Flags and Settings.
      */
     canCreateorupdateSetting?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update Tags. Default: false.
+     * Group members can create/update Tags.
      */
     canCreateorupdateTag?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Configs. Default: false.
+     * Group members can delete Configs.
      */
     canDeleteConfig?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Environments. Default: false.
+     * Group members can delete Environments.
      */
     canDeleteEnvironment?: pulumi.Input<boolean>;
+    /**
+     * Group members can delete Segments.
+     */
     canDeleteSegment?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Feature Flags and Settings. Default: false.
+     * Group members can delete Feature Flags and Settings.
      */
     canDeleteSetting?: pulumi.Input<boolean>;
     /**
-     * Group members can delete Tags. Default: false.
+     * Group members can delete Tags.
      */
     canDeleteTag?: pulumi.Input<boolean>;
     /**
-     * Group members can add and configure integrations. Default: false.
+     * Group members can disable two-factor authentication for other members.
+     */
+    canDisable2fa?: pulumi.Input<boolean>;
+    /**
+     * Group members can add and configure integrations.
      */
     canManageIntegrations?: pulumi.Input<boolean>;
     /**
-     * Group members can manage team members. Default: false.
+     * Group members can manage team members.
      */
     canManageMembers?: pulumi.Input<boolean>;
     /**
-     * Group members can update Product preferences. Default: false.
+     * Group members can update Product preferences.
      */
     canManageProductPreferences?: pulumi.Input<boolean>;
     /**
-     * Group members can create/update/delete Webhooks. Default: false.
+     * Group members can create/update/delete Webhooks.
      */
     canManageWebhook?: pulumi.Input<boolean>;
     /**
-     * Group members can rotate SDK keys. Default: false.
+     * Group members can rotate SDK keys.
      */
     canRotateSdkkey?: pulumi.Input<boolean>;
     /**
-     * Group members can attach/detach Tags to Feature Flags and Settings. Default: false.
+     * Group members can attach/detach Tags to Feature Flags and Settings.
      */
     canTagSetting?: pulumi.Input<boolean>;
     /**
-     * Group members can use the export/import feature. Default: false.
+     * Group members can use the export/import feature.
      */
     canUseExportimport?: pulumi.Input<boolean>;
     /**
-     * Group members has access to audit logs. Default: false.
+     * Group members has access to audit logs.
      */
     canViewProductAuditlog?: pulumi.Input<boolean>;
     /**
-     * Group members has access to product statistics. Default: false.
+     * Group members has access to product statistics.
      */
     canViewProductStatistics?: pulumi.Input<boolean>;
     /**
-     * Group members has access to SDK keys. Default: false.
+     * Group members has access to SDK keys.
      */
     canViewSdkkey?: pulumi.Input<boolean>;
     /**
-     * The environment specific permissions map block defined as below.
+     * The environment specific permissions map block. Keys are the Environment IDs and the values represent the environment
+     * specific Feature Management permission. Possible values: full, readOnly
      */
     environmentAccesses?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -479,7 +429,8 @@ export interface PermissionGroupArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly, none. Default: none.
+     * Represent the environment specific Feature Management permission for new Environments. Possible values: full, readOnly,
+     * none
      */
     newEnvironmentAccesstype?: pulumi.Input<string>;
     /**

@@ -25,7 +25,7 @@ class TagArgs:
         """
         The set of arguments for constructing a Tag resource.
         :param pulumi.Input[str] product_id: The ID of the Product.
-        :param pulumi.Input[str] color: Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        :param pulumi.Input[str] color: The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         :param pulumi.Input[str] name: The name of the Tag.
         """
         pulumi.set(__self__, "product_id", product_id)
@@ -50,7 +50,7 @@ class TagArgs:
     @pulumi.getter
     def color(self) -> Optional[pulumi.Input[str]]:
         """
-        Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         """
         return pulumi.get(self, "color")
 
@@ -79,7 +79,7 @@ class _TagState:
                  product_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Tag resources.
-        :param pulumi.Input[str] color: Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        :param pulumi.Input[str] color: The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         :param pulumi.Input[str] name: The name of the Tag.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
@@ -94,7 +94,7 @@ class _TagState:
     @pulumi.getter
     def color(self) -> Optional[pulumi.Input[str]]:
         """
-        Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         """
         return pulumi.get(self, "color")
 
@@ -137,43 +137,10 @@ class Tag(pulumi.CustomResource):
                  product_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        ## # Tag Resource
-
-        Creates and manages a **Tag**.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_configcat as configcat
-        import pulumiverse_configcat as configcat
-
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_tag = configcat.Tag("my_tag",
-            product_id=my_products.products[0].product_id,
-            name="Created by Terraform")
-        pulumi.export("tagId", my_tag.id)
-        ```
-
-        ## Endpoints used
-
-        * [Get Tag](https://api.configcat.com/docs/#tag/Tags/operation/get-tag)
-        * [Create Tag](https://api.configcat.com/docs/#tag/Tags/operation/create-tag)
-        * [Update Tag](https://api.configcat.com/docs/#tag/Tags/operation/update-tag)
-        * [Delete Tag](https://api.configcat.com/docs/#tag/Tags/operation/delete-tag)
-
-        ## Import
-
-        Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
-
-        ```sh
-        $ pulumi import configcat:index/tag:Tag example 1234
-        ```
-        Read more about importing.
-
+        Create a Tag resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] color: Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        :param pulumi.Input[str] color: The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         :param pulumi.Input[str] name: The name of the Tag.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
@@ -184,40 +151,7 @@ class Tag(pulumi.CustomResource):
                  args: TagArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## # Tag Resource
-
-        Creates and manages a **Tag**.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_configcat as configcat
-        import pulumiverse_configcat as configcat
-
-        my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-        my_tag = configcat.Tag("my_tag",
-            product_id=my_products.products[0].product_id,
-            name="Created by Terraform")
-        pulumi.export("tagId", my_tag.id)
-        ```
-
-        ## Endpoints used
-
-        * [Get Tag](https://api.configcat.com/docs/#tag/Tags/operation/get-tag)
-        * [Create Tag](https://api.configcat.com/docs/#tag/Tags/operation/create-tag)
-        * [Update Tag](https://api.configcat.com/docs/#tag/Tags/operation/update-tag)
-        * [Delete Tag](https://api.configcat.com/docs/#tag/Tags/operation/delete-tag)
-
-        ## Import
-
-        Tags can be imported using the TagId. Get the TagId using e.g. the [List Tags API](https://api.configcat.com/docs/#tag/Tags/operation/get-tags).
-
-        ```sh
-        $ pulumi import configcat:index/tag:Tag example 1234
-        ```
-        Read more about importing.
-
+        Create a Tag resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param TagArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -270,7 +204,7 @@ class Tag(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] color: Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        :param pulumi.Input[str] color: The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         :param pulumi.Input[str] name: The name of the Tag.
         :param pulumi.Input[str] product_id: The ID of the Product.
         """
@@ -285,9 +219,9 @@ class Tag(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def color(self) -> pulumi.Output[Optional[str]]:
+    def color(self) -> pulumi.Output[str]:
         """
-        Default: `panther`. The color of the Tag. Valid values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`.
+        The color of the Tag. Default value. `panther`. Valid values: `panther`|`whale`|`salmon`|`lizard`|`canary`|`koala`.
         """
         return pulumi.get(self, "color")
 

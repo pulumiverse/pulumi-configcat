@@ -60,6 +60,16 @@ export const getTags: typeof import("./getTags").getTags = null as any;
 export const getTagsOutput: typeof import("./getTags").getTagsOutput = null as any;
 utilities.lazyLoad(exports, ["getTags","getTagsOutput"], () => require("./getTags"));
 
+export { GetWebhookSigningKeysArgs, GetWebhookSigningKeysResult, GetWebhookSigningKeysOutputArgs } from "./getWebhookSigningKeys";
+export const getWebhookSigningKeys: typeof import("./getWebhookSigningKeys").getWebhookSigningKeys = null as any;
+export const getWebhookSigningKeysOutput: typeof import("./getWebhookSigningKeys").getWebhookSigningKeysOutput = null as any;
+utilities.lazyLoad(exports, ["getWebhookSigningKeys","getWebhookSigningKeysOutput"], () => require("./getWebhookSigningKeys"));
+
+export { IntegrationArgs, IntegrationState } from "./integration";
+export type Integration = import("./integration").Integration;
+export const Integration: typeof import("./integration").Integration = null as any;
+utilities.lazyLoad(exports, ["Integration"], () => require("./integration"));
+
 export { PermissionGroupArgs, PermissionGroupState } from "./permissionGroup";
 export type PermissionGroup = import("./permissionGroup").PermissionGroup;
 export const PermissionGroup: typeof import("./permissionGroup").PermissionGroup = null as any;
@@ -69,6 +79,11 @@ export { ProductArgs, ProductState } from "./product";
 export type Product = import("./product").Product;
 export const Product: typeof import("./product").Product = null as any;
 utilities.lazyLoad(exports, ["Product"], () => require("./product"));
+
+export { ProductPreferencesArgs, ProductPreferencesState } from "./productPreferences";
+export type ProductPreferences = import("./productPreferences").ProductPreferences;
+export const ProductPreferences: typeof import("./productPreferences").ProductPreferences = null as any;
+utilities.lazyLoad(exports, ["ProductPreferences"], () => require("./productPreferences"));
 
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
@@ -95,10 +110,20 @@ export type SettingValue = import("./settingValue").SettingValue;
 export const SettingValue: typeof import("./settingValue").SettingValue = null as any;
 utilities.lazyLoad(exports, ["SettingValue"], () => require("./settingValue"));
 
+export { SettingValueV2Args, SettingValueV2State } from "./settingValueV2";
+export type SettingValueV2 = import("./settingValueV2").SettingValueV2;
+export const SettingValueV2: typeof import("./settingValueV2").SettingValueV2 = null as any;
+utilities.lazyLoad(exports, ["SettingValueV2"], () => require("./settingValueV2"));
+
 export { TagArgs, TagState } from "./tag";
 export type Tag = import("./tag").Tag;
 export const Tag: typeof import("./tag").Tag = null as any;
 utilities.lazyLoad(exports, ["Tag"], () => require("./tag"));
+
+export { WebhookArgs, WebhookState } from "./webhook";
+export type Webhook = import("./webhook").Webhook;
+export const Webhook: typeof import("./webhook").Webhook = null as any;
+utilities.lazyLoad(exports, ["Webhook"], () => require("./webhook"));
 
 
 // Export sub-modules:
@@ -118,10 +143,14 @@ const _module = {
                 return new Configuration(name, <any>undefined, { urn })
             case "configcat:index/environment:Environment":
                 return new Environment(name, <any>undefined, { urn })
+            case "configcat:index/integration:Integration":
+                return new Integration(name, <any>undefined, { urn })
             case "configcat:index/permissionGroup:PermissionGroup":
                 return new PermissionGroup(name, <any>undefined, { urn })
             case "configcat:index/product:Product":
                 return new Product(name, <any>undefined, { urn })
+            case "configcat:index/productPreferences:ProductPreferences":
+                return new ProductPreferences(name, <any>undefined, { urn })
             case "configcat:index/segment:Segment":
                 return new Segment(name, <any>undefined, { urn })
             case "configcat:index/setting:Setting":
@@ -130,8 +159,12 @@ const _module = {
                 return new SettingTag(name, <any>undefined, { urn })
             case "configcat:index/settingValue:SettingValue":
                 return new SettingValue(name, <any>undefined, { urn })
+            case "configcat:index/settingValueV2:SettingValueV2":
+                return new SettingValueV2(name, <any>undefined, { urn })
             case "configcat:index/tag:Tag":
                 return new Tag(name, <any>undefined, { urn })
+            case "configcat:index/webhook:Webhook":
+                return new Webhook(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -139,13 +172,17 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("configcat", "index/configuration", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/environment", _module)
+pulumi.runtime.registerResourceModule("configcat", "index/integration", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/permissionGroup", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/product", _module)
+pulumi.runtime.registerResourceModule("configcat", "index/productPreferences", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/segment", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/setting", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/settingTag", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/settingValue", _module)
+pulumi.runtime.registerResourceModule("configcat", "index/settingValueV2", _module)
 pulumi.runtime.registerResourceModule("configcat", "index/tag", _module)
+pulumi.runtime.registerResourceModule("configcat", "index/webhook", _module)
 pulumi.runtime.registerResourcePackage("configcat", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

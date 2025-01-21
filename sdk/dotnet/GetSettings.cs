@@ -12,141 +12,12 @@ namespace Pulumiverse.Configcat
 {
     public static class GetSettings
     {
-        /// <summary>
-        /// ## # configcat.getSettings Resource
-        /// 
-        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
-        ///     var settings = Configcat.GetSettings.Invoke(new()
-        ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-        ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["settingId"] = settings.Apply(getSettingsResult =&gt; getSettingsResult.Settings[0]?.SettingId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
-        /// </summary>
         public static Task<GetSettingsResult> InvokeAsync(GetSettingsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getSettings Resource
-        /// 
-        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
-        ///     var settings = Configcat.GetSettings.Invoke(new()
-        ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-        ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["settingId"] = settings.Apply(getSettingsResult =&gt; getSettingsResult.Settings[0]?.SettingId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
-        /// </summary>
         public static Output<GetSettingsResult> Invoke(GetSettingsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsInvokeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// ## # configcat.getSettings Resource
-        /// 
-        /// Use this data source to access information about existing **Feature Flags or Settings**. [Read more about the anatomy of a Feature Flag or Setting.](https://configcat.com/docs/main-concepts) 
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Configcat = Pulumi.Configcat;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var myProducts = Configcat.GetProducts.Invoke(new()
-        ///     {
-        ///         NameFilterRegex = "ConfigCat's product",
-        ///     });
-        /// 
-        ///     var myConfigs = Configcat.GetConfigurations.Invoke(new()
-        ///     {
-        ///         ProductId = myProducts.Apply(getProductsResult =&gt; getProductsResult.Products[0]?.ProductId),
-        ///         NameFilterRegex = "Main Config",
-        ///     });
-        /// 
-        ///     var settings = Configcat.GetSettings.Invoke(new()
-        ///     {
-        ///         ConfigId = myConfigs.Apply(getConfigurationsResult =&gt; getConfigurationsResult.Configs[0]?.ConfigId),
-        ///         KeyFilterRegex = "isAwesomeFeatureEnabled",
-        ///     });
-        /// 
-        ///     return new Dictionary&lt;string, object?&gt;
-        ///     {
-        ///         ["settingId"] = settings.Apply(getSettingsResult =&gt; getSettingsResult.Settings[0]?.SettingId),
-        ///     };
-        /// });
-        /// ```
-        /// 
-        /// ## Endpoints used
-        /// 
-        /// - [List Flags](https://api.configcat.com/docs/#tag/Feature-Flags-and-Settings/operation/get-settings)
-        /// </summary>
         public static Output<GetSettingsResult> Invoke(GetSettingsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSettingsResult>("configcat:index/getSettings:getSettings", args ?? new GetSettingsInvokeArgs(), options.WithDefaults());
     }
@@ -154,15 +25,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetSettingsArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The ID of the Config.
-        /// </summary>
         [Input("configId", required: true)]
         public string ConfigId { get; set; } = null!;
 
-        /// <summary>
-        /// Filter the Settings by key.
-        /// </summary>
         [Input("keyFilterRegex")]
         public string? KeyFilterRegex { get; set; }
 
@@ -174,15 +39,9 @@ namespace Pulumiverse.Configcat
 
     public sealed class GetSettingsInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The ID of the Config.
-        /// </summary>
         [Input("configId", required: true)]
         public Input<string> ConfigId { get; set; } = null!;
 
-        /// <summary>
-        /// Filter the Settings by key.
-        /// </summary>
         [Input("keyFilterRegex")]
         public Input<string>? KeyFilterRegex { get; set; }
 
@@ -197,14 +56,8 @@ namespace Pulumiverse.Configcat
     public sealed class GetSettingsResult
     {
         public readonly string ConfigId;
-        /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
-        /// </summary>
         public readonly string Id;
         public readonly string? KeyFilterRegex;
-        /// <summary>
-        /// A setting list block defined as below.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetSettingsSettingResult> Settings;
 
         [OutputConstructor]

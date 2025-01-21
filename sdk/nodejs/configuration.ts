@@ -4,46 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.Configuration Resource
- *
- * Creates and manages a **Config**. [What is a Config in ConfigCat?](https://configcat.com/docs/main-concepts)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- * import * as configcat from "@pulumiverse/configcat";
- *
- * const myProducts = configcat.getProducts({
- *     nameFilterRegex: "ConfigCat's product",
- * });
- * const myConfig = new configcat.Configuration("my_config", {
- *     productId: myProducts.then(myProducts => myProducts.products?.[0]?.productId),
- *     name: "My config",
- *     description: "My config description",
- *     order: 0,
- * });
- * export const configId = myConfig.id;
- * ```
- *
- * ## Endpoints used
- *
- * * [Get Config](https://api.configcat.com/docs/#tag/Configs/operation/get-config)
- * * [Create Config](https://api.configcat.com/docs/#tag/Configs/operation/create-config)
- * * [Update Config](https://api.configcat.com/docs/#tag/Configs/operation/update-config)
- * * [Delete Config](https://api.configcat.com/docs/#tag/Configs/operation/delete-config)
- *
- * ## Import
- *
- * Configs can be imported using the ConfigId. Get the ConfigId using the [List Configs API](https://api.configcat.com/docs/#tag/Configs/operation/get-configs) for example.
- *
- * ```sh
- * $ pulumi import configcat:index/configuration:Configuration example 08d86d63-2726-47cd-8bfc-59608ecb91e2
- * ```
- * Read more about importing.
- */
 export class Configuration extends pulumi.CustomResource {
     /**
      * Get an existing Configuration resource's state with the given name, ID, and optional extra
@@ -75,13 +35,19 @@ export class Configuration extends pulumi.CustomResource {
     /**
      * The description of the Config.
      */
-    public readonly description!: pulumi.Output<string | undefined>;
+    public readonly description!: pulumi.Output<string>;
+    /**
+     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
+     * features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+     */
+    public readonly evaluationVersion!: pulumi.Output<string>;
     /**
      * The name of the Config.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
+     * alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
@@ -103,6 +69,7 @@ export class Configuration extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ConfigurationState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["evaluationVersion"] = state ? state.evaluationVersion : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["order"] = state ? state.order : undefined;
             resourceInputs["productId"] = state ? state.productId : undefined;
@@ -115,6 +82,7 @@ export class Configuration extends pulumi.CustomResource {
                 throw new Error("Missing required property 'productId'");
             }
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["evaluationVersion"] = args ? args.evaluationVersion : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["order"] = args ? args.order : undefined;
             resourceInputs["productId"] = args ? args.productId : undefined;
@@ -133,11 +101,17 @@ export interface ConfigurationState {
      */
     description?: pulumi.Input<string>;
     /**
+     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
+     * features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+     */
+    evaluationVersion?: pulumi.Input<string>;
+    /**
      * The name of the Config.
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
+     * alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
@@ -155,11 +129,17 @@ export interface ConfigurationArgs {
      */
     description?: pulumi.Input<string>;
     /**
+     * The evaluation version of the Config. Possible values: `v1`, `v2`. Default value: `v1`. Using `v2` enables the new
+     * features of [Config V2](https://configcat.com/docs/advanced/config-v2).
+     */
+    evaluationVersion?: pulumi.Input<string>;
+    /**
      * The name of the Config.
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in alphabetical order.
+     * The order of the Config within a Product (zero-based). If multiple Configs has the same order, they are displayed in
+     * alphabetical order.
      */
     order: pulumi.Input<number>;
     /**

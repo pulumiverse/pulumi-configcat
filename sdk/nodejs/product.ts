@@ -4,46 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * ## # configcat.Product Resource
- *
- * Creates and manages a **Product**. [What is a Product in ConfigCat?](https://configcat.com/docs/main-concepts)
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as configcat from "@pulumi/configcat";
- * import * as configcat from "@pulumiverse/configcat";
- *
- * const myOrganizations = configcat.getOrganizations({
- *     nameFilterRegex: "ConfigCat",
- * });
- * const myProduct = new configcat.Product("my_product", {
- *     organizationId: myOrganizations.then(myOrganizations => myOrganizations.organizations?.[0]?.organizationId),
- *     name: "My product",
- *     description: "My product description",
- *     order: 0,
- * });
- * export const productId = myProduct.id;
- * ```
- *
- * ## Endpoints used
- *
- * * [Get Product](https://api.configcat.com/docs/#tag/Products/operation/get-product)
- * * [Create Product](https://api.configcat.com/docs/#tag/Products/operation/create-product)
- * * [Update Product](https://api.configcat.com/docs/#tag/Products/operation/update-product)
- * * [Delete Product](https://api.configcat.com/docs/#tag/Products/operation/delete-product)
- *
- * ## Import
- *
- * Products can be imported using the ProductId. Get the ProductId using the [List Products API](https://api.configcat.com/docs/#tag/Products/operation/get-products) for example.
- *
- * ```sh
- * $ pulumi import configcat:index/product:Product example 08d86d63-2726-47cd-8bfc-59608ecb91e2
- * ```
- * Read more about importing.
- */
 export class Product extends pulumi.CustomResource {
     /**
      * Get an existing Product resource's state with the given name, ID, and optional extra
@@ -75,13 +35,14 @@ export class Product extends pulumi.CustomResource {
     /**
      * The description of the Product.
      */
-    public readonly description!: pulumi.Output<string | undefined>;
+    public readonly description!: pulumi.Output<string>;
     /**
      * The name of the Product.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
+     * in alphabetical order.
      */
     public readonly order!: pulumi.Output<number>;
     /**
@@ -137,7 +98,8 @@ export interface ProductState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
+     * in alphabetical order.
      */
     order?: pulumi.Input<number>;
     /**
@@ -159,7 +121,8 @@ export interface ProductArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The order of the Product within an Organization (zero-based). If multiple Products has the same order, they are displayed in alphabetical order.
+     * The order of the Product within a Organization (zero-based). If multiple Products has the same order, they are displayed
+     * in alphabetical order.
      */
     order: pulumi.Input<number>;
     /**

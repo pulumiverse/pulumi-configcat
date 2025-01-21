@@ -15,27 +15,27 @@ namespace Pulumiverse.Configcat.Outputs
     public sealed class GetSettingsSettingResult
     {
         /// <summary>
-        /// The hint of the Setting.
+        /// The hint of the Feature Flag or Setting.
         /// </summary>
         public readonly string Hint;
         /// <summary>
-        /// The key of the Feature Flag/Setting.
+        /// The key of the Feature Flag or Setting.
         /// </summary>
         public readonly string Key;
         /// <summary>
-        /// The name of the Setting.
+        /// The name of the Feature Flag or Setting.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The order of the Setting within a Config (zero-based).
+        /// The order of the Feature Flag or Setting within a Config (zero-based).
         /// </summary>
         public readonly int Order;
         /// <summary>
-        /// The unique Setting ID.
+        /// The unique Feature Flag or Setting ID.
         /// </summary>
         public readonly string SettingId;
         /// <summary>
-        /// The Setting's type. Available values: `boolean`|`string`|`int`|`double`.
+        /// The Feature Flag or Setting's type. Available values: `boolean`|`string`|`int`|`double`.
         /// </summary>
         public readonly string SettingType;
 

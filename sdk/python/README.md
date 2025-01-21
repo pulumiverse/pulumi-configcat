@@ -33,7 +33,7 @@ pip install pulumiverse_configcat
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/pulumiverse/pulumi-configcat/sdk/v3/go/...
+go get github.com/pulumiverse/pulumi-configcat/sdk/v5/go/...
 ```
 
 ### .NET

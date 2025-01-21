@@ -16,16 +16,21 @@ from .. import _utilities
 
 basePath: Optional[str]
 """
-ConfigCat Public Management API Base Path (defaults to production).
+ConfigCat Public Management API's `base_path`. Defaults to [https://api.configcat.com](https://api.configcat.com). This
+can also be sourced from the `CONFIGCAT_BASE_PATH` Environment Variable.
 """
 
 basicAuthPassword: Optional[str]
 """
-ConfigCat Public API credential - Basic Auth Password
+Get your `basic_auth_password` at [ConfigCat Public API
+credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+`CONFIGCAT_BASIC_AUTH_PASSWORD` Environment Variable.
 """
 
 basicAuthUsername: Optional[str]
 """
-ConfigCat Public API credential - Basic Auth Username.
+Get your `basic_auth_username` at [ConfigCat Public API
+credentials](https://app.configcat.com/my-account/public-api-credentials). This can also be sourced from the
+`CONFIGCAT_BASIC_AUTH_USERNAME` Environment Variable.
 """
 

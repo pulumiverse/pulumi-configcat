@@ -44,9 +44,6 @@ class GetSegmentsResult:
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -62,9 +59,6 @@ class GetSegmentsResult:
     @property
     @pulumi.getter
     def segments(self) -> Sequence['outputs.GetSegmentsSegmentResult']:
-        """
-        A segment list block defined as below.
-        """
         return pulumi.get(self, "segments")
 
 
@@ -84,29 +78,7 @@ def get_segments(name_filter_regex: Optional[str] = None,
                  product_id: Optional[str] = None,
                  opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSegmentsResult:
     """
-    ## # get_segments Resource
-
-    Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_segments = configcat.get_segments(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    pulumi.export("segmentId", my_segments.segments[0].segment_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
-
-
-    :param str name_filter_regex: Filter the Segments by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
@@ -123,29 +95,7 @@ def get_segments_output(name_filter_regex: Optional[pulumi.Input[Optional[str]]]
                         product_id: Optional[pulumi.Input[str]] = None,
                         opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetSegmentsResult]:
     """
-    ## # get_segments Resource
-
-    Use this data source to access information about existing **Segments**. [What is a Segment in ConfigCat?](https://configcat.com/docs/advanced/segments)
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_configcat as configcat
-
-    my_products = configcat.get_products(name_filter_regex="ConfigCat's product")
-    my_segments = configcat.get_segments(product_id=my_products.products[0].product_id,
-        name_filter_regex="Test")
-    pulumi.export("segmentId", my_segments.segments[0].segment_id)
-    ```
-
-    ## Endpoints used
-
-    - [List Segments](https://api.configcat.com/docs/#tag/Segments/operation/get-segments)
-
-
-    :param str name_filter_regex: Filter the Segments by name.
-    :param str product_id: The ID of the Product.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['nameFilterRegex'] = name_filter_regex
