@@ -1,5 +1,7 @@
 # ConfigCat Resource Provider
 
+**NOTE** this is a community package in [need of new maintainers](https://github.com/pulumiverse/pulumi-configcat/issues/86).
+
 The ConfigCat Resource Provider lets you manage [ConfigCat](https://configcat.com) resources.
 
 ## Installing
